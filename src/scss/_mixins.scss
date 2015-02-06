@@ -3,9 +3,11 @@
 /// @link http://registry.origami.ft.com/components/o-component-blueprint
 ////
 
-/// My Mixin
-@mixin oComponentBlueprintHello($who) {
+/// Hello world
+///
+/// @param {String} $who [world]
+@mixin oComponentBlueprintHello($who: world) {
 	.foo {
-		content: 'Hello #{$who}';
+		content: 'Hello, #{$who}!';
 	}
 }
