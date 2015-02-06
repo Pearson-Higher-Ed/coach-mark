@@ -7,5 +7,5 @@
 @import 'src/scss/mixins';
 
 @if not $o-component-blueprint-is-silent {
-	@include oComponentBlueprintHello(world);
+	@include oComponentBlueprintHello(world of Origami);
 }
