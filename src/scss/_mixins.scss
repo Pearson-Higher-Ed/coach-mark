@@ -1,0 +1,11 @@
+////
+/// @group o-component-blueprint
+/// @link http://registry.origami.ft.com/components/o-component-blueprint
+////
+
+/// My Mixin
+@mixin oComponentBlueprintHello($who) {
+	.foo {
+		content: 'Hello #{$who}';
+	}
+}

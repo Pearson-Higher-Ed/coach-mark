@@ -1,0 +1,11 @@
+// External imports
+
+// @import 'o-grid/main';
+
+// Internal imports
+@import 'src/scss/variables';
+@import 'src/scss/mixins';
+
+@if not $o-component-blueprint-is-silent {
+	@include oComponentBlueprintHello(world);
+}

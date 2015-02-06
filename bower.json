@@ -1,0 +1,13 @@
+{
+  "name": "o-component-blueprint",
+  "dependencies": {},
+  "main": [
+    "main.scss",
+    "main.js"
+  ],
+  "ignore": [
+    "examples",
+    "test",
+    ".gitignore"
+  ]
+}
