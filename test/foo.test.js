@@ -8,6 +8,6 @@ var Foo = require('./../src/js/foo');
 describe('Foo', function() {
 
 	it('should initialise', function() {
-
+		expect(Foo()).to.be('bar');
 	});
 });
