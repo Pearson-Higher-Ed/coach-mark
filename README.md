@@ -1,8 +1,12 @@
 # o-component-blueprint
 
-**Note:** This is not a usable Origami component.
-
 Project structure for new Origami components.
+
+**Note:** This is not a usable Origami component. Once you have completed the steps for creating and deploying the new module, replace this README with the provided template:
+
+```
+mv README.md.template README.md
+```
 
 ### Creating a new Origami Module
 
