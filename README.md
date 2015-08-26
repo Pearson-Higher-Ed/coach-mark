@@ -9,7 +9,7 @@ Project structure for new Origami components.
 1. Clone this repository into a new folder:
 
   ```
-  git clone https://github.com/Financial-Times/o-component-blueprint.git o-your-component
+  git clone https://github.com/Pearson-Higher-Ed/o-component-blueprint.git o-your-component
   ```
 2. Search `o-component-blueprint` and replace with `o-your-component`:
 
@@ -25,19 +25,19 @@ Project structure for new Origami components.
 
 ### Deploying for the first time
 
-1. Create a new repository (tipically: on GitHub)
+1. Create a new repository ([GitHub](https://github.com/Pearson-Higher-Ed) for OSS or [Stash](https://devops-tools.pearson.com/stash/) for internal components). If you are deploying to GitHub, you may need to make a request to one of the organization's [owners](https://github.com/orgs/Pearson-Higher-Ed/teams/owners) to create the repository.
 2. Delete the existing Git directory: `rm -Rf .git`
-3. Initialise a new local Git repository: `git init .`
+3. Initialize a new local Git repository: `git init .`
 4. Add the remote repository:
 
   ```
-  git remote add origin https://github.com/Financial-Times/o-your-component.git
+  git remote add origin https://github.com/Pearson-Higher-Ed/o-your-component.git
   ```
 5. Test and verify: `obt test && obt verify` (and fix the code raising errors)
 6. Commit and push: `git add . && git commit -m "Initial commit" && git push origin master`
 
 ----
 
-## Licence
+## License
 
-This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
+This is a fork of [Financial-Times/o-component-blueprint](https://github.com/Financial-Times/o-component-blueprint), which is published by the Financial Times under the [MIT license](http://opensource.org/licenses/MIT).
