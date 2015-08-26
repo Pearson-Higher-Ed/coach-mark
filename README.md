@@ -37,7 +37,7 @@ mv README.md.template README.md
   ```
   git remote add origin https://github.com/Pearson-Higher-Ed/o-your-component.git
   ```
-5. Test and verify: `obt test && obt verify` (and fix the code raising errors)
+5. Test and verify: `obt test && obt verify`
 6. Commit and push: `git add . && git commit -m "Initial commit" && git push origin master`
 
 ----
