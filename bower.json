@@ -9,5 +9,6 @@
     "examples",
     "test",
     ".gitignore"
-  ]
+  ],
+  "license": "MIT"
 }
