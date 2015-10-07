@@ -1,5 +1,7 @@
-"use strict";
+export default class Foo {
 
-module.exports = function() {
-	return 'bar';
-};
+	bar() {
+		return 'bar';
+	}
+
+}

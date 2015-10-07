@@ -1,13 +1,14 @@
+/*eslint-env node*/
+
 module.exports = {
-	"options": {
-		"sass": "demos/src/demo.scss",
-		"bodyClasses": "o-hoverable-on",
-		"js": "demos/src/demo.js"
+	options: {
+		sass: 'demos/src/demo.scss',
+		js: 'demos/src/demo.js'
 	},
-	"demos": [
+	demos: [
 		{
-			"name": "demo",
-			"template": "demos/src/demo.mustache"
+			name: 'demo',
+			template: 'demos/src/demo.mustache'
 		}
 	]
 };

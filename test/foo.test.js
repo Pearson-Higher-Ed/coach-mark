@@ -1,13 +1,12 @@
 /*global describe, it*/
-'use strict';
 
-var expect = require('expect.js');
+import expect from 'expect.js';
+import Foo from './../src/js/Foo';
 
-var foo = require('./../src/js/foo');
+describe('Foo', () => {
 
-describe('Foo', function() {
-
-	it('should initialise', function() {
-		expect(foo()).to.be('bar');
+	it('should initialize', () => {
+		expect(new Foo().bar()).to.be('bar');
 	});
+
 });

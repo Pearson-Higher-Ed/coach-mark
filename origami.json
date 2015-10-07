@@ -2,7 +2,7 @@
     "description": "Component Blueprint",
     "origamiType": "module",
     "origamiVersion": 1,
-    "support": "https://github.com/Financial-Times/o-component-blueprint/issues",
+    "support": "https://github.com/Pearson-Higher-Ed/o-component-blueprint/issues",
     "supportStatus": "experimental",
     "demos": [
         {

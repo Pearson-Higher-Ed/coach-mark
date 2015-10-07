@@ -1,7 +1,10 @@
-/*global module*/
-'use strict';
+/*eslint-env node*/
 
-module.exports = function(config) {
+const BowerPlugin = require('bower-webpack-plugin');
+const path = require('path');
+const cwd = process.cwd();
+
+module.exports = (config) => {
 	config.set({
 
 		// base path that will be used to resolve all patterns (eg. files, exclude)
@@ -10,26 +13,67 @@ module.exports = function(config) {
 
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ['mocha', 'browserify'],
+		frameworks: ['mocha', 'sinon'],
+
+
+		plugins: [
+			'karma-mocha',
+			'karma-phantomjs-launcher',
+			'karma-sinon',
+			'karma-sourcemap-loader',
+			'karma-webpack'
+		],
 
 
 		// list of files / patterns to load in the browser
 		files: [
-			// Polyfill PhantomJS as it's a similar Webkit version
 			'http://polyfill.webservices.ft.com/v1/polyfill.js?ua=safari/4',
 			'test/*.test.js'
 		],
 
 
 		// list of files to exclude
-		exclude: [
-		],
+		exclude: [],
 
 
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'test/*.test.js': ['browserify']
+			'test/*.js': ['webpack', 'sourcemap']
+		},
+
+
+		// webpack preprocessor options
+		webpack: {
+			quiet: true,
+			module: {
+				loaders: [
+					{
+						test: /\.js$/,
+						exclude: /node_modules/,
+						loaders: [
+							// Disable AMD module loading
+							'imports?define=>false',
+							'babel?optional[]=runtime'
+						]
+					}
+				]
+			},
+			resolve: {
+				root: [path.join(cwd, 'bower_components')]
+			},
+			plugins: [
+				new BowerPlugin({
+					includes:  /\.js$/
+				})
+			],
+			devtool: 'inline-source-map'
+		},
+
+
+		// Hide webpack output logging
+		webpackMiddleware: {
+			noInfo: true
 		},
 
 
@@ -64,11 +108,6 @@ module.exports = function(config) {
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
 		singleRun: true,
-
-		browserify: {
-			debug: true,
-			transform: [ 'debowerify' ]
-		}
 
 	});
 };
