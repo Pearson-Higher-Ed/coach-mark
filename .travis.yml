@@ -6,5 +6,5 @@ before_install:
   - npm install -g Financial-Times/origami-build-tools#node4
   - obt install
 script:
-  - obt test
   - obt verify
+  - obt test
