@@ -1,4 +1,6 @@
 {
+  "name": "o-component-blueprint",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
