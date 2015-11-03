@@ -1,4 +1,4 @@
-# o-component-blueprint
+# o-coach-mark
 
 Project structure for new Origami components.
 
@@ -13,17 +13,17 @@ mv README.md.template README.md
 1. Clone this repository into a new folder:
 
   ```
-  git clone https://github.com/Pearson-Higher-Ed/o-component-blueprint.git o-your-component
+  git clone https://github.com/Pearson-Higher-Ed/o-coach-mark.git o-your-component
   ```
-2. Search `o-component-blueprint` and replace with `o-your-component`:
+2. Search `o-coach-mark` and replace with `o-your-component`:
 
   ```
-  find . -name '*.*' -type f -print -exec sed -i '' 's/o-component-blueprint/o-your-component/g' {} \;
+  find . -name '*.*' -type f -print -exec sed -i '' 's/o-coach-mark/o-your-component/g' {} \;
   ```
-3. Search `oComponentBlueprint` and replace with `oYourComponent`:
+3. Search `oCoachMark` and replace with `oYourComponent`:
 
   ```
-  find . -name '*.*' -type f -print -exec sed -i '' 's/oComponentBlueprint/oYourComponent/g' {} \;
+  find . -name '*.*' -type f -print -exec sed -i '' 's/oCoachMark/oYourComponent/g' {} \;
   ```
 4. Re-name the component in the description field of `origami.json`
 
@@ -45,4 +45,4 @@ mv README.md.template README.md
 
 ## License
 
-This is a fork of [Financial-Times/o-component-blueprint](https://github.com/Financial-Times/o-component-blueprint), which is published by the Financial Times under the [MIT license](http://opensource.org/licenses/MIT).
+This is a fork of [Financial-Times/o-coach-mark](https://github.com/Financial-Times/o-coach-mark), which is published by the Financial Times under the [MIT license](http://opensource.org/licenses/MIT).

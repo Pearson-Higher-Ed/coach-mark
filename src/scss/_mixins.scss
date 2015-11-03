@@ -1,12 +1,12 @@
 ////
-/// @group o-component-blueprint
-/// @link https://origami.pearsoned.com/registry/components/o-component-blueprint
+/// @group o-coach-mark
+/// @link https://origami.pearsoned.com/registry/components/o-coach-mark
 ////
 
 /// Hello world
 ///
 /// @param {String} $who [world]
-@mixin oComponentBlueprintHello($who: world) {
+@mixin oCoachMarkHello($who: world) {
 	.foo {
 		content: 'Hello, #{$who}!';
 	}

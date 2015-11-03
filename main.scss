@@ -6,6 +6,6 @@
 @import 'src/scss/variables';
 @import 'src/scss/mixins';
 
-@if not $o-component-blueprint-is-silent {
-	@include oComponentBlueprintHello(world of Origami);
+@if not $o-coach-mark-is-silent {
+	@include oCoachMarkHello(world of Origami);
 }
