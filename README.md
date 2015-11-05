@@ -1,48 +1,29 @@
-# o-coach-mark
+# o-coach-mark [![Build Status](https://travis-ci.org/Pearson-Higher-Ed/o-coach-mark.svg?branch=master)](https://travis-ci.org/Pearson-Higher-Ed/o-coach-mark)
 
-Project structure for new Origami components.
+Simple popover to explain new features to users
 
-**Note:** This is not a usable Origami component. Once you have completed the steps for creating and deploying the new module, replace this README with the provided template:
+## API
 
+### Constructor
+
+`CoachMark(element, opts, callback)`
+
+Initializes coach mark pointing to the specified element, given an options object, with a callback to be executed when the user dismisses the coach mark.  
+
+#### Use
+
+```js
+const element = document.getElementById('awesome_featureId');
+
+new CoachMark(element, {
+  placement: 'bottom',
+  title: 'Optional Title',
+  text: 'Required text explaining to the user why you changed their interface'
+}, function () {
+  console.log('Callback executed on exit');
+});
 ```
-mv README.md.template README.md
-```
-
-### Creating a new Origami Module
-
-1. Clone this repository into a new folder:
-
-  ```
-  git clone https://github.com/Pearson-Higher-Ed/o-coach-mark.git o-your-component
-  ```
-2. Search `o-coach-mark` and replace with `o-your-component`:
-
-  ```
-  find . -name '*.*' -type f -print -exec sed -i '' 's/o-coach-mark/o-your-component/g' {} \;
-  ```
-3. Search `oCoachMark` and replace with `oYourComponent`:
-
-  ```
-  find . -name '*.*' -type f -print -exec sed -i '' 's/oCoachMark/oYourComponent/g' {} \;
-  ```
-4. Re-name the component in the description field of `origami.json`
-
-### Deploying for the first time
-
-1. Create a new repository ([GitHub](https://github.com/Pearson-Higher-Ed) for OSS or [Stash](https://devops-tools.pearson.com/stash/) for internal components). If you are deploying to GitHub, you may need to make a request to one of the organization's [owners](https://github.com/orgs/Pearson-Higher-Ed/teams/owners) to create the repository.
-2. Delete the existing Git directory: `rm -Rf .git`
-3. Initialize a new local Git repository: `git init .`
-4. Add the remote repository:
-
-  ```
-  git remote add origin https://github.com/Pearson-Higher-Ed/o-your-component.git
-  ```
-5. Install dependencies: `obt install`
-6. Test and verify: `obt test && obt verify`
-7. Commit and push: `git add . && git commit -m "Initial commit" && git push origin master`
-
-----
 
 ## License
 
-This is a fork of [Financial-Times/o-coach-mark](https://github.com/Financial-Times/o-coach-mark), which is published by the Financial Times under the [MIT license](http://opensource.org/licenses/MIT).
+This software is published by Pearson Education under the [MIT license](LICENSE).

@@ -1,13 +1,78 @@
-////
-/// @group o-coach-mark
-/// @link https://origami.pearsoned.com/registry/components/o-coach-mark
-////
+@mixin oCoachMark() {
+	.o-coach-mark {
+		&__container {
+			max-width: 15%;
+			max-height: 10%;
+			z-index: 910;
+			font-size: 18px;
 
-/// Hello world
-///
-/// @param {String} $who [world]
-@mixin oCoachMarkHello($who: world) {
-	.foo {
-		content: 'Hello, #{$who}!';
+			.close_icon {
+				float: right;
+			  margin-top: -3px;
+				text-decoration: none;
+				color: black;
+			}
+
+			.title {
+    		padding-bottom: 7px;
+			}
+		}
+
+		&__content {
+			box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+			border: 1px solid rgb(255, 223, 0);
+			padding: 5px;
+			z-index: 920;
+			background-color: rgb(255, 251, 215);
+
+			p {
+				font-size: 14px;
+			}
+		}
+
+		&__bottom::before {
+		  border-left: 10px solid transparent;
+		  border-right: 10px solid transparent;
+		  border-bottom: 10px solid rgb(255, 251, 215);
+		  margin-left: 15px;
+			margin-top: -10px;
+			z-index: 930;
+		}
+
+		&__top::after {
+		  border-left: 10px solid transparent;
+		  border-right: 10px solid transparent;
+		  border-top: 10px solid rgb(255, 251, 215);
+		  margin-left: 15px;
+			z-index: 930;
+		}
+
+		&__left::before {
+		  border-top: 10px solid transparent;
+		  border-bottom: 10px solid transparent;
+		  border-left: 10px solid rgb(255, 251, 215);
+			left: 100%;
+			margin-top: 15px;
+			z-index: 930;
+		}
+
+		&__right::before {
+		  border-top: 10px solid transparent;
+		  border-bottom: 10px solid transparent;
+		  border-right: 10px solid rgb(255, 251, 215);
+		  margin-left: -10px;
+			margin-top: 15px;
+			z-index: 930;
+		}
+
+		&__bottom::before,
+		&__top::after,
+		&__left::before,
+		&__right::before {
+			content: '';
+			position: absolute;
+			width: 0;
+		  height: 0;
+		}
 	}
 }
