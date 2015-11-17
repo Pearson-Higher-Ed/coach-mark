@@ -8,7 +8,6 @@
 
 			.close_icon {
 				float: right;
-			  margin-top: -3px;
 				text-decoration: none;
 				color: black;
 			}
@@ -30,7 +29,7 @@
 			}
 		}
 
-		&__bottom::before {
+		&--bottom::before {
 		  border-left: 10px solid transparent;
 		  border-right: 10px solid transparent;
 		  border-bottom: 10px solid rgb(255, 251, 215);
@@ -39,7 +38,7 @@
 			z-index: 930;
 		}
 
-		&__top::after {
+		&--top::after {
 		  border-left: 10px solid transparent;
 		  border-right: 10px solid transparent;
 		  border-top: 10px solid rgb(255, 251, 215);
@@ -47,7 +46,7 @@
 			z-index: 930;
 		}
 
-		&__left::before {
+		&--left::before {
 		  border-top: 10px solid transparent;
 		  border-bottom: 10px solid transparent;
 		  border-left: 10px solid rgb(255, 251, 215);
@@ -56,7 +55,7 @@
 			z-index: 930;
 		}
 
-		&__right::before {
+		&--right::before {
 		  border-top: 10px solid transparent;
 		  border-bottom: 10px solid transparent;
 		  border-right: 10px solid rgb(255, 251, 215);
@@ -65,10 +64,10 @@
 			z-index: 930;
 		}
 
-		&__bottom::before,
-		&__top::after,
-		&__left::before,
-		&__right::before {
+		&--bottom::before,
+		&--top::after,
+		&--left::before,
+		&--right::before {
 			content: '';
 			position: absolute;
 			width: 0;
