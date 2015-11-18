@@ -1,3 +1,5 @@
+import componentHandler from 'o-component-handler';
+
 export default class CoachMark {
 
 	constructor(element, opts, callback) {
@@ -99,3 +101,9 @@ export default class CoachMark {
 		});
 	}
 }
+
+componentHandler.register({
+	constructor: CoachMark,
+	classAsString: 'CoachMark',
+	cssClass: 'o-coach-mark'
+});

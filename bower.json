@@ -1,6 +1,8 @@
 {
 	"name": "o-coach-mark",
-	"dependencies": {},
+	"dependencies": {
+		"o-component-handler": "~1.0.0"
+	},
 	"main": [
 		"main.scss",
 		"main.js"
