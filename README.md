@@ -16,11 +16,11 @@ Initializes coach mark pointing to the specified element, given an options objec
 const element = document.getElementById('awesome_featureId');
 
 new CoachMark(element, {
-  placement: 'bottom',
-  title: 'Optional Title',
-  text: 'Required text explaining to the user why you changed their interface'
+	placement: 'bottom',
+	title: 'Optional Title',
+	text: 'Required text explaining to the user why you changed their interface'
 }, function () {
-  console.log('Callback executed on exit');
+	console.log('Callback executed on exit');
 });
 ```
 

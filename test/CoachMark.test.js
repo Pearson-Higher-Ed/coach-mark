@@ -83,7 +83,7 @@ describe('CoachMark', () => {
 		}, function () {});
 		const pos = document.querySelector('.o-coach-mark__container')
 			.getBoundingClientRect();
-		expect(pos.top).to.be(140);
+		expect(pos.top).to.be(122);
 		expect(pos.left).to.be(85);
 	});
 
@@ -108,7 +108,7 @@ describe('CoachMark', () => {
 		const pos = document.querySelector('.o-coach-mark__container')
 			.getBoundingClientRect();
 		expect(pos.top).to.be(208);
-		expect(pos.left).to.be(52);
+		expect(pos.left).to.be(64);
 	});
 
 	it('should correctly calculate placement if placed right of the feature', () => {

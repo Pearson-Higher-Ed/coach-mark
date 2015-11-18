@@ -13,7 +13,7 @@
 			}
 
 			.title {
-    		padding-bottom: 7px;
+				padding-bottom: 7px;
 			}
 		}
 
@@ -30,36 +30,36 @@
 		}
 
 		&--bottom::before {
-		  border-left: 10px solid transparent;
-		  border-right: 10px solid transparent;
-		  border-bottom: 10px solid rgb(255, 251, 215);
-		  margin-left: 15px;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+			border-bottom: 10px solid rgb(255, 251, 215);
+			margin-left: 15px;
 			margin-top: -10px;
 			z-index: 930;
 		}
 
 		&--top::after {
-		  border-left: 10px solid transparent;
-		  border-right: 10px solid transparent;
-		  border-top: 10px solid rgb(255, 251, 215);
-		  margin-left: 15px;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+			border-top: 10px solid rgb(255, 251, 215);
+			margin-left: 15px;
 			z-index: 930;
 		}
 
 		&--left::before {
-		  border-top: 10px solid transparent;
-		  border-bottom: 10px solid transparent;
-		  border-left: 10px solid rgb(255, 251, 215);
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-left: 10px solid rgb(255, 251, 215);
 			left: 100%;
 			margin-top: 15px;
 			z-index: 930;
 		}
 
 		&--right::before {
-		  border-top: 10px solid transparent;
-		  border-bottom: 10px solid transparent;
-		  border-right: 10px solid rgb(255, 251, 215);
-		  margin-left: -10px;
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-right: 10px solid rgb(255, 251, 215);
+			margin-left: -10px;
 			margin-top: 15px;
 			z-index: 930;
 		}
@@ -71,7 +71,7 @@
 			content: '';
 			position: absolute;
 			width: 0;
-		  height: 0;
+			height: 0;
 		}
 	}
 }
