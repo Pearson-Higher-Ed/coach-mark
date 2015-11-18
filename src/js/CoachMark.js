@@ -39,13 +39,13 @@ export default class CoachMark {
 		close.className = 'close_icon';
 
 		container.className = 'o-coach-mark__container';
-		container.className += ' o-coach-mark--' + opts.placement;
 		container.style.visibility = 'hidden';
 		container.style.display = 'block';
 		container.style.position = 'absolute';
 		const content = document.createElement('div');
 		content.style.margin = '0';
 		content.className = 'o-coach-mark__content';
+		content.className += ' o-coach-mark--' + opts.placement;
 		content.appendChild(close)
 		content.appendChild(titleText);
 		const paragraph = document.createElement('p');

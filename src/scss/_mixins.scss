@@ -10,6 +10,7 @@
 				float: right;
 				text-decoration: none;
 				color: black;
+				margin: 5px;
 			}
 
 			.title {
@@ -30,11 +31,35 @@
 		}
 
 		&--bottom::before {
+			border-left: 11px solid transparent;
+			border-right: 11px solid transparent;
+			border-bottom: 11px solid rgb(255, 223, 0);
+			margin-left: 15px;
+			margin-top: -10px;
+			top: 0;
+			left: 0;
+			z-index: 930;
+		}
+
+		&--bottom::after {
 			border-left: 10px solid transparent;
 			border-right: 10px solid transparent;
 			border-bottom: 10px solid rgb(255, 251, 215);
 			margin-left: 15px;
 			margin-top: -10px;
+			top: 1px;
+			left: 0;
+			z-index: 940;
+		}
+
+
+		&--top::before {
+			border-left: 11px solid transparent;
+			border-right: 11px solid transparent;
+			border-top: 11px solid rgb(255, 223, 0);
+			margin-left: 15px;
+			bottom: -10px;
+			left: 0;
 			z-index: 930;
 		}
 
@@ -43,31 +68,64 @@
 			border-right: 10px solid transparent;
 			border-top: 10px solid rgb(255, 251, 215);
 			margin-left: 15px;
+			bottom: -9px;
+			left: 0;
+			z-index: 940;
+		}
+
+
+		&--left::before {
+			border-top: 11px solid transparent;
+			border-bottom: 11px solid transparent;
+			border-left: 11px solid rgb(255, 223, 0);
+			left: 100%;
+			margin-top: 15px;
+			top: 0;
+			right: -10px;
 			z-index: 930;
 		}
 
-		&--left::before {
+		&--left::after {
 			border-top: 10px solid transparent;
 			border-bottom: 10px solid transparent;
 			border-left: 10px solid rgb(255, 251, 215);
 			left: 100%;
 			margin-top: 15px;
-			z-index: 930;
+			top: 0;
+			right: -9px;
+			z-index: 940;
 		}
 
 		&--right::before {
+			border-top: 11px solid transparent;
+			border-bottom: 11px solid transparent;
+			border-right: 11px solid rgb(255, 223, 0);
+			margin-left: -10px;
+			margin-top: 15px;
+			top: 0;
+			left: 0;
+			z-index: 930;
+		}
+
+		&--right::after {
 			border-top: 10px solid transparent;
 			border-bottom: 10px solid transparent;
 			border-right: 10px solid rgb(255, 251, 215);
 			margin-left: -10px;
 			margin-top: 15px;
-			z-index: 930;
+			top: 0;
+			left: 1px;
+			z-index: 940;
 		}
 
 		&--bottom::before,
-		&--top::after,
+		&--top::before,
 		&--left::before,
-		&--right::before {
+		&--right::before,
+		&--bottom::after,
+		&--top::after,
+		&--left::after,
+		&--right::after {
 			content: '';
 			position: absolute;
 			width: 0;
