@@ -31,9 +31,9 @@
 		}
 
 		&--bottom::before {
-			border-left: 11px solid transparent;
-			border-right: 11px solid transparent;
-			border-bottom: 11px solid rgb(255, 223, 0);
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+			border-bottom: 10px solid rgb(255, 223, 0);
 			margin-left: 15px;
 			margin-top: -10px;
 			top: 0;
@@ -54,9 +54,9 @@
 
 
 		&--top::before {
-			border-left: 11px solid transparent;
-			border-right: 11px solid transparent;
-			border-top: 11px solid rgb(255, 223, 0);
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+			border-top: 10px solid rgb(255, 223, 0);
 			margin-left: 15px;
 			bottom: -10px;
 			left: 0;
@@ -75,21 +75,21 @@
 
 
 		&--left::before {
-			border-top: 11px solid transparent;
-			border-bottom: 11px solid transparent;
-			border-left: 11px solid rgb(255, 223, 0);
-			left: 100%;
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-left: 10px solid rgb(255, 223, 0);
 			margin-top: 15px;
+			margin-right: -10px;
 			top: 0;
-			right: -10px;
+			right: 0;
 			z-index: 930;
 		}
 
 		&--left::after {
+			display: hidden;
 			border-top: 10px solid transparent;
 			border-bottom: 10px solid transparent;
 			border-left: 10px solid rgb(255, 251, 215);
-			left: 100%;
 			margin-top: 15px;
 			top: 0;
 			right: -9px;
@@ -97,9 +97,9 @@
 		}
 
 		&--right::before {
-			border-top: 11px solid transparent;
-			border-bottom: 11px solid transparent;
-			border-right: 11px solid rgb(255, 223, 0);
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-right: 10px solid rgb(255, 223, 0);
 			margin-left: -10px;
 			margin-top: 15px;
 			top: 0;
