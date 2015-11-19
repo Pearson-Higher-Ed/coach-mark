@@ -65,29 +65,29 @@ export default class CoachMark {
 
 		if(opts.placement === 'bottom') {
 			if(window.innerHeight-featurePosition.bottom > markHeight) {
-					container.style.top = (featurePosition.bottom) + 'px';
-					container.style.left = featurePosition.left + 'px';
+					container.style.top = (featurePosition.bottom + window.scrollY) + 'px';
+					container.style.left = (featurePosition.left + window.scrollX) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
 		} else if (opts.placement === 'top') {
 			if(featurePosition.top > markHeight) {
-				container.style.top = (featurePosition.top - markHeight) + 'px';
-				container.style.left = featurePosition.left + 'px';
+				container.style.top = (featurePosition.top + window.scrollY - markHeight) + 'px';
+				container.style.left = (featurePosition.left + window.scrollX) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
 		} else if (opts.placement === 'left') {
 			if(window.innerWidth - featurePosition.left > markWidth) {
-				container.style.top = featurePosition.top + 'px';
-				container.style.left = (featurePosition.left - markWidth) + 'px';
+				container.style.top = (featurePosition.top + window.scrollY) + 'px';
+				container.style.left = (featurePosition.left + window.scrollX - markWidth) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
 		} else if (opts.placement === 'right'){
 			if(window.innerWidth - featurePosition.right > markWidth) {
-				container.style.top = featurePosition.top + 'px';
-				container.style.left = (featurePosition.right) + 'px';
+				container.style.top = (featurePosition.top + window.scrollY) + 'px';
+				container.style.left = (featurePosition.right + window.scrollX) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
