@@ -1,1 +1,1 @@
-export { default } from './src/js/Foo';
+export { default } from './src/js/CoachMark';

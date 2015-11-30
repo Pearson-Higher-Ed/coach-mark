@@ -1,14 +1,16 @@
 {
-  "name": "o-coach-mark",
-  "dependencies": {},
-  "main": [
-    "main.scss",
-    "main.js"
-  ],
-  "ignore": [
-    "examples",
-    "test",
-    ".gitignore"
-  ],
-  "license": "MIT"
+	"name": "o-coach-mark",
+	"dependencies": {
+		"o-component-handler": "~1.0.0"
+	},
+	"main": [
+		"main.scss",
+		"main.js"
+	],
+	"ignore": [
+		"examples",
+		"test",
+		".gitignore"
+	],
+	"license": "MIT"
 }

@@ -7,5 +7,5 @@
 @import 'src/scss/mixins';
 
 @if not $o-coach-mark-is-silent {
-	@include oCoachMarkHello(world of Origami);
+	@include oCoachMark();
 }
