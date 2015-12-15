@@ -28,8 +28,8 @@ describe('CoachMark', () => {
 		document.body.removeChild(element);
 		document.body.removeChild(footer);
 		if(document.querySelector('.o-coach-mark__container')) {
-			document.body.removeChild(
-				document.querySelector('.o-coach-mark__container'));
+			const ct = document.querySelector('.o-coach-mark__container');
+			ct.parentNode.removeChild(ct);
 		}
 	});
 
@@ -94,7 +94,7 @@ describe('CoachMark', () => {
 		}, function () {});
 		const pos = document.querySelector('.o-coach-mark__container')
 			.getBoundingClientRect();
-		expect(pos.top>200).to.be(true);
+		expect(pos.top<50).to.be(true);
 	});
 
 	it('should correctly calculate placement if placed left of the feature', () => {
@@ -116,7 +116,7 @@ describe('CoachMark', () => {
 		}, function () {});
 		const pos = document.querySelector('.o-coach-mark__container')
 			.getBoundingClientRect();
-		expect(pos.left>300).to.be(true);
+		expect(pos.left>200).to.be(true);
 	});
 
 	it('should call the callback when dismissed', () => {
@@ -129,7 +129,7 @@ describe('CoachMark', () => {
 		const link = document.querySelector('.o-coach-mark__container a');
 
 		const ev = document.createEvent("MouseEvent");
-	 	ev.initMouseEvent("click", true, true, window);
+		ev.initMouseEvent("click", true, true, window);
 		link.dispatchEvent(ev);
 		expect(called).to.be(true);
 	});
