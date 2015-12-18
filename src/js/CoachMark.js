@@ -15,18 +15,20 @@ export default class CoachMark {
 		if(!opts.placement) opts.placement = "bottom";
 
 		if(opts.placement !== 'left' &&
-			 opts.placement !== 'right' &&
-			 opts.placement !== 'top' &&
-			 opts.placement !== 'bottom')
-			 throw new Error('invalid value for opts.placement: ' +
+			opts.placement !== 'right' &&
+			opts.placement !== 'top' &&
+			opts.placement !== 'bottom')
+			throw new Error('invalid value for opts.placement: ' +
 			'must be one of the following - left, right, top, or bottom');
 
 		if(!opts.text)
 			throw new Error('missing required option: ' +
 			'you must specify text for the coach mark');
 
-		//Add style to parent
-		element.style.position = 'relative';
+		// create relative parent for simplified positioning
+		const positioner = document.createElement('div');
+		positioner.style.position = 'relative';
+		positioner.style.display = 'inline-block';
 
 		//Build html
 		const container = document.createElement('div');
@@ -57,36 +59,44 @@ export default class CoachMark {
 		container.appendChild(content);
 
 		//Inject html - use classes to position
-		element.parentNode.insertBefore(container, element.nextSibling);
+		positioner.appendChild(container);
+		element.parentNode.insertBefore(positioner, element.nextSibling);
+
+		// temporarily show for measuring
+		container.style.visibility = 'visible';
 
 		const featurePosition = element.getBoundingClientRect();
-		const markHeight = container.offsetHeight;
+		const featureHeight = element.offsetHeight;
+
+		const markHeight = content.offsetHeight + 10;
 		const markWidth = container.offsetWidth;
+
+
+		container.style.visibility = 'hidden';
 
 		if(opts.placement === 'bottom') {
 			if(window.innerHeight-featurePosition.bottom > markHeight) {
-					container.style.top = (featurePosition.bottom + window.scrollY) + 'px';
 					container.style.left = (featurePosition.left + window.scrollX) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
 		} else if (opts.placement === 'top') {
 			if(featurePosition.top > markHeight) {
-				container.style.top = (featurePosition.top + window.scrollY - markHeight) + 'px';
+				container.style.top = ((featureHeight + markHeight) * -1) + 'px';
 				container.style.left = (featurePosition.left + window.scrollX) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
 		} else if (opts.placement === 'left') {
 			if(window.innerWidth - featurePosition.left > markWidth) {
-				container.style.top = (featurePosition.top + window.scrollY) + 'px';
+				container.style.top = (featureHeight * -1) + 'px';
 				container.style.left = (featurePosition.left + window.scrollX - markWidth) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
 		} else if (opts.placement === 'right'){
 			if(window.innerWidth - featurePosition.right > markWidth) {
-				container.style.top = (featurePosition.top + window.scrollY) + 'px';
+				container.style.top = (featureHeight * -1) + 'px';
 				container.style.left = (featurePosition.right + window.scrollX) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
