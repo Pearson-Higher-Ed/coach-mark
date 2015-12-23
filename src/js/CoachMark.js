@@ -32,15 +32,22 @@ export default class CoachMark {
 
 		//Build html
 		const container = document.createElement('div');
-		const close = document.createElement('a');
+		const close = document.createElement('button');
+		const closeSpan = document.createElement('span');
 		const titleText = document.createElement('div');
 
 		titleText.className = 'o-coach-mark__title';
-		if(opts.title) titleText.innerText = opts.title;
+		const internalText=('textContent' in titleText)?'textContent':'innerText';
 
-		close.innerText = '✕';
-		close.href = '#';
+		if(opts.title) titleText[internalText] = opts.title;
+
+		close.setAttribute('type','button');
+		close.setAttribute('aria-label','close');
 		close.className = 'o-coach-mark__close-icon';
+
+		closeSpan[internalText] = '✕';
+		closeSpan.setAttribute('aria-hidden','true');
+		close.appendChild(closeSpan);
 
 		container.className = 'o-coach-mark__container';
 		container.style.visibility = 'hidden';
@@ -53,7 +60,7 @@ export default class CoachMark {
 		content.appendChild(close)
 		content.appendChild(titleText);
 		const paragraph = document.createElement('p');
-		paragraph.innerText = opts.text;
+		paragraph[internalText] = opts.text;
 		content.appendChild(paragraph);
 		content.style.position = 'relative';
 		container.appendChild(content);
