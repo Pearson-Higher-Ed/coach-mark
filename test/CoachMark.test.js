@@ -126,11 +126,11 @@ describe('CoachMark', () => {
 			title: 'foo',
 			text: 'bar'
 		}, function() { called = true; });
-		const link = document.querySelector('.o-coach-mark__container a');
+		const button = document.querySelector('.o-coach-mark__container button');
 
 		const ev = document.createEvent("MouseEvent");
 		ev.initMouseEvent("click", true, true, window);
-		link.dispatchEvent(ev);
+		button.dispatchEvent(ev);
 		expect(called).to.be(true);
 	});
 });
