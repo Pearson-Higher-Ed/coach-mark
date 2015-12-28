@@ -7,16 +7,18 @@
 			z-index: 910;
 			font-size: 18px;
 
-			.close_icon {
-				float: right;
-				text-decoration: none;
-				color: black;
-				margin: 5px;
-			}
 
-			.title {
-				padding-bottom: 7px;
-			}
+		}
+
+		&__close-icon {
+			float: right;
+			text-decoration: none;
+			color: black;
+			margin: 5px;
+		}
+
+		&__title {
+			padding-bottom: 7px;
 		}
 
 		&__content {
