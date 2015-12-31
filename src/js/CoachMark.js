@@ -35,12 +35,12 @@ export default class CoachMark {
 		const close = document.createElement('a');
 		const titleText = document.createElement('div');
 
-		titleText.className = 'title';
+		titleText.className = 'o-coach-mark__title';
 		if(opts.title) titleText.innerText = opts.title;
 
 		close.innerText = '✕';
 		close.href = '#';
-		close.className = 'close_icon';
+		close.className = 'o-coach-mark__close-icon';
 
 		container.className = 'o-coach-mark__container';
 		container.style.visibility = 'hidden';
