@@ -49,10 +49,6 @@ export default class CoachMark {
 		closeSpan.setAttribute('aria-hidden','true');
 		close.appendChild(closeSpan);
 
-		closeSpan[internalText] = '✕';
-		closeSpan.setAttribute('aria-hidden','true');
-		close.appendChild(closeSpan);
-
 		container.className = 'o-coach-mark__container';
 		container.style.visibility = 'hidden';
 		container.style.display = 'block';
