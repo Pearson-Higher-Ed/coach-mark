@@ -25,6 +25,10 @@ export default class CoachMark {
 			throw new Error('missing required option: ' +
 			'you must specify text for the coach mark');
 
+		if (!opts.id) {
+			throw new Error('missing required option: you must specify an id for the coach mark')
+		}
+
 		// create relative parent for simplified positioning
 		const positioner = document.createElement('div');
 		positioner.style.position = 'relative';
@@ -57,13 +61,66 @@ export default class CoachMark {
 		content.style.margin = '0';
 		content.className = 'o-coach-mark__content';
 		content.className += ' o-coach-mark--' + opts.placement;
-		content.appendChild(close)
+		content.appendChild(close);
 		content.appendChild(titleText);
 		const paragraph = document.createElement('p');
 		paragraph[internalText] = opts.text;
 		content.appendChild(paragraph);
 		content.style.position = 'relative';
 		container.appendChild(content);
+
+		if (opts.like) {
+			let likeClicked = (like) => {
+				let event;
+				if (document.createEvent) {
+					event = document.createEvent('HTMLEvents');
+					event.initEvent('o-cm-like-clicked', true, true);
+				} else {
+					event = document.createEventObject();
+					event.eventType = 'o-cm-like-clicked';
+				}
+
+				event.eventName = 'o-cm-like-clicked';
+				event.data = {
+					type: like,
+					id: opts.id
+				}
+
+				if (document.createEvent) {
+					element.dispatchEvent(event);
+				} else {
+					element.fireEvent("on" + event.eventType, event);
+				}
+			};
+
+			this.appendAnchor = function appendAnchor(parent, img, text, like) {
+				const link = document.createElement('a');
+				link.onclick = function(event) {
+					likeClicked(like);
+					event.preventDefault();
+				};
+				link.innerHTML = text;
+				link.className = 'o-coach-mark--link-text';
+				link.setAttribute('href', '#');
+				const likeImg = document.createElement('img');
+				link.insertBefore(likeImg, link.childNodes[0]);
+				parent.appendChild(link);
+				likeImg.setAttribute('src', img);
+				likeImg.setAttribute('aria-hidden', 'true');
+				likeImg.width = '20';
+			};
+
+			const likeDiv = document.createElement('div');
+			const hr = document.createElement('hr');
+			hr.className = 'o-coach-mark--hr';
+			likeDiv.appendChild(hr);
+			const question = document.createElement('p');
+			question.innerHTML = 'What do you think of this change?';
+			likeDiv.appendChild(question);
+			content.appendChild(likeDiv);
+			this.appendAnchor(likeDiv, '/img/dont-like.png', 'Not Great', 'dislike');
+			this.appendAnchor(likeDiv, '/img/like.gif', 'I Like It', 'like');
+		}
 
 		//Inject html - use classes to position
 		positioner.appendChild(container);
@@ -114,7 +171,7 @@ export default class CoachMark {
 
 		close.addEventListener('click', function (event) {
 			container.style.visibility = 'hidden';
-			callback(event);
+			callback(opts.id, event);
 		});
 	}
 }

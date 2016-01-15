@@ -6,3 +6,6 @@ public/
 build/
 demos/local/
 docs/
+docs/
+.idea/
+*.iml
