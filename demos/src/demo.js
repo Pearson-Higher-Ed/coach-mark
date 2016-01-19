@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	new CoachMark(left, {
+		like: true,
 		placement: 'left',
 		title: 'Coach Mark Left of Feature',
 		text: 'Some text explaining to the user why you changed their interface',

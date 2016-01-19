@@ -93,7 +93,7 @@ export default class CoachMark {
 				}
 			};
 
-			this.appendAnchor = function appendAnchor(parent, img, text, like) {
+			this.appendAnchor = function appendAnchor(parent, upDown, text, like) {
 				const link = document.createElement('a');
 				link.onclick = function(event) {
 					likeClicked(like);
@@ -102,12 +102,12 @@ export default class CoachMark {
 				link.innerHTML = text;
 				link.className = 'o-coach-mark--link-text';
 				link.setAttribute('href', '#');
-				const likeImg = document.createElement('img');
+				const likeImg = document.createElement('i');
+				likeImg.className = 'o-coach-mark--icons fa fa-thumbs-o-' + upDown;
+				likeImg.setAttribute('aria-hidden', 'true');
+				// likeImg.width = '20';
 				link.insertBefore(likeImg, link.childNodes[0]);
 				parent.appendChild(link);
-				likeImg.setAttribute('src', img);
-				likeImg.setAttribute('aria-hidden', 'true');
-				likeImg.width = '20';
 			};
 
 			const likeDiv = document.createElement('div');
@@ -118,8 +118,8 @@ export default class CoachMark {
 			question.innerHTML = 'What do you think of this change?';
 			likeDiv.appendChild(question);
 			content.appendChild(likeDiv);
-			this.appendAnchor(likeDiv, '/img/dont-like.png', 'Not Great', 'dislike');
-			this.appendAnchor(likeDiv, '/img/like.gif', 'I Like It', 'like');
+			this.appendAnchor(likeDiv, 'down', 'Not Great', 'dislike');
+			this.appendAnchor(likeDiv, 'up', 'I Like It', 'like');
 		}
 
 		//Inject html - use classes to position
