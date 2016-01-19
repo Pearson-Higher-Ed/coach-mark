@@ -6,8 +6,8 @@ export default class CoachMark {
 		this.element = element;
 		this.opts = opts;
 		this.callback = callback;
-		var count;
-		var trackButton = 0;
+		let count;
+		let trackButton = 0;
 		//Check options
 		if(!opts)
 			throw new Error('missing required parameter:' +
@@ -31,9 +31,9 @@ export default class CoachMark {
 		positioner.style.position = 'relative'; 
 		positioner.style.display = 'inline-block';
 		buildHtml(element,opts);
-		var back;
-		var close;
-		var next;
+		let back;
+		let close;
+		let next;
 		//Build html
 		function buildHtml(element, opts) {
 			count = 0;
@@ -108,12 +108,12 @@ export default class CoachMark {
 			element.parentNode.insertBefore(positioner, element.nextSibling);
 			
 			// Disable the back and next button if there are not elements and opts in hasBack or hasNext attribute
-			var backElement = opts.hasBack ? opts.hasBack.element : null;
-			var backOpts = opts.hasBack ? opts.hasBack.opts : null;
+			let backElement = opts.hasBack ? opts.hasBack.element : null;
+			let backOpts = opts.hasBack ? opts.hasBack.opts : null;
 			back.disabled = !opts.hasBack ? true : false;
 
-			var nextElement = opts.hasNext ? opts.hasNext.element : null;
-			var nextOpts = opts.hasNext ? opts.hasNext.opts : null;
+			let nextElement = opts.hasNext ? opts.hasNext.element : null;
+			let nextOpts = opts.hasNext ? opts.hasNext.opts : null;
 			next.disabled = !opts.hasNext ? true : false;
 			
 			// temporarily show for measuring
@@ -176,7 +176,7 @@ export default class CoachMark {
 		}
 		// Function to track the number of back and next buttons for each coachmark
 		function backNextButtonTracking(property, opts, count) {
-			for (var opt in opts) {
+			for (let opt in opts) {
 				if (opt === property) {
 					count++;
 					if (property === 'hasNext')
