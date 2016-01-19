@@ -8,35 +8,66 @@ document.addEventListener('DOMContentLoaded', function() {
 	const right = document.getElementById('cm-right');
 
 	new CoachMark(bottom, {
-		placement: 'bottom',
-		title: 'Coach Mark Below Feature',
-		text: 'Some text explaining to the user why you changed their interface'
+	placement: 'bottom',
+	title: 'Coach Mark Below Feature',
+	text: 'Some text explaining to the user why you changed their interface',
+	hasBack: {
+		element: left,
+		opts: {
+			placement: 'left',
+			title: 'Coach Mark Below Feature',
+			text: 'Some text explaining to the user why you changed their interface',
+			hasBack: {
+				element: right,
+				opts: {
+					placement: 'right',
+					title: 'Coach Mark Right Feature',
+					text: 'Some text explaining to the user why you changed their interface',
+				hasBack: {
+				element: top,
+				opts: {
+					placement: 'top',
+					title: 'Coach Mark Top Feature ',
+					text: 'Some text explaining to the user why you changed their interface'
+						}
+					}
+				}
+			},
+			hasNext: {
+				element: left,
+				opts: {
+					placement: 'left',
+					title: 'Coach Mark Left Feature ',
+					text: 'Some text explaining to the user why you changed their interface'
+				}
+			}
+		}
+	},
+	hasNext: {
+		element: bottom,
+		opts: {
+			placement: 'bottom',
+			title: 'Coach Mark Below Feature inside parent hasnext',
+			text: 'Some text explaining to the user why you changed their interface',
+			hasBack: {
+				element: left,
+				opts: {
+					placement: 'top',
+					title: 'Coach Mark Below Feature inside child hasback of parent hasnext',
+					text: 'Some text explaining to the user why you changed their interface'
+				}
+			},
+			hasNext: {
+				element: left,
+				opts: {
+					placement: 'left',
+					title: 'Coach Mark Left Feature ',
+					text: 'Some text explaining to the user why you changed their interface'
+				}
+			}
+		}
+	}
 	}, function () {
 		console.log('Callback executed on exit');
 	});
-
-	new CoachMark(top, {
-		placement: 'top',
-		title: 'Coach Mark Above Feature',
-		text: 'Some text explaining to the user why you changed their interface'
-	}, function () {
-		console.log('Callback executed on exit');
-	});
-
-	new CoachMark(left, {
-		placement: 'left',
-		title: 'Coach Mark Left of Feature',
-		text: 'Some text explaining to the user why you changed their interface'
-	}, function () {
-		console.log('Callback executed on exit');
-	});
-
-	new CoachMark(right, {
-		placement: 'right',
-		title: 'Coach Mark Right of Feature',
-		text: 'Some text explaining to the user why you changed their interface'
-	}, function () {
-		console.log('Callback executed on exit');
-	});
-
 });

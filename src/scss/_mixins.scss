@@ -17,16 +17,18 @@
 			border: 0;
 			cursor: pointer;
 		}
-
 		&__title {
 			padding-bottom: 7px;
 		}
-
+		&__button-space {
+			margin-right:15px
+		}
 		&__content {
 			box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 			border: 1px solid rgb(255, 223, 0);
 			padding: 5px;
 			z-index: 920;
+			margin: 10px;
 			background-color: rgb(255, 251, 215);
 
 			p {
