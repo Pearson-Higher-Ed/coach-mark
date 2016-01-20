@@ -3,6 +3,8 @@ $o-coach-mark-is-silent: false;
 
 @import '../../main';
 
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
+
 html {
 	background-color: #cfcbcb;
 	font-family: proxima_nova, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -18,3 +20,4 @@ html {
 	 width: 60%;
 	 padding: 10px;
 }
+
