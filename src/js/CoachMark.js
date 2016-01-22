@@ -24,15 +24,18 @@ export default class CoachMark {
 			throw new Error('missing required option: ' +
 			'you must specify text for the coach mark');
 
+		if (!opts.id) {
+			throw new Error('missing required option: you must specify an id for the coach mark')
+		}
+
 		// create relative parent for simplified positioning
 		const positioner = document.createElement('div');
-		positioner.style.position = 'absolute'; 
+		positioner.style.position = 'relative'; 
 		positioner.style.display = 'inline-block';
 		let back;
 		let close;
 		let next;
 		//Build html
-		
 		const container = document.createElement('div');
 		close = document.createElement('button');
 		const closeSpan = document.createElement('span');
@@ -64,38 +67,13 @@ export default class CoachMark {
 		content.style.margin = '0';
 		content.className = 'o-coach-mark__content';
 		content.className += ' o-coach-mark--' + opts.placement;
-		content.appendChild(close)
+		content.appendChild(close);
 		content.appendChild(titleText);
 		const paragraph = document.createElement('p');
 		paragraph[internalText] = opts.text;
 
 		content.appendChild(paragraph);
 		if (opts.hasBack || opts.hasNext) {
-			//build back button
-
-			let buttonClicked = (backNextbutton) => {
-				let event;
-				if (document.createEvent) {
-					event = document.createEvent('HTMLEvents');
-					event.initEvent('o-cm-backNext-clicked', true, true);
-				} else {
-					event = document.createEventObject();
-					event.eventType = 'o-cm-backNext-clicked';
-				}
-
-				event.eventName = 'o-cm-backNext-clicked';
-				event.data = {
-					type: backNextbutton,
-					id: opts.id
-				}
-
-				if (document.createEvent) {
-					element.dispatchEvent(event);
-				} else {
-					element.fireEvent("on" + event.eventType, event);
-				}
-			};
-
 			const backNextDiv = document.createElement('div');
 			back.setAttribute('type', 'button');
 			back.setAttribute('aria-label', 'back');
@@ -125,9 +103,9 @@ export default class CoachMark {
 			hideCMOnClick(next);
 
 			function hideCMOnClick(parent) {
-				var button = opts.hasNext ? 'nextButton' : 'backButton';
+				var buttonIs = opts.hasNext ? 'nextButton' : 'backButton';
 				parent.onclick = function(event) {
-					buttonClicked(button);
+					triggerEvent(buttonIs, 'o-cm-backNext-clicked');
 					container.style.visibility = 'hidden';
 					event.preventDefault();
 				};
@@ -136,6 +114,59 @@ export default class CoachMark {
 		content.style.position = 'relative';
 		container.appendChild(content);
 
+		if (opts.like) {
+			
+			this.appendAnchor = function appendAnchor(parent, upDown, text, like) {
+				const link = document.createElement('a');
+				link.onclick = function(event) {
+					triggerEvent(like, 'o-cm-like-clicked');
+					event.preventDefault();
+				};
+				link.innerHTML = text;
+				link.className = 'o-coach-mark--link-text';
+				link.setAttribute('href', '#');
+				const likeImg = document.createElement('i');
+				likeImg.className = 'o-coach-mark--icons fa fa-thumbs-o-' + upDown;
+				likeImg.setAttribute('aria-hidden', 'true');
+				// likeImg.width = '20';
+				link.insertBefore(likeImg, link.childNodes[0]);
+				parent.appendChild(link);
+			};
+
+			const likeDiv = document.createElement('div');
+			const hr = document.createElement('hr');
+			hr.className = 'o-coach-mark--hr';
+			likeDiv.appendChild(hr);
+			const question = document.createElement('p');
+			question.innerHTML = 'What do you think of this change?';
+			likeDiv.appendChild(question);
+			content.appendChild(likeDiv);
+			this.appendAnchor(likeDiv, 'down', 'Not Great', 'dislike');
+			this.appendAnchor(likeDiv, 'up', 'I Like It', 'like');
+		}
+		function triggerEvent(elementClickedIS, eventIs) {
+			let event;
+			if (document.createEvent) {
+				event = document.createEvent('HTMLEvents');
+				event.initEvent(eventIs, true, true);
+			} else {
+				event = document.createEventObject();
+				event.eventType = eventIs;
+			}
+
+			event.eventName = eventIs;
+			event.data = {
+				type: elementClickedIS,
+				id: opts.id
+			}
+
+			if (document.createEvent) {
+				element.dispatchEvent(event);
+			} else {
+				element.fireEvent("on" + event.eventType, event);
+			}
+
+		};
 		//Inject html - use classes to position
 		positioner.appendChild(container);
 		element.parentNode.insertBefore(positioner, element.nextSibling);
@@ -183,7 +214,7 @@ export default class CoachMark {
 
 		close.addEventListener('click', function(event) {
 			container.style.visibility = 'hidden';
-			callback(event);
+			callback(opts.id, event);
 		});
 	}
 }

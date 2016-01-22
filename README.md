@@ -8,7 +8,28 @@ Simple popover to explain new features to users
 
 `CoachMark(element, opts, callback)`
 
-Initializes coach mark pointing to the specified element, given an options object, with a callback to be executed when the user dismisses the coach mark.  
+Initializes coach mark pointing to the specified element, given an options object, 
+with a callback to be executed when the user dismisses the coach mark.  
+
+```
+
+Options are the following
+
+Option    | Type    | Required | Notes
+--------------------------------------
+like      | boolean | no       | determines if this coachmark will show Like/Dislike links
+placement | text    | yes      | where to place the coachmark
+title     | text    | no       |
+text      | text    | yes      |
+id        | text    | yes      | unique identifier
+hasBack	  | boolean	| no       | determines if this coachmark will have back coachmark
+hasNext	  | boolean | no       | determines if this coachmark will have next coachmark		
+```
+
+For the like/dislike links, listen for an event called 'o-cm-like-clicked' and you will get a data
+object identifying which link was clicked.
+
+For the back/next buttons, listen for an event called 'o-cm-backNext-clicked' and you will get a data object identifying which link was clicked.
 
 #### Use
 
@@ -16,12 +37,18 @@ Initializes coach mark pointing to the specified element, given an options objec
 const element = document.getElementById('awesome_featureId');
 
 new CoachMark(element, {
+	like: false,
+	hasBack/hasNext: true,
 	placement: 'bottom',
 	title: 'Optional Title',
 	text: 'Required text explaining to the user why you changed their interface'
-}, function () {
-	console.log('Callback executed on exit');
+}, function (id) {
+	console.log('Callback executed on exit of id:' + id);
 });
+
+document.addEventListener('o-cm-like-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
+document.addEventListener('o-cm-backNext-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
+
 ```
 
 ## License

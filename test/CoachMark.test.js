@@ -37,7 +37,8 @@ describe('CoachMark', () => {
 		mark = new CoachMark(element, {
 			placement: 'top',
 			title: 'bar',
-			text: 'baz'
+			text: 'baz',
+			id: 'sjsdflkjsdlkfj'
 		}, function () {
 			console.log('test');
 		});
@@ -49,7 +50,8 @@ describe('CoachMark', () => {
 			new CoachMark(null , {
 					placement: 'top',
 					title: 'foo',
-					text: 'bar'
+					text: 'bar',
+					id: 'sjsdflkjsdlkfj'
 				}, function () {
 					console.log('test');
 				})}).to.throwError();
@@ -59,7 +61,8 @@ describe('CoachMark', () => {
 		expect(function () {
 			new CoachMark(element , {
 					placement: 'top',
-					title: 'bar'
+					title: 'bar',
+					id: 'sjsdflkjsdlkfj'
 				}, function () {
 					console.log('test');
 				})
@@ -69,7 +72,8 @@ describe('CoachMark', () => {
 	it('should default to bottom if there is no placement', () => {
 		mark = new CoachMark(element, {
 			title: 'foo',
-			text: 'bar'
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
 		}, function () {
 		});
 		expect(mark.opts.placement).to.be('bottom');
@@ -79,7 +83,8 @@ describe('CoachMark', () => {
 		mark = new CoachMark(element, {
 			placement: 'top',
 			title: 'foo',
-			text: 'bar'
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
 		}, function () {});
 		const pos = document.querySelector('.o-coach-mark__container')
 			.getBoundingClientRect();
@@ -90,7 +95,8 @@ describe('CoachMark', () => {
 		mark = new CoachMark(element, {
 			placement: 'bottom',
 			title: 'foo',
-			text: 'bar'
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
 		}, function () {});
 		const pos = document.querySelector('.o-coach-mark__container')
 			.getBoundingClientRect();
@@ -101,7 +107,8 @@ describe('CoachMark', () => {
 		mark = new CoachMark(element, {
 			placement: 'left',
 			title: 'foo',
-			text: 'bar'
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
 		}, function () {});
 		const pos = document.querySelector('.o-coach-mark__container')
 			.getBoundingClientRect();
@@ -112,7 +119,8 @@ describe('CoachMark', () => {
 		mark = new CoachMark(element, {
 			placement: 'right',
 			title: 'foo',
-			text: 'bar'
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
 		}, function () {});
 		const pos = document.querySelector('.o-coach-mark__container')
 			.getBoundingClientRect();
@@ -124,7 +132,8 @@ describe('CoachMark', () => {
 		mark = new CoachMark(element, {
 			placement: 'right',
 			title: 'foo',
-			text: 'bar'
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
 		}, function() { called = true; });
 		const button = document.querySelector('.o-coach-mark__container button');
 
