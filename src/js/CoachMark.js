@@ -103,7 +103,7 @@ export default class CoachMark {
 			hideCMOnClick(next);
 
 			function hideCMOnClick(parent) {
-				var buttonIs = opts.hasNext ? 'nextButton' : 'backButton';
+				let buttonIs = opts.hasNext ? 'nextButton' : 'backButton';
 				parent.onclick = function(event) {
 					triggerEvent(buttonIs, 'o-cm-backNext-clicked');
 					container.style.visibility = 'hidden';
