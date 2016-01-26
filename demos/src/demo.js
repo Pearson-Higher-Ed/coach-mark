@@ -1,5 +1,5 @@
 /*global require*/
-let button = null;
+
 document.addEventListener('DOMContentLoaded', function() {
 	const CoachMark = require('../../main');
 	const bottom = document.getElementById('cm-bottom');
@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				return document.evaluate('/html/body/div[3]/div/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.style.visibility = 'hidden';
 			}
 			return document.evaluate('/html/body/div[4]/div/div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.style.visibility = 'hidden';
-
 		})(event.data.type);
 		console.log("user clicked " + event.data.id + " " + event.data.type);
 	});
