@@ -199,7 +199,7 @@ describe('CoachMark', () => {
 
 	it('should check for the total navigable coachmarks on next button ', () => {
 		mark = new CoachMark(element, {
-			placement: 'top',
+			placement: 'right',
 			title: 'foo',
 			text: 'bar',
 			hasNext: true,
