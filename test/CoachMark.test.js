@@ -143,7 +143,7 @@ describe('CoachMark', () => {
 		expect(called).to.be(true);
 	});
 
-	it('should call the event when next button clicked', () => {
+	it('should call the event when next button is clicked', () => {
 		let fired = false;
 		mark = new CoachMark(element, {
 			placement: 'right',
@@ -154,7 +154,7 @@ describe('CoachMark', () => {
 		});
 
 		const button = document.querySelector('.o-coach-mark__container button.o-coach-mark__next-button');
-		button.addEventListener('click', e => {
+		button.addEventListener('click', () => {
 			fired = true;
 		});
 		const ev = document.createEvent("MouseEvent");
@@ -163,7 +163,7 @@ describe('CoachMark', () => {
 		expect(fired).to.be(true);
 	});
 
-	it('should call the event when back button clicked', () => {
+	it('should call the event when back button is clicked', () => {
 		let fired = false;
 		mark = new CoachMark(element, {
 			placement: 'bottom',
@@ -174,7 +174,7 @@ describe('CoachMark', () => {
 		});
 
 		const button = document.querySelector('.o-coach-mark__container button.o-coach-mark__button-space');
-		button.addEventListener('click', e => {
+		button.addEventListener('click', () => {
 			fired = true;
 		});
 		const ev = document.createEvent("MouseEvent");
