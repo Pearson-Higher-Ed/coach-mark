@@ -142,4 +142,72 @@ describe('CoachMark', () => {
 		button.dispatchEvent(ev);
 		expect(called).to.be(true);
 	});
+
+	it('should call the event when next button clicked', () => {
+		let fired = false;
+		mark = new CoachMark(element, {
+			placement: 'right',
+			title: 'foo',
+			text: 'bar',
+			hasNext: true,
+			id: 'sjsdflkjsdlkfj'
+		});
+
+		const button = document.querySelector('.o-coach-mark__container button.o-coach-mark__next-button');
+		button.addEventListener('click', e => {
+			fired = true;
+		});
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent('click', true, true, window);
+		button.dispatchEvent(ev);
+		expect(fired).to.be(true);
+	});
+
+	it('should call the event when back button clicked', () => {
+		let fired = false;
+		mark = new CoachMark(element, {
+			placement: 'bottom',
+			title: 'foo',
+			text: 'bar',
+			hasBack: true,
+			id: 'sjsdflkjsdlkfj'
+		});
+
+		const button = document.querySelector('.o-coach-mark__container button.o-coach-mark__button-space');
+		button.addEventListener('click', e => {
+			fired = true;
+		});
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent('click', true, true, window);
+		button.dispatchEvent(ev);
+		expect(fired).to.be(true);
+	});
+
+	it('should check for the total navigable coachmarks on back button ', () => {
+		mark = new CoachMark(element, {
+			placement: 'left',
+			title: 'foo',
+			text: 'bar',
+			hasBack: true,
+			id: 'sjsdflkjsdlkfj'
+		});
+
+		const total = document.querySelector('span.o-coach-mark__total-coachmarks');
+
+		expect(total.innerText).to.be('2/2');
+	});
+
+	it('should check for the total navigable coachmarks on next button ', () => {
+		mark = new CoachMark(element, {
+			placement: 'top',
+			title: 'foo',
+			text: 'bar',
+			hasNext: true,
+			id: 'sjsdflkjsdlkfj'
+		});
+
+		const total = document.querySelector('span.o-coach-mark__total-coachmarks');
+
+		expect(total.innerText).to.be('1/2');
+	});
 });
