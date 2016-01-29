@@ -159,13 +159,13 @@ export default class CoachMark {
 			const buttonBar = document.createElement('div');
 			const submit = document.createElement('button');
 			submit.innerHTML = 'submit';
-			submit.onclick = (event) => {
+			submit.onclick = () => {
 				triggerEvent('submit', 'o-cm-submit-clicked', form.value);
 			}
 			const cancel = document.createElement('a');
 			cancel.innerHTML = 'cancel';
 			cancel.setAttribute('href', '#');
-			cancel.onclick = (event) => {
+			cancel.onclick = () => {
 				triggerEvent('cancel', 'o-cm-cancel-clicked');
 				likeDiv.style.display = 'block';
 				feedBack.style.display = 'none';
