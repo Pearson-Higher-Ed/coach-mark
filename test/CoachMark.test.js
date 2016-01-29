@@ -127,19 +127,144 @@ describe('CoachMark', () => {
 		expect(pos.left>200).to.be(true);
 	});
 
-	it('should call the callback when dismissed', () => {
+
+	it('should call the callback when liked', () => {
 		let called = false;
+		let matched = false;
+		let data = {type: "like",
+			id: "sjsdflkjsdlkfj",
+			payload: undefined
+		};
+
+		document.addEventListener('o-cm-like-clicked', (event) => {
+			called = true;
+			matched = JSON.stringify(data) === JSON.stringify(event.data);
+		});
+
 		mark = new CoachMark(element, {
+			like: true,
 			placement: 'right',
 			title: 'foo',
 			text: 'bar',
 			id: 'sjsdflkjsdlkfj'
-		}, function() { called = true; });
-		const button = document.querySelector('.o-coach-mark__container button');
+		}, function() {});
+		const anchor = document.querySelectorAll('.o-coach-mark__content div a')[1];
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent("click", true, true, window);
+		anchor.dispatchEvent(ev);
+		expect(called).to.be(true);
+		expect(matched).to.be(true);
+	});
 
+
+	it('should call the callback when disliked', () => {
+		let called = false;
+		let matched = false;
+		let data = {type: "dislike",
+			id: "sjsdflkjsdlkfj",
+			payload: undefined
+		};
+
+		document.addEventListener('o-cm-like-clicked', (event) => {
+			called = true;
+			matched = JSON.stringify(data) === JSON.stringify(event.data);
+		});
+
+		mark = new CoachMark(element, {
+			like: true,
+			placement: 'right',
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function() {});
+		const anchor = document.querySelectorAll('.o-coach-mark__content div a')[0];
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent("click", true, true, window);
+		anchor.dispatchEvent(ev);
+		expect(called).to.be(true);
+		expect(matched).to.be(true);
+	});
+
+	it('should call the callback when feedback clicked', () => {
+		let called = false;
+		let matched = false;
+		let data = {type: "submit",
+			id: "sjsdflkjsdlkfj",
+			payload: 'my comment here'
+		};
+
+		document.addEventListener('o-cm-submit-clicked', (event) => {
+			called = true;
+			matched = JSON.stringify(data) === JSON.stringify(event.data);
+		});
+
+		mark = new CoachMark(element, {
+			like: true,
+			placement: 'right',
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function() {});
+		const textarea = document.querySelector('textarea');
+		textarea.innerHTML = 'my comment here';
+
+		const button = document.querySelectorAll('button')[1];
 		const ev = document.createEvent("MouseEvent");
 		ev.initMouseEvent("click", true, true, window);
 		button.dispatchEvent(ev);
 		expect(called).to.be(true);
+		expect(matched).to.be(true);
 	});
+
+
+	it('should call the callback when cancel clicked', () => {
+		let called = false;
+		let matched = false;
+		let data = {type: "cancel",
+			id: "sjsdflkjsdlkfj",
+			payload: undefined
+		};
+
+		document.addEventListener('o-cm-cancel-clicked', (event) => {
+			called = true;
+			matched = JSON.stringify(data) === JSON.stringify(event.data);
+		});
+
+		mark = new CoachMark(element, {
+			like: true,
+			placement: 'right',
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function() {});
+
+		const anchor = document.querySelectorAll('a')[2];
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent("click", true, true, window);
+		anchor.dispatchEvent(ev);
+		expect(called).to.be(true);
+		expect(matched).to.be(true);
+	});
+
+
+	it('should show like/dislike when cancel clicked', () => {
+		mark = new CoachMark(element, {
+			like: true,
+			placement: 'right',
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function() {});
+
+		const anchor = document.querySelectorAll('a')[2];
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent("click", true, true, window);
+		anchor.dispatchEvent(ev);
+
+		const likeDiv = document.querySelector(".o-coach-mark__like-div");
+		expect(likeDiv.style.display).to.be("block");
+		const feedbackDiv = document.querySelector(".o-coach-mark__feedback");
+		expect(feedbackDiv.style.display).to.be("none");
+	});
+
 });
