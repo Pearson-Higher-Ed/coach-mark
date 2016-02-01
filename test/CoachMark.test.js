@@ -172,107 +172,74 @@ describe('CoachMark', () => {
 		expect(matched).to.be(true);
 	});
 
-
-	it('should call the callback when disliked', () => {
-		let called = false;
-		let matched = false;
-		let data = {type: "dislike",
-			id: "sjsdflkjsdlkfj",
-			payload: undefined
-		};
-
-		document.addEventListener('o-cm-like-clicked', (event) => {
-			called = true;
-			matched = JSON.stringify(data) === JSON.stringify(event.data);
-		});
-
+	it('should call the event when next button is clicked', () => {
+		let fired = false;
 		mark = new CoachMark(element, {
-			like: true,
 			placement: 'right',
 			title: 'foo',
 			text: 'bar',
+			hasNext: true,
 			id: 'sjsdflkjsdlkfj'
-		}, function() {});
-		const anchor = document.querySelectorAll('.o-coach-mark__content div a')[0];
-		clickOnDiv(anchor);
-		expect(called).to.be(true);
-		expect(matched).to.be(true);
-	});
-
-	it('should call the callback when feedback clicked', () => {
-		let called = false;
-		let matched = false;
-		let data = {type: "submit",
-			id: "sjsdflkjsdlkfj",
-			payload: 'my comment here'
-		};
-
-		document.addEventListener('o-cm-submit-clicked', (event) => {
-			called = true;
-			matched = JSON.stringify(data) === JSON.stringify(event.data);
 		});
 
-		mark = new CoachMark(element, {
-			like: true,
-			placement: 'right',
-			title: 'foo',
-			text: 'bar',
-			id: 'sjsdflkjsdlkfj'
-		}, function() {});
-		const textarea = document.querySelector('textarea');
-		textarea.innerHTML = 'my comment here';
-
-		const button = document.querySelectorAll('button')[1];
+		const button = document.querySelector('.o-coach-mark__container button.o-coach-mark__next-button');
+		button.addEventListener('click', () => {
+			fired = true;
+		});
 		clickOnDiv(button);
-		expect(called).to.be(true);
-		expect(matched).to.be(true);
+		expect(fired).to.be(true);
 	});
 
-
-	it('should call the callback when cancel clicked', () => {
-		let called = false;
-		let matched = false;
-		let data = {type: "cancel",
-			id: "sjsdflkjsdlkfj",
-			payload: undefined
-		};
-
-		document.addEventListener('o-cm-cancel-clicked', (event) => {
-			called = true;
-			matched = JSON.stringify(data) === JSON.stringify(event.data);
+	it('should call the event when back button is clicked', () => {
+		let fired = false;
+		mark = new CoachMark(element, {
+			placement: 'bottom',
+			title: 'foo',
+			text: 'bar',
+			hasBack: true,
+			id: 'sjsdflkjsdlkfj'
 		});
 
-		mark = new CoachMark(element, {
-			like: true,
-			placement: 'right',
-			title: 'foo',
-			text: 'bar',
-			id: 'sjsdflkjsdlkfj'
-		}, function() {});
-
-		const anchor = document.querySelectorAll('a')[2];
-		clickOnDiv(anchor);
-		expect(called).to.be(true);
-		expect(matched).to.be(true);
+		const button = document.querySelector('.o-coach-mark__container button.o-coach-mark__button-space');
+		button.addEventListener('click', () => {
+			fired = true;
+		});
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent('click', true, true, window);
+		button.dispatchEvent(ev);
+		expect(fired).to.be(true);
 	});
 
-
-	it('should show like/dislike when cancel clicked', () => {
+	it('should check for the total navigable coachmarks on back button ', () => {
 		mark = new CoachMark(element, {
-			like: true,
+			placement: 'left',
+			title: 'foo',
+			text: 'bar',
+			hasBack: true,
+			currentCM: '2',
+			totalCM: '2',
+			id: 'sjsdflkjsdlkfj'
+		});
+
+		const total = document.querySelector('span.o-coach-mark__total-coachmarks');
+
+		expect(total.innerText).to.be('2/2');
+	});
+
+	it('should check for the total navigable coachmarks on next button ', () => {
+		mark = new CoachMark(element, {
 			placement: 'right',
 			title: 'foo',
 			text: 'bar',
+			hasNext: true,
+			currentCM: '1',
+			totalCM: '2',
 			id: 'sjsdflkjsdlkfj'
-		}, function() {});
+		});
 
-		const anchor = document.querySelectorAll('a')[2];
-		clickOnDiv(anchor);
+		const total = document.querySelector('span.o-coach-mark__total-coachmarks');
 
-		const likeDiv = document.querySelector(".o-coach-mark__like-div");
-		expect(likeDiv.style.display).to.be("block");
-		const feedbackDiv = document.querySelector(".o-coach-mark__feedback");
-		expect(feedbackDiv.style.display).to.be("none");
+		expect(total.innerText).to.be('1/2');
 	});
 
 });

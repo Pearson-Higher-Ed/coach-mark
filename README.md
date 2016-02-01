@@ -23,7 +23,9 @@ title     | text    | no       |
 text      | text    | yes      |
 id        | text    | yes      | unique identifier
 hasBack	  | boolean	| no       | determines if this coachmark will have back coachmark
-hasNext	  | boolean | no       | determines if this coachmark will have next coachmark		
+hasNext	  | boolean | no       | determines if this coachmark will have next coachmark	
+currentCM | text	| no       | keeps track of current coachmark where the user navigated
+totalCM	  | text    | no       | keeps track of total number of coachmarks 
 ```
 
 For the like/dislike links, listen for an event called 'o-cm-like-clicked' and you will get a data
@@ -45,6 +47,8 @@ const element = document.getElementById('awesome_featureId');
 new CoachMark(element, {
 	like: false,
 	hasBack/hasNext: true,
+	currentCM: '2',
+	totalCM: '2',
 	placement: 'bottom',
 	title: 'Optional Title',
 	text: 'Required text explaining to the user why you changed their interface'

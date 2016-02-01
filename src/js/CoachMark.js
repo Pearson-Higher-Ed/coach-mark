@@ -32,20 +32,13 @@ export default class CoachMark {
 		const positioner = document.createElement('div');
 		positioner.style.position = 'relative'; 
 		positioner.style.display = 'inline-block';
-		let back;
 		let close;
-		let next;
 		//Build html
 		const container = document.createElement('div');
 		close = document.createElement('button');
 		const closeSpan = document.createElement('span');
 		const titleText = document.createElement('div');
-		back = document.createElement('button');
-		const backSpan = document.createElement('span');
-		next = document.createElement('button');
-		const nextSpan = document.createElement('span');
-		const totalOfCoachMarksSpan = document.createElement('span');
-
+		
 		titleText.className = 'o-coach-mark__title';
 		const internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
 
@@ -75,38 +68,38 @@ export default class CoachMark {
 		content.appendChild(paragraph);
 		if (opts.hasBack || opts.hasNext) {
 			const backNextDiv = document.createElement('div');
+			let back = document.createElement('button');
+			const backSpan = document.createElement('span');
+			let next = document.createElement('button');
+			const nextSpan = document.createElement('span');
+			const totalOfCoachMarksSpan = document.createElement('span');
+
 			back.setAttribute('type', 'button');
-			back.setAttribute('aria-label', 'back');
 			back.className = 'o-coach-mark__button-space';
 
 			backSpan[internalText] = 'Back';
-			backSpan.setAttribute('aria-hidden', 'true');
 			back.appendChild(backSpan);
 			//build next button
 			next.setAttribute('type', 'button');
-			next.setAttribute('aria-label', 'next');
+			next.className = 'o-coach-mark__next-button';
 
 			nextSpan[internalText] = 'Next';
-			nextSpan.setAttribute('aria-hidden', 'true');
 			next.appendChild(nextSpan);
-			back.disabled = opts.hasNext;
-			next.disabled = opts.hasBack;
-			totalOfCoachMarksSpan.setAttribute('aria-hidden', 'true');
-			totalOfCoachMarksSpan.style.paddingLeft = '60px';
-			totalOfCoachMarksSpan[internalText] = opts.hasNext ? '1/2' : '2/2';
+			
+			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks';
+			totalOfCoachMarksSpan[internalText] = opts.currentCM + '/' + opts.totalCM;
 
 			backNextDiv.appendChild(back);
 			backNextDiv.appendChild(next);
 			backNextDiv.appendChild(totalOfCoachMarksSpan);
 			content.appendChild(backNextDiv);
-			hideCMOnClick(back);
-			hideCMOnClick(next);
+			eventOnClick(back);
+			eventOnClick(next);
 
-			function hideCMOnClick(parent) {
+			function eventOnClick(parent) {
 				let buttonIs = opts.hasNext ? 'nextButton' : 'backButton';
 				parent.onclick = function(event) {
 					triggerEvent(buttonIs, 'o-cm-backNext-clicked');
-					container.style.visibility = 'hidden';
 					event.preventDefault();
 				};
 			}
