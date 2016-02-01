@@ -189,6 +189,8 @@ describe('CoachMark', () => {
 			title: 'foo',
 			text: 'bar',
 			hasBack: true,
+			currentCM: '2',
+			totalCM: '2',
 			id: 'sjsdflkjsdlkfj'
 		});
 
@@ -203,6 +205,8 @@ describe('CoachMark', () => {
 			title: 'foo',
 			text: 'bar',
 			hasNext: true,
+			currentCM: '1',
+			totalCM: '2',
 			id: 'sjsdflkjsdlkfj'
 		});
 
