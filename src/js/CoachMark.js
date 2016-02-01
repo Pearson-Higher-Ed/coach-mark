@@ -133,7 +133,6 @@ export default class CoachMark {
 				const likeImg = document.createElement('i');
 				likeImg.className = 'o-coach-mark--icons fa fa-thumbs-o-' + upDown;
 				likeImg.setAttribute('aria-hidden', 'true');
-				// likeImg.width = '20';
 				link.insertBefore(likeImg, link.childNodes[0]);
 				parent.appendChild(link);
 			}

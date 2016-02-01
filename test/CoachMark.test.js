@@ -127,6 +127,20 @@ describe('CoachMark', () => {
 		expect(pos.left>200).to.be(true);
 	});
 
+	it('should call the callback when dismissed', () => {
+		let called = false;
+		mark = new CoachMark(element, {
+			placement: 'right',
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function() { called = true; });
+		const button = document.querySelector('.o-coach-mark__container button');
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent("click", true, true, window);
+		button.dispatchEvent(ev);
+		expect(called).to.be(true);
+	});
 
 	it('should call the callback when liked', () => {
 		let called = false;
