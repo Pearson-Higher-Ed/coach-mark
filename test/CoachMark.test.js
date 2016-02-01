@@ -33,6 +33,12 @@ describe('CoachMark', () => {
 		}
 	});
 
+	function clickOnDiv(element) {
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent("click", true, true, window);
+		element.dispatchEvent(ev);
+	}
+
 	it('should initialize', () => {
 		mark = new CoachMark(element, {
 			placement: 'top',
@@ -136,9 +142,7 @@ describe('CoachMark', () => {
 			id: 'sjsdflkjsdlkfj'
 		}, function() { called = true; });
 		const button = document.querySelector('.o-coach-mark__container button');
-		const ev = document.createEvent("MouseEvent");
-		ev.initMouseEvent("click", true, true, window);
-		button.dispatchEvent(ev);
+		clickOnDiv(button);
 		expect(called).to.be(true);
 	});
 
@@ -163,9 +167,7 @@ describe('CoachMark', () => {
 			id: 'sjsdflkjsdlkfj'
 		}, function() {});
 		const anchor = document.querySelectorAll('.o-coach-mark__content div a')[1];
-		const ev = document.createEvent("MouseEvent");
-		ev.initMouseEvent("click", true, true, window);
-		anchor.dispatchEvent(ev);
+		clickOnDiv(anchor);
 		expect(called).to.be(true);
 		expect(matched).to.be(true);
 	});
@@ -192,9 +194,7 @@ describe('CoachMark', () => {
 			id: 'sjsdflkjsdlkfj'
 		}, function() {});
 		const anchor = document.querySelectorAll('.o-coach-mark__content div a')[0];
-		const ev = document.createEvent("MouseEvent");
-		ev.initMouseEvent("click", true, true, window);
-		anchor.dispatchEvent(ev);
+		clickOnDiv(anchor);
 		expect(called).to.be(true);
 		expect(matched).to.be(true);
 	});
@@ -223,9 +223,7 @@ describe('CoachMark', () => {
 		textarea.innerHTML = 'my comment here';
 
 		const button = document.querySelectorAll('button')[1];
-		const ev = document.createEvent("MouseEvent");
-		ev.initMouseEvent("click", true, true, window);
-		button.dispatchEvent(ev);
+		clickOnDiv(button);
 		expect(called).to.be(true);
 		expect(matched).to.be(true);
 	});
@@ -253,9 +251,7 @@ describe('CoachMark', () => {
 		}, function() {});
 
 		const anchor = document.querySelectorAll('a')[2];
-		const ev = document.createEvent("MouseEvent");
-		ev.initMouseEvent("click", true, true, window);
-		anchor.dispatchEvent(ev);
+		clickOnDiv(anchor);
 		expect(called).to.be(true);
 		expect(matched).to.be(true);
 	});
@@ -271,9 +267,7 @@ describe('CoachMark', () => {
 		}, function() {});
 
 		const anchor = document.querySelectorAll('a')[2];
-		const ev = document.createEvent("MouseEvent");
-		ev.initMouseEvent("click", true, true, window);
-		anchor.dispatchEvent(ev);
+		clickOnDiv(anchor);
 
 		const likeDiv = document.querySelector(".o-coach-mark__like-div");
 		expect(likeDiv.style.display).to.be("block");
