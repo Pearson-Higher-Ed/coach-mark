@@ -6,7 +6,6 @@ export default class CoachMark {
 		this.element = element;
 		this.opts = opts;
 		this.callback = callback;
-
 		//Check options
 		if(!opts)
 			throw new Error('missing required parameter:' +
@@ -31,26 +30,26 @@ export default class CoachMark {
 
 		// create relative parent for simplified positioning
 		const positioner = document.createElement('div');
-		positioner.style.position = 'relative';
+		positioner.style.position = 'relative'; 
 		positioner.style.display = 'inline-block';
-
+		let close;
 		//Build html
 		const container = document.createElement('div');
-		const close = document.createElement('button');
+		close = document.createElement('button');
 		const closeSpan = document.createElement('span');
 		const titleText = document.createElement('div');
-
+		
 		titleText.className = 'o-coach-mark__title';
-		const internalText=('textContent' in titleText)?'textContent':'innerText';
+		const internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
 
-		if(opts.title) titleText[internalText] = opts.title;
+		if (opts.title) titleText[internalText] = opts.title;
 
-		close.setAttribute('type','button');
-		close.setAttribute('aria-label','close');
+		close.setAttribute('type', 'button');
+		close.setAttribute('aria-label', 'close');
 		close.className = 'o-coach-mark__close-icon';
 
 		closeSpan[internalText] = '✕';
-		closeSpan.setAttribute('aria-hidden','true');
+		closeSpan.setAttribute('aria-hidden', 'true');
 		close.appendChild(closeSpan);
 
 		container.className = 'o-coach-mark__container';
@@ -65,38 +64,55 @@ export default class CoachMark {
 		content.appendChild(titleText);
 		const paragraph = document.createElement('p');
 		paragraph[internalText] = opts.text;
+
 		content.appendChild(paragraph);
+		if (opts.hasBack || opts.hasNext) {
+			const backNextDiv = document.createElement('div');
+			let back = document.createElement('button');
+			const backSpan = document.createElement('span');
+			let next = document.createElement('button');
+			const nextSpan = document.createElement('span');
+			const totalOfCoachMarksSpan = document.createElement('span');
+
+			back.setAttribute('type', 'button');
+			back.className = 'o-coach-mark__button-space';
+
+			backSpan[internalText] = 'Back';
+			back.appendChild(backSpan);
+			//build next button
+			next.setAttribute('type', 'button');
+			next.className = 'o-coach-mark__next-button';
+
+			nextSpan[internalText] = 'Next';
+			next.appendChild(nextSpan);
+			
+			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks';
+			totalOfCoachMarksSpan[internalText] = opts.currentCM + '/' + opts.totalCM;
+
+			backNextDiv.appendChild(back);
+			backNextDiv.appendChild(next);
+			backNextDiv.appendChild(totalOfCoachMarksSpan);
+			content.appendChild(backNextDiv);
+			eventOnClick(back);
+			eventOnClick(next);
+
+			function eventOnClick(parent) {
+				let buttonIs = opts.hasNext ? 'nextButton' : 'backButton';
+				parent.onclick = function(event) {
+					triggerEvent(buttonIs, 'o-cm-backNext-clicked');
+					event.preventDefault();
+				};
+			};
+		}
 		content.style.position = 'relative';
 		container.appendChild(content);
 
 		if (opts.like) {
-			let likeClicked = (like) => {
-				let event;
-				if (document.createEvent) {
-					event = document.createEvent('HTMLEvents');
-					event.initEvent('o-cm-like-clicked', true, true);
-				} else {
-					event = document.createEventObject();
-					event.eventType = 'o-cm-like-clicked';
-				}
-
-				event.eventName = 'o-cm-like-clicked';
-				event.data = {
-					type: like,
-					id: opts.id
-				}
-
-				if (document.createEvent) {
-					element.dispatchEvent(event);
-				} else {
-					element.fireEvent("on" + event.eventType, event);
-				}
-			};
-
+			
 			this.appendAnchor = function appendAnchor(parent, upDown, text, like) {
 				const link = document.createElement('a');
 				link.onclick = function(event) {
-					likeClicked(like);
+					triggerEvent(like, 'o-cm-like-clicked');
 					event.preventDefault();
 				};
 				link.innerHTML = text;
@@ -121,7 +137,29 @@ export default class CoachMark {
 			this.appendAnchor(likeDiv, 'down', 'Not Great', 'dislike');
 			this.appendAnchor(likeDiv, 'up', 'I Like It', 'like');
 		}
+		function triggerEvent(elementClickedIS, eventIs) {
+			let event;
+			if (document.createEvent) {
+				event = document.createEvent('HTMLEvents');
+				event.initEvent(eventIs, true, true);
+			} else {
+				event = document.createEventObject();
+				event.eventType = eventIs;
+			}
 
+			event.eventName = eventIs;
+			event.data = {
+				type: elementClickedIS,
+				id: opts.id
+			}
+
+			if (document.createEvent) {
+				element.dispatchEvent(event);
+			} else {
+				element.fireEvent("on" + event.eventType, event);
+			}
+
+		};
 		//Inject html - use classes to position
 		positioner.appendChild(container);
 		element.parentNode.insertBefore(positioner, element.nextSibling);
@@ -135,41 +173,39 @@ export default class CoachMark {
 		const markHeight = content.offsetHeight + 10;
 		const markWidth = container.offsetWidth;
 
-
 		container.style.visibility = 'hidden';
 
-		if(opts.placement === 'bottom') {
-			if(window.innerHeight-featurePosition.bottom > markHeight) {
-					container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
+		if (opts.placement === 'bottom') {
+			if (window.innerHeight - featurePosition.bottom > markHeight) {
+				container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
 		} else if (opts.placement === 'top') {
-			if(featurePosition.top > markHeight) {
+			if (featurePosition.top > markHeight) {
 				container.style.top = ((featureHeight + markHeight) * -1) + 'px';
 				container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
 		} else if (opts.placement === 'left') {
-			if(window.innerWidth - featurePosition.left > markWidth) {
+			if (window.innerWidth - featurePosition.left > markWidth) {
 				container.style.top = (featureHeight * -1) + 'px';
 				container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
-		} else if (opts.placement === 'right'){
-			if(window.innerWidth - featurePosition.right > markWidth) {
+		} else if (opts.placement === 'right') {
+			if (window.innerWidth - featurePosition.right > markWidth) {
 				container.style.top = (featureHeight * -1) + 'px';
 				container.style.left = (featurePosition.right + window.pageXOffset) + 'px';
 			} else {
 				throw new Error('insufficient room for coach mark placement');
 			}
 		}
-
 		container.style.visibility = 'visible';
 
-		close.addEventListener('click', function (event) {
+		close.addEventListener('click', function(event) {
 			container.style.visibility = 'hidden';
 			callback(opts.id, event);
 		});
