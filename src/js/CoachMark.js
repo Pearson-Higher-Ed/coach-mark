@@ -87,7 +87,7 @@ export default class CoachMark {
 			next.appendChild(nextSpan);
 			
 			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks';
-			totalOfCoachMarksSpan[internalText] = opts.hasNext ? '1/2' : '2/2';
+			totalOfCoachMarksSpan[internalText] = opts.currentCM + '/' + opts.totalCM;
 
 			backNextDiv.appendChild(back);
 			backNextDiv.appendChild(next);

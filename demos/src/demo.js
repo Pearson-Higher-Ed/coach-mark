@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		title: 'Coach Mark Above Feature',
 		text: 'Some text explaining to the user why you changed their interface',
 		id: '9837494320',
+		currentCM: '1',
+		totalCM: '2',
 		hasNext:true
 	}, function (id) {
 		console.log('Callback executed on exit of ' + id);
@@ -32,6 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		title: 'Coach Mark Left of Feature',
 		text: 'Some text explaining to the user why you changed their interface',
 		id: '9892387492098',
+		currentCM: '2',
+		totalCM: '2',
 		hasBack:true
 	}, function (id) {
 		console.log('Callback executed on exit '+ id);
