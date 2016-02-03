@@ -102,17 +102,22 @@ export default class CoachMark {
 					triggerEvent(buttonIs, 'o-cm-backNext-clicked');
 					event.preventDefault();
 				};
-			};
+			}
 		}
 		content.style.position = 'relative';
 		container.appendChild(content);
 
 		if (opts.like) {
+
+			let likeDiv;
+			let feedBack;
 			
-			this.appendAnchor = function appendAnchor(parent, upDown, text, like) {
+			this.appendAnchor = (parent, upDown, text, like) => {
 				const link = document.createElement('a');
 				link.onclick = function(event) {
 					triggerEvent(like, 'o-cm-like-clicked');
+					likeDiv.style.display = 'none';
+					feedBack.style.display = 'block';
 					event.preventDefault();
 				};
 				link.innerHTML = text;
@@ -121,23 +126,50 @@ export default class CoachMark {
 				const likeImg = document.createElement('i');
 				likeImg.className = 'o-coach-mark--icons fa fa-thumbs-o-' + upDown;
 				likeImg.setAttribute('aria-hidden', 'true');
-				// likeImg.width = '20';
 				link.insertBefore(likeImg, link.childNodes[0]);
 				parent.appendChild(link);
-			};
+			}
 
-			const likeDiv = document.createElement('div');
 			const hr = document.createElement('hr');
 			hr.className = 'o-coach-mark--hr';
-			likeDiv.appendChild(hr);
+			content.appendChild(hr);
+
+			likeDiv = document.createElement('div');
+			likeDiv.className = 'o-coach-mark__like-div';
 			const question = document.createElement('p');
 			question.innerHTML = 'What do you think of this change?';
 			likeDiv.appendChild(question);
 			content.appendChild(likeDiv);
 			this.appendAnchor(likeDiv, 'down', 'Not Great', 'dislike');
 			this.appendAnchor(likeDiv, 'up', 'I Like It', 'like');
+			feedBack = document.createElement('div');
+			feedBack.className = 'o-coach-mark__feedback';
+			const instructions = document.createElement('p');
+			instructions.innerHTML = 'Thanks! Care to tell us more?';
+			feedBack.appendChild(instructions);
+			const form = document.createElement('textarea');
+			const buttonBar = document.createElement('div');
+			const submit = document.createElement('button');
+			submit.innerHTML = 'submit';
+			submit.onclick = () => {
+				triggerEvent('submit', 'o-cm-submit-clicked', form.value);
+			}
+			const cancel = document.createElement('a');
+			cancel.innerHTML = 'cancel';
+			cancel.setAttribute('href', '#');
+			cancel.onclick = () => {
+				triggerEvent('cancel', 'o-cm-cancel-clicked');
+				likeDiv.style.display = 'block';
+				feedBack.style.display = 'none';
+			}
+			feedBack.appendChild(form);
+			buttonBar.appendChild(submit);
+			buttonBar.appendChild(cancel);
+			feedBack.appendChild(buttonBar);
+			content.appendChild(feedBack);
 		}
-		function triggerEvent(elementClickedIS, eventIs) {
+
+		function triggerEvent(elementClickedIS, eventIs, payload) {
 			let event;
 			if (document.createEvent) {
 				event = document.createEvent('HTMLEvents');
@@ -150,16 +182,17 @@ export default class CoachMark {
 			event.eventName = eventIs;
 			event.data = {
 				type: elementClickedIS,
-				id: opts.id
-			}
+				id: opts.id,
+				payload: payload
+			};
 
 			if (document.createEvent) {
 				element.dispatchEvent(event);
 			} else {
 				element.fireEvent("on" + event.eventType, event);
 			}
+		}
 
-		};
 		//Inject html - use classes to position
 		positioner.appendChild(container);
 		element.parentNode.insertBefore(positioner, element.nextSibling);

@@ -33,6 +33,12 @@ describe('CoachMark', () => {
 		}
 	});
 
+	function clickOnDiv(element) {
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent("click", true, true, window);
+		element.dispatchEvent(ev);
+	}
+
 	it('should initialize', () => {
 		mark = new CoachMark(element, {
 			placement: 'top',
@@ -136,11 +142,34 @@ describe('CoachMark', () => {
 			id: 'sjsdflkjsdlkfj'
 		}, function() { called = true; });
 		const button = document.querySelector('.o-coach-mark__container button');
-
-		const ev = document.createEvent("MouseEvent");
-		ev.initMouseEvent("click", true, true, window);
-		button.dispatchEvent(ev);
+		clickOnDiv(button);
 		expect(called).to.be(true);
+	});
+
+	it('should call the callback when liked', () => {
+		let called = false;
+		let matched = false;
+		let data = {type: "like",
+			id: "sjsdflkjsdlkfj",
+			payload: undefined
+		};
+
+		document.addEventListener('o-cm-like-clicked', (event) => {
+			called = true;
+			matched = JSON.stringify(data) === JSON.stringify(event.data);
+		});
+
+		mark = new CoachMark(element, {
+			like: true,
+			placement: 'right',
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function() {});
+		const anchor = document.querySelectorAll('.o-coach-mark__content div a')[1];
+		clickOnDiv(anchor);
+		expect(called).to.be(true);
+		expect(matched).to.be(true);
 	});
 
 	it('should call the event when next button is clicked', () => {
@@ -157,9 +186,7 @@ describe('CoachMark', () => {
 		button.addEventListener('click', () => {
 			fired = true;
 		});
-		const ev = document.createEvent("MouseEvent");
-		ev.initMouseEvent('click', true, true, window);
-		button.dispatchEvent(ev);
+		clickOnDiv(button);
 		expect(fired).to.be(true);
 	});
 
@@ -214,4 +241,5 @@ describe('CoachMark', () => {
 
 		expect(total.innerText).to.be('1/2');
 	});
+
 });

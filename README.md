@@ -33,6 +33,12 @@ object identifying which link was clicked.
 
 For the back/next buttons, listen for an event called 'o-cm-backNext-clicked' and you will get a data object identifying which link was clicked.
 
+For the feedback feature, listen to an event called 'o-cm-submit-clicked' and you will get a data object identifying the id and the feedback text.
+
+If the user clicks the cancel link, the event called 'o-cm-cancel-clicked' is fired.
+
+See the Origami Demo to see the features in action.
+
 #### Use
 
 ```js
@@ -52,6 +58,8 @@ new CoachMark(element, {
 
 document.addEventListener('o-cm-like-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
 document.addEventListener('o-cm-backNext-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
+document.addEventListener('o-cm-submit-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type + " and commented: " + event.data.payload));
+document.addEventListener('o-cm-cancel-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
 
 ```
 
