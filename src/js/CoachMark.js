@@ -85,7 +85,7 @@ export default class CoachMark {
 
 			nextSpan[internalText] = 'Next';
 			next.appendChild(nextSpan);
-			
+
 			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks';
 			totalOfCoachMarksSpan[internalText] = opts.currentCM + '/' + opts.totalCM;
 
@@ -93,16 +93,30 @@ export default class CoachMark {
 			backNextDiv.appendChild(next);
 			backNextDiv.appendChild(totalOfCoachMarksSpan);
 			content.appendChild(backNextDiv);
-			eventOnClick(back);
-			eventOnClick(next);
+			((back, next, opts) => {
+				if (opts.hasNext && opts.hasBack) {
+					eventOnClick(back, 'backButton');
+					eventOnClick(next, 'nextButton');
+					return;
+				}
+				if (opts.hasNext && !opts.hasBack) {
+					back.disabled = true;
+					eventOnClick(next, 'nextButton');
+					return;
+				}
+				if (!opts.hasNext && opts.hasBack) {
+					eventOnClick(back, 'backButton');
+					next.disabled = true;
+					return;
+				}
 
-			function eventOnClick(parent) {
-				let buttonIs = opts.hasNext ? 'nextButton' : 'backButton';
-				parent.onclick = function(event) {
-					triggerEvent(buttonIs, 'o-cm-backNext-clicked');
-					event.preventDefault();
+				function eventOnClick(parent, buttonIs) {
+					parent.onclick = function(event) {
+						triggerEvent(buttonIs, 'o-cm-backNext-clicked');
+						event.preventDefault();
+					};
 				};
-			}
+			})(back, next, opts);
 		}
 		content.style.position = 'relative';
 		container.appendChild(content);

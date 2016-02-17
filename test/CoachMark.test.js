@@ -210,6 +210,36 @@ describe('CoachMark', () => {
 		expect(fired).to.be(true);
 	});
 
+	it('should call the events when back button and next button are clicked', () => {
+		let firedBackButton = false;
+		let firedNextButton = false;
+		mark = new CoachMark(element, {
+			placement: 'bottom',
+			title: 'foo',
+			text: 'bar',
+			hasBack: true,
+			hasNext:true,
+			id: 'sjsdflkjsdlkfj'
+		});
+
+		const backButton = document.querySelector('.o-coach-mark__container button.o-coach-mark__button-space');
+		backButton.addEventListener('click', () => {
+			firedBackButton = true;
+		});
+		const eventIs = document.createEvent("MouseEvent");
+		eventIs.initMouseEvent('click', true, true, window);
+		backButton.dispatchEvent(eventIs);
+		const nextButton = document.querySelector('.o-coach-mark__container button.o-coach-mark__next-button');
+		nextButton.addEventListener('click', () => {
+			firedNextButton = true;
+		});
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent('click', true, true, window);
+		nextButton.dispatchEvent(ev);
+		expect(firedNextButton).to.be(true);
+		expect(firedBackButton).to.be(true);
+	});
+
 	it('should check for the total navigable coachmarks on back button ', () => {
 		mark = new CoachMark(element, {
 			placement: 'left',

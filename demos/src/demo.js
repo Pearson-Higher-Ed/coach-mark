@@ -46,15 +46,16 @@ document.addEventListener('DOMContentLoaded', function() {
 		placement: 'right',
 		title: 'Coach Mark Right of Feature',
 		text: 'Some text explaining to the user why you changed their interface',
-		id: '29874209280'
+		id: '29874209280',
+		currentCM: '1',
+		totalCM: '2',
+		hasBack:true,
+		hasNext:true
 	}, function (id) {
 		console.log('Callback executed on exit of ' + id);
 	});
 
-	//Disabling back button for the left placement coachmark just for the demo purposes 
-	document.evaluate('/html/body/div[3]/div/div/div/div[2]/button[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.disabled = true;
-	//Disabling next button for the top placement coachmark just for the demo purposes 
-	document.evaluate('/html/body/div[4]/div/div/div/div[2]/button[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.disabled = true;
+	
 	document.addEventListener('o-cm-like-clicked', (event) => {
 		console.log("user clicked " + event.data.id + " " + event.data.type)
 	});

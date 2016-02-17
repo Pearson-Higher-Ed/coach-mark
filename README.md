@@ -46,7 +46,8 @@ const element = document.getElementById('awesome_featureId');
 
 new CoachMark(element, {
 	like: false,
-	hasBack/hasNext: true,
+	hasBack: true,
+	hasNext:true,
 	currentCM: '2',
 	totalCM: '2',
 	placement: 'bottom',
