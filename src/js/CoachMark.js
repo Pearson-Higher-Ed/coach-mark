@@ -93,6 +93,8 @@ export default class CoachMark {
 			backNextDiv.appendChild(next);
 			backNextDiv.appendChild(totalOfCoachMarksSpan);
 			content.appendChild(backNextDiv);
+			//IIFE to create event for back and next buttons based on the hasBack and hasNext boolean values is true
+			// and disabling the buttons if they are false or undefined
 			((back, next, opts) => {
 				if (opts.hasNext && opts.hasBack) {
 					eventOnClick(back, 'backButton');

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		id: '9837494320',
 		currentCM: '1',
 		totalCM: '2',
-		hasNext:true
+		hasNext: true
 	}, function (id) {
 		console.log('Callback executed on exit of ' + id);
 	});
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		id: '9892387492098',
 		currentCM: '2',
 		totalCM: '2',
-		hasBack:true
+		hasBack: true
 	}, function (id) {
 		console.log('Callback executed on exit '+ id);
 	});
@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		id: '29874209280',
 		currentCM: '1',
 		totalCM: '2',
-		hasBack:true,
-		hasNext:true
+		hasBack: true,
+		hasNext: true
 	}, function (id) {
 		console.log('Callback executed on exit of ' + id);
 	});

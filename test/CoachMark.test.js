@@ -218,7 +218,7 @@ describe('CoachMark', () => {
 			title: 'foo',
 			text: 'bar',
 			hasBack: true,
-			hasNext:true,
+			hasNext: true,
 			id: 'sjsdflkjsdlkfj'
 		});
 
