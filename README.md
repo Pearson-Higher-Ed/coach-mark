@@ -20,7 +20,7 @@ Option    | Type    | Required | Notes
 like      | boolean | no       | determines if this coachmark will show Like/Dislike links
 title     | text    | no       |
 text      | text    | yes      |
-srText   | text    | no       | The screen reader text that calls out the close button (default is "close this coach mark")
+srText    | text    | no       | The screen reader text that calls out the close button (default is "close this coach mark")
 id        | text    | yes      | unique identifier
 hasBack	  | boolean	| no       | determines if this coachmark will have back coachmark
 hasNext	  | boolean | no       | determines if this coachmark will have next coachmark	

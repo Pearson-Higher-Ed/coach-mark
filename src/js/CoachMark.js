@@ -3,6 +3,8 @@ import componentHandler from 'o-component-handler';
 export default class CoachMark {
 
 	constructor(element, opts, callback) {
+
+
 		this.element = element;
 		this.opts = opts;
 		this.callback = callback;
@@ -16,14 +18,34 @@ export default class CoachMark {
 			'you must specify text for the coach mark');
 
 		if (!opts.id) {
-			throw new Error('missing required option: you must specify an id for the coach mark')
+			throw new Error('missing required option: you must specify a unique id for the coach mark')
 		}
+
+		// check other args
+		if (!element) {
+			throw new Error('missing required option: element')
+		}
+
+
+		const placement = function placement() {
+			if (element.getBoundingClientRect().left == 0) {
+				return 'right';
+			}
+			if (element.getBoundingClientRect().bottom == window.innerHeight) {
+				return 'top';
+			}
+			if (element.getBoundingClientRect().right == window.innerWidth) {
+				return 'left';
+			}
+			return 'bottom';
+		}();
+
 
 		// create relative parent for simplified positioning
 		const positioner = document.createElement('div');
 		positioner.style.position = 'relative'; 
 		positioner.style.display = 'inline-block';
-		//let close;
+
 		//Build html
 		const container = document.createElement('div');
 		const close = document.createElement('button');
@@ -36,7 +58,7 @@ export default class CoachMark {
 
 		if (opts.title) titleText[internalText] = opts.title;
 
-		close.setAttribute('aria-label', 'close');
+		//close.setAttribute('aria-label', 'close');
 		close.className = 'o-coach-mark__close-icon';
 
 		closeSpan[internalText] = '✕';
@@ -123,7 +145,7 @@ export default class CoachMark {
 				likeImg.setAttribute('aria-hidden', 'true');
 				link.insertBefore(likeImg, link.childNodes[0]);
 				parent.appendChild(link);
-			}
+			};
 
 			const hr = document.createElement('hr');
 			hr.className = 'o-coach-mark--hr';
@@ -148,7 +170,7 @@ export default class CoachMark {
 			submit.innerHTML = 'submit';
 			submit.onclick = () => {
 				triggerEvent('submit', 'o-cm-submit-clicked', form.value);
-			}
+			};
 			const cancel = document.createElement('a');
 			cancel.innerHTML = 'cancel';
 			cancel.setAttribute('href', '#');
@@ -156,7 +178,7 @@ export default class CoachMark {
 				triggerEvent('cancel', 'o-cm-cancel-clicked');
 				likeDiv.style.display = 'block';
 				feedBack.style.display = 'none';
-			}
+			};
 			feedBack.appendChild(form);
 			buttonBar.appendChild(submit);
 			buttonBar.appendChild(cancel);
@@ -188,7 +210,8 @@ export default class CoachMark {
 			}
 		}
 
-		function computePlacement() {
+
+		function resetPosition() {
 			const featurePosition = element.getBoundingClientRect();
 			const featureHeight = element.offsetHeight;
 
@@ -197,34 +220,49 @@ export default class CoachMark {
 
 			container.style.visibility = 'hidden';
 
-			if (opts.placement === 'bottom') {
-				if (window.innerHeight - featurePosition.bottom > markHeight) {
+			switch (placement) {
+				case 'bottom':
 					container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
-				} else {
-					throw new Error('insufficient room for coach mark placement');
-				}
-			} else if (opts.placement === 'top') {
-				if (featurePosition.top > markHeight) {
+					break;
+				case 'top':
 					container.style.top = ((featureHeight + markHeight) * -1) + 'px';
 					container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
-				} else {
-					throw new Error('insufficient room for coach mark placement');
-				}
-			} else if (opts.placement === 'left') {
-				if (window.innerWidth - featurePosition.left > markWidth) {
-					container.style.top = (featureHeight * -1) + 'px';
-					container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
-				} else {
-					throw new Error('insufficient room for coach mark placement');
-				}
-			} else if (opts.placement === 'right') {
-				if (window.innerWidth - featurePosition.right > markWidth) {
+					break;
+				case 'right':
 					container.style.top = (featureHeight * -1) + 'px';
 					container.style.left = (featurePosition.right + window.pageXOffset) + 'px';
-				} else {
-					throw new Error('insufficient room for coach mark placement');
-				}
+					break;
+				case 'left':
+					container.style.top = ((featurePosition.bottom - featurePosition)/2 + featurePosition) + 'px';
+					container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
+					break;
 			}
+
+			//if (placement === 'bottom') {
+			//	container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
+			//}
+			//else if (placement === 'top') {
+			//	if (featurePosition.top > markHeight) {
+			//		container.style.top = ((featureHeight + markHeight) * -1) + 'px';
+			//		container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
+			//	} else {
+			//		throw new Error('insufficient room for coach mark placement');
+			//	}
+			//} else if (placement === 'left') {
+			//	if (window.innerWidth - featurePosition.left > markWidth) {
+			//		container.style.top = (featureHeight * -1) + 'px';
+			//		container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
+			//	} else {
+			//		throw new Error('insufficient room for coach mark placement');
+			//	}
+			//} else if (placement === 'right') {
+			//	if (window.innerWidth - featurePosition.right > markWidth) {
+			//		container.style.top = (featureHeight * -1) + 'px';
+			//		container.style.left = (featurePosition.right + window.pageXOffset) + 'px';
+			//	} else {
+			//		throw new Error('insufficient room for coach mark placement');
+			//	}
+			//}
 			container.style.visibility = 'visible';
 
 		}
@@ -236,10 +274,10 @@ export default class CoachMark {
 		// temporarily show for measuring
 		container.style.visibility = 'visible';
 
-		computePlacement();
+		resetPosition();
 
 		window.onresize = function(event) {
-			computePlacement();
+			resetPosition();
 		};
 
 
