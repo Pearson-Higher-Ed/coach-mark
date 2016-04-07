@@ -26,35 +26,48 @@ export default class CoachMark {
 			throw new Error('missing required option: element')
 		}
 
-
 		const placement = function placement() {
-			if (element.getBoundingClientRect().left == 0) {
-				return 'right';
-			}
-			if (element.getBoundingClientRect().bottom == window.innerHeight) {
-				return 'top';
-			}
-			if (element.getBoundingClientRect().right == window.innerWidth) {
-				return 'left';
-			}
+			// get window geometry - this is how jQuery does it
+			const body = document.body,
+				html = document.documentElement,
+				height = Math.max(
+					body.scrollHeight,
+					body.offsetHeight,
+					html.clientHeight,
+					html.scrollHeight,
+					html.offsetHeight),
+				rect = element.getBoundingClientRect(),
+				touch_top = rect.top == 0,
+				touch_left = rect.left == 0,
+				// 50 is close enough. This is very browser-specific
+				touch_right = window.innerWidth - rect.right < 50,
+				touch_bottom = rect.bottom + 50 > height;
+
+			if (touch_top) return 'bottom';
+			if (touch_bottom) return 'top';
+			if (touch_left && touch_right) return 'bottom';
+			if (touch_right) return 'left';
+			if (touch_left) return 'right';
 			return 'bottom';
 		}();
 
 
 		// create relative parent for simplified positioning
 		const positioner = document.createElement('div');
-		positioner.style.position = 'relative'; 
 		positioner.style.display = 'inline-block';
 
 		//Build html
-		const container = document.createElement('div');
-		const close = document.createElement('button');
-		const closeSpan = document.createElement('span');
-		const screenReader = document.createElement('span');
-		const titleText = document.createElement('div');
-		
+		const container = document.createElement('div'),
+			close = document.createElement('button'),
+			closeSpan = document.createElement('span'),
+			screenReader = document.createElement('span'),
+			titleText = document.createElement('div'),
+			content = document.createElement('div'),
+			paragraph = document.createElement('p'),
+			internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
+
+
 		titleText.className = 'o-coach-mark__title';
-		const internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
 
 		if (opts.title) titleText[internalText] = opts.title;
 
@@ -73,23 +86,21 @@ export default class CoachMark {
 		container.style.visibility = 'hidden';
 		container.style.display = 'block';
 		container.style.position = 'absolute';
-		const content = document.createElement('div');
 		content.style.margin = '0';
 		content.className = 'o-coach-mark__content';
-		content.className += ' o-coach-mark--' + opts.placement;
+		content.className += ' o-coach-mark--' + placement;
 		content.appendChild(close);
 		content.appendChild(titleText);
-		const paragraph = document.createElement('p');
 		paragraph[internalText] = opts.text;
 
 		content.appendChild(paragraph);
 		if (opts.hasBack || opts.hasNext) {
-			const backNextDiv = document.createElement('div');
-			const back = document.createElement('button');
-			const backSpan = document.createElement('span');
-			const next = document.createElement('button');
-			const nextSpan = document.createElement('span');
-			const totalOfCoachMarksSpan = document.createElement('span');
+			const backNextDiv = document.createElement('div'),
+				back = document.createElement('button'),
+				backSpan = document.createElement('span'),
+				next = document.createElement('button'),
+				nextSpan = document.createElement('span'),
+				totalOfCoachMarksSpan = document.createElement('span');
 
 			back.setAttribute('type', 'button');
 			back.className = 'o-coach-mark__button-space';
@@ -147,13 +158,19 @@ export default class CoachMark {
 				parent.appendChild(link);
 			};
 
-			const hr = document.createElement('hr');
+			const hr = document.createElement('hr'),
+				form = document.createElement('textarea'),
+				buttonBar = document.createElement('div'),
+				submit = document.createElement('button'),
+				question = document.createElement('p'),
+				instructions = document.createElement('p'),
+				cancel = document.createElement('a');
+
 			hr.className = 'o-coach-mark--hr';
 			content.appendChild(hr);
 
 			likeDiv = document.createElement('div');
 			likeDiv.className = 'o-coach-mark__like-div';
-			const question = document.createElement('p');
 			question.innerHTML = 'What do you think of this change?';
 			likeDiv.appendChild(question);
 			content.appendChild(likeDiv);
@@ -161,17 +178,12 @@ export default class CoachMark {
 			this.appendAnchor(likeDiv, 'up', 'I Like It', 'like');
 			feedBack = document.createElement('div');
 			feedBack.className = 'o-coach-mark__feedback';
-			const instructions = document.createElement('p');
 			instructions.innerHTML = 'Thanks! Care to tell us more?';
 			feedBack.appendChild(instructions);
-			const form = document.createElement('textarea');
-			const buttonBar = document.createElement('div');
-			const submit = document.createElement('button');
 			submit.innerHTML = 'submit';
 			submit.onclick = () => {
 				triggerEvent('submit', 'o-cm-submit-clicked', form.value);
 			};
-			const cancel = document.createElement('a');
 			cancel.innerHTML = 'cancel';
 			cancel.setAttribute('href', '#');
 			cancel.onclick = () => {
@@ -212,59 +224,34 @@ export default class CoachMark {
 
 
 		function resetPosition() {
-			const featurePosition = element.getBoundingClientRect();
-			const featureHeight = element.offsetHeight;
 
-			const markHeight = content.offsetHeight + 10;
-			const markWidth = container.offsetWidth;
+			const featurePosition = element.getBoundingClientRect(),
+				markHeight = content.offsetHeight + 10,
+				markWidth = container.offsetWidth,
+				horizontal_center = ((featurePosition.right + featurePosition.left) / 2 + featurePosition.left) + 'px',
+				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + 'px';
 
 			container.style.visibility = 'hidden';
 
 			switch (placement) {
 				case 'bottom':
-					container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
+					container.style.top = featurePosition.bottom + 'px';
+					container.style.left = horizontal_center;
 					break;
 				case 'top':
-					container.style.top = ((featureHeight + markHeight) * -1) + 'px';
-					container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
+					container.style.top = (featurePosition.top - markHeight) + 'px';
+					container.style.left = horizontal_center;
 					break;
 				case 'right':
-					container.style.top = (featureHeight * -1) + 'px';
+					container.style.top = vertical_center;
 					container.style.left = (featurePosition.right + window.pageXOffset) + 'px';
 					break;
 				case 'left':
-					container.style.top = ((featurePosition.bottom - featurePosition)/2 + featurePosition) + 'px';
+					container.style.top = vertical_center;
 					container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
 					break;
 			}
-
-			//if (placement === 'bottom') {
-			//	container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
-			//}
-			//else if (placement === 'top') {
-			//	if (featurePosition.top > markHeight) {
-			//		container.style.top = ((featureHeight + markHeight) * -1) + 'px';
-			//		container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
-			//	} else {
-			//		throw new Error('insufficient room for coach mark placement');
-			//	}
-			//} else if (placement === 'left') {
-			//	if (window.innerWidth - featurePosition.left > markWidth) {
-			//		container.style.top = (featureHeight * -1) + 'px';
-			//		container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
-			//	} else {
-			//		throw new Error('insufficient room for coach mark placement');
-			//	}
-			//} else if (placement === 'right') {
-			//	if (window.innerWidth - featurePosition.right > markWidth) {
-			//		container.style.top = (featureHeight * -1) + 'px';
-			//		container.style.left = (featurePosition.right + window.pageXOffset) + 'px';
-			//	} else {
-			//		throw new Error('insufficient room for coach mark placement');
-			//	}
-			//}
 			container.style.visibility = 'visible';
-
 		}
 
 		//Inject html - use classes to position
@@ -276,48 +263,7 @@ export default class CoachMark {
 
 		resetPosition();
 
-		window.onresize = function(event) {
-			resetPosition();
-		};
-
-
-		//const featurePosition = element.getBoundingClientRect();
-		//const featureHeight = element.offsetHeight;
-        //
-		//const markHeight = content.offsetHeight + 10;
-		//const markWidth = container.offsetWidth;
-        //
-		//container.style.visibility = 'hidden';
-        //
-		//if (opts.placement === 'bottom') {
-		//	if (window.innerHeight - featurePosition.bottom > markHeight) {
-		//		container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
-		//	} else {
-		//		throw new Error('insufficient room for coach mark placement');
-		//	}
-		//} else if (opts.placement === 'top') {
-		//	if (featurePosition.top > markHeight) {
-		//		container.style.top = ((featureHeight + markHeight) * -1) + 'px';
-		//		container.style.left = (featurePosition.left + window.pageXOffset) + 'px';
-		//	} else {
-		//		throw new Error('insufficient room for coach mark placement');
-		//	}
-		//} else if (opts.placement === 'left') {
-		//	if (window.innerWidth - featurePosition.left > markWidth) {
-		//		container.style.top = (featureHeight * -1) + 'px';
-		//		container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
-		//	} else {
-		//		throw new Error('insufficient room for coach mark placement');
-		//	}
-		//} else if (opts.placement === 'right') {
-		//	if (window.innerWidth - featurePosition.right > markWidth) {
-		//		container.style.top = (featureHeight * -1) + 'px';
-		//		container.style.left = (featurePosition.right + window.pageXOffset) + 'px';
-		//	} else {
-		//		throw new Error('insufficient room for coach mark placement');
-		//	}
-		//}
-		//container.style.visibility = 'visible';
+		window.addEventListener("resize", resetPosition);
 
 		close.addEventListener('click', function(event) {
 			container.style.visibility = 'hidden';

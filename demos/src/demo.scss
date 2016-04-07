@@ -10,24 +10,22 @@ html {
 	background-color: #cfcbcb;
 }
 
+p.lorum-ipsum {
+	border: groove;
+}
+
 .feature {
 	margin-top: 75px;
 	margin-bottom: 75px;
 }
 
-.center {
-	 margin: auto;
-	 width: 60%;
-	 padding: 10px;
-}
-
 .left {
-	width: 50%;
+	width: 40%;
 	float: left;
 }
 
 .right {
-	width: 50%;
+	width: 60%;
 	float: left;
 }
 
