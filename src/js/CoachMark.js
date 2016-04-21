@@ -37,9 +37,9 @@ export default class CoachMark {
 					html.scrollHeight,
 					html.offsetHeight),
 				rect = element.getBoundingClientRect(),
-				touch_top = rect.top == 0,
-				touch_left = rect.left == 0,
 				// 50 is close enough. This is very browser-specific
+				touch_top = rect.top < 50,
+				touch_left = rect.left < 50,
 				touch_right = window.innerWidth - rect.right < 50,
 				touch_bottom = rect.bottom + 50 > height;
 
