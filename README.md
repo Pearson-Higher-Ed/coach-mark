@@ -64,6 +64,14 @@ document.addEventListener('o-cm-cancel-clicked', (event) => console.log("user cl
 
 ```
 
+
+## Testing
+
+```
+karma start
+```
+
+
 ## License
 
 This software is published by Pearson Education under the [MIT license](LICENSE).
