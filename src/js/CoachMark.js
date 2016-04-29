@@ -30,7 +30,7 @@ export default class CoachMark {
 
 		// create relative parent for simplified positioning
 		const positioner = document.createElement('div');
-		positioner.style.position = 'relative'; 
+		positioner.style.position = 'relative';
 		positioner.style.display = 'inline-block';
 		let close;
 		//Build html
@@ -38,7 +38,7 @@ export default class CoachMark {
 		close = document.createElement('button');
 		const closeSpan = document.createElement('span');
 		const titleText = document.createElement('div');
-		
+
 		titleText.className = 'o-coach-mark__title';
 		const internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
 
@@ -85,10 +85,12 @@ export default class CoachMark {
 
 			nextSpan[internalText] = 'Next';
 			next.appendChild(nextSpan);
-			
-			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks';
-			totalOfCoachMarksSpan[internalText] = opts.currentCM + '/' + opts.totalCM;
 
+			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks';
+			if (opts.currentCM && opts.totalCM) {
+				totalOfCoachMarksSpan[internalText] = opts.currentCM + '/' + opts.totalCM;
+			}
+			
 			backNextDiv.appendChild(back);
 			backNextDiv.appendChild(next);
 			backNextDiv.appendChild(totalOfCoachMarksSpan);
@@ -111,7 +113,7 @@ export default class CoachMark {
 
 			let likeDiv;
 			let feedBack;
-			
+
 			this.appendAnchor = (parent, upDown, text, like) => {
 				const link = document.createElement('a');
 				link.onclick = function(event) {
