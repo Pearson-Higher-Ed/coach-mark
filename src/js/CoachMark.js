@@ -113,9 +113,11 @@ export default class CoachMark {
 
 			nextSpan[internalText] = 'Next';
 			next.appendChild(nextSpan);
-			
+
 			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks';
-			totalOfCoachMarksSpan[internalText] = opts.currentCM + '/' + opts.totalCM;
+			if (opts.currentCM && opts.totalCM) {
+				totalOfCoachMarksSpan[internalText] = opts.currentCM + '/' + opts.totalCM;
+			}
 
 			backNextDiv.appendChild(back);
 			backNextDiv.appendChild(next);
@@ -139,7 +141,7 @@ export default class CoachMark {
 
 			let likeDiv;
 			let feedBack;
-			
+
 			this.appendAnchor = (parent, upDown, text, like) => {
 				const link = document.createElement('a');
 				link.onclick = function(event) {
