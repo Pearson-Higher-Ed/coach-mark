@@ -1,6 +1,6 @@
 {
 	"name": "o-coach-mark",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"private": true,
 	"scripts": {
 		"test": "./node_modules/karma/bin/karma start karma.conf.js"
