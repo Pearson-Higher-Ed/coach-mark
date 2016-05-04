@@ -113,7 +113,6 @@ export default class CoachMark {
 
 			nextSpan[internalText] = 'Next';
 			next.appendChild(nextSpan);
-
 			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks';
 			if (opts.currentCM && opts.totalCM) {
 				totalOfCoachMarksSpan[internalText] = opts.currentCM + '/' + opts.totalCM;
@@ -123,16 +122,32 @@ export default class CoachMark {
 			backNextDiv.appendChild(next);
 			backNextDiv.appendChild(totalOfCoachMarksSpan);
 			content.appendChild(backNextDiv);
-			eventOnClick(back);
-			eventOnClick(next);
+			//IIFE to create event for back and next buttons based on the hasBack and hasNext boolean values is true
+			// and disabling the buttons if they are false or undefined
+			((back, next, opts) => {
+				if (opts.hasNext && opts.hasBack) {
+					eventOnClick(back, 'backButton');
+					eventOnClick(next, 'nextButton');
+					return;
+				}
+				if (opts.hasNext && !opts.hasBack) {
+					back.disabled = true;
+					eventOnClick(next, 'nextButton');
+					return;
+				}
+				if (!opts.hasNext && opts.hasBack) {
+					eventOnClick(back, 'backButton');
+					next.disabled = true;
+					return;
+				}
 
-			function eventOnClick(parent) {
-				const buttonIs = opts.hasNext ? 'nextButton' : 'backButton';
-				parent.onclick = function(event) {
-					triggerEvent(buttonIs, 'o-cm-backNext-clicked');
-					event.preventDefault();
+				function eventOnClick(parent, buttonIs) {
+					parent.onclick = function(event) {
+						triggerEvent(buttonIs, 'o-cm-backNext-clicked');
+						event.preventDefault();
+					};
 				};
-			}
+			})(back, next, opts);
 		}
 		content.style.position = 'relative';
 		container.appendChild(content);
