@@ -18,14 +18,15 @@ Options are the following
 Option    | Type    | Required | Notes
 --------------------------------------
 like      | boolean | no       | determines if this coachmark will show Like/Dislike links
-placement | text    | yes      | where to place the coachmark
 title     | text    | no       |
 text      | text    | yes      |
+srText    | text    | no       | The screen reader text that calls out the close button (default is "close this coach mark")
 id        | text    | yes      | unique identifier
 hasBack	  | boolean	| no       | determines if this coachmark will have back coachmark
 hasNext	  | boolean | no       | determines if this coachmark will have next coachmark	
 currentCM | text	| no       | keeps track of current coachmark where the user navigated
 totalCM	  | text    | no       | keeps track of total number of coachmarks 
+
 ```
 
 For the like/dislike links, listen for an event called 'o-cm-like-clicked' and you will get a data
@@ -63,6 +64,14 @@ document.addEventListener('o-cm-submit-clicked', (event) => console.log("user cl
 document.addEventListener('o-cm-cancel-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
 
 ```
+
+
+## Testing
+
+```
+karma start
+```
+
 
 ## License
 

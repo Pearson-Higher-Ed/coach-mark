@@ -10,13 +10,13 @@ describe('CoachMark', () => {
 
 	beforeEach(() => {
 		element = document.createElement('div');
-		element.innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+		element.innerText = '1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 		element.style.top = '200px';
 		element.style.position = 'absolute';
 		element.style.width = '60%';
 		element.style.margin = 'auto';
 		footer = document.createElement('div');
-		footer.innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+		footer.innerText = '2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 		footer.style.top = '600px';
 		footer.style.width = '60%';
 		footer.style.position = 'absolute';
@@ -29,6 +29,10 @@ describe('CoachMark', () => {
 		document.body.removeChild(footer);
 		if(document.querySelector('.o-coach-mark__container')) {
 			const ct = document.querySelector('.o-coach-mark__container');
+			ct.parentNode.removeChild(ct);
+		}
+		if (document.querySelector('div')) {
+			const ct = document.querySelector('div');
 			ct.parentNode.removeChild(ct);
 		}
 	});
@@ -54,7 +58,6 @@ describe('CoachMark', () => {
 	it('should throw an Error if no parent element', () => {
 		expect(function () {
 			new CoachMark(null , {
-					placement: 'top',
 					title: 'foo',
 					text: 'bar',
 					id: 'sjsdflkjsdlkfj'
@@ -66,7 +69,6 @@ describe('CoachMark', () => {
 	it('should throw an Error if there is no text', () => {
 		expect(function () {
 			new CoachMark(element , {
-					placement: 'top',
 					title: 'bar',
 					id: 'sjsdflkjsdlkfj'
 				}, function () {
@@ -75,63 +77,6 @@ describe('CoachMark', () => {
 			}).to.throwError();
 	});
 
-	it('should default to bottom if there is no placement', () => {
-		mark = new CoachMark(element, {
-			title: 'foo',
-			text: 'bar',
-			id: 'sjsdflkjsdlkfj'
-		}, function () {
-		});
-		expect(mark.opts.placement).to.be('bottom');
-	});
-
-	it('should correctly calculate placement if placed above the feature', () => {
-		mark = new CoachMark(element, {
-			placement: 'top',
-			title: 'foo',
-			text: 'bar',
-			id: 'sjsdflkjsdlkfj'
-		}, function () {});
-		const pos = document.querySelector('.o-coach-mark__container')
-			.getBoundingClientRect();
-		expect(pos.top<200).to.be(true);
-	});
-
-	it('should correctly calculate placement if placed below the feature', () => {
-		mark = new CoachMark(element, {
-			placement: 'bottom',
-			title: 'foo',
-			text: 'bar',
-			id: 'sjsdflkjsdlkfj'
-		}, function () {});
-		const pos = document.querySelector('.o-coach-mark__container')
-			.getBoundingClientRect();
-		expect(pos.top<50).to.be(true);
-	});
-
-	it('should correctly calculate placement if placed left of the feature', () => {
-		mark = new CoachMark(element, {
-			placement: 'left',
-			title: 'foo',
-			text: 'bar',
-			id: 'sjsdflkjsdlkfj'
-		}, function () {});
-		const pos = document.querySelector('.o-coach-mark__container')
-			.getBoundingClientRect();
-		expect(pos.left<100).to.be(true);
-	});
-
-	it('should correctly calculate placement if placed right of the feature', () => {
-		mark = new CoachMark(element, {
-			placement: 'right',
-			title: 'foo',
-			text: 'bar',
-			id: 'sjsdflkjsdlkfj'
-		}, function () {});
-		const pos = document.querySelector('.o-coach-mark__container')
-			.getBoundingClientRect();
-		expect(pos.left>200).to.be(true);
-	});
 
 	it('should call the callback when dismissed', () => {
 		let called = false;
@@ -270,6 +215,120 @@ describe('CoachMark', () => {
 		const total = document.querySelector('span.o-coach-mark__total-coachmarks');
 
 		expect(total.innerText).to.be('1/2');
+	});
+
+});
+
+
+describe('CoachMark', () => {
+	let header = null,
+		footer = null,
+		left = null,
+		right = null,
+		mark = null,
+		leftRights = [];
+
+	beforeEach(() => {
+		header = document.createElement('div');
+		header.innerText = 'header Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+		document.body.appendChild(header);
+
+		(count) => {
+
+			// make sure we are touching the bottom of the viewport by adding a ton of stuff
+			while (--count > 0) {
+				left = document.createElement('div');
+				left.innerText = 'left ' + count + ' Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+				left.style.width = '50%';
+				left.style.float = 'left';
+				leftRights.push(left);
+				document.body.appendChild(left);
+
+				right = document.createElement('div');
+				right.innerText = 'right Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+				right.style.width = '50%';
+				right.style.float = 'right';
+				leftRights.push(right);
+				document.body.appendChild(right);
+			}
+		} (100);
+
+		footer = document.createElement('div');
+		footer.innerText = 'footer Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+		footer.style.clear = 'both';
+
+		document.body.appendChild(footer);
+	});
+
+	afterEach(() => {
+		document.body.removeChild(header);
+		document.body.removeChild(footer);
+		leftRights.forEach((item) => {
+			document.body.removeChild(item);
+		});
+		leftRights = [];
+		if(document.querySelector('.o-coach-mark__container')) {
+			const ct = document.querySelector('.o-coach-mark__container');
+			ct.parentNode.removeChild(ct);
+		}
+	});
+
+	it('should attach to the bottom of the header', () => {
+		mark = new CoachMark(header , {
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function () {
+			console.log('test');
+		});
+		const cm = document.querySelector('.o-coach-mark__container');
+		expect(cm).to.not.be.null;
+		const cmTop = cm.getBoundingClientRect().top;
+		expect(cmTop).to.be(header.getBoundingClientRect().bottom);
+	});
+
+	it('should attach to the top of the footer', () => {
+		mark = new CoachMark(footer , {
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function () {
+			console.log('test');
+		});
+		const cm = document.querySelector('.o-coach-mark__container');
+		expect(cm).to.not.be.null;
+		const cmBottom = cm.getBoundingClientRect().bottom;
+		expect(Math.abs(cmBottom - footer.getBoundingClientRect().top) < 20).to.be.true;
+	});
+
+	it('should attach to the right of an element touching the left side of viewport', () => {
+
+		mark = new CoachMark(left, {
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function () {
+			console.log('test');
+		});
+		const cm = document.querySelector('.o-coach-mark__container');
+		expect(cm).to.not.be.null;
+		const cmLeft = cm.getBoundingClientRect().left;
+		expect(Math.abs(cmLeft - left.getBoundingClientRect().left) < 20).to.be.true;
+	});
+
+	it('should attach to the left of an element touching the right side of viewport', () => {
+
+		mark = new CoachMark(right, {
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj'
+		}, function () {
+			console.log('test');
+		});
+		const cm = document.querySelector('.o-coach-mark__container');
+		expect(cm).to.not.be.null;
+		const cmRight = cm.getBoundingClientRect().right;
+		expect(Math.abs(cmRight - right.getBoundingClientRect().left) < 20).to.be.true;
 	});
 
 });
