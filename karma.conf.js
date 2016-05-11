@@ -1,6 +1,5 @@
 /*eslint-env node*/
 
-const BowerPlugin = require('bower-webpack-plugin');
 const path = require('path');
 const cwd = process.cwd();
 
@@ -21,14 +20,13 @@ module.exports = (config) => {
 			'karma-phantomjs-launcher',
 			'karma-sinon',
 			'karma-sourcemap-loader',
-			'karma-webpack',
-			'karma-chrome-launcher'
+			'karma-webpack'
 		],
 
 
 		// list of files / patterns to load in the browser
 		files: [
-			'http://polyfill.webservices.ft.com/v1/polyfill.js?ua=safari/4',
+			'./node_modules/phantomjs-polyfill/bind-polyfill.js',
 			'test/*.test.js'
 		],
 
@@ -59,14 +57,6 @@ module.exports = (config) => {
 					}
 				]
 			},
-			resolve: {
-				root: [path.join(cwd, 'bower_components')]
-			},
-			plugins: [
-				new BowerPlugin({
-					includes:  /\.js$/
-				})
-			],
 			devtool: 'inline-source-map'
 		},
 
@@ -102,7 +92,7 @@ module.exports = (config) => {
 
 		// start these browsers
 		// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-		browsers: ['Chrome'],
+		browsers: ['PhantomJS'],
 
 
 		// Continuous Integration mode
