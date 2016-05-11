@@ -2,7 +2,13 @@
 
 Simple popover to explain new features to users
 
-## API
+## Usage
+
+## How to Consume in an Application
+
+Platform requirements: npm 2+ and the [Elements SDK](https://www.npmjs.com/package/pearson-elements)
+
+	> npm i --save @pearson-components/coach-mark
 
 ### Constructor
 
@@ -40,7 +46,7 @@ If the user clicks the cancel link, the event called 'o-cm-cancel-clicked' is fi
 
 See the Origami Demo to see the features in action.
 
-#### Use
+#### Example Usage
 
 ```js
 const element = document.getElementById('awesome_featureId');
@@ -66,13 +72,19 @@ document.addEventListener('o-cm-cancel-clicked', (event) => console.log("user cl
 ```
 
 
-## Testing
+## Contributing
 
-```
-karma start
-```
+### Demo
 
+	npm install
+	npm run dev
+	
+Navigate to **localhost:8081/demo** in your favorite browser.
 
+### Test
+
+	npm test
+	
 ## License
 
 This software is published by Pearson Education under the [MIT license](LICENSE).

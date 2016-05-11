@@ -51,7 +51,6 @@ module.exports = (config) => {
 				loaders: [
 					{
 						test: /\.js$/,
-						exclude: /node_modules/,
 						loaders: [
 							// Disable AMD module loading
 							'imports?define=>false',
@@ -108,7 +107,7 @@ module.exports = (config) => {
 
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
-		singleRun: false
+		singleRun: true
 
 	});
 };

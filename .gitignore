@@ -4,7 +4,7 @@ bower_components/
 node_modules/
 public/
 build/
-demos/local/
+demo/local/
 docs/
 docs/
 .idea/

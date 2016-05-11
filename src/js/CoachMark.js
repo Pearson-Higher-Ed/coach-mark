@@ -1,4 +1,4 @@
-import componentHandler from 'o-component-handler';
+import componentHandler from '@pearson-components/component-handler';
 
 export default class CoachMark {
 

@@ -1,7 +1,9 @@
 /*global require*/
+import './demo.scss';
+import CoachMark from '../../main';
 
 document.addEventListener('DOMContentLoaded', function() {
-	const CoachMark = require('../../main');
+
 	new CoachMark(document.getElementById('top'), {
 		title: 'Coach Mark Below Feature',
 		text: 'Some text explaining to the user why you changed their interface',

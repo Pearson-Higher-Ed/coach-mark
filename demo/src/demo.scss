@@ -1,10 +1,6 @@
-$o-assets-global-path: '/bower_components/';
 $o-coach-mark-is-silent: false;
 
 @import '../../main';
-
-@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
-@import 'https://origami.pearsoned.com/build/bundles/css?modules=o-type@latest';
 
 html {
 	background-color: #cfcbcb;
