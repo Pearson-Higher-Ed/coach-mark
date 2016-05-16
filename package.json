@@ -1,10 +1,11 @@
 {
-  "name": "o-coach-mark",
-  "version": "1.0.1",
-  "private": true,
+  "name": "@pearson-components/coach-mark",
+  "version": "0.0.0",
+  "description": "Simple popover to explain new features to users.",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
-    "dev": "webpack-dev-server --port 8081 --devtool eval --hot --progress --colors",
+    "dev-setup": "mkdir -p fonts && cp ./node_modules/pearson-elements/dist/fonts/* ./fonts && cp ./node_modules/pearson-elements/dist/css/elements.css ./demo",
+    "dev": "npm run dev-setup && webpack-dev-server --port 8081 --devtool eval --hot --progress --colors",
     "build": "webpack",
     "version": "npm run gen-changelog && git add CHANGELOG.md",
     "ci": "npm test && npm run build",
@@ -30,6 +31,7 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^2.1.0",
     "node-sass": "^3.7.0",
+    "pearson-elements": "^0.5.0",
     "phantomjs-polyfill": "0.0.2",
     "sass-loader": "^3.2.0",
     "sinon": "^1.17.1",

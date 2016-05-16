@@ -1,11 +1,7 @@
 .DS_Store
-.sass-cache/
-bower_components/
 node_modules/
-public/
-build/
-demo/local/
-docs/
-docs/
-.idea/
+build/*.js
+demo/elements.css
+.idea
 *.iml
+fonts

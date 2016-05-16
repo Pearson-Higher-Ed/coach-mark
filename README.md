@@ -74,14 +74,23 @@ document.addEventListener('o-cm-cancel-clicked', (event) => console.log("user cl
 
 ## Contributing
 
-### Demo
+### Quick Start
 
-	npm install
-	npm run dev
-	
-Navigate to **localhost:8081/demo** in your favorite browser.
+See the project working before changing anything!
+
+In your local repo:
+
+    npm install
+    npm run dev
+
+Navigate to **localhost:8081/demo** - the bundle is served in memory, which is why you may not see the file in /build.
+
+**Hot module replacement** is activated in the webpack dev server; saved changes to src are automatically reloaded in the 
+browser.
 
 ### Test
+
+The project is wired to unit test with Karma launching the tests against PhantomJS.
 
 	npm test
 	

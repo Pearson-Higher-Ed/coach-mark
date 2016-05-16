@@ -1,0 +1,7 @@
+webpack.config.js
+.travis.yml
+karma.conf.js
+test
+npm_scripts
+.idea
+build/dev*.js

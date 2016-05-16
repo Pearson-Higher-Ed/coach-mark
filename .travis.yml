@@ -1,10 +1,16 @@
 language: node_js
 sudo: false
 node_js:
-  - "stable"
-before_install:
-  - npm install -g Financial-Times/origami-build-tools#node4
-  - obt install
+- 5.2
+- 4.2
 script:
-  - obt verify
-  - obt test
+- npm run ci
+deploy:
+  provider: npm
+  email: pearson-design-accelerator@pearson.com
+  api_key:
+    secure: ZkYCyZXCq+GNGOHAUQEu/GG/790GEiw5bme5RrJT9+e8NrLahyldPQrU1rUcq4hGv1Ri0B414M3WD3GpKS1vjd1SVnXwoSbuGEK0wG3qihdfzVMZLmVG1ZB7tjX3Zbsn5VI4A8fPf01hDASi314Iu7cIAq55+ehXPdlZPplk+4jlUiDJQ8K2p/ymb26S7mqM9YkcRqvuLFKFgp4EbdsAiJ8Vb7twRrYjhzGj9djgnGzcbo89BlBO1bF3/9sfLTjor+psubeTob2zqXyf65BkFXk57exaHw3XeiKD+K9Lx9O/7jOB3mLTh9wFMYfZpWZVKx3qiEIpjEHCBFScfWQ9xeUbHSD38Q5iq/8FSY6sfdYWq/wahzIr4E0b2aulyiF6Y+8wo6ezBcG+/gna7kqMkl0awW1Vg3G27BxBblMqt92DwTJIwslvhbLccbfiREx+vC+XWlthRGm3h4raqNSXaMjA9iTrE0EWIvwgOHP6eOW1NJ6PMNbvF9KvM4cL7zQYplUWMsmDfR76Y3RQ2aleTxndw4LIoydE+Y9d7mx4GPFurCO3uiT0S9Mbs5SKISsafbsDLX5YJWkvlWjT6WslgpTh3bcPtnc5nezgofvrugx7cOg9xyplrFbgtF1McPy7IdQUSbwAsjmh1P8VC3zQD6cn1Dl6N+Eelsl4Myh2YQ8=
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: true
