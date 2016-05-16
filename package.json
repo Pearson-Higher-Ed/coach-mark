@@ -42,5 +42,9 @@
   },
   "dependencies": {
     "@pearson-components/component-handler": "^0.1.4"
-  }
+  },
+  "keywords": [
+    "pearson-components",
+    "coach-mark"
+  ]
 }

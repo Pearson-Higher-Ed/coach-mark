@@ -1,4 +1,4 @@
-# o-coach-mark [![Build Status](https://travis-ci.org/Pearson-Higher-Ed/o-coach-mark.svg?branch=master)](https://travis-ci.org/Pearson-Higher-Ed/o-coach-mark)
+# coach-mark [![Build Status](https://travis-ci.org/Pearson-Higher-Ed/coach-mark.svg?branch=master)](https://travis-ci.org/Pearson-Higher-Ed/coach-mark)
 
 Simple popover to explain new features to users
 
@@ -14,7 +14,7 @@ Platform requirements: npm 2+ and the [Elements SDK](https://www.npmjs.com/packa
 
 `CoachMark(element, opts, callback)`
 
-Initializes coach mark pointing to the specified element, given an options object, 
+Initializes coach mark pointing to the specified element, given an options object,
 with a callback to be executed when the user dismisses the coach mark.  
 
 ```
@@ -29,9 +29,9 @@ text      | text    | yes      |
 srText    | text    | no       | The screen reader text that calls out the close button (default is "close this coach mark")
 id        | text    | yes      | unique identifier
 hasBack	  | boolean	| no       | determines if this coachmark will have back coachmark
-hasNext	  | boolean | no       | determines if this coachmark will have next coachmark	
+hasNext	  | boolean | no       | determines if this coachmark will have next coachmark
 currentCM | text	| no       | keeps track of current coachmark where the user navigated
-totalCM	  | text    | no       | keeps track of total number of coachmarks 
+totalCM	  | text    | no       | keeps track of total number of coachmarks
 
 ```
 
@@ -85,7 +85,7 @@ In your local repo:
 
 Navigate to **localhost:8081/demo** - the bundle is served in memory, which is why you may not see the file in /build.
 
-**Hot module replacement** is activated in the webpack dev server; saved changes to src are automatically reloaded in the 
+**Hot module replacement** is activated in the webpack dev server; saved changes to src are automatically reloaded in the
 browser.
 
 ### Test
@@ -93,7 +93,7 @@ browser.
 The project is wired to unit test with Karma launching the tests against PhantomJS.
 
 	npm test
-	
+
 ## License
 
 This software is published by Pearson Education under the [MIT license](LICENSE).
