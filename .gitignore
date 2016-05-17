@@ -5,3 +5,4 @@ demo/elements.css
 .idea
 *.iml
 fonts
+npm-debug.log
