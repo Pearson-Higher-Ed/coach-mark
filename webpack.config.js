@@ -6,7 +6,8 @@ module.exports = {
   },
   output: {
     path: './',
-    filename: 'build/[name].coach-mark.js'
+    filename: 'build/[name].coach-mark.js',
+    libraryTarget: 'umd'
   },
   contentBase: "./demo", // for webpack dev server
   module: {
