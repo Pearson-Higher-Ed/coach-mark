@@ -1,6 +1,6 @@
 {
   "name": "@pearson-components/coach-mark",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple popover to explain new features to users.",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
@@ -13,7 +13,7 @@
     "release": "node ./npm_scripts/release.js",
     "postpublish": "npm access public && echo 'Package scope set to public!'"
   },
-  "main": "./main.js",
+  "main": "./build/dist.coach-mark.js",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^5.8.38",
@@ -42,7 +42,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "@pearson-components/component-handler": "^0.1.4"
+    "@pearson-components/component-handler": "^0.1.4",
+    "pearson-elements": "^0.5.0"
   },
   "keywords": [
     "pearson-components",
