@@ -39,7 +39,7 @@ export default class CoachMark {
 				touch_top = rect.top < 50,
 				touch_left = rect.left < 50,
 				touch_right = window.innerWidth - rect.right < 50,
-				touch_bottom = rect.bottom + 50 + body.scrollTop > height;
+				touch_bottom = rect.bottom + 50 + window.pageYOffset > height;
 
 			if (touch_top) return 'bottom';
 			if (touch_bottom) return 'top';
@@ -261,10 +261,10 @@ export default class CoachMark {
 		function resetPosition() {
 
 			const featurePosition = element.getBoundingClientRect(),
-				markHeight = content.offsetHeight + 30,
 				markWidth = container.offsetWidth,
+				markHeight = content.offsetHeight + 30,
 				horizontal_center = ((featurePosition.right + featurePosition.left) / 2 + featurePosition.left) + 'px',
-				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + document.body.scrollTop + 'px';
+				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset + 'px';
 
 			container.style.visibility = 'hidden';
 
@@ -274,7 +274,7 @@ export default class CoachMark {
 					container.style.left = horizontal_center;
 					break;
 				case 'top':
-					container.style.top = (featurePosition.top + document.body.scrollTop - markHeight) + 'px';
+					container.style.top = (featurePosition.top + window.pageYOffset - markHeight) + 'px';
 					container.style.left = horizontal_center;
 					break;
 				case 'right':
