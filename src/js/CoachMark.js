@@ -99,14 +99,18 @@ export default class CoachMark {
 			back.className = 'o-coach-mark__button-space';
 
 			backSpan[internalText] = 'previous';
-			back.appendChild(backSpan);
+			if (opts.hasBack) {
+				back.appendChild(backSpan);
+			}
 			//build next button
 			//next.setAttribute('type', 'button');
 			next.className = 'o-coach-mark__next-button';
 
 			nextSpan[internalText] = 'next';
 
-			next.appendChild(nextSpan);
+			if (opts.hasNext) {
+				next.appendChild(nextSpan);
+			}
 			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks pe-label pe-label--small';
 			if (opts.currentCM && opts.totalCM) {
 				totalOfCoachMarksSpan[internalText] = opts.currentCM + ' of ' + opts.totalCM;
@@ -129,13 +133,13 @@ export default class CoachMark {
 			// and disabling the buttons if they are false or undefined
 			((back, next, opts) => {
 				if (opts.hasNext && opts.hasBack) {
-					eventOnClick(back, 'backButton');
-					eventOnClick(next, 'nextButton');
+					//eventOnClick(back, 'backButton');
+					eventOnClick(next, 'nextButton', opts);
 					return;
 				}
 				if (opts.hasNext && !opts.hasBack) {
 					back.disabled = true;
-					eventOnClick(next, 'nextButton');
+					eventOnClick(next, 'nextButton', opts);
 					return;
 				}
 				if (!opts.hasNext && opts.hasBack) {
@@ -144,8 +148,17 @@ export default class CoachMark {
 					return;
 				}
 
-				function eventOnClick(parent, buttonIs) {
-					parent.onclick = function(event) {
+				function eventOnClick(parent, buttonIs, opts) {
+					parent.onclick = (event) => {
+						if (typeof opts !== 'undefined') {
+							if (opts.currentCM === opts.totalCM) {
+								// this is a close link
+								this.coachMark.parentElement.removeChild(this.coachMark);
+								removeClass(element, 'o-coach-mark__hole');
+								callback(opts.id, event);
+							}
+						}
+						console.log('context: ', opts);
 						triggerEvent(buttonIs, 'o-cm-backNext-clicked');
 						event.preventDefault();
 					};
@@ -159,7 +172,8 @@ export default class CoachMark {
 		close.appendChild(screenReader);
 		closeDiv.className = 'o-coach-mark__close-div';
 		close.className = 'o-coach-mark__close-icon';
-		closeSpan[internalText] = 'x';
+		//closeSpan[internalText] = 'x';
+		closeSpan.className = 'pe-icon--times';
 		closeSpan.setAttribute('aria-hidden', 'true');
 		close.appendChild(closeSpan);
 		closeDiv.appendChild(close);
@@ -264,7 +278,7 @@ export default class CoachMark {
 				markWidth = container.offsetWidth,
 				markHeight = content.offsetHeight + 30,
 				horizontal_center = ((featurePosition.right + featurePosition.left) / 2 + featurePosition.left) + 'px',
-				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset + 'px';
+				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset;
 
 			container.style.visibility = 'hidden';
 
@@ -278,11 +292,11 @@ export default class CoachMark {
 					container.style.left = horizontal_center;
 					break;
 				case 'right':
-					container.style.top = vertical_center;
+					container.style.top = vertical_center - 60 + 'px';
 					container.style.left = (featurePosition.right + window.pageXOffset) + 'px';
 					break;
 				case 'left':
-					container.style.top = vertical_center;
+					container.style.top = vertical_center - 60 + 'px';
 					container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
 					break;
 			}

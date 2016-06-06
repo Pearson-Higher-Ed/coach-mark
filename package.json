@@ -42,8 +42,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "@pearson-components/component-handler": "^0.1.4",
-    "pearson-elements": "^0.5.0"
+    "@pearson-components/component-handler": "^0.1.4"
   },
   "keywords": [
     "pearson-components",
