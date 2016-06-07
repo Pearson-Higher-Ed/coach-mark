@@ -33,10 +33,28 @@ document.addEventListener('DOMContentLoaded', function() {
 					hasNext:true
 				}, function (id) {
 					console.log('Callback executed on exit '+ id);
+					// Demo eventing API
+					const element = document.getElementById('top');
+					document.body.dispatchEvent(new CustomEvent('o.InitCoachMark', {
+						detail: {
+							element: element,
+							opts: {
+								title: 'Eventing API',
+								text: 'This demos the Event API - see demo.js file',
+								id: 'lskdjflkjsd'
+							},
+							callback: function (id) {
+								"use strict";
+								console.log('api closed');
+							}
+						}
+					}));
+
 				});
 			});
 		});
 	});
+
 
 
 	document.addEventListener('o-cm-like-clicked', (event) => {
