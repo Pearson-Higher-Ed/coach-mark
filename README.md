@@ -23,26 +23,23 @@ Options are the following
 
 Option    | Type    | Required | Notes
 --------------------------------------
-like      | boolean | no       | determines if this coachmark will show Like/Dislike links
 title     | text    | no       | The title
 text      | text    | yes      | The body of the coach mark
 srText    | text    | no       | The screen reader text that calls out the close button (default is "close this coach mark")
-id        | text    | yes      | unique identifier - can be anything as long as no other id has this value
+id        | text    | yes      | unique identifier - can be anything as long as no other HTML element has this value as an id
 currentCM | text	| no       | keeps track of current coachmark where the user navigated
 totalCM	  | text    | no       | keeps track of total number of coachmarks
 
 ```
 
-For the like/dislike links, listen for an event called 'o-cm-like-clicked' and you will get a data
-object identifying which link was clicked.
+For the back/next buttons, listen for an event called 'o-cm-previous-clicked' and 'o-cm-next-clicked' and you will get a data object identifying which link was clicked.
 
-For the back/next buttons, listen for an event called 'o-cm-backNext-clicked' and you will get a data object identifying which link was clicked.
+See the Demo to see the features in action.
 
-For the feedback feature, listen to an event called 'o-cm-submit-clicked' and you will get a data object identifying the id and the feedback text.
+```sh
+$ npm run dev
+```
 
-If the user clicks the cancel link, the event called 'o-cm-cancel-clicked' is fired.
-
-See the Origami Demo to see the features in action.
 
 #### Example Usage
 
@@ -50,22 +47,17 @@ See the Origami Demo to see the features in action.
 const element = document.getElementById('awesome_featureId');
 
 new CoachMark(element, {
-	like: false,
-	hasBack: true,
-	hasNext: true,
 	currentCM: '2',
 	totalCM: '2',
-	placement: 'bottom',
 	title: 'Optional Title',
-	text: 'Required text explaining to the user why you changed their interface'
+	text: 'Required text explaining to the user why you changed their interface',
+	id: 23098402384
 }, function (id) {
 	console.log('Callback executed on exit of id:' + id);
 });
 
-document.addEventListener('o-cm-like-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
-document.addEventListener('o-cm-backNext-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
-document.addEventListener('o-cm-submit-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type + " and commented: " + event.data.payload));
-document.addEventListener('o-cm-cancel-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
+document.addEventListener('o-cm-previous-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
+document.addEventListener('o-cm-next-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
 
 ```
 

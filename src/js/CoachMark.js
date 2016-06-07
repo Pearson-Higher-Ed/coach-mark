@@ -26,6 +26,17 @@ export default class CoachMark {
 			throw new Error('missing required option: element')
 		}
 
+		if (typeof opts.currentCM !== 'undefined') {
+			if (typeof opts.totalCM === 'undefined') {
+				throw new Error('you must include totalCM if currentCM is specified')
+			}
+		}
+
+		if (typeof opts.totalCM !== 'undefined') {
+			if (typeof opts.currentCM === 'undefined') {
+				throw new Error('you must include currentCM if totalCM is specified')
+			}
+		}
 		const placement = function placement() {
 			// get window geometry - this is how jQuery does it
 			const body = document.body,
@@ -67,7 +78,10 @@ export default class CoachMark {
 			meatball = document.createElement('div'),
 			internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
 
-		this.coachMark = container;
+		// save these for use during callbacks
+		opts.coachMark = container;
+		opts.element = element;
+		opts.callback = callback;
 
 		titleText.className = 'o-coach-mark__title pe-label pe-label--bold';
 		titleBar.appendChild(meatball);
@@ -87,7 +101,7 @@ export default class CoachMark {
 		paragraph[internalText] = opts.text;
 
 		content.appendChild(paragraph);
-		if (opts.hasBack || opts.hasNext) {
+		if (typeof opts.currentCM !== 'undefined') {
 			const backNextDiv = document.createElement('div'),
 				back = document.createElement('a'),
 				backSpan = document.createElement('span'),
@@ -106,16 +120,17 @@ export default class CoachMark {
 			//next.setAttribute('type', 'button');
 			next.className = 'o-coach-mark__next-button';
 
-			nextSpan[internalText] = 'next';
+			next[internalText] = 'next';
 
-			if (opts.hasNext) {
-				next.appendChild(nextSpan);
-			}
 			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks pe-label pe-label--small';
 			if (opts.currentCM && opts.totalCM) {
+				if (opts.currentCM < opts.totalCM) {
+					next.appendChild(nextSpan);
+				}
 				totalOfCoachMarksSpan[internalText] = opts.currentCM + ' of ' + opts.totalCM;
 				if (opts.currentCM == opts.totalCM) {
-					nextSpan[internalText] = 'close';
+					// change this to a close link
+					next[internalText] = 'close';
 				}
 				// draw meatball
 				meatball[internalText] = opts.currentCM;
@@ -129,40 +144,23 @@ export default class CoachMark {
 			backNextDiv.appendChild(next);
 			backNextDiv.className = 'o-coach-mark__back-next pe-copy--small';
 			content.appendChild(backNextDiv);
-			//IIFE to create event for back and next buttons based on the hasBack and hasNext boolean values is true
-			// and disabling the buttons if they are false or undefined
+			//IIFE to create event for back and next buttons based on the current and total
 			((back, next, opts) => {
-				if (opts.hasNext && opts.hasBack) {
-					//eventOnClick(back, 'backButton');
-					eventOnClick(next, 'nextButton', opts);
-					return;
-				}
-				if (opts.hasNext && !opts.hasBack) {
-					back.disabled = true;
-					eventOnClick(next, 'nextButton', opts);
-					return;
-				}
-				if (!opts.hasNext && opts.hasBack) {
-					eventOnClick(back, 'backButton');
-					next.disabled = true;
-					return;
-				}
-
-				function eventOnClick(parent, buttonIs, opts) {
-					parent.onclick = (event) => {
-						if (typeof opts !== 'undefined') {
-							if (opts.currentCM === opts.totalCM) {
-								// this is a close link
-								this.coachMark.parentElement.removeChild(this.coachMark);
-								removeClass(element, 'o-coach-mark__hole');
-								callback(opts.id, event);
-							}
-						}
-						console.log('context: ', opts);
-						triggerEvent(buttonIs, 'o-cm-backNext-clicked');
-						event.preventDefault();
-					};
-				}
+				back.onclick = (event) => {
+					triggerEvent('previous', 'o-cm-previous-clicked');
+					event.preventDefault();
+				};
+				next.onclick = (event) => {
+					if (opts.currentCM === opts.totalCM) {
+						// this is a close link
+						opts.coachMark.parentElement.removeChild(opts.coachMark);
+						removeClass(opts.element, 'o-coach-mark__hole');
+						opts.callback(opts.id, event);
+						return;
+					}
+					triggerEvent('next', 'o-cm-next-clicked');
+					event.preventDefault();
+				};
 			})(back, next, opts);
 		}
 		content.style.position = 'relative';
@@ -313,8 +311,8 @@ export default class CoachMark {
 		window.addEventListener("resize", resetPosition);
 
 		close.addEventListener('click', event => {
-			this.coachMark.parentElement.removeChild(this.coachMark);
-			removeClass(element, 'o-coach-mark__hole');
+			opts.coachMark.parentElement.removeChild(opts.coachMark);
+			removeClass(opts.element, 'o-coach-mark__hole');
 			callback(opts.id, event);
 		});
 
