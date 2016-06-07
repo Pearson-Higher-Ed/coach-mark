@@ -24,12 +24,10 @@ Options are the following
 Option    | Type    | Required | Notes
 --------------------------------------
 like      | boolean | no       | determines if this coachmark will show Like/Dislike links
-title     | text    | no       |
-text      | text    | yes      |
+title     | text    | no       | The title
+text      | text    | yes      | The body of the coach mark
 srText    | text    | no       | The screen reader text that calls out the close button (default is "close this coach mark")
-id        | text    | yes      | unique identifier
-hasBack	  | boolean	| no       | determines if this coachmark will have back coachmark
-hasNext	  | boolean | no       | determines if this coachmark will have next coachmark
+id        | text    | yes      | unique identifier - can be anything as long as no other id has this value
 currentCM | text	| no       | keeps track of current coachmark where the user navigated
 totalCM	  | text    | no       | keeps track of total number of coachmarks
 

@@ -172,8 +172,7 @@ export default class CoachMark {
 		close.appendChild(screenReader);
 		closeDiv.className = 'o-coach-mark__close-div';
 		close.className = 'o-coach-mark__close-icon';
-		//closeSpan[internalText] = 'x';
-		closeSpan.className = 'pe-icon--times';
+		closeSpan.className = 'pe-icon--times pe-color(gray-no-1) pe-label';
 		closeSpan.setAttribute('aria-hidden', 'true');
 		close.appendChild(closeSpan);
 		closeDiv.appendChild(close);
