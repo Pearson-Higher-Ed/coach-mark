@@ -277,8 +277,6 @@ export default class CoachMark {
 				horizontal_center = ((featurePosition.right + featurePosition.left) / 2 + featurePosition.left) + 'px',
 				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset;
 
-			container.style.visibility = 'hidden';
-
 			switch (placement) {
 				case 'bottom':
 					container.style.top = featurePosition.bottom + 'px';
@@ -297,7 +295,15 @@ export default class CoachMark {
 					container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
 					break;
 			}
-			container.style.visibility = 'visible';
+
+			const rect = contentContainer.getBoundingClientRect();
+			if (rect.left < 0) {
+				container.style.left = 0;
+			}
+			if (rect.right > 0 && rect.right > window.innerWidth) {
+				container.style.left = window.innerWidth - contentContainer.clientWidth - 20 + 'px';
+			}
+
 		}
 
 		//Inject html - use classes to position
