@@ -109,15 +109,14 @@ export default class CoachMark {
 				nextSpan = document.createElement('span'),
 				totalOfCoachMarksSpan = document.createElement('span');
 
-			//back.setAttribute('type', 'button');
 			back.className = 'o-coach-mark__button-space';
 
 			backSpan[internalText] = 'previous';
 			if (opts.hasBack) {
 				back.appendChild(backSpan);
 			}
+
 			//build next button
-			//next.setAttribute('type', 'button');
 			next.className = 'o-coach-mark__next-button';
 
 			next[internalText] = 'next';
