@@ -1,3 +1,6 @@
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.1.4...v0.1.4) (2016-06-08)
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.1.2...v0.1.3) (2016-05-23)
 
@@ -21,6 +24,7 @@
 
 * Install karma-chrome-launcher to allow npm test to work. ([1731762](https://github.com/Pearson-Higher-Ed/coach-mark/commit/1731762))
 * position calculations ([08f0d05](https://github.com/Pearson-Higher-Ed/coach-mark/commit/08f0d05))
+* rewrite to match new design ([5bc2ae4]((https://github.com/Pearson-Higher-Ed/coach-mark/commit/5bc2ae4))
 
 
 
