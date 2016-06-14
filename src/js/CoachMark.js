@@ -118,11 +118,11 @@ export default class CoachMark {
 				totalOfCoachMarksSpan = document.createElement('span');
 
 			back.className = 'o-coach-mark__button-space';
-			back.setAttribute('href', '#');
-			back.setAttribute('tabindex', '2');
 
 			backSpan[internalText] = 'previous';
 			if (opts.currentCM > 1 && opts.totalCM > 1) {
+				back.setAttribute('href', '#');
+				back.setAttribute('tabindex', '2');
 				back.appendChild(backSpan);
 			}
 
