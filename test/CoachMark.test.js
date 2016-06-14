@@ -118,7 +118,7 @@ describe('CoachMark', () => {
 	//	expect(matched).to.be(true);
 	//});
 
-	it('should call the event when next button is clicked', () => {
+	it('should call the event when next button is clicked', (done) => {
 		let fired = false;
 		mark = new CoachMark(element, {
 			placement: 'right',
@@ -135,6 +135,7 @@ describe('CoachMark', () => {
 		});
 		clickOnDiv(button);
 		expect(fired).to.be(true);
+		done();
 	});
 
 	it('should call the event when back button is clicked', () => {
