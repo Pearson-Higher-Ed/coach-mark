@@ -31,6 +31,7 @@ currentCM | text	| no       | keeps track of current coachmark where the user na
 totalCM	  | text    | no       | keeps track of total number of coachmarks
 offsetX   | numeric | no       | If you have position:fixed elements, this allows you to adjust the x-axis placement
 offsetY   | numeric | no       | If you have position:fixed elements, this allows you to adjust the y-axis placement
+disableShadow | boolean | no       | Prevents the darkening of the rest of the page when an element is highlighted. Default is false.
 
 ```
 
