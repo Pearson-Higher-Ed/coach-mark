@@ -332,7 +332,9 @@ export default class CoachMark {
 		close.addEventListener('click', event => {
 			opts.coachMark.parentElement.removeChild(opts.coachMark);
 			removeClass(opts.element, 'o-coach-mark__hole');
-			callback(opts.id, event);
+			if (typeof callback !== 'undefined') {
+				callback(opts.id, event);
+			}
 		});
 
 		function hasClass(el, className) {
