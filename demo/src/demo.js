@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				text: 'Some text explaining to the user why you changed their interface',
 				id: '9837494320',
 				currentCM: '1',
-				totalCM: '2',
-				hasNext:true
+				totalCM: '2'
 			}, function (id) {
 				new CoachMark(document.getElementById('cm-bottom'), {
 					like: true,
@@ -28,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					text: 'Some text explaining to the user why you changed their interface',
 					id: '9892387492098',
 					currentCM: '2',
-					totalCM: '2',
-					hasBack:true,
-					hasNext:true
+					totalCM: '2'
 				}, function (id) {
 					console.log('Callback executed on exit '+ id);
 					// Demo eventing API
@@ -41,7 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
 							opts: {
 								title: 'Eventing API',
 								text: 'This demos the Event API - see demo.js file',
-								id: 'lskdjflkjsd'
+								id: 'lskdjflkjsd',
+								offsetX: 20,
+								offsetY: 20
 							},
 							callback: function (id) {
 								"use strict";

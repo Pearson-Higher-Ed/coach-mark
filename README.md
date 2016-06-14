@@ -29,6 +29,8 @@ srText    | text    | no       | The screen reader text that calls out the close
 id        | text    | yes      | unique identifier - can be anything as long as no other HTML element has this value as an id
 currentCM | text	| no       | keeps track of current coachmark where the user navigated
 totalCM	  | text    | no       | keeps track of total number of coachmarks
+offsetX   | numeric | no       | If you have position:fixed elements, this allows you to adjust the x-axis placement
+offsetY   | numeric | no       | If you have position:fixed elements, this allows you to adjust the y-axis placement
 
 ```
 

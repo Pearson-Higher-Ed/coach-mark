@@ -273,27 +273,41 @@ export default class CoachMark {
 			const featurePosition = element.getBoundingClientRect(),
 				markWidth = container.offsetWidth,
 				markHeight = content.offsetHeight + 30,
-				horizontal_center = ((featurePosition.right + featurePosition.left) / 2 + featurePosition.left) + 'px',
+				horizontal_center = ((featurePosition.right + featurePosition.left) / 2 + featurePosition.left),
 				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset;
+			var top, left;
 
 			switch (placement) {
 				case 'bottom':
-					container.style.top = featurePosition.bottom + 'px';
-					container.style.left = horizontal_center;
+					top = featurePosition.bottom;
+					left = horizontal_center;
 					break;
 				case 'top':
-					container.style.top = (featurePosition.top + window.pageYOffset - markHeight) + 'px';
-					container.style.left = horizontal_center;
+					top = (featurePosition.top + window.pageYOffset - markHeight);
+					left = horizontal_center;
 					break;
 				case 'right':
-					container.style.top = vertical_center - 60 + 'px';
-					container.style.left = (featurePosition.right + window.pageXOffset) + 'px';
+					top = vertical_center - 60;
+					left = (featurePosition.right + window.pageXOffset);
 					break;
 				case 'left':
-					container.style.top = vertical_center - 60 + 'px';
-					container.style.left = (featurePosition.left + window.pageXOffset - markWidth) + 'px';
+					top = vertical_center - 60;
+					left = (featurePosition.left + window.pageXOffset - markWidth);
 					break;
 			}
+
+			if (typeof opts.offsetX !== 'undefined') {
+				container.style.left = left + opts.offsetX + 'px';
+			} else {
+				container.style.left = left + 'px';
+			}
+
+			if (typeof opts.offsetY !== 'undefined') {
+				container.style.top = top + opts.offsetY + 'px';
+			} else {
+				container.style.top = top + 'px';
+			}
+
 
 			const rect = contentContainer.getBoundingClientRect();
 			if (rect.left < 0) {
