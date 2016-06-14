@@ -112,7 +112,7 @@ export default class CoachMark {
 			back.className = 'o-coach-mark__button-space';
 
 			backSpan[internalText] = 'previous';
-			if (opts.hasBack) {
+			if (opts.currentCM > 1 && opts.totalCM > 1) {
 				back.appendChild(backSpan);
 			}
 
@@ -146,17 +146,12 @@ export default class CoachMark {
 			//IIFE to create event for back and next buttons based on the current and total
 			((back, next, opts) => {
 				back.onclick = (event) => {
+					closeCoachMark(event);
 					triggerEvent('previous', 'o-cm-previous-clicked');
 					event.preventDefault();
 				};
 				next.onclick = (event) => {
-					if (opts.currentCM === opts.totalCM) {
-						// this is a close link
-						opts.coachMark.parentElement.removeChild(opts.coachMark);
-						removeClass(opts.element, 'o-coach-mark__hole');
-						opts.callback(opts.id, event);
-						return;
-					}
+					closeCoachMark(event);
 					triggerEvent('next', 'o-cm-next-clicked');
 					event.preventDefault();
 				};
@@ -329,13 +324,15 @@ export default class CoachMark {
 
 		window.addEventListener("resize", resetPosition);
 
-		close.addEventListener('click', event => {
+		close.addEventListener('click', closeCoachMark);
+
+		function closeCoachMark(event) {
 			opts.coachMark.parentElement.removeChild(opts.coachMark);
 			removeClass(opts.element, 'o-coach-mark__hole');
 			if (typeof callback !== 'undefined') {
 				callback(opts.id, event);
 			}
-		});
+		}
 
 		function hasClass(el, className) {
 			if (el.classList)
