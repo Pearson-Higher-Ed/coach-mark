@@ -146,12 +146,12 @@ export default class CoachMark {
 			//IIFE to create event for back and next buttons based on the current and total
 			((back, next, opts) => {
 				back.onclick = (event) => {
-					cloaseCoachMark(event);
+					closeCoachMark(event);
 					triggerEvent('previous', 'o-cm-previous-clicked');
 					event.preventDefault();
 				};
 				next.onclick = (event) => {
-					cloaseCoachMark(event);
+					closeCoachMark(event);
 					triggerEvent('next', 'o-cm-next-clicked');
 					event.preventDefault();
 				};
@@ -310,9 +310,9 @@ export default class CoachMark {
 
 		window.addEventListener("resize", resetPosition);
 
-		close.addEventListener('click', cloaseCoachMark);
+		close.addEventListener('click', closeCoachMark);
 
-		function cloaseCoachMark(event) {
+		function closeCoachMark(event) {
 			opts.coachMark.parentElement.removeChild(opts.coachMark);
 			removeClass(opts.element, 'o-coach-mark__hole');
 			callback(opts.id, event);
