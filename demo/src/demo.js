@@ -39,9 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
 						detail: {
 							element: element,
 							opts: {
-								title: 'Eventing API',
+								title: 'Eventing API. Also, no shadow box.',
 								text: 'This demos the Event API - see demo.js file',
-								id: 'lskdjflkjsd'
+								id: 'lskdjflkjsd',
+								disableShadow: true
 							},
 							callback: function (id) {
 								"use strict";
@@ -65,4 +66,3 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.addEventListener('o-cm-previous-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
 	document.addEventListener('o-cm-next-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
 });
-

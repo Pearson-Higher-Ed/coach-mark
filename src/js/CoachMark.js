@@ -8,6 +8,7 @@ export default class CoachMark {
 		this.element = element;
 		this.opts = opts;
 		this.callback = callback;
+		this.disableShadow = false; // default
 		//Check options
 		if(!opts)
 			throw new Error('missing required parameter:' +
@@ -37,6 +38,11 @@ export default class CoachMark {
 				throw new Error('you must include currentCM if totalCM is specified')
 			}
 		}
+
+		if (typeof opts.disableShadow === 'string' || typeof opts.disableShadow === 'boolean') {
+			this.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true');
+		}
+
 		const placement = function placement() {
 			// get window geometry - this is how jQuery does it
 			const body = document.body,
@@ -62,7 +68,9 @@ export default class CoachMark {
 
 		element.scrollIntoView(false);
 
-		addClass(element, 'o-coach-mark__hole');
+		if (!this.disableShadow) {
+			addClass(element, 'o-coach-mark__hole');
+		}
 
 		//Build html
 		const container = document.createElement('div'),
@@ -346,5 +354,3 @@ componentHandler.register({
 	classAsString: 'CoachMark',
 	cssClass: 'o-coach-mark'
 });
-
-
