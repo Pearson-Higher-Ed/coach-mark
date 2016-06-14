@@ -110,29 +110,28 @@ export default class CoachMark {
 				totalOfCoachMarksSpan = document.createElement('span');
 
 			back.className = 'o-coach-mark__button-space';
+			back.setAttribute('href', '#');
+			back.setAttribute('tabindex', '2');
 
 			backSpan[internalText] = 'previous';
 			if (opts.currentCM > 1 && opts.totalCM > 1) {
-				back.setAttribute('tabindex','1');
-				back.setAttribute('href','#');
 				back.appendChild(backSpan);
 			}
 
 			//build next button
 			next.className = 'o-coach-mark__next-button';
 			next.setAttribute('href','#');
+			next.setAttribute('tabindex', '1');
 			next[internalText] = 'next';
 
 			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks pe-label pe-label--small';
 			if (opts.currentCM && opts.totalCM) {
 				if (opts.currentCM < opts.totalCM) {
-					next.setAttribute('tabindex','2');
 					next.appendChild(nextSpan);
 				}
 				totalOfCoachMarksSpan[internalText] = opts.currentCM + ' of ' + opts.totalCM;
 				if (opts.currentCM == opts.totalCM) {
 					// change this to a close link
-					next.setAttribute('tabindex','2');
 					next[internalText] = 'close';
 				}
 				// draw meatball
@@ -141,10 +140,9 @@ export default class CoachMark {
 				// lower title
 				titleText.style.paddingTop = '24px';
 			}
-
+			backNextDiv.appendChild(next);
 			backNextDiv.appendChild(back);
 			backNextDiv.appendChild(totalOfCoachMarksSpan);
-			backNextDiv.appendChild(next);
 			backNextDiv.className = 'o-coach-mark__back-next pe-copy--small';
 			content.appendChild(backNextDiv);
 			//IIFE to create event for back and next buttons based on the current and total
@@ -168,7 +166,7 @@ export default class CoachMark {
 		close.appendChild(screenReader);
 		closeDiv.className = 'o-coach-mark__close-div';
 		close.className = 'o-coach-mark__close-icon';
-		close.setAttribute('tabindex','3');
+		close.setAttribute('tabindex', '3');
 		closeSpan.className = 'pe-icon--times pe-color(gray-no-1) pe-label';
 		closeSpan.setAttribute('aria-hidden', 'true');
 		close.appendChild(closeSpan);
