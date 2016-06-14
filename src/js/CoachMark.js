@@ -40,8 +40,7 @@ export default class CoachMark {
 		}
 
 		if (typeof opts.disableShadow === 'string' || typeof opts.disableShadow === 'boolean') {
-			this.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true')
-			console.log('disableShadow: ', this.disableShadow);
+			this.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true');
 		}
 
 		const placement = function placement() {
