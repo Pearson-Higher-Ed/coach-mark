@@ -118,105 +118,78 @@ describe('CoachMark', () => {
 	//	expect(matched).to.be(true);
 	//});
 
-	//it('should call the event when next button is clicked', () => {
-	//	let fired = false;
-	//	mark = new CoachMark(element, {
-	//		placement: 'right',
-	//		title: 'foo',
-	//		text: 'bar',
-	//		hasNext: true,
-	//		id: 'sjsdflkjsdlkfj'
-	//	});
-    //
-	//	const button = document.querySelector('a.o-coach-mark__next-button');
-	//	button.addEventListener('click', () => {
-	//		fired = true;
-	//	});
-	//	clickOnDiv(button);
-	//	expect(fired).to.be(true);
-	//});
+	it('should call the event when next button is clicked', (done) => {
+		let fired = false;
+		mark = new CoachMark(element, {
+			placement: 'right',
+			title: 'foo',
+			text: 'bar',
+			id: 'sjsdflkjsdlkfj',
+			currentCM: 1,
+			totalCM: 2
+		});
 
-	//it('should call the event when back button is clicked', () => {
-	//	let fired = false;
-	//	mark = new CoachMark(element, {
-	//		placement: 'bottom',
-	//		title: 'foo',
-	//		text: 'bar',
-	//		hasBack: true,
-	//		id: 'sjsdflkjsdlkfj'
-	//	});
-    //
-	//	const button = document.querySelector('.o-coach-mark__container a.o-coach-mark__button-space');
-	//	button.addEventListener('click', () => {
-	//		fired = true;
-	//	});
-	//	const ev = document.createEvent("MouseEvent");
-	//	ev.initMouseEvent('click', true, true, window);
-	//	button.dispatchEvent(ev);
-	//	expect(fired).to.be(true);
-	//});
+		const button = document.querySelector('a.o-coach-mark__next-button');
+		button.addEventListener('click', () => {
+			fired = true;
+		});
+		clickOnDiv(button);
+		expect(fired).to.be(true);
+		done();
+	});
 
-	//it('should call the events when back button and next button are clicked', () => {
-	//	let firedBackButton = false;
-	//	let firedNextButton = false;
-	//	mark = new CoachMark(element, {
-	//		placement: 'bottom',
-	//		title: 'foo',
-	//		text: 'bar',
-	//		hasBack: true,
-	//		hasNext: true,
-	//		id: 'sjsdflkjsdlkfj'
-	//	});
-    //
-	//	const backButton = document.querySelector('.o-coach-mark__container a.o-coach-mark__button-space');
-	//	backButton.addEventListener('click', () => {
-	//		firedBackButton = true;
-	//	});
-	//	const eventIs = document.createEvent("MouseEvent");
-	//	eventIs.initMouseEvent('click', true, true, window);
-	//	backButton.dispatchEvent(eventIs);
-	//	const nextButton = document.querySelector('.o-coach-mark__container a.o-coach-mark__next-button');
-	//	nextButton.addEventListener('click', () => {
-	//		firedNextButton = true;
-	//	});
-	//	const ev = document.createEvent("MouseEvent");
-	//	ev.initMouseEvent('click', true, true, window);
-	//	nextButton.dispatchEvent(ev);
-	//	expect(firedNextButton).to.be(true);
-	//	expect(firedBackButton).to.be(true);
-	//});
+	it('should call the event when back button is clicked', () => {
+		let fired = false;
+		mark = new CoachMark(element, {
+			placement: 'bottom',
+			title: 'foo',
+			text: 'bar',
+			currentCM: 2,
+			totalCM: 3,
+			id: 'sjsdflkjsdlkfj'
+		});
 
-	//it('should check for the total navigable coachmarks on back button ', () => {
-	//	mark = new CoachMark(element, {
-	//		placement: 'left',
-	//		title: 'foo',
-	//		text: 'bar',
-	//		hasBack: true,
-	//		currentCM: '2',
-	//		totalCM: '2',
-	//		id: 'sjsdflkjsdlkfj'
-	//	});
-    //
-	//	const total = document.querySelector('span.o-coach-mark__total-coachmarks');
-    //
-	//	expect(total.innerText).to.be('2/2');
-	//});
+		const button = document.querySelector('.o-coach-mark__container a.o-coach-mark__button-space');
+		button.addEventListener('click', () => {
+			fired = true;
+		});
+		const ev = document.createEvent("MouseEvent");
+		ev.initMouseEvent('click', true, true, window);
+		button.dispatchEvent(ev);
+		expect(fired).to.be(true);
+	});
 
-	//it('should check for the total navigable coachmarks on next button ', () => {
-	//	mark = new CoachMark(element, {
-	//		placement: 'right',
-	//		title: 'foo',
-	//		text: 'bar',
-	//		hasNext: true,
-	//		currentCM: '1',
-	//		totalCM: '2',
-	//		id: 'sjsdflkjsdlkfj'
-	//	});
-    //
-	//	const total = document.querySelector('span.o-coach-mark__total-coachmarks');
-    //
-	//	expect(total.innerText).to.be('1/2');
-	//});
+
+	it('should check for the total navigable coachmarks on back button ', () => {
+		mark = new CoachMark(element, {
+			placement: 'left',
+			title: 'foo',
+			text: 'bar',
+			currentCM: '2',
+			totalCM: '2',
+			id: 'sjsdflkjsdlkfj'
+		});
+
+		const total = document.querySelector('span.o-coach-mark__total-coachmarks');
+
+		expect(total.innerText).to.be('2 of 2');
+	});
+
+	it('should check for the total navigable coachmarks on next button ', () => {
+		mark = new CoachMark(element, {
+			placement: 'right',
+			title: 'foo',
+			text: 'bar',
+			hasNext: true,
+			currentCM: '1',
+			totalCM: '2',
+			id: 'sjsdflkjsdlkfj'
+		});
+
+		const total = document.querySelector('span.o-coach-mark__total-coachmarks');
+
+		expect(total.innerText).to.be('1 of 2');
+	});
 
 });
 

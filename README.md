@@ -21,14 +21,16 @@ with a callback to be executed when the user dismisses the coach mark.
 
 Options are the following
 
-Option        | Type    | Required | Notes
-------------------------------------------
-title         | text    | no       | The title
-text          | text    | yes      | The body of the coach mark
-srText        | text    | no       | The screen reader text that calls out the close button (default is "close this coach mark")
-id            | text    | yes      | unique identifier - can be anything as long as no other HTML element has this value as an id
-currentCM     | text    | no       | keeps track of current coachmark where the user navigated
-totalCM       | text    | no       | keeps track of total number of coachmarks
+Option    | Type    | Required | Notes
+--------------------------------------
+title     | text    | no       | The title
+text      | text    | yes      | The body of the coach mark
+srText    | text    | no       | The screen reader text that calls out the close button (default is "close this coach mark")
+id        | text    | yes      | unique identifier - can be anything as long as no other HTML element has this value as an id
+currentCM | text	| no       | keeps track of current coachmark where the user navigated
+totalCM	  | text    | no       | keeps track of total number of coachmarks
+offsetX   | numeric | no       | If you have position:fixed elements, this allows you to adjust the x-axis placement
+offsetY   | numeric | no       | If you have position:fixed elements, this allows you to adjust the y-axis placement
 disableShadow | boolean | no       | Prevents the darkening of the rest of the page when an element is highlighted. Default is false.
 
 ```

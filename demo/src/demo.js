@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				text: 'Some text explaining to the user why you changed their interface',
 				id: '9837494320',
 				currentCM: '1',
-				totalCM: '2',
-				hasNext:true
+				totalCM: '2'
 			}, function (id) {
 				new CoachMark(document.getElementById('cm-bottom'), {
 					like: true,
@@ -28,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					text: 'Some text explaining to the user why you changed their interface',
 					id: '9892387492098',
 					currentCM: '2',
-					totalCM: '2',
-					hasBack:true,
-					hasNext:true
+					totalCM: '2'
 				}, function (id) {
 					console.log('Callback executed on exit '+ id);
 					// Demo eventing API
