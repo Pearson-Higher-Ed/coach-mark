@@ -279,18 +279,18 @@ export default class CoachMark {
 			const featurePosition = element.getBoundingClientRect(),
 				markWidth = container.offsetWidth,
 				markHeight = content.offsetHeight + 30,
-				horizontal_center = ((featurePosition.right + featurePosition.left) / 2 + featurePosition.left),
+				horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left),
 				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset;
 			var top, left;
 
 			switch (placement) {
 				case 'bottom':
 					top = featurePosition.bottom;
-					left = horizontal_center;
+					left = horizontal_center - 60;
 					break;
 				case 'top':
 					top = (featurePosition.top + window.pageYOffset - markHeight);
-					left = horizontal_center;
+					left = horizontal_center - 60;
 					break;
 				case 'right':
 					top = vertical_center - 60;
