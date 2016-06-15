@@ -39,7 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
 								title: 'Eventing API. Also, no shadow box.',
 								text: 'This demos the Event API - see demo.js file',
 								id: 'lskdjflkjsd',
-								disableShadow: true
+								disableShadow: true,
+								offsetX: 50,
+								offsetY: 50
 							},
 							callback: function (id) {
 								"use strict";
