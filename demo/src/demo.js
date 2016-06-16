@@ -23,11 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
 			}, function (id) {
 				new CoachMark(document.getElementById('cm-bottom'), {
 					like: true,
-					title: 'This is a long title that wraps three lines wraps three lines wraps and looks fine',
+					title: 'No pointer. This is a long title that wraps three lines wraps three lines wraps and looks fine',
 					text: 'Some text explaining to the user why you changed their interface',
 					id: '9892387492098',
 					currentCM: '2',
-					totalCM: '2'
+					totalCM: '2',
+					disablePointer: true
 				}, function (id) {
 					console.log('Callback executed on exit '+ id);
 					// Demo eventing API

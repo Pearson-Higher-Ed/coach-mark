@@ -43,6 +43,10 @@ export default class CoachMark {
 			this.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true');
 		}
 
+		if (typeof opts.disablePointer === 'string' || typeof opts.disablePointer === 'boolean') {
+			this.disablePointer = (opts.disablePointer.toString().toLowerCase() === 'true');
+		}
+
 		const placement = function placement() {
 			// get window geometry - this is how jQuery does it
 			const body = document.body,
@@ -103,7 +107,9 @@ export default class CoachMark {
 		container.style.position = 'absolute';
 		content.style.margin = '0';
 		content.className = 'o-coach-mark__content';
-		content.className += ' o-coach-mark--' + placement;
+		if (!opts.disablePointer) {
+			content.className += ' o-coach-mark--' + placement;
+		}
 		content.appendChild(titleBar);
 		paragraph.className = 'pe-copy--small o-coach-mark__paragraph';
 		paragraph[internalText] = opts.text;
