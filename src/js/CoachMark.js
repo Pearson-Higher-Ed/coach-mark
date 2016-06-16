@@ -72,7 +72,7 @@ export default class CoachMark {
 
 		element.scrollIntoView(false);
 
-		if (!this.disableShadow) {
+		if (!opts.disableShadow) {
 			addClass(element, 'o-coach-mark__hole');
 		}
 
