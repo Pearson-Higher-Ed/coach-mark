@@ -8,7 +8,7 @@ export default class CoachMark {
 		this.element = element;
 		this.opts = opts;
 		this.callback = callback;
-		this.disableShadow = false; // default
+
 		//Check options
 		if(!opts)
 			throw new Error('missing required parameter:' +
@@ -40,7 +40,7 @@ export default class CoachMark {
 		}
 
 		if (typeof opts.disableShadow === 'string' || typeof opts.disableShadow === 'boolean') {
-			this.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true');
+			opts.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true');
 		}
 
 		if (typeof opts.disablePointer === 'string' || typeof opts.disablePointer === 'boolean') {
