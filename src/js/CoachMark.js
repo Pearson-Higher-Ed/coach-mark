@@ -285,7 +285,7 @@ export default class CoachMark {
 
 			switch (placement) {
 				case 'bottom':
-					top = featurePosition.bottom;
+					top = featurePosition.bottom + window.pageYOffset;
 					left = horizontal_center - 60;
 					break;
 				case 'top':
