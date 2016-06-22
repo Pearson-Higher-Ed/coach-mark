@@ -125,14 +125,14 @@ export default class CoachMark {
 
 			back.className = 'o-coach-mark__button-space';
 
-			backSpan[internalText] = 'previous';
 			if (opts.currentCM > 1 && opts.totalCM > 1) {
+				backSpan[internalText] = 'previous';
 				back.setAttribute('href', '#');
 				back.setAttribute('tabindex', '2');
 				back.appendChild(backSpan);
 			}
 
-			//build next button
+				//build next button
 			next.className = 'o-coach-mark__next-button';
 			next.setAttribute('href','#');
 			next.setAttribute('tabindex', '1');
@@ -155,7 +155,13 @@ export default class CoachMark {
 				titleText.style.paddingTop = '24px';
 			}
 			backNextDiv.appendChild(next);
-			backNextDiv.appendChild(back);
+
+			if (opts.currentCM > 1 && opts.totalCM > 1) {
+				backNextDiv.appendChild(back);
+			} else {
+				totalOfCoachMarksSpan.style.paddingLeft = '107px';
+			}
+
 			backNextDiv.appendChild(totalOfCoachMarksSpan);
 			backNextDiv.className = 'o-coach-mark__back-next pe-copy--small';
 			content.appendChild(backNextDiv);
