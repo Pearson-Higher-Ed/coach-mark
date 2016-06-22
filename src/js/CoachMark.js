@@ -8,7 +8,7 @@ export default class CoachMark {
 		this.element = element;
 		this.opts = opts;
 		this.callback = callback;
-		this.disableShadow = false; // default
+
 		//Check options
 		if(!opts)
 			throw new Error('missing required parameter:' +
@@ -40,7 +40,11 @@ export default class CoachMark {
 		}
 
 		if (typeof opts.disableShadow === 'string' || typeof opts.disableShadow === 'boolean') {
-			this.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true');
+			opts.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true');
+		}
+
+		if (typeof opts.disablePointer === 'string' || typeof opts.disablePointer === 'boolean') {
+			this.disablePointer = (opts.disablePointer.toString().toLowerCase() === 'true');
 		}
 
 		const placement = function placement() {
@@ -68,7 +72,7 @@ export default class CoachMark {
 
 		element.scrollIntoView(false);
 
-		if (!this.disableShadow) {
+		if (!opts.disableShadow) {
 			addClass(element, 'o-coach-mark__hole');
 		}
 
@@ -103,7 +107,9 @@ export default class CoachMark {
 		container.style.position = 'absolute';
 		content.style.margin = '0';
 		content.className = 'o-coach-mark__content';
-		content.className += ' o-coach-mark--' + placement;
+		if (!opts.disablePointer) {
+			content.className += ' o-coach-mark--' + placement;
+		}
 		content.appendChild(titleBar);
 		paragraph.className = 'pe-copy--small o-coach-mark__paragraph';
 		paragraph[internalText] = opts.text;
