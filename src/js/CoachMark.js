@@ -10,13 +10,13 @@ export default class CoachMark {
 		this.callback = callback;
 
 		//Check options
-		if(!opts)
+		if(!this.opts)
 			throw new Error('missing required parameter:' +
-			' you must include an options object');
+				' you must include an options object');
 
 		if(!opts.text)
 			throw new Error('missing required option: ' +
-			'you must specify text for the coach mark');
+				'you must specify text for the coach mark');
 
 		if (!opts.id) {
 			throw new Error('missing required option: you must specify a unique id for the coach mark')
@@ -56,17 +56,11 @@ export default class CoachMark {
 					body.offsetHeight,
 					html.clientHeight),
 				rect = element.getBoundingClientRect(),
-				// 50 is close enough. This is very browser-specific
-				touch_top = rect.top < 50,
-				touch_left = rect.left < 50,
-				touch_right = window.innerWidth - rect.right < 50,
-				touch_bottom = rect.bottom + 50 + window.pageYOffset > height;
 
-			if (touch_top) return 'bottom';
-			if (touch_bottom) return 'top';
-			if (touch_left && touch_right) return 'bottom';
-			if (touch_right) return 'left';
-			if (touch_left) return 'right';
+			// 50 is close enough. This is very browser-specific
+				touch_bottom = rect.bottom + 50 + window.pageYOffset > height;
+			// this will follow the 50% rule, but for now, just return bottom
+			// if (touch_bottom) return 'top';
 			return 'bottom';
 		}();
 
@@ -132,7 +126,7 @@ export default class CoachMark {
 				back.appendChild(backSpan);
 			}
 
-				//build next button
+			//build next button
 			next.className = 'o-coach-mark__next-button';
 			next.setAttribute('href','#');
 			next.setAttribute('tabindex', '1');
@@ -199,10 +193,10 @@ export default class CoachMark {
 
 		// removed for now, but leave code in case it comes back. Feedback does not make sense until you have used a feature.
 		//if (opts.like) {
-        //
+		//
 		//	let likeDiv;
 		//	let feedBack;
-        //
+		//
 		//	this.appendAnchor = (parent, upDown, text, like) => {
 		//		const link = document.createElement('a');
 		//		link.onclick = function(event) {
@@ -220,7 +214,7 @@ export default class CoachMark {
 		//		link.insertBefore(likeImg, link.childNodes[0]);
 		//		parent.appendChild(link);
 		//	};
-        //
+		//
 		//	const hr = document.createElement('hr'),
 		//		form = document.createElement('textarea'),
 		//		buttonBar = document.createElement('div'),
@@ -228,10 +222,10 @@ export default class CoachMark {
 		//		question = document.createElement('p'),
 		//		instructions = document.createElement('p'),
 		//		cancel = document.createElement('a');
-        //
+		//
 		//	hr.className = 'o-coach-mark--hr';
 		//	content.appendChild(hr);
-        //
+		//
 		//	likeDiv = document.createElement('div');
 		//	likeDiv.className = 'o-coach-mark__like-div';
 		//	question.innerHTML = 'What do you think of this change?';
@@ -288,30 +282,31 @@ export default class CoachMark {
 
 		function resetPosition() {
 
-			const featurePosition = element.getBoundingClientRect(),
-				markWidth = container.offsetWidth,
+			const featurePosition = {
+					top: element.offsetTop,
+					left: element.offsetLeft,
+					bottom: element.offsetTop + element.offsetHeight,
+					right: element.offsetLeft + element.offsetWidth},
 				markHeight = content.offsetHeight + 30,
 				horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left),
 				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset;
 			var top, left;
 
-			switch (placement) {
-				case 'bottom':
-					top = featurePosition.bottom + window.pageYOffset;
-					left = horizontal_center - 60;
-					break;
-				case 'top':
-					top = (featurePosition.top + window.pageYOffset - markHeight);
-					left = horizontal_center - 60;
-					break;
-				case 'right':
-					top = vertical_center - 60;
-					left = (featurePosition.right + window.pageXOffset);
-					break;
-				case 'left':
-					top = vertical_center - 60;
-					left = (featurePosition.left + window.pageXOffset - markWidth);
-					break;
+			var bodyWidth = document.body.offsetWidth;
+
+			if (bodyWidth > 480) {
+				left = horizontal_center - 280;
+			} else {
+				const relativeOffset = container.getBoundingClientRect().left - container.offsetLeft;
+				left = (bodyWidth - 320) / 2 - relativeOffset;
+			}
+
+			if (placement == 'bottom') {
+				top = featurePosition.bottom + window.pageYOffset + 5;
+			}
+
+			if (placement == 'top') {
+				top = (featurePosition.top + window.pageYOffset - markHeight);
 			}
 
 			if (typeof opts.offsetX !== 'undefined') {
@@ -327,13 +322,17 @@ export default class CoachMark {
 			}
 
 
-			const rect = contentContainer.getBoundingClientRect();
+			let rect = contentContainer.getBoundingClientRect();
 			if (rect.left < 0) {
-				container.style.left = 0;
+				container.style.left = container.offsetLeft - rect.left + 'px';
 			}
-			if (rect.right > 0 && rect.right > window.innerWidth) {
-				container.style.left = window.innerWidth - contentContainer.clientWidth - 20 + 'px';
-			}
+
+			//rect = contentContainer.getBoundingClientRect();
+			//console.log("right", rect.right, window.innerWidth, contentContainer.offsetLeft);
+			//	if (rect.right > window.innerWidth) {
+			//  console.log(contentContainer.offsetLeft + window.innerWidth - contentContainer.clientWidth + 'px');
+			//		container.style.left = contentContainer.offsetLeft + window.innerWidth - contentContainer.clientWidth + 'px';
+			//	}
 
 		}
 

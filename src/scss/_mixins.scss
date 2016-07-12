@@ -9,11 +9,13 @@
 		&__container {
 			z-index: 1010;
 			font-size: 18px;
+			font-weight: normal;
 			content: " ";
 			display: block;
 			height: 0;
 			clear: both;
 			float: left;
+			text-align: left;
 		}
 		&__hole {
 			box-shadow: 0 0 0 9999999px rgba(0, 0, 0, .4);

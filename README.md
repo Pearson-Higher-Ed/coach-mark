@@ -29,11 +29,23 @@ srText         | text    | no       | The screen reader text that calls out the 
 id             | text    | yes      | unique identifier - can be anything as long as no other HTML element has this value as an id
 currentCM      | text    | no       | keeps track of current coachmark where the user navigated
 totalCM        | text    | no       | keeps track of total number of coachmarks
-offsetX        | numeric | no       | If you have position:fixed elements, this allows you to adjust the x-axis placement
-offsetY        | numeric | no       | If you have position:fixed elements, this allows you to adjust the y-axis placement
+offset         | array   | no       | x-y coordinates - see below
 disableShadow  | boolean | no       | Prevents the darkening of the rest of the page when an element is highlighted. Default is false
 disablePointer | boolean | no       | Disables the pointer which indicates which element the coach mark is attached to. Default is false
 
+### offset array
+
+```js
+[{
+    break: 100px,
+    x: -10px,
+    y: -50px
+}]
+```
+
+where break is at that screen width or less, position at offset x and y. If there is only one element in the array, 
+the break value is ignored
+    
 
 ```
 
@@ -44,6 +56,9 @@ See the Demo to see the features in action.
 ```sh
 $ npm run dev
 ```
+
+If the coach mark is attached to a div that has an ancestor that is opacity < 1, then it should be reset to 1 prior to 
+displaying the coach mark and return to original opacity in the close callback function.
 
 
 #### Example Usage
