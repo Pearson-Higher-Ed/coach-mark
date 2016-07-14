@@ -5,17 +5,18 @@ import CoachMark from '../../main';
 document.addEventListener('DOMContentLoaded', function() {
 
 	new CoachMark(document.getElementById('top'), {
-		title: 'Coach Mark Below Feature',
+		title: 'Coach Mark Below Feature with Got It',
 		text: 'Some text explaining to the user why you changed their interface',
+		gotIt: true,
 		id: '9834893449'
 	}, function (id) {
 		new CoachMark(document.getElementById('cm-left'), {
-			title: 'Coach Mark Right of Feature',
+			title: 'Coach Mark Below Feature',
 			text: 'Some text explaining to the user why you changed their interface',
 			id: '9834893498'
 		}, function (id) {
 			new CoachMark(document.getElementById('cm-right-1'), {
-				title: 'Coach Mark Left of Feature',
+				title: 'Coach Mark Above Feature',
 				text: 'Some text explaining to the user why you changed their interface',
 				id: '9837494320',
 				currentCM: '1',
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			}, function (id) {
 				new CoachMark(document.getElementById('cm-bottom'), {
 					like: true,
-					title: 'No pointer. This is a long title that wraps three lines wraps three lines wraps and looks fine',
+					title: 'No pointer. This is a long title that wraps three lines wraps three lines and looks fine',
 					text: 'Some text explaining to the user why you changed their interface',
 					id: '9892387492098',
 					currentCM: '2',

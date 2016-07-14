@@ -99,7 +99,7 @@
 			border-left: 15px solid transparent;
 			border-right: 15px solid transparent;
 			border-top: 15px solid rgb(255, 255, 255);
-			margin-left: 35px;
+			margin-left: 230px;
 			bottom: -35px;
 			left: 0;
 			z-index: 940;
@@ -151,6 +151,10 @@
 			height: 1px !important;
 			width: 1px !important;
 			overflow: hidden;
+		}
+
+		&__got-it {
+			float: right;
 		}
 
 	}

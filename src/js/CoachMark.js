@@ -33,6 +33,10 @@ export default class CoachMark {
 			}
 		}
 
+		if (opts.gotIt && opts.totalCM) {
+			throw new Error('cannot display "Got it" along with numbered coach marks (totalCM)')
+		}
+
 		if (typeof opts.totalCM !== 'undefined') {
 			if (typeof opts.currentCM === 'undefined') {
 				throw new Error('you must include currentCM if totalCM is specified')
@@ -55,13 +59,9 @@ export default class CoachMark {
 					body.scrollHeight,
 					body.offsetHeight,
 					html.clientHeight),
-				rect = element.getBoundingClientRect(),
+				rect = element.getBoundingClientRect();
 
-			// 50 is close enough. This is very browser-specific
-				touch_bottom = rect.bottom + 50 + window.pageYOffset > height;
-			// this will follow the 50% rule, but for now, just return bottom
-			// if (touch_bottom) return 'top';
-			return 'bottom';
+			return (rect.bottom - rect.top) / 2 + rect.top > window.innerHeight / 2 ? 'top' : 'bottom';
 		}();
 
 		element.scrollIntoView(false);
@@ -82,6 +82,7 @@ export default class CoachMark {
 			contentContainer = document.createElement('div'),
 			paragraph = document.createElement('p'),
 			meatball = document.createElement('div'),
+			gotIt = document.createElement('a'),
 			internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
 
 		// save these for use during callbacks
@@ -109,6 +110,17 @@ export default class CoachMark {
 		paragraph[internalText] = opts.text;
 
 		content.appendChild(paragraph);
+
+		if (typeof opts.gotIt !== 'undefined') {
+			const gotItDiv = document.createElement('div');
+			gotItDiv.className = 'pe-copy--small';
+			gotItDiv.appendChild(gotIt);
+			gotIt[internalText] = 'Got it';
+			gotIt.className = 'o-coach-mark__got-it';
+			gotIt.setAttribute('href', '#');
+			content.appendChild(gotItDiv);
+		}
+
 		if (typeof opts.currentCM !== 'undefined') {
 			const backNextDiv = document.createElement('div'),
 				back = document.createElement('a'),
@@ -302,11 +314,11 @@ export default class CoachMark {
 			}
 
 			if (placement == 'bottom') {
-				top = featurePosition.bottom + window.pageYOffset + 5;
+				top = featurePosition.bottom + 5;
 			}
 
 			if (placement == 'top') {
-				top = (featurePosition.top + window.pageYOffset - markHeight);
+				top = featurePosition.top - markHeight - 15 - container.offsetHeight;
 			}
 
 			if (typeof opts.offsetX !== 'undefined') {
@@ -321,18 +333,10 @@ export default class CoachMark {
 				container.style.top = top + 'px';
 			}
 
-
 			let rect = contentContainer.getBoundingClientRect();
 			if (rect.left < 0) {
 				container.style.left = container.offsetLeft - rect.left + 'px';
 			}
-
-			//rect = contentContainer.getBoundingClientRect();
-			//console.log("right", rect.right, window.innerWidth, contentContainer.offsetLeft);
-			//	if (rect.right > window.innerWidth) {
-			//  console.log(contentContainer.offsetLeft + window.innerWidth - contentContainer.clientWidth + 'px');
-			//		container.style.left = contentContainer.offsetLeft + window.innerWidth - contentContainer.clientWidth + 'px';
-			//	}
 
 		}
 
@@ -347,6 +351,7 @@ export default class CoachMark {
 		window.addEventListener("resize", resetPosition);
 
 		close.addEventListener('click', closeCoachMark);
+		gotIt.addEventListener('click', closeCoachMark);
 
 		function closeCoachMark(event) {
 			opts.coachMark.parentElement.removeChild(opts.coachMark);
