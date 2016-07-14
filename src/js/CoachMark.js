@@ -61,6 +61,7 @@ export default class CoachMark {
 					html.clientHeight),
 				rect = element.getBoundingClientRect();
 
+			// if the centerline of the element is above the centerline of the viewport, placement is bottom, otherwise top
 			return (rect.bottom - rect.top) / 2 + rect.top > window.innerHeight / 2 ? 'top' : 'bottom';
 		}();
 
