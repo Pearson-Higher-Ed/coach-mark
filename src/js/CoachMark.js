@@ -83,7 +83,7 @@ export default class CoachMark {
 			contentContainer = document.createElement('div'),
 			paragraph = document.createElement('p'),
 			meatball = document.createElement('div'),
-			gotIt = document.createElement('a'),
+			gotIt = document.createElement('button'),
 			internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
 
 		// save these for use during callbacks
@@ -117,20 +117,20 @@ export default class CoachMark {
 			gotItDiv.className = 'pe-copy--small';
 			gotItDiv.appendChild(gotIt);
 			gotIt[internalText] = 'Got it';
-			gotIt.className = 'o-coach-mark__got-it';
+			gotIt.className = 'o-coach-mark__got-it pe-btn pe-btn--link';
 			gotIt.setAttribute('href', '#');
 			content.appendChild(gotItDiv);
 		}
 
 		if (typeof opts.currentCM !== 'undefined') {
 			const backNextDiv = document.createElement('div'),
-				back = document.createElement('a'),
+				back = document.createElement('button'),
 				backSpan = document.createElement('span'),
-				next = document.createElement('a'),
+				next = document.createElement('button'),
 				nextSpan = document.createElement('span'),
 				totalOfCoachMarksSpan = document.createElement('span');
 
-			back.className = 'o-coach-mark__button-space';
+			back.className = 'o-coach-mark__button-space pe-btn pe-btn--link';
 
 			if (opts.currentCM > 1 && opts.totalCM > 1) {
 				backSpan[internalText] = 'previous';
@@ -140,7 +140,7 @@ export default class CoachMark {
 			}
 
 			//build next button
-			next.className = 'o-coach-mark__next-button';
+			next.className = 'o-coach-mark__next-button pe-btn pe-btn--link';
 			next.setAttribute('href','#');
 			next.setAttribute('tabindex', '1');
 			next[internalText] = 'next';
