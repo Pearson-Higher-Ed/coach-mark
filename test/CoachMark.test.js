@@ -129,7 +129,7 @@ describe('CoachMark', () => {
 			totalCM: 2
 		});
 
-		const button = document.querySelector('a.o-coach-mark__next-button');
+		const button = document.querySelector('button.o-coach-mark__next-button');
 		button.addEventListener('click', () => {
 			fired = true;
 		});
@@ -149,7 +149,7 @@ describe('CoachMark', () => {
 			id: 'sjsdflkjsdlkfj'
 		});
 
-		const button = document.querySelector('.o-coach-mark__container a.o-coach-mark__button-space');
+		const button = document.querySelector('.o-coach-mark__container button.o-coach-mark__button-space');
 		button.addEventListener('click', () => {
 			fired = true;
 		});
