@@ -91,6 +91,20 @@
 			}
 		}
 
+		&--bottom-left::after {
+			border-left: 15px solid transparent;
+			border-right: 15px solid transparent;
+			border-bottom: 15px solid rgb(255, 255, 255);
+			margin-left: 0px;
+			margin-top: -15px;
+			top: 0;
+			left: 0;
+			z-index: 940;
+			@media (max-width: 480px) {
+				visibility: hidden;
+			}
+		}
+
 		&--bottom-disappear {
 			visibility: hidden;
 		}
@@ -105,8 +119,20 @@
 			z-index: 940;
 		}
 
+		&--top-left::after {
+			border-left: 15px solid transparent;
+			border-right: 15px solid transparent;
+			border-top: 15px solid rgb(255, 255, 255);
+			margin-left: 0px;
+			bottom: -35px;
+			left: 0;
+			z-index: 940;
+		}
+
 		&--bottom::after,
-		&--top::after {
+		&--bottom-left::after,
+		&--top::after,
+		&--top-left::after {
 			content: '';
 			position: absolute;
 			width: 0;

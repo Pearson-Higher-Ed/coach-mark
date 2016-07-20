@@ -22,36 +22,43 @@ document.addEventListener('DOMContentLoaded', function() {
 				currentCM: '1',
 				totalCM: '2'
 			}, function (id) {
-				new CoachMark(document.getElementById('cm-bottom'), {
-					like: true,
-					title: 'No pointer. This is a long title that wraps three lines wraps three lines and looks fine',
+				new CoachMark(document.getElementById('cm-left-1'), {
+					title: 'Coach Mark top left Feature',
 					text: 'Some text explaining to the user why you changed their interface',
-					id: '9892387492098',
-					currentCM: '2',
-					totalCM: '2',
-					disablePointer: true
+					id: '9837494320',
+					currentCM: '1',
+					totalCM: '2'
 				}, function (id) {
-					console.log('Callback executed on exit '+ id);
-					// Demo eventing API
-					const element = document.getElementById('top');
-					document.body.dispatchEvent(new CustomEvent('o.InitCoachMark', {
-						detail: {
-							element: element,
-							opts: {
-								title: 'Eventing API. Also, no shadow box.',
-								text: 'This demos the Event API - see demo.js file',
-								id: 'lskdjflkjsd',
-								disableShadow: true,
-								offsetX: 50,
-								offsetY: 50
-							},
-							callback: function (id) {
-								"use strict";
-								console.log('api closed');
+					new CoachMark(document.getElementById('cm-bottom'), {
+						like: true,
+						title: 'No pointer. This is a long title that wraps three lines wraps three lines and looks fine',
+						text: 'Some text explaining to the user why you changed their interface',
+						id: '9892387492098',
+						currentCM: '2',
+						totalCM: '2',
+						disablePointer: true
+					}, function (id) {
+						console.log('Callback executed on exit '+ id);
+						// Demo eventing API
+						const element = document.getElementById('top');
+						document.body.dispatchEvent(new CustomEvent('o.InitCoachMark', {
+							detail: {
+								element: element,
+								opts: {
+									title: 'Eventing API. Also, no shadow box.',
+									text: 'This demos the Event API - see demo.js file',
+									id: 'lskdjflkjsd',
+									disableShadow: true,
+									offsetX: 50,
+									offsetY: 50
+								},
+								callback: function (id) {
+									"use strict";
+									console.log('api closed');
+								}
 							}
-						}
-					}));
-
+						}));
+					});
 				});
 			});
 		});

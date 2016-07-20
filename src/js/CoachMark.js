@@ -52,6 +52,7 @@ export default class CoachMark {
 		}
 
 		const placement = function placement() {
+			let modifier = '';
 			// get window geometry - this is how jQuery does it
 			const body = document.body,
 				html = document.documentElement,
@@ -59,10 +60,23 @@ export default class CoachMark {
 					body.scrollHeight,
 					body.offsetHeight,
 					html.clientHeight),
-				rect = element.getBoundingClientRect();
+				rect = element.getBoundingClientRect(),
+				// 50 is close enough. This is very browser-specific
+				touch_bottom = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
+				leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2;
 
-			// if the centerline of the element is above the centerline of the viewport, placement is bottom, otherwise top
-			return (rect.bottom - rect.top) / 2 + rect.top > window.innerHeight / 2 ? 'top' : 'bottom';
+			// this will follow the 50% rule, but for now, just return bottom
+			if (touch_bottom) {
+				modifier = 'top';
+			} else {
+				modifier = 'bottom';
+			}
+
+			if(leftCenterLine) {
+				modifier += '-left';
+			}
+
+			return modifier;
 		}();
 
 		element.scrollIntoView(false);
@@ -204,70 +218,6 @@ export default class CoachMark {
 		contentContainer.appendChild(closeDiv);
 		container.appendChild(contentContainer);
 
-		// removed for now, but leave code in case it comes back. Feedback does not make sense until you have used a feature.
-		//if (opts.like) {
-		//
-		//	let likeDiv;
-		//	let feedBack;
-		//
-		//	this.appendAnchor = (parent, upDown, text, like) => {
-		//		const link = document.createElement('a');
-		//		link.onclick = function(event) {
-		//			triggerEvent(like, 'o-cm-like-clicked');
-		//			likeDiv.style.display = 'none';
-		//			feedBack.style.display = 'block';
-		//			event.preventDefault();
-		//		};
-		//		link.innerHTML = text;
-		//		link.className = 'o-coach-mark--link-text';
-		//		link.setAttribute('href', '#');
-		//		const likeImg = document.createElement('i');
-		//		likeImg.className = 'o-coach-mark--icons fa fa-thumbs-o-' + upDown;
-		//		likeImg.setAttribute('aria-hidden', 'true');
-		//		link.insertBefore(likeImg, link.childNodes[0]);
-		//		parent.appendChild(link);
-		//	};
-		//
-		//	const hr = document.createElement('hr'),
-		//		form = document.createElement('textarea'),
-		//		buttonBar = document.createElement('div'),
-		//		submit = document.createElement('button'),
-		//		question = document.createElement('p'),
-		//		instructions = document.createElement('p'),
-		//		cancel = document.createElement('a');
-		//
-		//	hr.className = 'o-coach-mark--hr';
-		//	content.appendChild(hr);
-		//
-		//	likeDiv = document.createElement('div');
-		//	likeDiv.className = 'o-coach-mark__like-div';
-		//	question.innerHTML = 'What do you think of this change?';
-		//	likeDiv.appendChild(question);
-		//	content.appendChild(likeDiv);
-		//	this.appendAnchor(likeDiv, 'down', 'Not Great', 'dislike');
-		//	this.appendAnchor(likeDiv, 'up', 'I Like It', 'like');
-		//	feedBack = document.createElement('div');
-		//	feedBack.className = 'o-coach-mark__feedback';
-		//	instructions.innerHTML = 'Thanks! Care to tell us more?';
-		//	feedBack.appendChild(instructions);
-		//	submit.innerHTML = 'submit';
-		//	submit.onclick = () => {
-		//		triggerEvent('submit', 'o-cm-submit-clicked', form.value);
-		//	};
-		//	cancel.innerHTML = 'cancel';
-		//	cancel.setAttribute('href', '#');
-		//	cancel.onclick = () => {
-		//		triggerEvent('cancel', 'o-cm-cancel-clicked');
-		//		likeDiv.style.display = 'block';
-		//		feedBack.style.display = 'none';
-		//	};
-		//	feedBack.appendChild(form);
-		//	buttonBar.appendChild(submit);
-		//	buttonBar.appendChild(cancel);
-		//	feedBack.appendChild(buttonBar);
-		//	content.appendChild(feedBack);
-		//}
-
 		function triggerEvent(elementClickedIS, eventIs, payload) {
 			let event;
 			if (document.createEvent) {
@@ -314,11 +264,11 @@ export default class CoachMark {
 				left = (bodyWidth - 320) / 2 - relativeOffset;
 			}
 
-			if (placement == 'bottom') {
+			if (placement.indexOf('bottom') > -1) {
 				top = featurePosition.bottom + 5;
 			}
 
-			if (placement == 'top') {
+			if (placement.indexOf('top') > -1) {
 				top = featurePosition.top - markHeight - 15 - container.offsetHeight;
 			}
 
@@ -383,6 +333,70 @@ export default class CoachMark {
 				el.className = el.className.replace(reg, ' ');
 			}
 		}
+
+		// removed for now, but leave code in case it comes back. Feedback does not make sense until you have used a feature.
+		//if (opts.like) {
+		//
+		//	let likeDiv;
+		//	let feedBack;
+		//
+		//	this.appendAnchor = (parent, upDown, text, like) => {
+		//		const link = document.createElement('a');
+		//		link.onclick = function(event) {
+		//			triggerEvent(like, 'o-cm-like-clicked');
+		//			likeDiv.style.display = 'none';
+		//			feedBack.style.display = 'block';
+		//			event.preventDefault();
+		//		};
+		//		link.innerHTML = text;
+		//		link.className = 'o-coach-mark--link-text';
+		//		link.setAttribute('href', '#');
+		//		const likeImg = document.createElement('i');
+		//		likeImg.className = 'o-coach-mark--icons fa fa-thumbs-o-' + upDown;
+		//		likeImg.setAttribute('aria-hidden', 'true');
+		//		link.insertBefore(likeImg, link.childNodes[0]);
+		//		parent.appendChild(link);
+		//	};
+		//
+		//	const hr = document.createElement('hr'),
+		//		form = document.createElement('textarea'),
+		//		buttonBar = document.createElement('div'),
+		//		submit = document.createElement('button'),
+		//		question = document.createElement('p'),
+		//		instructions = document.createElement('p'),
+		//		cancel = document.createElement('a');
+		//
+		//	hr.className = 'o-coach-mark--hr';
+		//	content.appendChild(hr);
+		//
+		//	likeDiv = document.createElement('div');
+		//	likeDiv.className = 'o-coach-mark__like-div';
+		//	question.innerHTML = 'What do you think of this change?';
+		//	likeDiv.appendChild(question);
+		//	content.appendChild(likeDiv);
+		//	this.appendAnchor(likeDiv, 'down', 'Not Great', 'dislike');
+		//	this.appendAnchor(likeDiv, 'up', 'I Like It', 'like');
+		//	feedBack = document.createElement('div');
+		//	feedBack.className = 'o-coach-mark__feedback';
+		//	instructions.innerHTML = 'Thanks! Care to tell us more?';
+		//	feedBack.appendChild(instructions);
+		//	submit.innerHTML = 'submit';
+		//	submit.onclick = () => {
+		//		triggerEvent('submit', 'o-cm-submit-clicked', form.value);
+		//	};
+		//	cancel.innerHTML = 'cancel';
+		//	cancel.setAttribute('href', '#');
+		//	cancel.onclick = () => {
+		//		triggerEvent('cancel', 'o-cm-cancel-clicked');
+		//		likeDiv.style.display = 'block';
+		//		feedBack.style.display = 'none';
+		//	};
+		//	feedBack.appendChild(form);
+		//	buttonBar.appendChild(submit);
+		//	buttonBar.appendChild(cancel);
+		//	feedBack.appendChild(buttonBar);
+		//	content.appendChild(feedBack);
+		//}
 	}
 }
 
