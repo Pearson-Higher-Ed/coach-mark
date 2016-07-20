@@ -38,26 +38,53 @@ document.addEventListener('DOMContentLoaded', function() {
 						totalCM: '2',
 						disablePointer: true
 					}, function (id) {
-						console.log('Callback executed on exit '+ id);
-						// Demo eventing API
-						const element = document.getElementById('top');
-						document.body.dispatchEvent(new CustomEvent('o.InitCoachMark', {
-							detail: {
-								element: element,
-								opts: {
-									title: 'Eventing API. Also, no shadow box.',
-									text: 'This demos the Event API - see demo.js file',
-									id: 'lskdjflkjsd',
-									disableShadow: true,
-									offsetX: 50,
-									offsetY: 50
-								},
-								callback: function (id) {
-									"use strict";
-									console.log('api closed');
-								}
-							}
-						}));
+						new CoachMark(document.getElementById('cm-bottom'), {
+							title: 'overridden prev and next text',
+							text: 'Previous and Next text has been overridden with custom text',
+							id: '9892387492098a',
+							currentCM: '2',
+							totalCM: '3',
+							previousText: 'anterior',
+							nextText: 'siguiente',
+					}, function(id) {
+						new CoachMark(document.getElementById('cm-bottom'), {
+							title: 'overridden got it',
+							text: 'got it text has been overridden with custom text',
+							id: '9892387492098a',
+							gotIt: true,
+							gotItText: 'Roger that',
+						}, function(id) {
+							new CoachMark(document.getElementById('cm-bottom'), {
+								title: 'overridden close',
+								text: 'close text has been overridden with custom text',
+								id: '9892387492098a',
+								currentCM: '3',
+								totalCM: '3',
+								closeText: 'cerca'
+							}, function (id) {
+									console.log('Callback executed on exit '+ id);
+									// Demo eventing API
+									const element = document.getElementById('top');
+									document.body.dispatchEvent(new CustomEvent('o.InitCoachMark', {
+										detail: {
+											element: element,
+											opts: {
+												title: 'Eventing API. Also, no shadow box.',
+												text: 'This demos the Event API - see demo.js file',
+												id: 'lskdjflkjsd',
+												disableShadow: true,
+												offsetX: 50,
+												offsetY: 50
+											},
+											callback: function (id) {
+												"use strict";
+												console.log('api closed');
+											}
+										}
+									}));
+								});
+							});
+						});
 					});
 				});
 			});
@@ -67,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	document.addEventListener('o-cm-like-clicked', (event) => {
-		console.log("user clicked " + event.data.id + " " + event.data.type)
+		console.log("user clicked " + event.data.id + " " + event.data.type);
 	});
 	document.addEventListener('o-cm-submit-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type + " and commented: " + event.data.payload));
 	document.addEventListener('o-cm-cancel-clicked', (event) => console.log("user clicked " + event.data.id + " " + event.data.type));
