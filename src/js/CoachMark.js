@@ -9,6 +9,12 @@ export default class CoachMark {
 		this.opts = opts;
 		this.callback = callback;
 
+		//G11n English Defaults
+		this.gotItText = 'Got it';
+		this.previousText = 'previous';
+		this.nextText = 'next';
+		this.closeText = 'close';
+
 		//Check options
 		if(!this.opts)
 			throw new Error('missing required parameter:' +
@@ -51,6 +57,23 @@ export default class CoachMark {
 			this.disablePointer = (opts.disablePointer.toString().toLowerCase() === 'true');
 		}
 
+		// G11n
+		if (typeof opts.gotItText === 'string') {
+			this.gotItText = opts.gotItText;
+		}
+
+		if (typeof opts.previousText === 'string') {
+			this.previousText = opts.previousText;
+		}
+
+		if (typeof opts.nextText === 'string') {
+			this.nextText = opts.nextText;
+		}
+
+		if (typeof opts.closeText === 'string') {
+			this.closeText = opts.closeText;
+		}
+		
 		const placement = function placement() {
 			let modifier = '';
 			// get window geometry - this is how jQuery does it
@@ -130,7 +153,7 @@ export default class CoachMark {
 			const gotItDiv = document.createElement('div');
 			gotItDiv.className = 'pe-copy--small';
 			gotItDiv.appendChild(gotIt);
-			gotIt[internalText] = 'Got it';
+			gotIt[internalText] = this.gotItText;
 			gotIt.className = 'o-coach-mark__got-it pe-btn pe-btn--link';
 			gotIt.setAttribute('href', '#');
 			content.appendChild(gotItDiv);
@@ -147,7 +170,7 @@ export default class CoachMark {
 			back.className = 'o-coach-mark__button-space pe-btn pe-btn--link';
 
 			if (opts.currentCM > 1 && opts.totalCM > 1) {
-				backSpan[internalText] = 'previous';
+				backSpan[internalText] = this.previousText;
 				back.setAttribute('href', '#');
 				back.setAttribute('tabindex', '2');
 				back.appendChild(backSpan);
@@ -157,7 +180,7 @@ export default class CoachMark {
 			next.className = 'o-coach-mark__next-button pe-btn pe-btn--link';
 			next.setAttribute('href','#');
 			next.setAttribute('tabindex', '1');
-			next[internalText] = 'next';
+			next[internalText] = this.nextText;
 
 			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks pe-label pe-label--small';
 			if (opts.currentCM && opts.totalCM) {
@@ -167,7 +190,7 @@ export default class CoachMark {
 				totalOfCoachMarksSpan[internalText] = opts.currentCM + ' of ' + opts.totalCM;
 				if (opts.currentCM == opts.totalCM) {
 					// change this to a close link
-					next[internalText] = 'close';
+					next[internalText] = this.closeText;
 				}
 				// draw meatball
 				meatball[internalText] = opts.currentCM;
