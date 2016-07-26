@@ -34,6 +34,11 @@ offsetY        | int     | no       | moves the mark up/down
 disableShadow  | boolean | no       | Prevents the darkening of the rest of the page when an element is highlighted. Default is false
 disablePointer | boolean | no       | Disables the pointer which indicates which element the coach mark is attached to. Default is false
 gotIt          | boolean | no       | display "Got it" on bottom-right
+previousText   | text    | no       | Overrides the "previous" text
+nextText       | text    | no       | Overrides the "next" text
+gotItText      | text    | no       | Overrides the "Got it" text
+closeText      | text    | no       | Overrides the "close" text
+
 
 
 ```
@@ -46,7 +51,7 @@ See the Demo to see the features in action.
 $ npm run dev
 ```
 
-If the coach mark is attached to a div that has an ancestor that is opacity < 1, then it should be reset to 1 prior to 
+If the coach mark is attached to a div that has an ancestor that is opacity < 1, then it should be reset to 1 prior to
 displaying the coach mark and return to original opacity in the close callback function.
 
 
