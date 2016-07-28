@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		title: 'Coach Mark Below Feature with Got It',
 		text: 'Some text explaining to the user why you changed their interface',
 		gotIt: true,
+		zIndex: 994,
 		id: '9834893449'
 	}, function (id) {
 		new CoachMark(document.getElementById('cm-left'), {

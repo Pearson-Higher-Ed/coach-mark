@@ -138,6 +138,7 @@ export default class CoachMark {
 		container.style.visibility = 'hidden';
 		container.style.display = 'block';
 		container.style.position = 'absolute';
+		container.style.zIndex = (typeof opts.zIndex !== 'undefined') ? opts.zIndex : '1010';
 		content.style.margin = '0';
 		content.className = 'o-coach-mark__content';
 		if (!opts.disablePointer) {
