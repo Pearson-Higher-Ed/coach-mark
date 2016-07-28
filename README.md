@@ -17,6 +17,9 @@ Platform requirements: npm 2+ and the [Elements SDK](https://www.npmjs.com/packa
 Initializes coach mark pointing to the specified element, given an options object,
 with a callback to be executed when the user dismisses the coach mark.  
 
+Special Case: Have a wrapper div as a specified element if the coachmark pointing element is not a block level element,this 
+will allow to adjust css in cases of long texts that needs to be wrapped on two lines and still have proper highlight in smaller screens or mobile views.
+
 ```
 
 Options are the following
