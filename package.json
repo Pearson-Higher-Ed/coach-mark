@@ -1,6 +1,6 @@
 {
   "name": "@pearson-components/coach-mark",
-  "version": "0.1.12",
+  "version": "0.1.10",
   "description": "Simple popover to explain new features to users.",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
