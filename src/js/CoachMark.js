@@ -321,7 +321,7 @@ export default class CoachMark {
 			const centerOnScreen = () => {
 				// take horizontal scroll into account
 				const relativeOffset = container.getBoundingClientRect().left - container.offsetLeft;
-				return bodyWidth / 2 - relativeOffset - 150;
+				return document.body.offsetWidth / 2 - relativeOffset - 150;
 			};
 
 			// center pointer on div if wider than 480, otherwise center on screen
