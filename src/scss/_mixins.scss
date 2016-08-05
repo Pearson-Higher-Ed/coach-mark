@@ -1,10 +1,4 @@
 @mixin oCoachMark() {
-	*:-moz-focusring {
-		outline:none;
-		border:2px solid rgba(81, 203, 238, 1);
-		-webkit-box-shadow: 0px 0px 5px  rgba(81, 203, 238, 1);
-		box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-	}
 	.o-coach-mark {
 		&__container {
 			font-size: 18px;
@@ -15,6 +9,12 @@
 			clear: both;
 			float: left;
 			text-align: left;
+			:-moz-focusring {
+				outline:none;
+				border:2px solid rgba(81, 203, 238, 1);
+				-webkit-box-shadow: 0px 0px 5px  rgba(81, 203, 238, 1);
+				box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+			}
 		}
 		&__hole {
 			box-shadow: 0 0 0 9999999px rgba(0, 0, 0, .4);
