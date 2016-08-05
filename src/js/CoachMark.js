@@ -9,6 +9,38 @@ export default class CoachMark {
 		this.opts = opts;
 		this.callback = callback;
 
+		// utils
+		const closeCoachMark = (event) => {
+			opts.coachMark.parentElement.removeChild(opts.coachMark);
+			removeClass(opts.element, 'o-coach-mark__hole');
+			if (typeof callback !== 'undefined') {
+				callback(opts.id, event);
+			}
+		};
+
+		const hasClass = (el, className) => {
+			if (el.classList) return el.classList.contains(className);
+
+			// IE9
+			el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+		};
+
+		const addClass = (el, className) => {
+			if (el.classList) return el.classList.add(className);
+
+			// IE9
+			el.className += " " + className
+		};
+
+		const removeClass = (el, className) => {
+			if (el.classList) return el.classList.remove(className);
+
+			// IE9
+			var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+			el.className = el.className.replace(reg, ' ');
+		};
+
+
 		//G11n English Defaults
 		this.gotItText = 'Got it';
 		this.previousText = 'previous';
@@ -74,33 +106,28 @@ export default class CoachMark {
 			this.closeText = opts.closeText;
 		}
 		
-		const placement = function placement() {
-			let modifier = '';
-			// get window geometry - this is how jQuery does it
-			const body = document.body,
-				html = document.documentElement,
-				height = Math.max(
-					body.scrollHeight,
-					body.offsetHeight,
-					html.clientHeight),
-				rect = element.getBoundingClientRect(),
-				// 50 is close enough. This is very browser-specific
-				touch_bottom = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
-				leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2;
+		let placement = '';
+		// get window geometry - this is how jQuery does it
+		const body = document.body,
+			html = document.documentElement,
+			height = Math.max(
+				body.scrollHeight,
+				body.offsetHeight,
+				html.clientHeight),
+			rect = element.getBoundingClientRect(),
+			// 50 is close enough. This is very browser-specific
+			bottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
+			leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2;
 
-			// this will follow the 50% rule, but for now, just return bottom
-			if (touch_bottom) {
-				modifier = 'top';
-			} else {
-				modifier = 'bottom';
-			}
+		if (bottomHalf) {
+			placement = 'top';
+		} else {
+			placement = 'bottom';
+		}
 
-			if(leftCenterLine) {
-				modifier += '-left';
-			}
-
-			return modifier;
-		}();
+		if(leftCenterLine) {
+			placement += '-left';
+		}
 
 		element.scrollIntoView(false);
 
@@ -139,15 +166,15 @@ export default class CoachMark {
 		container.style.display = 'block';
 		container.style.position = 'absolute';
 		container.style.zIndex = (typeof opts.zIndex !== 'undefined') ? opts.zIndex : '1010';
+
 		content.style.margin = '0';
 		content.className = 'o-coach-mark__content';
 		if (!opts.disablePointer) {
-			content.className += ' o-coach-mark--' + placement;
+			addClass(content, 'o-coach-mark--' + placement);
 		}
 		content.appendChild(titleBar);
 		paragraph.className = 'pe-copy--small o-coach-mark__paragraph';
 		paragraph[internalText] = opts.text;
-
 		content.appendChild(paragraph);
 
 		if (typeof opts.gotIt !== 'undefined') {
@@ -202,8 +229,10 @@ export default class CoachMark {
 			backNextDiv.appendChild(next);
 
 			if (opts.currentCM > 1 && opts.totalCM > 1) {
+				// we need a back button here
 				backNextDiv.appendChild(back);
 			} else {
+				// add space here since no back button
 				totalOfCoachMarksSpan.style.paddingLeft = '107px';
 			}
 
@@ -242,7 +271,7 @@ export default class CoachMark {
 		contentContainer.appendChild(closeDiv);
 		container.appendChild(contentContainer);
 
-		function triggerEvent(elementClickedIS, eventIs, payload) {
+		const triggerEvent = (elementClickedIS, eventIs, payload) => {
 			let event;
 			if (document.createEvent) {
 				event = document.createEvent('HTMLEvents');
@@ -262,12 +291,14 @@ export default class CoachMark {
 			if (document.createEvent) {
 				element.dispatchEvent(event);
 			} else {
+				// IE9
 				element.fireEvent("on" + event.eventType, event);
 			}
-		}
+		};
 
 
-		function resetPosition() {
+		const resetPosition = () => {
+			// this is called on draw and redraw
 
 			const featurePosition = {
 					top: element.offsetTop,
@@ -277,45 +308,44 @@ export default class CoachMark {
 				markHeight = content.offsetHeight + 30,
 				horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left),
 				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset;
-			var top, left;
 
-			var bodyWidth = document.body.offsetWidth;
+			const centerOnDiv = () => {
+				var left = horizontal_center - 280;
+				if (placement.indexOf('-left') > -1) {
+					// push to the right because pointer is on the left side
+					left += 220;
+				}
+				return left;
+			};
 
-			if (bodyWidth > 480) {
-				left = horizontal_center - 280;
-			} else {
+			const centerOnScreen = () => {
+				// take horizontal scroll into account
 				const relativeOffset = container.getBoundingClientRect().left - container.offsetLeft;
-				left = (bodyWidth - 320) / 2 - relativeOffset;
-			}
+				return bodyWidth / 2 - relativeOffset - 150;
+			};
 
+			// center pointer on div if wider than 480, otherwise center on screen
+			const left = (document.body.offsetWidth > 480) ? centerOnDiv() : centerOnScreen();
+
+			let top = 0;
 			if (placement.indexOf('bottom') > -1) {
 				top = featurePosition.bottom + 5;
 			}
-
 			if (placement.indexOf('top') > -1) {
 				top = featurePosition.top - markHeight - 15 - container.offsetHeight;
 			}
 
-			if (typeof opts.offsetX !== 'undefined') {
-				container.style.left = left + opts.offsetX + 'px';
-			} else {
-				container.style.left = left + 'px';
-			}
+			// allow consumer to specify an offset (side effect: this adds 'px' regardless)
+			container.style.left = (typeof opts.offsetX !== 'undefined') ? left + opts.offsetX + 'px' : left + 'px';
+			container.style.top = (typeof opts.offsetY !== 'undefined') ? top + opts.offsetY + 'px' : top + 'px';
 
-			if (typeof opts.offsetY !== 'undefined') {
-				container.style.top = top + opts.offsetY + 'px';
-			} else {
-				container.style.top = top + 'px';
-			}
-
+			// push right if we are off-screen to the left
 			let rect = contentContainer.getBoundingClientRect();
 			if (rect.left < 0) {
 				container.style.left = container.offsetLeft - rect.left + 'px';
 			}
+		};
 
-		}
-
-		//Inject html - use classes to position
 		element.parentNode.insertBefore(container, element.nextSibling);
 
 		// temporarily show for measuring
@@ -328,37 +358,7 @@ export default class CoachMark {
 		close.addEventListener('click', closeCoachMark);
 		gotIt.addEventListener('click', closeCoachMark);
 
-		function closeCoachMark(event) {
-			opts.coachMark.parentElement.removeChild(opts.coachMark);
-			removeClass(opts.element, 'o-coach-mark__hole');
-			if (typeof callback !== 'undefined') {
-				callback(opts.id, event);
-			}
-		}
-
-		function hasClass(el, className) {
-			if (el.classList)
-				return el.classList.contains(className);
-			else
-				return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
-		}
-
-		function addClass(el, className) {
-			if (el.classList)
-				el.classList.add(className);
-			else if (!hasClass(el, className)) el.className += " " + className
-		}
-
-		function removeClass(el, className) {
-			if (el.classList)
-				el.classList.remove(className);
-			else if (hasClass(el, className)) {
-				var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
-				el.className = el.className.replace(reg, ' ');
-			}
-		}
-
-		// removed for now, but leave code in case it comes back. Feedback does not make sense until you have used a feature.
+		// removed for now, but leave code, in case it comes back. Feedback does not make sense until you have used a feature.
 		//if (opts.like) {
 		//
 		//	let likeDiv;

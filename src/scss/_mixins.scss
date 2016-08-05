@@ -21,8 +21,8 @@
 		}
 		&__close-icon {
 			margin: 0;
-			margin-top: 5px;
-			padding: 0 5px;
+			margin-top: 10px;
+			padding: 2px;
 			background-color: transparent;
 			cursor: pointer;
 			border: none;
@@ -52,7 +52,7 @@
 			margin-bottom: 15px;
 		}
 		&__title {
-			padding: 20px 0 0 0;
+			padding: 20px 10px 0 0;
 		}
 		&__paragraph {
 			clear: both;
@@ -79,72 +79,54 @@
 			}
 		}
 
-		&--bottom::after {
-			border-left: 15px solid transparent;
-			border-right: 15px solid transparent;
-			border-bottom: 15px solid rgb(255, 255, 255);
-			margin-left: 230px;
-			margin-top: -15px;
-			top: 0;
-			left: 0;
+		&--bottom::before {
+			left: 221px;
+			top: -10px;
 			z-index: 940;
-			@media (max-width: 480px) {
-				visibility: hidden;
-			}
+			box-shadow: -3px -3px 2px 0 rgba( 0, 0, 0, .2 );
 		}
 
-		&--bottom-left::after {
-			border-left: 15px solid transparent;
-			border-right: 15px solid transparent;
-			border-bottom: 15px solid rgb(255, 255, 255);
-			margin-left: 0px;
-			margin-top: -15px;
-			top: 0;
-			left: 0;
+		&--bottom-left::before {
+			left: 19px;
+			top: -10px;
 			z-index: 940;
-			@media (max-width: 480px) {
-				visibility: hidden;
-			}
+			box-shadow: -3px -3px 2px 0 rgba( 0, 0, 0, .2 );
 		}
 
 		&--bottom-disappear {
 			visibility: hidden;
 		}
 
-		&--top::after {
-			border-left: 15px solid transparent;
-			border-right: 15px solid transparent;
-			border-top: 15px solid rgb(255, 255, 255);
-			margin-left: 230px;
-			bottom: -35px;
-			left: 0;
-			z-index: 940;
-			@media (max-width: 480px) {
-				visibility: hidden;
-			}
+
+		&--top::before {
+			bottom: -30px;
+			left: 220px;
+			box-shadow: 3px 3px 2px 0 rgba( 0, 0, 0, .2 );
 		}
 
-		&--top-left::after {
-			border-left: 15px solid transparent;
-			border-right: 15px solid transparent;
-			border-top: 15px solid rgb(255, 255, 255);
-			margin-left: 0px;
-			bottom: -35px;
-			left: 0;
-			z-index: 940;
-			@media (max-width: 480px) {
-				visibility: hidden;
-			}
+		&--top-left::before {
+			bottom: -30px;
+			left: 19px;
+			box-shadow: 3px 3px 2px 0 rgba( 0, 0, 0, .2 );
 		}
 
-		&--bottom::after,
-		&--bottom-left::after,
-		&--top::after,
-		&--top-left::after {
-			content: '';
+		&--bottom::before,
+		&--bottom-left::before,
+		&--top::before,
+		&--top-left::before {
+			content: '\00a0';
 			position: absolute;
-			width: 0;
-			height: 0;
+			width: 20px;
+			height: 20px;
+			background-color: rgb(255, 255, 255);
+			transform: rotate( 45deg );
+				-moz-transform: rotate( 45deg );
+				-ms-transform: rotate( 45deg );
+				-o-transform: rotate( 45deg );
+				-webkit-transform: rotate( 45deg );
+			@media (max-width: 480px) {
+				visibility: hidden;
+			}
 		}
 
 		&--link-text {
