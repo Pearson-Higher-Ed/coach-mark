@@ -247,19 +247,6 @@ describe('CoachMark', () => {
 		}
 	});
 
-	//it('should attach to the bottom of the header', () => {
-	//	mark = new CoachMark(header , {
-	//		title: 'foo',
-	//		text: 'bar',
-	//		id: 'sjsdflkjsdlkfj'
-	//	}, function () {
-	//		console.log('test');
-	//	});
-	//	const cm = document.querySelector('.o-coach-mark__container');
-	//	expect(cm).to.not.be.null;
-	//	const cmTop = cm.getBoundingClientRect().top;
-	//	expect(cmTop).to.be(header.getBoundingClientRect().bottom);
-	//});
 
 	it('should attach to the top of the footer', () => {
 		mark = new CoachMark(footer , {
