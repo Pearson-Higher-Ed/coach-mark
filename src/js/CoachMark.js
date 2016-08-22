@@ -105,7 +105,7 @@ export default class CoachMark {
 		if (typeof opts.closeText === 'string') {
 			this.closeText = opts.closeText;
 		}
-		
+
 		let placement = '';
 		// get window geometry - this is how jQuery does it
 		const body = document.body,
@@ -358,69 +358,6 @@ export default class CoachMark {
 		close.addEventListener('click', closeCoachMark);
 		gotIt.addEventListener('click', closeCoachMark);
 
-		// removed for now, but leave code, in case it comes back. Feedback does not make sense until you have used a feature.
-		//if (opts.like) {
-		//
-		//	let likeDiv;
-		//	let feedBack;
-		//
-		//	this.appendAnchor = (parent, upDown, text, like) => {
-		//		const link = document.createElement('a');
-		//		link.onclick = function(event) {
-		//			triggerEvent(like, 'o-cm-like-clicked');
-		//			likeDiv.style.display = 'none';
-		//			feedBack.style.display = 'block';
-		//			event.preventDefault();
-		//		};
-		//		link.innerHTML = text;
-		//		link.className = 'o-coach-mark--link-text';
-		//		link.setAttribute('href', '#');
-		//		const likeImg = document.createElement('i');
-		//		likeImg.className = 'o-coach-mark--icons fa fa-thumbs-o-' + upDown;
-		//		likeImg.setAttribute('aria-hidden', 'true');
-		//		link.insertBefore(likeImg, link.childNodes[0]);
-		//		parent.appendChild(link);
-		//	};
-		//
-		//	const hr = document.createElement('hr'),
-		//		form = document.createElement('textarea'),
-		//		buttonBar = document.createElement('div'),
-		//		submit = document.createElement('button'),
-		//		question = document.createElement('p'),
-		//		instructions = document.createElement('p'),
-		//		cancel = document.createElement('a');
-		//
-		//	hr.className = 'o-coach-mark--hr';
-		//	content.appendChild(hr);
-		//
-		//	likeDiv = document.createElement('div');
-		//	likeDiv.className = 'o-coach-mark__like-div';
-		//	question.innerHTML = 'What do you think of this change?';
-		//	likeDiv.appendChild(question);
-		//	content.appendChild(likeDiv);
-		//	this.appendAnchor(likeDiv, 'down', 'Not Great', 'dislike');
-		//	this.appendAnchor(likeDiv, 'up', 'I Like It', 'like');
-		//	feedBack = document.createElement('div');
-		//	feedBack.className = 'o-coach-mark__feedback';
-		//	instructions.innerHTML = 'Thanks! Care to tell us more?';
-		//	feedBack.appendChild(instructions);
-		//	submit.innerHTML = 'submit';
-		//	submit.onclick = () => {
-		//		triggerEvent('submit', 'o-cm-submit-clicked', form.value);
-		//	};
-		//	cancel.innerHTML = 'cancel';
-		//	cancel.setAttribute('href', '#');
-		//	cancel.onclick = () => {
-		//		triggerEvent('cancel', 'o-cm-cancel-clicked');
-		//		likeDiv.style.display = 'block';
-		//		feedBack.style.display = 'none';
-		//	};
-		//	feedBack.appendChild(form);
-		//	buttonBar.appendChild(submit);
-		//	buttonBar.appendChild(cancel);
-		//	feedBack.appendChild(buttonBar);
-		//	content.appendChild(feedBack);
-		//}
 	}
 }
 
