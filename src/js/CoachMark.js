@@ -1,368 +1,358 @@
-import componentHandler from '@pearson-components/component-handler';
-
 export default class CoachMark {
 
-	constructor(element, opts, callback) {
+    constructor(element, opts, callback) {
+        this.element = element;
+        this.opts = opts;
+        this.callback = callback;
+
+        // utils
+        const closeCoachMark = (event) => {
+            opts.coachMark.parentElement.removeChild(opts.coachMark);
+            removeClass(opts.element, 'o-coach-mark__hole');
+            if (typeof callback !== 'undefined') {
+                callback(opts.id, event);
+            }
+        };
+
+        const hasClass = (el, className) => {
+            if (el.classList) return el.classList.contains(className);
+
+            // IE9
+            el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+        };
+
+        const addClass = (el, className) => {
+            if (el.classList) return el.classList.add(className);
+
+            // IE9
+            el.className += " " + className
+        };
+
+        const removeClass = (el, className) => {
+            if (el.classList) return el.classList.remove(className);
+
+            // IE9
+            var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+            el.className = el.className.replace(reg, ' ');
+        };
 
 
-		this.element = element;
-		this.opts = opts;
-		this.callback = callback;
+        //G11n English Defaults
+        this.gotItText = 'Got it';
+        this.previousText = 'previous';
+        this.nextText = 'next';
+        this.closeText = 'close';
 
-		// utils
-		const closeCoachMark = (event) => {
-			opts.coachMark.parentElement.removeChild(opts.coachMark);
-			removeClass(opts.element, 'o-coach-mark__hole');
-			if (typeof callback !== 'undefined') {
-				callback(opts.id, event);
-			}
-		};
+        //Check options
+        if(!this.opts)
+            throw new Error('missing required parameter:' +
+                ' you must include an options object');
 
-		const hasClass = (el, className) => {
-			if (el.classList) return el.classList.contains(className);
+        if(!opts.text)
+            throw new Error('missing required option: ' +
+                'you must specify text for the coach mark');
 
-			// IE9
-			el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
-		};
+        if (!opts.id) {
+            throw new Error('missing required option: you must specify a unique id for the coach mark')
+        }
 
-		const addClass = (el, className) => {
-			if (el.classList) return el.classList.add(className);
+        // check other args
+        if (!element) {
+            throw new Error('missing required option: element')
+        }
 
-			// IE9
-			el.className += " " + className
-		};
+        if (typeof opts.currentCM !== 'undefined') {
+            if (typeof opts.totalCM === 'undefined') {
+                throw new Error('you must include totalCM if currentCM is specified')
+            }
+        }
 
-		const removeClass = (el, className) => {
-			if (el.classList) return el.classList.remove(className);
+        if (opts.gotIt && opts.totalCM) {
+            throw new Error('cannot display "Got it" along with numbered coach marks (totalCM)')
+        }
 
-			// IE9
-			var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
-			el.className = el.className.replace(reg, ' ');
-		};
+        if (typeof opts.totalCM !== 'undefined') {
+            if (typeof opts.currentCM === 'undefined') {
+                throw new Error('you must include currentCM if totalCM is specified')
+            }
+        }
 
+        if (typeof opts.disableShadow === 'string' || typeof opts.disableShadow === 'boolean') {
+            opts.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true');
+        }
 
-		//G11n English Defaults
-		this.gotItText = 'Got it';
-		this.previousText = 'previous';
-		this.nextText = 'next';
-		this.closeText = 'close';
+        if (typeof opts.disablePointer === 'string' || typeof opts.disablePointer === 'boolean') {
+            this.disablePointer = (opts.disablePointer.toString().toLowerCase() === 'true');
+        }
 
-		//Check options
-		if(!this.opts)
-			throw new Error('missing required parameter:' +
-				' you must include an options object');
+        // G11n
+        if (typeof opts.gotItText === 'string') {
+            this.gotItText = opts.gotItText;
+        }
 
-		if(!opts.text)
-			throw new Error('missing required option: ' +
-				'you must specify text for the coach mark');
+        if (typeof opts.previousText === 'string') {
+            this.previousText = opts.previousText;
+        }
 
-		if (!opts.id) {
-			throw new Error('missing required option: you must specify a unique id for the coach mark')
-		}
+        if (typeof opts.nextText === 'string') {
+            this.nextText = opts.nextText;
+        }
 
-		// check other args
-		if (!element) {
-			throw new Error('missing required option: element')
-		}
+        if (typeof opts.closeText === 'string') {
+            this.closeText = opts.closeText;
+        }
 
-		if (typeof opts.currentCM !== 'undefined') {
-			if (typeof opts.totalCM === 'undefined') {
-				throw new Error('you must include totalCM if currentCM is specified')
-			}
-		}
+        let placement = '';
+        // get window geometry - this is how jQuery does it
+        const body = document.body,
+            html = document.documentElement,
+            height = Math.max(
+                body.scrollHeight,
+                body.offsetHeight,
+                html.clientHeight),
+            rect = element.getBoundingClientRect(),
+            // 50 is close enough. This is very browser-specific
+            bottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
+            leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2;
 
-		if (opts.gotIt && opts.totalCM) {
-			throw new Error('cannot display "Got it" along with numbered coach marks (totalCM)')
-		}
+        if (bottomHalf) {
+            placement = 'top';
+        } else {
+            placement = 'bottom';
+        }
 
-		if (typeof opts.totalCM !== 'undefined') {
-			if (typeof opts.currentCM === 'undefined') {
-				throw new Error('you must include currentCM if totalCM is specified')
-			}
-		}
+        if(leftCenterLine) {
+            placement += '-left';
+        }
 
-		if (typeof opts.disableShadow === 'string' || typeof opts.disableShadow === 'boolean') {
-			opts.disableShadow = (opts.disableShadow.toString().toLowerCase() === 'true');
-		}
+        element.scrollIntoView(false);
 
-		if (typeof opts.disablePointer === 'string' || typeof opts.disablePointer === 'boolean') {
-			this.disablePointer = (opts.disablePointer.toString().toLowerCase() === 'true');
-		}
+        if (!opts.disableShadow) {
+            addClass(element, 'o-coach-mark__hole');
+        }
 
-		// G11n
-		if (typeof opts.gotItText === 'string') {
-			this.gotItText = opts.gotItText;
-		}
+        //Build html
+        const container = document.createElement('div'),
+            close = document.createElement('button'),
+            closeSpan = document.createElement('span'),
+            closeDiv = document.createElement('div'),
+            screenReader = document.createElement('span'),
+            titleBar = document.createElement('div'),
+            titleText = document.createElement('div'),
+            content = document.createElement('div'),
+            contentContainer = document.createElement('div'),
+            paragraph = document.createElement('p'),
+            meatball = document.createElement('div'),
+            gotIt = document.createElement('button'),
+            internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
 
-		if (typeof opts.previousText === 'string') {
-			this.previousText = opts.previousText;
-		}
+        // save these for use during callbacks
+        opts.coachMark = container;
+        opts.element = element;
+        opts.callback = callback;
 
-		if (typeof opts.nextText === 'string') {
-			this.nextText = opts.nextText;
-		}
+        titleText.className = 'o-coach-mark__title pe-label pe-label--bold';
+        titleBar.appendChild(meatball);
+        titleBar.appendChild(titleText);
 
-		if (typeof opts.closeText === 'string') {
-			this.closeText = opts.closeText;
-		}
+        if (opts.title) titleText[internalText] = opts.title;
 
-		let placement = '';
-		// get window geometry - this is how jQuery does it
-		const body = document.body,
-			html = document.documentElement,
-			height = Math.max(
-				body.scrollHeight,
-				body.offsetHeight,
-				html.clientHeight),
-			rect = element.getBoundingClientRect(),
-			// 50 is close enough. This is very browser-specific
-			bottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
-			leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2;
+        container.className = 'o-coach-mark__container';
+        container.style.visibility = 'hidden';
+        container.style.display = 'block';
+        container.style.position = 'absolute';
+        container.style.zIndex = (typeof opts.zIndex !== 'undefined') ? opts.zIndex : '1010';
 
-		if (bottomHalf) {
-			placement = 'top';
-		} else {
-			placement = 'bottom';
-		}
+        content.style.margin = '0';
+        content.className = 'o-coach-mark__content';
+        if (!opts.disablePointer) {
+            addClass(content, 'o-coach-mark--' + placement);
+        }
+        content.appendChild(titleBar);
+        paragraph.className = 'pe-copy--small o-coach-mark__paragraph';
+        paragraph[internalText] = opts.text;
+        content.appendChild(paragraph);
 
-		if(leftCenterLine) {
-			placement += '-left';
-		}
+        if (typeof opts.gotIt !== 'undefined') {
+            const gotItDiv = document.createElement('div');
+            gotItDiv.className = 'pe-copy--small';
+            gotItDiv.appendChild(gotIt);
+            gotIt[internalText] = this.gotItText;
+            gotIt.className = 'o-coach-mark__got-it pe-btn pe-btn--link';
+            gotIt.setAttribute('href', '#');
+            content.appendChild(gotItDiv);
+        }
 
-		element.scrollIntoView(false);
+        if (typeof opts.currentCM !== 'undefined') {
+            const backNextDiv = document.createElement('div'),
+                back = document.createElement('button'),
+                backSpan = document.createElement('span'),
+                next = document.createElement('button'),
+                nextSpan = document.createElement('span'),
+                totalOfCoachMarksSpan = document.createElement('span');
 
-		if (!opts.disableShadow) {
-			addClass(element, 'o-coach-mark__hole');
-		}
+            back.className = 'o-coach-mark__button-space pe-btn pe-btn--link';
 
-		//Build html
-		const container = document.createElement('div'),
-			close = document.createElement('button'),
-			closeSpan = document.createElement('span'),
-			closeDiv = document.createElement('div'),
-			screenReader = document.createElement('span'),
-			titleBar = document.createElement('div'),
-			titleText = document.createElement('div'),
-			content = document.createElement('div'),
-			contentContainer = document.createElement('div'),
-			paragraph = document.createElement('p'),
-			meatball = document.createElement('div'),
-			gotIt = document.createElement('button'),
-			internalText = ('textContent' in titleText) ? 'textContent' : 'innerText';
+            if (opts.currentCM > 1 && opts.totalCM > 1) {
+                backSpan[internalText] = this.previousText;
+                back.setAttribute('href', '#');
+                back.setAttribute('tabindex', '2');
+                back.appendChild(backSpan);
+            }
 
-		// save these for use during callbacks
-		opts.coachMark = container;
-		opts.element = element;
-		opts.callback = callback;
+            //build next button
+            next.className = 'o-coach-mark__next-button pe-btn pe-btn--link';
+            next.setAttribute('href','#');
+            next.setAttribute('tabindex', '1');
+            next[internalText] = this.nextText;
 
-		titleText.className = 'o-coach-mark__title pe-label pe-label--bold';
-		titleBar.appendChild(meatball);
-		titleBar.appendChild(titleText);
+            totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks pe-label pe-label--small';
+            if (opts.currentCM && opts.totalCM) {
+                if (opts.currentCM < opts.totalCM) {
+                    next.appendChild(nextSpan);
+                }
+                totalOfCoachMarksSpan[internalText] = opts.currentCM + ' of ' + opts.totalCM;
+                if (opts.currentCM == opts.totalCM) {
+                    // change this to a close link
+                    next[internalText] = this.closeText;
+                }
+                // draw meatball
+                meatball[internalText] = opts.currentCM;
+                meatball.className = 'o-coach-mark__meatball';
+                // lower title
+                titleText.style.paddingTop = '24px';
+            }
+            backNextDiv.appendChild(next);
 
-		if (opts.title) titleText[internalText] = opts.title;
+            if (opts.currentCM > 1 && opts.totalCM > 1) {
+                // we need a back button here
+                backNextDiv.appendChild(back);
+            } else {
+                // add space here since no back button
+                totalOfCoachMarksSpan.style.paddingLeft = '107px';
+            }
 
-		container.className = 'o-coach-mark__container';
-		container.style.visibility = 'hidden';
-		container.style.display = 'block';
-		container.style.position = 'absolute';
-		container.style.zIndex = (typeof opts.zIndex !== 'undefined') ? opts.zIndex : '1010';
+            backNextDiv.appendChild(totalOfCoachMarksSpan);
+            backNextDiv.className = 'o-coach-mark__back-next pe-copy--small';
+            content.appendChild(backNextDiv);
+            //IIFE to create event for back and next buttons based on the current and total
+            ((back, next, opts) => {
+                back.onclick = (event) => {
+                    closeCoachMark(event);
+                    triggerEvent('previous', 'o-cm-previous-clicked');
+                    event.preventDefault();
+                };
+                next.onclick = (event) => {
+                    closeCoachMark(event);
+                    triggerEvent('next', 'o-cm-next-clicked');
+                    event.preventDefault();
+                };
+            })(back, next, opts);
+        }
+        content.style.position = 'relative';
 
-		content.style.margin = '0';
-		content.className = 'o-coach-mark__content';
-		if (!opts.disablePointer) {
-			addClass(content, 'o-coach-mark--' + placement);
-		}
-		content.appendChild(titleBar);
-		paragraph.className = 'pe-copy--small o-coach-mark__paragraph';
-		paragraph[internalText] = opts.text;
-		content.appendChild(paragraph);
+        screenReader.className="o-coach-mark__sr-hidden";
+        screenReader[internalText] = opts.srText || "close this coach mark";
+        close.appendChild(screenReader);
+        closeDiv.className = 'o-coach-mark__close-div';
+        close.className = 'o-coach-mark__close-icon';
+        close.setAttribute('tabindex', '3');
+        closeSpan.className = 'pe-icon--times pe-color(gray-no-1) pe-label';
+        closeSpan.setAttribute('aria-hidden', 'true');
+        close.appendChild(closeSpan);
+        closeDiv.appendChild(close);
 
-		if (typeof opts.gotIt !== 'undefined') {
-			const gotItDiv = document.createElement('div');
-			gotItDiv.className = 'pe-copy--small';
-			gotItDiv.appendChild(gotIt);
-			gotIt[internalText] = this.gotItText;
-			gotIt.className = 'o-coach-mark__got-it pe-btn pe-btn--link';
-			gotIt.setAttribute('href', '#');
-			content.appendChild(gotItDiv);
-		}
+        contentContainer.className = 'o-coach-mark__content-container';
+        contentContainer.appendChild(content);
+        contentContainer.appendChild(closeDiv);
+        container.appendChild(contentContainer);
 
-		if (typeof opts.currentCM !== 'undefined') {
-			const backNextDiv = document.createElement('div'),
-				back = document.createElement('button'),
-				backSpan = document.createElement('span'),
-				next = document.createElement('button'),
-				nextSpan = document.createElement('span'),
-				totalOfCoachMarksSpan = document.createElement('span');
+        const triggerEvent = (elementClickedIS, eventIs, payload) => {
+            let event;
+            if (document.createEvent) {
+                event = document.createEvent('HTMLEvents');
+                event.initEvent(eventIs, true, true);
+            } else {
+                event = document.createEventObject();
+                event.eventType = eventIs;
+            }
 
-			back.className = 'o-coach-mark__button-space pe-btn pe-btn--link';
+            event.eventName = eventIs;
+            event.data = {
+                type: elementClickedIS,
+                id: opts.id,
+                payload: payload
+            };
 
-			if (opts.currentCM > 1 && opts.totalCM > 1) {
-				backSpan[internalText] = this.previousText;
-				back.setAttribute('href', '#');
-				back.setAttribute('tabindex', '2');
-				back.appendChild(backSpan);
-			}
-
-			//build next button
-			next.className = 'o-coach-mark__next-button pe-btn pe-btn--link';
-			next.setAttribute('href','#');
-			next.setAttribute('tabindex', '1');
-			next[internalText] = this.nextText;
-
-			totalOfCoachMarksSpan.className = 'o-coach-mark__total-coachmarks pe-label pe-label--small';
-			if (opts.currentCM && opts.totalCM) {
-				if (opts.currentCM < opts.totalCM) {
-					next.appendChild(nextSpan);
-				}
-				totalOfCoachMarksSpan[internalText] = opts.currentCM + ' of ' + opts.totalCM;
-				if (opts.currentCM == opts.totalCM) {
-					// change this to a close link
-					next[internalText] = this.closeText;
-				}
-				// draw meatball
-				meatball[internalText] = opts.currentCM;
-				meatball.className = 'o-coach-mark__meatball';
-				// lower title
-				titleText.style.paddingTop = '24px';
-			}
-			backNextDiv.appendChild(next);
-
-			if (opts.currentCM > 1 && opts.totalCM > 1) {
-				// we need a back button here
-				backNextDiv.appendChild(back);
-			} else {
-				// add space here since no back button
-				totalOfCoachMarksSpan.style.paddingLeft = '107px';
-			}
-
-			backNextDiv.appendChild(totalOfCoachMarksSpan);
-			backNextDiv.className = 'o-coach-mark__back-next pe-copy--small';
-			content.appendChild(backNextDiv);
-			//IIFE to create event for back and next buttons based on the current and total
-			((back, next, opts) => {
-				back.onclick = (event) => {
-					closeCoachMark(event);
-					triggerEvent('previous', 'o-cm-previous-clicked');
-					event.preventDefault();
-				};
-				next.onclick = (event) => {
-					closeCoachMark(event);
-					triggerEvent('next', 'o-cm-next-clicked');
-					event.preventDefault();
-				};
-			})(back, next, opts);
-		}
-		content.style.position = 'relative';
-
-		screenReader.className="o-coach-mark__sr-hidden";
-		screenReader[internalText] = opts.srText || "close this coach mark";
-		close.appendChild(screenReader);
-		closeDiv.className = 'o-coach-mark__close-div';
-		close.className = 'o-coach-mark__close-icon';
-		close.setAttribute('tabindex', '3');
-		closeSpan.className = 'pe-icon--times pe-color(gray-no-1) pe-label';
-		closeSpan.setAttribute('aria-hidden', 'true');
-		close.appendChild(closeSpan);
-		closeDiv.appendChild(close);
-
-		contentContainer.className = 'o-coach-mark__content-container';
-		contentContainer.appendChild(content);
-		contentContainer.appendChild(closeDiv);
-		container.appendChild(contentContainer);
-
-		const triggerEvent = (elementClickedIS, eventIs, payload) => {
-			let event;
-			if (document.createEvent) {
-				event = document.createEvent('HTMLEvents');
-				event.initEvent(eventIs, true, true);
-			} else {
-				event = document.createEventObject();
-				event.eventType = eventIs;
-			}
-
-			event.eventName = eventIs;
-			event.data = {
-				type: elementClickedIS,
-				id: opts.id,
-				payload: payload
-			};
-
-			if (document.createEvent) {
-				element.dispatchEvent(event);
-			} else {
-				// IE9
-				element.fireEvent("on" + event.eventType, event);
-			}
-		};
+            if (document.createEvent) {
+                element.dispatchEvent(event);
+            } else {
+                // IE9
+                element.fireEvent("on" + event.eventType, event);
+            }
+        };
 
 
-		const resetPosition = () => {
-			// this is called on draw and redraw
+        const resetPosition = () => {
+            // this is called on draw and redraw
 
-			const featurePosition = {
-					top: element.offsetTop,
-					left: element.offsetLeft,
-					bottom: element.offsetTop + element.offsetHeight,
-					right: element.offsetLeft + element.offsetWidth},
-				markHeight = content.offsetHeight + 30,
-				horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left),
-				vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset;
+            const featurePosition = {
+                    top: element.offsetTop,
+                    left: element.offsetLeft,
+                    bottom: element.offsetTop + element.offsetHeight,
+                    right: element.offsetLeft + element.offsetWidth},
+                markHeight = content.offsetHeight + 30,
+                horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left),
+                vertical_center = ((featurePosition.bottom - featurePosition.top)/2 + featurePosition.top) + window.pageYOffset;
 
-			const centerOnDiv = () => {
-				var left = horizontal_center - 280;
-				if (placement.indexOf('-left') > -1) {
-					// push to the right because pointer is on the left side
-					left += 220;
-				}
-				return left;
-			};
+            const centerOnDiv = () => {
+                var left = horizontal_center - 280;
+                if (placement.indexOf('-left') > -1) {
+                    // push to the right because pointer is on the left side
+                    left += 220;
+                }
+                return left;
+            };
 
-			const centerOnScreen = () => {
-				// take horizontal scroll into account
-				const relativeOffset = container.getBoundingClientRect().left - container.offsetLeft;
-				return document.body.offsetWidth / 2 - relativeOffset - 150;
-			};
+            const centerOnScreen = () => {
+                // take horizontal scroll into account
+                const relativeOffset = container.getBoundingClientRect().left - container.offsetLeft;
+                return document.body.offsetWidth / 2 - relativeOffset - 150;
+            };
 
-			// center pointer on div if wider than 480, otherwise center on screen
-			const left = (document.body.offsetWidth > 480) ? centerOnDiv() : centerOnScreen();
+            // center pointer on div if wider than 480, otherwise center on screen
+            const left = (document.body.offsetWidth > 480) ? centerOnDiv() : centerOnScreen();
 
-			let top = 0;
-			if (placement.indexOf('bottom') > -1) {
-				top = featurePosition.bottom + 5;
-			}
-			if (placement.indexOf('top') > -1) {
-				top = featurePosition.top - markHeight - 15 - container.offsetHeight;
-			}
+            let top = 0;
+            if (placement.indexOf('bottom') > -1) {
+                top = featurePosition.bottom + 5;
+            }
+            if (placement.indexOf('top') > -1) {
+                top = featurePosition.top - markHeight - 15 - container.offsetHeight;
+            }
 
-			// allow consumer to specify an offset (side effect: this adds 'px' regardless)
-			container.style.left = (typeof opts.offsetX !== 'undefined') ? left + opts.offsetX + 'px' : left + 'px';
-			container.style.top = (typeof opts.offsetY !== 'undefined') ? top + opts.offsetY + 'px' : top + 'px';
+            // allow consumer to specify an offset (side effect: this adds 'px' regardless)
+            container.style.left = (typeof opts.offsetX !== 'undefined') ? left + opts.offsetX + 'px' : left + 'px';
+            container.style.top = (typeof opts.offsetY !== 'undefined') ? top + opts.offsetY + 'px' : top + 'px';
 
-			// push right if we are off-screen to the left
-			let rect = contentContainer.getBoundingClientRect();
-			if (rect.left < 0) {
-				container.style.left = container.offsetLeft - rect.left + 'px';
-			}
-		};
+            // push right if we are off-screen to the left
+            let rect = contentContainer.getBoundingClientRect();
+            if (rect.left < 0) {
+                container.style.left = container.offsetLeft - rect.left + 'px';
+            }
+        };
 
-		element.parentNode.insertBefore(container, element.nextSibling);
+        element.parentNode.insertBefore(container, element.nextSibling);
 
-		// temporarily show for measuring
-		container.style.visibility = 'visible';
+        // temporarily show for measuring
+        container.style.visibility = 'visible';
 
-		resetPosition();
+        resetPosition();
 
-		window.addEventListener("resize", resetPosition);
+        window.addEventListener("resize", resetPosition);
 
-		close.addEventListener('click', closeCoachMark);
-		gotIt.addEventListener('click', closeCoachMark);
+        close.addEventListener('click', closeCoachMark);
+        gotIt.addEventListener('click', closeCoachMark);
 
-	}
+    }
 }
-
-componentHandler.register({
-	constructor: CoachMark,
-	classAsString: 'CoachMark',
-	cssClass: 'o-coach-mark'
-});

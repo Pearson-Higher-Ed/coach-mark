@@ -1,0 +1,181 @@
+////
+/// Custom SCSS for component-specific styling goes here
+////
+
+.o-coach-mark {
+	&__container {
+		font-size: 18px;
+		font-weight: normal;
+		content: " ";
+		display: block;
+		height: 0;
+		clear: both;
+		float: left;
+		text-align: left;
+		position: absolute;
+		:-moz-focusring {
+			outline:none;
+			border:2px solid rgba(81, 203, 238, 1);
+			-webkit-box-shadow: 0px 0px 5px  rgba(81, 203, 238, 1);
+			box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+		}
+	}
+	&__hole {
+		box-shadow: 0 0 0 9999999px rgba(0, 0, 0, .4);
+	}
+	&__close-icon {
+		margin-top: 5px;
+		padding: 2px;
+		background-color: transparent;
+		cursor: pointer;
+		border: none;
+	}
+	&__content-container {
+		padding: 0 0 20px 20px;
+		z-index: 920;
+		margin: 10px;
+		background-color: rgb(255, 255, 255);
+		border-radius: 4px;
+		box-shadow: 0 1px 10px;
+		min-width: 300px;
+		float: left;
+	}
+	&__meatball {
+		border-radius: 50%;
+		width: 30px;
+		height: 30px;
+		background: #107aca;
+		border-color: #9dc0db;
+		color: white;
+		padding: 3px;
+		float: left;
+		text-align: center;
+		margin-top: 20px;
+		margin-right: 14px;
+		margin-bottom: 15px;
+	}
+	&__title {
+		padding: 20px 10px 0 0;
+	}
+	&__paragraph {
+		clear: both;
+	}
+	&__button-space {
+		margin-right: 15px;
+		margin-top: -4px;
+	}
+	&__next-button {
+		float: right;
+		margin-top: -4px;
+	}
+	&__back-next {
+		cursor: pointer;
+	}
+	&__total-coachmarks {
+		padding-left: 45px;
+	}
+	&__content {
+		float: left;
+		width: 255px;
+		margin: 0px;
+		position: relative;
+		p {
+			margin: 13px 0;
+		}
+	}
+
+	&--bottom::before {
+		left: 221px;
+		top: -10px;
+		z-index: 940;
+		box-shadow: -3px -3px 2px 0 rgba( 0, 0, 0, .2 );
+	}
+
+	&--bottom-left::before {
+		left: 19px;
+		top: -10px;
+		z-index: 940;
+		box-shadow: -3px -3px 2px 0 rgba( 0, 0, 0, .2 );
+	}
+
+	&--bottom-disappear {
+		visibility: hidden;
+	}
+
+
+	&--top::before {
+		bottom: -30px;
+		left: 220px;
+		box-shadow: 3px 3px 2px 0 rgba( 0, 0, 0, .2 );
+	}
+
+	&--top-left::before {
+		bottom: -30px;
+		left: 19px;
+		box-shadow: 3px 3px 2px 0 rgba( 0, 0, 0, .2 );
+	}
+
+	&--bottom::before,
+	&--bottom-left::before,
+	&--top::before,
+	&--top-left::before {
+		content: '\00a0';
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		background-color: rgb(255, 255, 255);
+		transform: rotate( 45deg );
+			-moz-transform: rotate( 45deg );
+			-ms-transform: rotate( 45deg );
+			-o-transform: rotate( 45deg );
+			-webkit-transform: rotate( 45deg );
+		@media (max-width: 480px) {
+			visibility: hidden;
+		}
+	}
+
+	&--link-text {
+		color: #0d65a6;
+		padding: 5px;
+		font-size: smaller;
+	}
+
+	&--hr {
+		border-color: #eee9c1;
+		border-style: ridge;
+	}
+
+	&--icons {
+		padding: 4px;
+	}
+
+	&__feedback {
+		display: none;
+
+		textarea {
+			width: 95%;
+			height: 50px;
+		}
+
+		div a {
+			font-size: 12px;
+			padding: 0 10px;
+		}
+	}
+
+	&__sr-hidden {
+		position: absolute !important;
+		clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+		clip: rect(1px, 1px, 1px, 1px);
+		padding: 0 !important;
+		border: 0 !important;
+		height: 1px !important;
+		width: 1px !important;
+		overflow: hidden;
+	}
+
+	&__got-it {
+		float: right;
+	}
+
+}

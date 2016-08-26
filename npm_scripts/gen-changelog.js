@@ -1,3 +1,4 @@
+const log = require('./log');
 const changelog = require('conventional-changelog');
 const fs = require('fs');
 const exec = require('./exec');
@@ -15,5 +16,5 @@ const changelogStream = changelog({
 changelogStream.pipe(outStream);
 
 changelogStream.on('end', () => {
-  console.log('Changelog saved to', FILENAME);
+  log.primary('Changelog saved to', FILENAME);
 });
