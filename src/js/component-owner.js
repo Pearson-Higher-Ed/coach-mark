@@ -150,7 +150,7 @@ class ComponentOwner extends React.Component {
 			return (
 				<div className="pe-copy--small">
 					<button className="o-coach-mark__got-it pe-btn pe-btn--link" onClick={ (event) => this.closeCoachMark(event) }>
-						{formatMessage(messages.gotIt)}
+						{this.props.opts.gotItText || formatMessage(messages.gotIt)}
 					</button>
 				</div>
 			);
@@ -159,7 +159,7 @@ class ComponentOwner extends React.Component {
 		if(this.props.opts.currentCM && this.props.opts.totalCM) {
 			const opts = this.props.opts;
 			let backButton = '';
-			let nextText = messages.close;
+			let nextText = opts.closeText || formatMessage(messages.close);
 			const noBack = {
 				paddingLeft: '107px'
 			};
@@ -176,13 +176,13 @@ class ComponentOwner extends React.Component {
 			if(opts.currentCM > 1 && opts.totalCM > 1) {
 				backButton = (
 					<button className="o-coach-mark__button-space pe-btn pe-btn--link" onClick={backEvent}>
-						<span>{formatMessage(messages.back)}</span>
+						<span>{opts.previousText || formatMessage(messages.back)}</span>
 					</button>
 				);
 				noBack.paddingLeft = '';
 			}
 			if(opts.currentCM < opts.totalCM) {
-				nextText = messages.next;
+				nextText = opts.nextText || formatMessage(messages.next);
 			}
 
 			return (
@@ -192,7 +192,7 @@ class ComponentOwner extends React.Component {
 						{opts.currentCM}/{opts.totalCM}
 					</span>
 					<button className="o-coach-mark__next-button pe-btn pe-btn--link" onClick={nextEvent}>
-						<span>{formatMessage(nextText)}</span>
+						<span>{nextText}</span>
 					</button>
 				</div>
 			);

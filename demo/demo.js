@@ -4,19 +4,6 @@ import MyComponent from '../main'; // to demo direct API usage
 // import MyComponent from '@pearson-components/[component-name]'
 
 function init() {
-
-  // Demo eventing API
-  // document.body.dispatchEvent(new CustomEvent('o.InitMyComponent', {
-  //   detail: {
-  //     elementId: 'demo-target1',
-  //     title: 'Coach Mark Below Feature with Got It',
-  //     text: 'Some text explaining to the user why you changed their interface',
-  //     gotIt: true,
-  //     zIndex: 994,
-  //     id: '9834893449'
-  //   }
-  // }));
-
   // Demo direct API
   new MyComponent({
     elementId: 'top',
@@ -71,34 +58,50 @@ function init() {
                       new MyComponent({
                         elementId: 'cm-bottom',
                         opts: {
-                          title: 'overridden prev and next text',
-                          text: 'Previous and Next text has been overridden with localized text',
-                          id: '9892387492098a',
+                          like: true,
+                          title: 'No pointer. This is a long title that wraps three lines wraps three lines and looks fine',
+                          text: 'Some text explaining to the user why you changed their interface',
+                          id: '9892387492098',
                           currentCM: '2',
                           totalCM: '3',
+                          disablePointer: true,
+                          nextText: 'ncustom',
+                          previousText: 'pcustom'
                         },
-                        locale: 'fr',
                         callback: function() {
-                          console.log('here');
-                          console.log('Callback executed on exit '+ id);
-                          // Demo eventing API
-                          document.body.dispatchEvent(new CustomEvent('o.InitCoachMark', {
-                            detail: {
-                              elementId: 'top',
-                              opts: {
-                                title: 'Eventing API. Also, no shadow box.',
-                                text: 'This demos the Event API - see demo.js file',
-                                id: 'lskdjflkjsd',
-                                disableShadowing: true,
-                                offsetX: 50,
-                                offsetY: 50
-                              },
-                              callback: function (id) {
-                                "use strict";
-                                console.log('api closed');
-                              }
+                          new MyComponent({
+                            elementId: 'cm-bottom',
+                            opts: {
+                              title: 'overridden prev and next text',
+                              text: 'Previous and Next text has been overridden with localized text',
+                              id: '9892387492098a',
+                              currentCM: '2',
+                              totalCM: '3',
+                            },
+                            locale: 'fr',
+                            callback: function() {
+                              console.log('here');
+                              console.log('Callback executed on exit '+ id);
+                              // Demo eventing API
+                              document.body.dispatchEvent(new CustomEvent('o.InitCoachMark', {
+                                detail: {
+                                  elementId: 'top',
+                                  opts: {
+                                    title: 'Eventing API. Also, no shadow box.',
+                                    text: 'This demos the Event API - see demo.js file',
+                                    id: 'lskdjflkjsd',
+                                    disableShadowing: true,
+                                    offsetX: 50,
+                                    offsetY: 50
+                                  },
+                                  callback: function (id) {
+                                    "use strict";
+                                    console.log('api closed');
+                                  }
+                                }
+                              }));
                             }
-                          }));
+                          });
                         }
                       });
                     }
