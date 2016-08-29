@@ -7,7 +7,6 @@
 import React, {PropTypes} from 'react';
 import {intlShape, injectIntl} from 'react-intl';
 import {messages} from './defaultMessages';
-// import CoachMark from './CoachMark';
 
 class ComponentOwner extends React.Component {
 

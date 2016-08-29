@@ -17,7 +17,7 @@ const translations = {
 	'fr' : frJson
 };
 
-export default class MyComponent {
+export default class CoachMark {
 
 	constructor(config) {
 
@@ -65,4 +65,4 @@ export default class MyComponent {
 //
 // For events, use the Origami naming convention of pre-pending with 'o.'
 //
-document.body.addEventListener('o.InitCoachMark', e => new MyComponent(e.detail));
+document.body.addEventListener('o.InitCoachMark', e => new CoachMark(e.detail));

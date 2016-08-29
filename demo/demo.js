@@ -1,11 +1,11 @@
-import MyComponent from '../main'; // to demo direct API usage
+import CoachMark from '../main'; // to demo direct API usage
 
 // When available on npm, consumer usage would be similar to:
-// import MyComponent from '@pearson-components/[component-name]'
+// import CoachMark from '@pearson-components/[component-name]'
 
 function init() {
   // Demo direct API
-  new MyComponent({
+  new CoachMark({
     elementId: 'top',
     opts: {
       title: 'Coach Mark Below Feature with Got It',
@@ -15,7 +15,7 @@ function init() {
       id: '9834893449'
     },
     callback: function (id) {
-      new MyComponent({
+      new CoachMark({
         elementId: 'cm-left',
         opts: {
           title: 'Coach Mark Below Feature',
@@ -23,7 +23,7 @@ function init() {
           id: '9834893498'
         },
         callback: function() {
-          new MyComponent({
+          new CoachMark({
             elementId: 'cm-right-1',
             opts: {
               title: 'Coach Mark Above Feature',
@@ -33,7 +33,7 @@ function init() {
               totalCM: '2'
             },
             callback: function() {
-              new MyComponent({
+              new CoachMark({
                 elementId: 'cm-left-1',
                 opts: {
                   title: 'Coach Mark top left Feature',
@@ -43,7 +43,7 @@ function init() {
                   totalCM: '2'
                 },
                 callback: function() {
-                  new MyComponent({
+                  new CoachMark({
                     elementId: 'cm-bottom',
                     opts: {
                       like: true,
@@ -55,7 +55,7 @@ function init() {
                       disablePointer: true
                     },
                     callback: function() {
-                      new MyComponent({
+                      new CoachMark({
                         elementId: 'cm-bottom',
                         opts: {
                           like: true,
@@ -69,7 +69,7 @@ function init() {
                           previousText: 'pcustom'
                         },
                         callback: function() {
-                          new MyComponent({
+                          new CoachMark({
                             elementId: 'cm-bottom',
                             opts: {
                               title: 'overridden prev and next text',
