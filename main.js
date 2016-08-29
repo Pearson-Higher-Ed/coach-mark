@@ -22,6 +22,17 @@ export default class MyComponent {
 	constructor(config) {
 
 		addLocaleData(frLocaleData);
+		if (!config.opts.id) {
+            throw new Error('missing required option: you must specify a unique id for the coach mark')
+        }
+
+        if (config.opts.currentCM !== undefined && config.opts.totalCM === undefined) {
+            throw new Error('you must include totalCM if currentCM is specified')
+        }
+
+        if (config.opts.gotIt && config.opts.totalCM) {
+            throw new Error('cannot display "Got it" along with numbered coach marks (totalCM)')
+        }
 		this.init(config);
 	}
 
