@@ -23,5 +23,5 @@ export const messages = defineMessages({
     id: 'close',
     description : 'close button',
     defaultMessage: 'close'
-  },
+  }
 });

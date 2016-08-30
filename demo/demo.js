@@ -76,7 +76,7 @@ function init() {
                               text: 'Previous and Next text has been overridden with localized text',
                               id: '9892387492098a',
                               currentCM: '2',
-                              totalCM: '3',
+                              totalCM: '3'
                             },
                             locale: 'fr',
                             callback: function() {
@@ -94,7 +94,7 @@ function init() {
                                     offsetX: 50,
                                     offsetY: 50
                                   },
-                                  callback: function (id) {
+                                  callback: function () {
                                     "use strict";
                                     console.log('api closed');
                                   }

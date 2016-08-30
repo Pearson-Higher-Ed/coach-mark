@@ -4,8 +4,8 @@
 // See https://facebook.github.io/react/docs/multiple-components.html for composability.
 //
 
-import React, {PropTypes} from 'react';
-import {intlShape, injectIntl} from 'react-intl';
+import React from 'react';
+import {injectIntl} from 'react-intl';
 import {messages} from './defaultMessages';
 
 class ComponentOwner extends React.Component {
@@ -30,7 +30,6 @@ class ComponentOwner extends React.Component {
 			this.props.callback(this.props.opts.id, event);
 		}
 		this.props.removeCoachMark();
-
 	}
 
 	triggerEvent(elementClickedIS, eventIs, payload) {
@@ -73,11 +72,11 @@ class ComponentOwner extends React.Component {
 					right: element.offsetLeft + element.offsetWidth
 				},
 				markHeight = content.offsetHeight + 30,
-				horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left),
-				vertical_center = ((featurePosition.bottom - featurePosition.top) / 2 + featurePosition.top) + window.pageYOffset;
+				horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left);
+				//vertical_center = ((featurePosition.bottom - featurePosition.top) / 2 + featurePosition.top) + window.pageYOffset;
 
 		const centerOnDiv = () => {
-				var left = horizontal_center - 280;
+				let left = horizontal_center - 280;
 				if (content.className.indexOf('-left') > -1) {
 						// push to the right because pointer is on the left side
 						left += 220;
@@ -108,7 +107,7 @@ class ComponentOwner extends React.Component {
 		container.style.top = (typeof this.props.opts.offsetY !== 'undefined') ? top + this.props.opts.offsetY + 'px' : top + 'px';
 
 		// push right if we are off-screen to the left
-		let rect = contentContainer.getBoundingClientRect();
+		const rect = contentContainer.getBoundingClientRect();
 		if (rect.left < 0) {
 				container.style.left = element.offsetLeft - rect.left + 'px';
 		}
@@ -148,12 +147,12 @@ class ComponentOwner extends React.Component {
 		if(this.props.opts.gotIt) {
 			return (
 				<div className="pe-copy--small">
-					<button className="o-coach-mark__got-it pe-btn pe-btn--link" onClick={ (event) => this.closeCoachMark(event) }>
+					<button className="o-coach-mark__got-it pe-btn pe-btn--link" onClick={(event) => this.closeCoachMark(event)}>
 						{this.props.opts.gotItText || formatMessage(messages.gotIt)}
 					</button>
 				</div>
 			);
-		} 
+		}
 
 		if(this.props.opts.currentCM && this.props.opts.totalCM) {
 			const opts = this.props.opts;
@@ -238,7 +237,7 @@ class ComponentOwner extends React.Component {
 						{extras}						
 					</div>
 					<div className="o-coach-mark__close-div"> 
-						<button className="o-coach-mark__close-icon" tabindex="3" onClick={ (event) => this.closeCoachMark(event) }>
+						<button className="o-coach-mark__close-icon" tabindex="3" onClick={(event) => this.closeCoachMark(event)}>
 							<span className="o-coach-mark__sr-hidden"> </span>
 							<span className="pe-icon--times pe-color(gray-no-1) pe-label" aria-hidden> </span>
 						</button>
