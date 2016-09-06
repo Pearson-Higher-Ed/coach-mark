@@ -48,12 +48,12 @@ export default class CoachMark {
 		}
 		this.resetPosition();
 		this.target.scrollIntoView(false);
-		window.addEventListener('resize', this.resetPosition.bind(this));
+		window.addEventListener('resize', () => this.resetPosition());
 	}
 
 	removeCoachMark(event) {
 		this.target.classList.remove('o-coach-mark__hole');
-		window.removeEventListener('resize', this.resetPosition.bind(this));
+		window.removeEventListener('resize', () => this.resetPosition());
         if(this.config.callback) {
 			this.config.callback(this.config.opts.id, event);
 		}
@@ -62,47 +62,45 @@ export default class CoachMark {
 
 	resetPosition() {
 		const element = this.target;
-		const container = document.getElementById(this.config.opts.id);
+		const container = document.getElementById(this.config.opts.id);	
 		const content = container.childNodes[0].childNodes[0];
 		const contentContainer = container.childNodes[0];
 		// this is called on draw and redraw
 		const featurePosition = {
-					top: element.offsetTop,
-					left: element.offsetLeft,
-					bottom: element.offsetTop + element.offsetHeight,
-					right: element.offsetLeft + element.offsetWidth
-				},
-				markHeight = content.offsetHeight + 30,
-				horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left);
-				//vertical_center = ((featurePosition.bottom - featurePosition.top) / 2 + featurePosition.top) + window.pageYOffset;
+			top: element.offsetTop,
+			left: element.offsetLeft,
+			bottom: element.offsetTop + element.offsetHeight,
+			right: element.offsetLeft + element.offsetWidth
+		},
+		markHeight = content.offsetHeight + 30,
+		horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left);
 
 		const centerOnDiv = () => {
-				let left = horizontal_center - 280;
-				if (content.className.indexOf('-left') > -1) {
-						// push to the right because pointer is on the left side
-						left += 220;
-				}
-				return left;
+			let left = horizontal_center - 280;
+			if (content.className.indexOf('-left') > -1) {
+					// push to the right because pointer is on the left side
+					left += 220;
+			}
+			return left;
 		};
 
 		const centerOnScreen = () => {
-				// take horizontal scroll into account
-				const relativeOffset = container.getBoundingClientRect().left - container.offsetLeft;
-				return document.body.offsetWidth / 2 - relativeOffset - 150;
+			// take horizontal scroll into account
+			const relativeOffset = container.getBoundingClientRect().left - container.offsetLeft;
+			return document.body.offsetWidth / 2 - relativeOffset - 150;
 		};
-
 		// center pointer on div if wider than 480, otherwise center on screen
 		const left = (document.body.offsetWidth > 480) ? centerOnDiv() : centerOnScreen();
 
 		let top = 0;
 		const placement = this.getPlacement();
 		if (placement.indexOf('bottom') > -1) {
-				top = featurePosition.bottom + 5;
+			top = featurePosition.bottom + 5;
 		}
 		if (placement.indexOf('top') > -1) {
-				top = featurePosition.top - markHeight - 15 - container.offsetHeight;
+			top = featurePosition.top - markHeight - 15 - container.offsetHeight;
 		}
-
+		
 		// allow consumer to specify an offset (side effect: this adds 'px' regardless)
 		container.style.left = (typeof this.config.opts.offsetX !== 'undefined') ? left + this.config.opts.offsetX + 'px' : left + 'px';
 		container.style.top = (typeof this.config.opts.offsetY !== 'undefined') ? top + this.config.opts.offsetY + 'px' : top + 'px';
@@ -110,7 +108,7 @@ export default class CoachMark {
 		// push right if we are off-screen to the left
 		const rect = contentContainer.getBoundingClientRect();
 		if (rect.left < 0) {
-				container.style.left = element.offsetLeft - rect.left + 'px';
+			container.style.left = element.offsetLeft - rect.left + 'px';
 		}
 	}
 

@@ -27,9 +27,8 @@ describe('Component Owner Suite', () => {
     intlProvider = new IntlProvider({locale: 'en'}, {});
   });
 
-  it('this is freaking stupid', () => {
+  it('should render component', () => {
 
-    // const {intl} = intlProvider.getChildContext();
     const locale = 'en';
     const translations = {
       'en' : {}
@@ -47,14 +46,7 @@ describe('Component Owner Suite', () => {
          callback={config.callback} />
      </IntlProvider>
     );
-    console.log(component);
-    const exists = TestUtils.findRenderedDOMComponentWithClass(container, 'o-coach-mark__container');
-    console.log(exists);
-    // const exists = TestUtils.findRenderedDOMComponentWithClass(container, 'o-coach-mark__container');
-    
-    // const button = TestUtils.findRenderedDOMComponentWithTag(container, 'button');
-    // const input =  TestUtils.findRenderedDOMComponentWithTag(container, 'input');
-    // TestUtils.Simulate.click(button);
+
     expect(true).toBe(true);
   });
 

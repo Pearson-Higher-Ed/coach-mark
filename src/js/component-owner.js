@@ -131,7 +131,7 @@ class ComponentOwner extends React.Component {
 								{this.props.opts.text}
 							</p>
 						</div>
-						{extras}						
+						{extras}
 					</div>
 					<div className="o-coach-mark__close-div"> 
 						<button className="o-coach-mark__close-icon" tabIndex="3" onClick={(event) => this.props.removeCoachMark(event)}>

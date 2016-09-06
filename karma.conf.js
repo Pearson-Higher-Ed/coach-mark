@@ -40,10 +40,10 @@ module.exports = function(config) {
 
         browsers: [
             // Run tests using PhantomJS
-            'Chrome'
+            'PhantomJS'
         ],
 
-        singleRun: false,
+        singleRun: true,
 
         webpack: {
             module: {
@@ -57,7 +57,11 @@ module.exports = function(config) {
                         // sass-loader for the origami pieces
                         test: /\.scss$/,
                         loader: 'null-loader'
-                    }
+                    },
+                    {
+				        test: /\.json$/,
+				        loader: 'json'
+				    }
                 ]
             },
             resolve: {
