@@ -63,12 +63,14 @@ displaying the coach mark and return to original opacity in the close callback f
 ```js
 const element = document.getElementById('awesome_featureId');
 
-new CoachMark(element, {
+new CoachMark({
+	elementId: 'id of element to attach to'
 	currentCM: '2',
 	totalCM: '2',
 	title: 'Optional Title',
 	text: 'Required text explaining to the user why you changed their interface',
-	id: 23098402384
+	id: 23098402384,
+	locale: 'internationalization'
 }, function (id) {
 	console.log('Callback executed on exit of id:' + id);
 });
