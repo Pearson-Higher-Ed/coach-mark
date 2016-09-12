@@ -42,7 +42,7 @@ nextText       | text    | no       | Overrides the "next" text
 gotItText      | text    | no       | Overrides the "Got it" text
 closeText      | text    | no       | Overrides the "close" text
 zIndex		   | int     | no       | keeps coachmark on top or below other HTML elements,based on the requirement.Default is 1010 
-
+locale		   | string  | no 		| Set the language for coach mark (only fr and english right now)
 
 ```
 
