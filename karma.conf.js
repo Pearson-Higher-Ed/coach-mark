@@ -1,103 +1,81 @@
-/*eslint-env node*/
+/*global module, process*/
 
-const path = require('path');
-const cwd = process.cwd();
+'use strict';
 
-module.exports = (config) => {
-	config.set({
+module.exports = function(config) {
+    config.set({
+         files: [
+            //polyfill like we do with chorme browsers
+            // Grab all files in the app folder that contain .test.
+            'node_modules/babel-polyfill/dist/polyfill.js',
+            'test/*.test.js'
+        ],
 
-		// base path that will be used to resolve all patterns (eg. files, exclude)
-		basePath: '',
+        frameworks: [
+            'jasmine', 'intl-shim'
+        ],
 
+        plugins: [
+            'karma-jasmine',
+            'karma-webpack',
+            'karma-sourcemap-loader',
+            'karma-phantomjs-launcher',
+            'karma-spec-reporter',
+            'karma-chrome-launcher',
+            'karma-intl-shim'
+        ],
 
-		// frameworks to use
-		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ['mocha', 'sinon'],
+        reporters: [
+            // Reference: https://github.com/mlex/karma-spec-reporter
+            // Set reporter to print detailed results to console
+            'spec'
+        ],
 
+        preprocessors: {
+            // Reference: http://webpack.github.io/docs/testing.html
+            // Reference: https://github.com/webpack/karma-webpack
+            // Convert files with webpack and load sourcemaps
+            'test/*.test.js': ['webpack', 'sourcemap']
+        },
 
-		plugins: [
-			'karma-mocha',
-			'karma-phantomjs-launcher',
-			'karma-sinon',
-			'karma-sourcemap-loader',
-			'karma-webpack'
-		],
+        browsers: [
+            // Run tests using PhantomJS
+            'PhantomJS'
+        ],
 
+        singleRun: true,
 
-		// list of files / patterns to load in the browser
-		files: [
-			'./node_modules/phantomjs-polyfill/bind-polyfill.js',
-			'test/*.test.js'
-		],
+        webpack: {
+        	devtool: 'inline-source-map',
+            module: {
+                loaders: [
+                    { 
+                        test: /\.js?$/, 
+                        exclude: /(node_modules)/,
+                        loader: 'babel-loader?plugins=rewire' 
+                    },
+                    {
+                        // sass-loader for the origami pieces
+                        test: /\.scss$/,
+                        loader: 'null-loader'
+                    },
+                    {
+				        test: /\.json$/,
+				        loader: 'json'
+				    }
+                ]
+            },
+            resolve: {
+                modulesDirectories: ['node_modules'],
+                extensions: ['', '.js']
+            },
+            plugins: [
+            ]
+        },
 
-
-		// list of files to exclude
-		exclude: [],
-
-
-		// preprocess matching files before serving them to the browser
-		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-		preprocessors: {
-			'test/*.js': ['webpack', 'sourcemap']
-		},
-
-
-		// webpack preprocessor options
-		webpack: {
-			quiet: true,
-			module: {
-				loaders: [
-					{
-						test: /\.js$/,
-						loaders: [
-							// Disable AMD module loading
-							'imports?define=>false',
-							'babel?optional[]=runtime'
-						]
-					}
-				]
-			},
-			devtool: 'inline-source-map'
-		},
-
-
-		// Hide webpack output logging
-		webpackMiddleware: {
-			noInfo: true
-		},
-
-
-		// test results reporter to use
-		// possible values: 'dots', 'progress'
-		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		reporters: ['progress'],
-
-
-		// web server port
-		port: 9876,
-
-
-		// enable / disable colors in the output (reporters and logs)
-		colors: true,
-
-
-		// level of logging
-		// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-		logLevel: config.LOG_INFO,
-
-
-		// enable / disable watching file and executing tests whenever any file changes
-		autoWatch: true,
-
-
-		// start these browsers
-		// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-		browsers: ['PhantomJS'],
-
-
-		// Continuous Integration mode
-		// if true, Karma captures browsers, runs the tests and exits
-		singleRun: true
-
-	});
+        // Hide webpack build information from output
+        webpackMiddleware: {
+            noInfo: true
+        }
+    });
 };
