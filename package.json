@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pearson-Higher-Ed/"
+    "url": "https://github.com/Pearson-Higher-Ed/coach-mark"
   },
   "dependencies": {
     "react-intl": "~2.0.1"
