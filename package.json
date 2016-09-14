@@ -17,7 +17,7 @@
     "verify": "node ./npm_scripts/verify.js",
     "postinstall": "cp ./node_modules/@pearson-components/npm-scripts/npm_scripts/*.js ./npm_scripts"
   },
-  "author": "",
+  "author": "AegisTeam aegisteam@pearson.com",
   "license": "MIT",
   "repository": {
     "type": "git",
