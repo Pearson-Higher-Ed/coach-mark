@@ -1,7 +1,7 @@
 {
-  "name": "",
-  "version": "0.0.0",
-  "description": "",
+  "name": "@pearson-components/coach-mark",
+  "version": "0.2.0",
+  "description": "Simple popover to explain new features to users.",
   "main": "./main.js",
   "scripts": {
     "dev-setup": "mkdir -p fonts && cp ./node_modules/pearson-elements/dist/fonts/* ./fonts && cp ./node_modules/pearson-elements/dist/css/elements.css ./demo",
