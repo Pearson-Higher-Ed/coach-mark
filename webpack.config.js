@@ -10,7 +10,7 @@ module.exports = {
   },
   output: {
     path: './',
-    filename: 'build/[name].coach-mark.js',
+    filename: 'build/[name].component-name.js',
     libraryTarget: 'umd'
   },
   devtool: 'cheap-module-source-map',
