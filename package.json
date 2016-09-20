@@ -1,6 +1,6 @@
 {
   "name": "@pearson-components/coach-mark",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Simple popover to explain new features to users.",
   "main": "./main.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "react-intl": "~2.0.1"
   },
   "devDependencies": {
-    "@pearson-components/npm-scripts": "^0.1.0",
+    "@pearson-components/npm-scripts": "^0.2.0",
     "babel-core": "~6.3.17",
     "babel-eslint": "~4.1.6",
     "babel-loader": "~6.2.0",
