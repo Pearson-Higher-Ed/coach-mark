@@ -1,15 +1,20 @@
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.1...v0.2.2) (2016-09-20)
+
+
+
 <a name="0.2.1"></a>
-## [0.2.1](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.1.12...v0.2.1) (2016-09-14)
-
-
-
-<a name="0.1.12"></a>
-## [0.1.12](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.1.11...v0.1.12) (2016-08-05)
+## [0.2.1](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.1.11...v0.2.1) (2016-09-14)
 
 
 
 <a name="0.1.11"></a>
-## [0.1.11](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.1.10...v0.1.11) (2016-07-29)
+## [0.1.11](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.1.12...v0.1.11) (2016-07-29)
+
+
+
+<a name="0.1.12"></a>
+## [0.1.12](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.1.10...v0.1.12) (2016-07-29)
 
 
 
