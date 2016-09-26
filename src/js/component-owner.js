@@ -82,7 +82,7 @@ class ComponentOwner extends React.Component {
 			}
 
 			return (
-				<div className="o-coach-mark__back-next pe-copy--small" tabIndex="2">
+				<div className="o-coach-mark__back-next pe-copy--small">
 					{backButton}
 					<span className="o-coach-mark__total-coachmarks pe-label pe-label--small" style={noBack}>
 						{opts.currentCM}/{opts.totalCM}
@@ -134,7 +134,7 @@ class ComponentOwner extends React.Component {
 						{extras}
 					</div>
 					<div className="o-coach-mark__close-div"> 
-						<button className="o-coach-mark__close-icon" tabIndex="3" onClick={(event) => this.props.removeCoachMark(event)}>
+						<button className="o-coach-mark__close-icon" tabIndex="1" onClick={(event) => this.props.removeCoachMark(event)}>
 							<span className="o-coach-mark__sr-hidden"> </span>
 							<span className="pe-icon--times pe-color(gray-no-1) pe-label" aria-hidden> </span>
 						</button>

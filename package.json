@@ -14,8 +14,7 @@
     "version": "npm run gen-changelog && git add CHANGELOG.md",
     "ci": "npm test && npm run build",
     "release": "node ./npm_scripts/release.js",
-    "verify": "node ./npm_scripts/verify.js",
-    "postinstall": "cp ./node_modules/@pearson-components/npm-scripts/npm_scripts/*.js ./npm_scripts"
+    "verify": "node ./npm_scripts/verify.js"
   },
   "author": "AegisTeam aegisteam@pearson.com",
   "license": "MIT",
@@ -27,7 +26,6 @@
     "react-intl": "~2.0.1"
   },
   "devDependencies": {
-    "@pearson-components/npm-scripts": "^0.1.0",
     "babel-core": "~6.3.17",
     "babel-eslint": "~4.1.6",
     "babel-loader": "~6.2.0",
