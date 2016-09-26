@@ -1,3 +1,8 @@
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.2...v0.2.3) (2016-09-26)
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.3...v0.2.2) (2016-09-21)
 
