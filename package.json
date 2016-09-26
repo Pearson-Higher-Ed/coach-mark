@@ -14,7 +14,7 @@
     "version": "npm run gen-changelog && git add CHANGELOG.md",
     "ci": "npm test && npm run build",
     "release": "node ./npm_scripts/release.js",
-    "verify": "node ./npm_scripts/verify.js",
+    "verify": "node ./npm_scripts/verify.js"
   },
   "author": "AegisTeam aegisteam@pearson.com",
   "license": "MIT",
