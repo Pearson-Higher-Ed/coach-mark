@@ -146,7 +146,7 @@ export default class CoachMark {
 					target={this.target} 
 					opts={this.config.opts} 
 					callback={this.config.callback}
-					placement={this.getPlacement()} />
+					placement={!this.config.opts.disablePointer ? this.getPlacement() : ''} />
 			</IntlProvider>,
 			this.container
 		);
