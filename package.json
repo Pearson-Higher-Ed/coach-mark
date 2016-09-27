@@ -1,6 +1,6 @@
 {
   "name": "@pearson-components/coach-mark",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Simple popover to explain new features to users.",
   "main": "./main.js",
   "scripts": {
