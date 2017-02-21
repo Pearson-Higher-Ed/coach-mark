@@ -4,7 +4,7 @@
   "description": "Simple popover to explain new features to users.",
   "main": "./build/dist.coach-mark.js",
   "scripts": {
-    "dev-setup": "mkdir -p fonts && cp ./node_modules/pearson-elements/dist/fonts/* ./fonts && cp ./node_modules/pearson-elements/dist/css/elements.css ./demo",
+    "dev-setup": "mkdir -p fonts && mkdir -p icons && cp ./node_modules/pearson-elements/dist/fonts/* ./fonts && cp ./node_modules/pearson-elements/dist/icons/* ./icons",
     "dev": "npm run dev-setup && webpack-dev-server --port 8081 --devtool source-map --hot --progress --colors",
     "pretest": "npm run lint",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
@@ -23,6 +23,7 @@
     "url": "https://github.com/Pearson-Higher-Ed/coach-mark"
   },
   "dependencies": {
+    "inline-loader": "^0.1.1",
     "react-intl": "~2.0.1"
   },
   "devDependencies": {
@@ -60,7 +61,7 @@
     "karma-webpack": "^1.7.0",
     "node-sass": "~3.4.2",
     "null-loader": "^0.1.1",
-    "pearson-elements": "^0.10.0",
+    "pearson-elements": "^1.5.0",
     "react": "^15.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-dom": "^15.0.0",

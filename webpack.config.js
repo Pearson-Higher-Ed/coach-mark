@@ -57,6 +57,11 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json'
+      },
+      {
+        test: /\.(svg|woff2|eot|woff|ttf)$/,
+        exclude: /node_modules/,
+        loaders: ['file-loader?name=images/[path]/[name].[ext]&context=src/images']
       }
     ]
   }

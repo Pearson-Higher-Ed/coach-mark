@@ -1,3 +1,7 @@
 ////
 /// Custom SCSS variables for component-specific styling go here
 ////
+// Elements
+@import '../../node_modules/pearson-elements/scss/base/_variables';
+
+@import '../../node_modules/pearson-elements/scss/elements/icons/_icons';

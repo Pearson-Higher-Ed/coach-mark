@@ -23,19 +23,19 @@ export default class CoachMark {
 
 		addLocaleData(frLocaleData);
 		if (!config.opts.id) {
-            throw new Error('missing required option: you must specify a unique id for the coach mark')
-        }
+			throw new Error('missing required option: you must specify a unique id for the coach mark')
+		}
 
-        if (config.opts.currentCM !== undefined && config.opts.totalCM === undefined) {
-            throw new Error('you must include totalCM if currentCM is specified')
-        }
+		if (config.opts.currentCM !== undefined && config.opts.totalCM === undefined) {
+			throw new Error('you must include totalCM if currentCM is specified')
+		}
 
-        if (config.opts.gotIt && config.opts.totalCM) {
-            throw new Error('cannot display "Got it" along with numbered coach marks (totalCM)')
-        }
+		if (config.opts.gotIt && config.opts.totalCM) {
+			throw new Error('cannot display "Got it" along with numbered coach marks (totalCM)')
+		}
 
-        this.config = config;
-        this.target = document.getElementById(config.elementId);
+		this.config = config;
+		this.target = document.getElementById(config.elementId);
 		this.container = document.createElement('div');
 		this.target.parentNode.insertBefore(this.container, this.target.nextSibling);
 		this.init();
@@ -54,15 +54,15 @@ export default class CoachMark {
 	removeCoachMark(event) {
 		this.target.classList.remove('o-coach-mark__hole');
 		window.removeEventListener('resize', () => this.resetPosition());
-        if(this.config.callback) {
+		if(this.config.callback) {
 			this.config.callback(this.config.opts.id, event);
 		}
-        this.container.parentElement.removeChild(this.container);
+		this.container.parentElement.removeChild(this.container);
 	}
 
 	resetPosition() {
 		const element = this.target;
-		const container = document.getElementById(this.config.opts.id);	
+		const container = document.getElementById(this.config.opts.id);
 		const content = container.childNodes[0].childNodes[0];
 		const contentContainer = container.childNodes[0];
 		// this is called on draw and redraw
@@ -100,7 +100,7 @@ export default class CoachMark {
 		if (placement.indexOf('top') > -1) {
 			top = featurePosition.top - markHeight - 15 - container.offsetHeight;
 		}
-		
+
 		// allow consumer to specify an offset (side effect: this adds 'px' regardless)
 		container.style.left = (typeof this.config.opts.offsetX !== 'undefined') ? left + this.config.opts.offsetX + 'px' : left + 'px';
 		container.style.top = (typeof this.config.opts.offsetY !== 'undefined') ? top + this.config.opts.offsetY + 'px' : top + 'px';
@@ -132,19 +132,32 @@ export default class CoachMark {
 		if(leftCenterLine) {
 			placement += '-left';
 		}
-		
+
 		return placement;
 	}
 
 	init() {
+		if (!document.getElementById('pe-icons-sprite')) {
+			var pe_ajax=new XMLHttpRequest();
+			pe_ajax.open("GET", "/icons/p-icons-sprite-1.1.svg", true);
+			pe_ajax.responseType="document";
+			pe_ajax.onload=function(e) {
+				document.body.insertBefore(
+					pe_ajax.responseXML.documentElement,
+					document.body.childNodes[0]
+				);
+			}
+			pe_ajax.send();
+		}
+
 		const locale = this.config.locale ? this.config.locale : 'en';
-		
+
 		ReactDOM.render(
 			<IntlProvider locale={locale} messages={translations[locale]}>
-				<ComponentOwner 
-					removeCoachMark={() => this.removeCoachMark()} 
-					target={this.target} 
-					opts={this.config.opts} 
+				<ComponentOwner
+					removeCoachMark={() => this.removeCoachMark()}
+					target={this.target}
+					opts={this.config.opts}
 					callback={this.config.callback}
 					placement={!this.config.opts.disablePointer ? this.getPlacement() : ''} />
 			</IntlProvider>,
