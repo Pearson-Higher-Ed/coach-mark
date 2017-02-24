@@ -45,7 +45,7 @@ class ComponentOwner extends React.Component {
 		if(this.props.opts.gotIt) {
 			return (
 				<div className="pe-copy--small">
-					<button className="o-coach-mark__got-it pe-btn pe-btn--link" onClick={(event) => this.props.removeCoachMark(event)}>
+					<button className="o-coach-mark__got-it" onClick={(event) => this.props.removeCoachMark(event)}>
 						{this.props.opts.gotItText || formatMessage(messages.gotIt)}
 					</button>
 				</div>
