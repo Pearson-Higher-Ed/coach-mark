@@ -127,7 +127,16 @@ export default class CoachMark {
 			bottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
 			leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2;
 
-		placement += bottomHalf ? 'top' : 'bottom';
+		if(this.config.opts.forceAbove) {
+			placement += 'top';
+		} else if(this.config.opts.forceBelow) {
+			placement += 'bottom';
+		} else {
+			placement += bottomHalf ? 'top' : 'bottom';
+		}
+
+
+
 
 		if(leftCenterLine) {
 			placement += '-left';
