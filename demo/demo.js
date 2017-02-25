@@ -32,7 +32,8 @@ function init() {
               text: 'Some text explaining to the user why you changed their interface',
               id: '9837494320',
               currentCM: '1',
-              totalCM: '2'
+              totalCM: '2',
+              stopScroll: true
             },
             callback: function() {
               new CoachMark({

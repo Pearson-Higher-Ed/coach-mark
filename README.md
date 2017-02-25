@@ -45,6 +45,7 @@ zIndex		   | int     | no       | keeps coachmark on top or below other HTML ele
 locale		   | string  | no 		| Set the language for coach mark (only fr and english right now)
 forceAbove     | boolean | no 		| forces the coach mark to be above element
 forceBelow	   | boolean | no 		| forces the coach mark to be below element
+stopScroll	   | boolean | no       | Stops coach mark from moving the view
 
 ```
 

@@ -47,7 +47,11 @@ export default class CoachMark {
 			this.target.classList.add('o-coach-mark__hole');
 		}
 		this.resetPosition();
-		this.target.scrollIntoView(false);
+
+		if(!this.config.opts.stopScroll) {
+			this.target.scrollIntoView(false);
+		}
+
 		window.addEventListener('resize', () => this.resetPosition());
 	}
 
