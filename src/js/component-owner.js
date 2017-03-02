@@ -45,7 +45,7 @@ class ComponentOwner extends React.Component {
 		if(this.props.opts.gotIt) {
 			return (
 				<div className="pe-copy--small">
-					<button className="o-coach-mark__got-it pe-btn pe-btn--link" onClick={(event) => this.props.removeCoachMark(event)}>
+					<button className="o-coach-mark__got-it" onClick={(event) => this.props.removeCoachMark(event)}>
 						{this.props.opts.gotItText || formatMessage(messages.gotIt)}
 					</button>
 				</div>
@@ -124,19 +124,26 @@ class ComponentOwner extends React.Component {
 						{/*titlebar*/}
 						<div>
 							{meatball}
-							<div className="o-coach-mark__title pe-label pe-label--bold" style={meatballTitleStyle}> 
+							<div className="o-coach-mark__title pe-label pe-label--bold" style={meatballTitleStyle}>
 								{this.props.opts.title}
 							</div>
-							<p className="pe-copy--small o-coach-mark__paragraph"> 
+							<p className="pe-copy--small o-coach-mark__paragraph">
 								{this.props.opts.text}
 							</p>
 						</div>
 						{extras}
 					</div>
-					<div className="o-coach-mark__close-div"> 
-						<button className="o-coach-mark__close-icon" tabIndex="1" onClick={(event) => this.props.removeCoachMark(event)}>
+					<div className="o-coach-mark__close-div">
+						<button className="o-coach-mark__close-icon pe-icon--btn" tabIndex="1" onClick={(event) => this.props.removeCoachMark(event)}>
 							<span className="o-coach-mark__sr-hidden"> </span>
 							<span className="pe-icon--times pe-color(gray-no-1) pe-label" aria-hidden> </span>
+							<svg role="img"
+							   aria-labelledby="r2"
+							   focusable="false"
+							   className="pe-icon--remove-sm-18">
+							<title id="r2">Close dialog</title>
+							<use xlinkHref="#remove-sm-18"></use>
+						  </svg>
 						</button>
 					</div>
 				</div>

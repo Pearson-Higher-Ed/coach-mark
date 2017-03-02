@@ -15,9 +15,9 @@ Platform requirements: npm 2+ and the [Elements SDK](https://www.npmjs.com/packa
 `CoachMark(element, opts, callback)`
 
 Initializes coach mark pointing to the specified element, given an options object,
-with a callback to be executed when the user dismisses the coach mark.  
+with a callback to be executed when the user dismisses the coach mark.
 
-Special Case: Have a wrapper div as a specified element if the coachmark pointing element is not a block level element,this 
+Special Case: Have a wrapper div as a specified element if the coachmark pointing element is not a block level element,this
 will allow to adjust css in cases of long texts that needs to be wrapped on two lines and still have proper highlight in smaller screens or mobile views.
 
 ```
@@ -41,8 +41,11 @@ previousText   | text    | no       | Overrides the "previous" text
 nextText       | text    | no       | Overrides the "next" text
 gotItText      | text    | no       | Overrides the "Got it" text
 closeText      | text    | no       | Overrides the "close" text
-zIndex		   | int     | no       | keeps coachmark on top or below other HTML elements,based on the requirement.Default is 1010 
+zIndex		   | int     | no       | keeps coachmark on top or below other HTML elements,based on the requirement.Default is 1010
 locale		   | string  | no 		| Set the language for coach mark (only fr and english right now)
+forceAbove     | boolean | no 		| forces the coach mark to be above element
+forceBelow	   | boolean | no 		| forces the coach mark to be below element
+stopScroll	   | boolean | no       | Stops coach mark from moving the view
 
 ```
 
