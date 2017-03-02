@@ -85,14 +85,12 @@
 			left: 221px;
 			top: -10px;
 			z-index: 940;
-			box-shadow: -3px -3px 2px 0 rgba(0,0,0,0.25);
 		}
 
 		&--bottom-left::before {
 			left: 19px;
 			top: -10px;
 			z-index: 940;
-			box-shadow: -3px -3px 2px 0 rgba(0,0,0,0.25);
 		}
 
 		&--bottom-disappear {
@@ -103,13 +101,11 @@
 		&--top::before {
 			bottom: -30px;
 			left: 220px;
-			box-shadow: 3px 3px 2px 0 rgba(0,0,0,0.25);
 		}
 
 		&--top-left::before {
 			bottom: -30px;
 			left: 19px;
-			box-shadow: 3px 3px 2px 0 rgba(0,0,0,0.25);
 		}
 
 		&--bottom::before,
