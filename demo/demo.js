@@ -12,6 +12,7 @@ function init() {
       text: 'Some text explaining to the user why you changed their interface',
       gotIt: true,
       zIndex: 994,
+      disableShadowing: true,
       id: '9834893449'
     },
     callback: function (id) {
@@ -22,6 +23,7 @@ function init() {
           text: 'Some text explaining to the user why you changed their interface',
           gotIt: true,
           forceAbove: true,
+          disableShadowing: true,
           id: '9834893498'
         },
         callback: function() {
@@ -33,6 +35,7 @@ function init() {
               id: '9837494320',
               currentCM: '1',
               totalCM: '2',
+              disableShadowing: true,
               stopScroll: true
             },
             callback: function() {

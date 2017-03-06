@@ -88,13 +88,13 @@
 	&--bottom::before {
 		left: 221px;
 		top: -10px;
-		z-index: 940;
+		box-shadow: -1px -1px 1px 0px rgba(0,0,0,.1);
 	}
 
 	&--bottom-left::before {
 		left: 19px;
 		top: -10px;
-		z-index: 940;
+		box-shadow: -1px -1px 1px 0px rgba(0,0,0,.1);
 	}
 
 	&--bottom-disappear {
@@ -105,11 +105,13 @@
 	&--top::before {
 		bottom: -30px;
 		left: 220px;
+		box-shadow: 1px 1px 1px 0px rgba(0,0,0,.1);
 	}
 
 	&--top-left::before {
 		bottom: -30px;
 		left: 19px;
+		box-shadow: 1px 1px 1px 0px rgba(0,0,0,.1);
 	}
 
 	&--bottom::before,
@@ -129,7 +131,6 @@
 		@media (max-width: 480px) {
 			visibility: hidden;
 		}
-		box-shadow: none;
 	}
 
 	&--link-text {
