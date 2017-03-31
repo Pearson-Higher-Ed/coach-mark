@@ -134,8 +134,7 @@ class ComponentOwner extends React.Component {
 						{extras}
 					</div>
 					<div className="o-coach-mark__close-div">
-						<button className="o-coach-mark__close-icon pe-icon--btn" onClick={(event) => this.props.removeCoachMark(event)}>
-							<span className="o-coach-mark__sr-hidden"> </span>
+						<button className="pe-icon--btn" onClick={(event) => this.props.removeCoachMark(event)}>
 							<svg role="img"
 							   aria-labelledby="r2"
 							   focusable="false"
