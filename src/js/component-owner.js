@@ -118,7 +118,7 @@ class ComponentOwner extends React.Component {
 		}
 
 		return (
-			<div id={this.props.opts.id} className="o-coach-mark__container" style={{ zIndex: 990 }}>
+			<div id={this.props.opts.id} className="o-coach-mark__container"  style={{ zIndex: this.props.opts.zIndex || 990 }}>
 				<div className="o-coach-mark__content-container">
 					<div className={`o-coach-mark__content ${this.props.placement}`}>
 						{/*titlebar*/}
