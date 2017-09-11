@@ -17,7 +17,7 @@
     "verify": "node ./npm_scripts/verify.js"
   },
   "author": "AegisTeam aegisteam@pearson.com",
-  "license": "MIT",
+  "license": "PEARSON PROPRIETARY AND CONFIDENTIAL INFORMATION SUBJECT TO NDA",
   "repository": {
     "type": "git",
     "url": "https://github.com/Pearson-Higher-Ed/coach-mark"
