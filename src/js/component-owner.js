@@ -5,7 +5,6 @@
 //
 
 import React from 'react';
-import {injectIntl} from 'react-intl';
 import {messages} from './defaultMessages';
 
 class ComponentOwner extends React.Component {
@@ -40,13 +39,13 @@ class ComponentOwner extends React.Component {
 	}
 
 	extraOptions() {
-		const {formatMessage} = this.props.intl;
+		const gotItText = this.props.opts.gotItText ? this.props.opts.gotItText : messages.gotIt.defaultMessage;
 
 		if(this.props.opts.gotIt) {
 			return (
 				<div className="pe-copy--small">
 					<button className="o-coach-mark__got-it" onClick={(event) => this.props.removeCoachMark(event)}>
-						{this.props.opts.gotItText || formatMessage(messages.gotIt)}
+						{gotItText}
 					</button>
 				</div>
 			);
@@ -55,7 +54,8 @@ class ComponentOwner extends React.Component {
 		if(this.props.opts.currentCM && this.props.opts.totalCM) {
 			const opts = this.props.opts;
 			let backButton = '';
-			let nextText = opts.closeText || formatMessage(messages.close);
+			let nextText = opts.closeText ? opts.closeText : messages.close.defaultMessage;
+			const prevText = opts.previousText ? opts.previousText : messages.back.defaultMessage;
 			const noBack = {
 				paddingLeft: '107px'
 			};
@@ -72,13 +72,13 @@ class ComponentOwner extends React.Component {
 			if(opts.currentCM > 1 && opts.totalCM > 1) {
 				backButton = (
 					<button className="o-coach-mark__button-space pe-btn pe-btn--link" onClick={backEvent}>
-						<span>{opts.previousText || formatMessage(messages.back)}</span>
+						<span>{prevText}</span>
 					</button>
 				);
 				noBack.paddingLeft = '';
 			}
 			if(opts.currentCM < opts.totalCM) {
-				nextText = opts.nextText || formatMessage(messages.next);
+				nextText = opts.nextText ? opts.nextText : messages.close.defaultMessage;
 			}
 
 			return (
@@ -150,4 +150,4 @@ class ComponentOwner extends React.Component {
 	}
 }
 
-export default injectIntl(ComponentOwner, {withRef: true}); // Inject this.props.intl into the component context
+export default ComponentOwner;

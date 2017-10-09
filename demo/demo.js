@@ -19,9 +19,10 @@ function init() {
       new CoachMark({
         elementId: 'cm-left',
         opts: {
-          title: 'Coach Mark Below Feature',
+          title: 'Coach Mark Above Feature',
           text: 'Some text explaining to the user why you changed their interface',
           gotIt: true,
+          gotItText: 'Yup! I got it!',
           forceAbove: true,
           disableShadowing: true,
           id: '9834893498'
@@ -32,6 +33,7 @@ function init() {
             opts: {
               title: 'Coach Mark Above Feature',
               text: 'Some text explaining to the user why you changed their interface',
+              nextText: 'Next',
               id: '9837494320',
               currentCM: '1',
               totalCM: '2',
@@ -44,6 +46,7 @@ function init() {
                 opts: {
                   title: 'Coach Mark top left Feature',
                   text: 'Some text explaining to the user why you changed their interface',
+                  nextText: 'Next',
                   id: '9837494321',
                   currentCM: '1',
                   totalCM: '2'
@@ -56,6 +59,7 @@ function init() {
                       title: 'No pointer. This is a long title that wraps three lines wraps three lines and looks fine',
                       text: 'Some text explaining to the user why you changed their interface',
                       id: '9892387492098',
+                      previousText: 'previous',
                       currentCM: '2',
                       totalCM: '2',
                       disablePointer: true
@@ -80,6 +84,8 @@ function init() {
                             opts: {
                               title: 'overridden prev and next text',
                               text: 'Previous and Next text has been overridden with localized text',
+                              previousText: 'go back',
+                              nextText: 'go forward',
                               id: '9892387492098a',
                               currentCM: '2',
                               totalCM: '3'
