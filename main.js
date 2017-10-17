@@ -146,7 +146,10 @@ export default class CoachMark {
 					pe_ajax.responseXML.documentElement,
 					document.body.childNodes[0]
 				);
-			}
+			};
+			pe_ajax.onerror=function() {
+				console.log('Icon sprite not loaded...icons not available');
+			};
 			pe_ajax.send();
 		}
 
