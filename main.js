@@ -142,13 +142,11 @@ export default class CoachMark {
 			pe_ajax.open("GET", "/icons/p-icons-sprite-1.1.svg", true);
 			pe_ajax.responseType="document";
 			pe_ajax.onload=function() {
+				console.log(pe_ajax);
 				document.body.insertBefore(
 					pe_ajax.responseXML.documentElement,
 					document.body.childNodes[0]
 				);
-			};
-			pe_ajax.onerror=function() {
-				console.log('Icon sprite not loaded...icons not available');
 			};
 			pe_ajax.send();
 		}
