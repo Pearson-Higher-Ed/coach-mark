@@ -137,18 +137,7 @@ export default class CoachMark {
 	}
 
 	init() {
-		if (!document.getElementById('pe-icons-sprite')) {
-			const pe_ajax=new XMLHttpRequest();
-			pe_ajax.open("GET", "/icons/p-icons-sprite-1.1.svg", true);
-			pe_ajax.responseType="document";
-			pe_ajax.onload=function() {
-				document.body.insertBefore(
-					pe_ajax.responseXML.documentElement,
-					document.body.childNodes[0]
-				);
-			};
-			pe_ajax.send();
-		}
+		
 
 		ReactDOM.render(
 			<ComponentOwner

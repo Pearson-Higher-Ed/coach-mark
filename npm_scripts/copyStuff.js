@@ -7,7 +7,7 @@ try {
 }
 
 try {
-  fs.copySync('./node_modules/pearson-elements/assets/icons/p-icons-sprite-1.1.svg', './build/images/p-icons-sprite-1.1.svg')
+  fs.copySync('./node_modules/pearson-elements/assets/icons/p-icons-sprite-1.1.svg', './build/icons/p-icons-sprite-1.1.svg')
 } catch (err) {
   console.error('copy icons error: ' + err)
 }

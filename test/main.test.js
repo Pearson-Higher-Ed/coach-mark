@@ -4,10 +4,10 @@ import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
 
 
-// These tests are kind of "hacky"  I'm mocking out a lot of things that should be able to "rewired" but isn't doing it 
+// These tests are kind of "hacky"  I'm mocking out a lot of things that should be able to "rewired" but isn't doing it
 // properly.  So i took a different approach at it.  They work, but i do not suggest testing anything insde of the constructor
 describe('CoachMark', () => {
-	
+
 	let config = {
 		elementId: 'testId',
 	    opts: {
@@ -17,7 +17,7 @@ describe('CoachMark', () => {
 	      totalCM: '2'
 	    },
 	    callback: function() {
-	      
+
 	    }
 	};
 	let coachMark;
@@ -29,7 +29,7 @@ describe('CoachMark', () => {
 			div.id = 'testId';
 			body.appendChild(div);
 		});
-		
+
 		// just cleaning up
 		afterEach(function() {
 			let body = document.body;
@@ -47,7 +47,7 @@ describe('CoachMark', () => {
 			      totalCM: '2'
 			    },
 			    callback: function() {
-			      
+
 			    }
 			}
 			expect(() => { new CoachMark(config); }).toThrow();
@@ -64,7 +64,7 @@ describe('CoachMark', () => {
 			      currentCM: '1'
 			    },
 			    callback: function() {
-			      
+
 			    }
 			}
 			expect(() => { new CoachMark(config); }).toThrow();
@@ -82,7 +82,7 @@ describe('CoachMark', () => {
 			      gotIt: 'got it'
 			    },
 			    callback: function() {
-			      
+
 			    }
 			}
 			expect(() => { new CoachMark(config); }).toThrow();
@@ -99,7 +99,7 @@ describe('CoachMark', () => {
 			config.opts.id = '1';
 			coachMark = new CoachMark(config);
 		});
-		
+
 		// just cleaning up
 		afterEach(function() {
 			coachMark.removeCoachMark();
@@ -173,7 +173,7 @@ describe('CoachMark', () => {
 		// IMPORTANT: This is a brittle test because of the way coach mark is designed.  Any change to the logic
 		// may could break this test
 		it('should place the coachmark depending on body viewport', function() {
-			// we are going to place the target element at a specific location and the creation of the coachmark 
+			// we are going to place the target element at a specific location and the creation of the coachmark
 			// should always be at the same place that proves that no change in the logic changed the placement
 			let div = document.getElementById('testId');
 			div.style.position = 'absolute';
@@ -245,5 +245,5 @@ describe('CoachMark', () => {
 			coachMark.removeCoachMark();
 		});
 	});
-	
+
 });
