@@ -137,7 +137,7 @@ export default class CoachMark {
 	}
 
 	init() {
-		
+
 
 		ReactDOM.render(
 			<ComponentOwner
