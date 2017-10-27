@@ -6,53 +6,53 @@ import ReactDOM from 'react-dom';
 
 // These tests are kind of "hacky"  I'm mocking out a lot of things that should be able to "rewired" but isn't doing it
 // properly.  So i took a different approach at it.  They work, but i do not suggest testing anything insde of the constructor
-// describe('CoachMark', () => {
-//
-// 	let config = {
-// 		elementId: 'testId',
-// 	    opts: {
-// 	      title: 'Coach Mark Above Feature',
-// 	      text: 'Some text explaining to the user why you changed their interface',
-// 	      currentCM: '1',
-// 	      totalCM: '2'
-// 	    },
-// 	    callback: function() {
-//
-// 	    }
-// 	};
-// 	let coachMark;
-//
-// 	describe('config errors', function() {
-// 		beforeEach(function() {
-// 			let body = document.body;
-// 			let div = document.createElement('div');
-// 			div.id = 'testId';
-// 			body.appendChild(div);
-// 		});
-//
-// 		// just cleaning up
-// 		afterEach(function() {
-// 			let body = document.body;
-// 			let div = document.getElementById('testId');
-// 			div.parentElement.removeChild(div);
-// 		});
-//
-// 		it('should throw an error if id does not exist', function() {
-// 			let config = {
-// 				elementId: 'testId',
-// 			    opts: {
-// 			      title: 'Coach Mark Above Feature',
-// 			      text: 'Some text explaining to the user why you changed their interface',
-// 			      currentCM: '1',
-// 			      totalCM: '2'
-// 			    },
-// 			    callback: function() {
-//
-// 			    }
-// 			}
-// 			expect(() => { new CoachMark(config); }).toThrow();
-//
-// 		});
+describe('CoachMark', () => {
+
+	let config = {
+		elementId: 'testId',
+	    opts: {
+	      title: 'Coach Mark Above Feature',
+	      text: 'Some text explaining to the user why you changed their interface',
+	      currentCM: '1',
+	      totalCM: '2'
+	    },
+	    callback: function() {
+
+	    }
+	};
+	let coachMark;
+
+	describe('config errors', function() {
+		beforeEach(function() {
+			let body = document.body;
+			let div = document.createElement('div');
+			div.id = 'testId';
+			body.appendChild(div);
+		});
+
+		// just cleaning up
+		afterEach(function() {
+			let body = document.body;
+			let div = document.getElementById('testId');
+			div.parentElement.removeChild(div);
+		});
+
+		it('should throw an error if id does not exist', function() {
+			let config = {
+				elementId: 'testId',
+			    opts: {
+			      title: 'Coach Mark Above Feature',
+			      text: 'Some text explaining to the user why you changed their interface',
+			      currentCM: '1',
+			      totalCM: '2'
+			    },
+			    callback: function() {
+
+			    }
+			}
+			expect(() => { new CoachMark(config); }).toThrow();
+
+		});
 //
 // 		it('should throw an error if currentCm exists and totalCM does not exist', function() {
 // 			let config = {
@@ -88,7 +88,7 @@ import ReactDOM from 'react-dom';
 // 			expect(() => { new CoachMark(config); }).toThrow();
 //
 // 		});
-// 	});
+	});
 //
 // 	describe('resize event setup', function() {
 // 		beforeEach(function() {
@@ -246,4 +246,4 @@ import ReactDOM from 'react-dom';
 // 		});
 // 	});
 //
-// });
+});
