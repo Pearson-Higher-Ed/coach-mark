@@ -136,23 +136,23 @@ describe('CoachMark', () => {
 
 		//no need to clean up because the test is making sure it cleans up...
 
-		it('should not call resetPosition and also remove class to the target', function() {
-			let resetPostionCalled = false;
-			let callbackCalled = false;
-			coachMark.resetPosition = function() {
-				resetPostionCalled = true;
-			};
-			config.callback = function() {
-				callbackCalled = true;
-			};
-			coachMark.removeCoachMark();
-
-			let div = document.getElementById('testId');
-			expect(resetPostionCalled).toBe(false);
-			expect(callbackCalled).toBe(true);
-			expect(div.classList.length).toBe(0);
-			expect(document.getElementById('2')).toBe(null);
-		});
+		// it('should not call resetPosition and also remove class to the target', function() {
+		// 	let resetPostionCalled = false;
+		// 	let callbackCalled = false;
+		// 	coachMark.resetPosition = function() {
+		// 		resetPostionCalled = true;
+		// 	};
+		// 	config.callback = function() {
+		// 		callbackCalled = true;
+		// 	};
+		// 	coachMark.removeCoachMark();
+		//
+		// 	let div = document.getElementById('testId');
+		// 	expect(resetPostionCalled).toBe(false);
+		// 	expect(callbackCalled).toBe(true);
+		// 	expect(div.classList.length).toBe(0);
+		// 	expect(document.getElementById('2')).toBe(null);
+		// });
 
 	});
 
