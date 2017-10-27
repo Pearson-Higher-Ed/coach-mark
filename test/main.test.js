@@ -53,41 +53,41 @@ describe('CoachMark', () => {
 			expect(() => { new CoachMark(config); }).toThrow();
 
 		});
-//
-// 		it('should throw an error if currentCm exists and totalCM does not exist', function() {
-// 			let config = {
-// 				elementId: 'testId',
-// 			    opts: {
-// 			      id: 1,
-// 			      title: 'Coach Mark Above Feature',
-// 			      text: 'Some text explaining to the user why you changed their interface',
-// 			      currentCM: '1'
-// 			    },
-// 			    callback: function() {
-//
-// 			    }
-// 			}
-// 			expect(() => { new CoachMark(config); }).toThrow();
-//
-// 		});
-//
-// 		it('should throw an error if gotIt exists and totalCM both exist', function() {
-// 			let config = {
-// 				elementId: 'testId',
-// 			    opts: {
-// 			      id: 1,
-// 			      title: 'Coach Mark Above Feature',
-// 			      text: 'Some text explaining to the user why you changed their interface',
-// 			      totalCM: '1',
-// 			      gotIt: 'got it'
-// 			    },
-// 			    callback: function() {
-//
-// 			    }
-// 			}
-// 			expect(() => { new CoachMark(config); }).toThrow();
-//
-// 		});
+
+		it('should throw an error if currentCm exists and totalCM does not exist', function() {
+			let config = {
+				elementId: 'testId',
+			    opts: {
+			      id: 1,
+			      title: 'Coach Mark Above Feature',
+			      text: 'Some text explaining to the user why you changed their interface',
+			      currentCM: '1'
+			    },
+			    callback: function() {
+
+			    }
+			}
+			expect(() => { new CoachMark(config); }).toThrow();
+
+		});
+
+		it('should throw an error if gotIt exists and totalCM both exist', function() {
+			let config = {
+				elementId: 'testId',
+			    opts: {
+			      id: 1,
+			      title: 'Coach Mark Above Feature',
+			      text: 'Some text explaining to the user why you changed their interface',
+			      totalCM: '1',
+			      gotIt: 'got it'
+			    },
+			    callback: function() {
+
+			    }
+			}
+			expect(() => { new CoachMark(config); }).toThrow();
+
+		});
 	});
 //
 // 	describe('resize event setup', function() {
