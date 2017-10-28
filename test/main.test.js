@@ -89,34 +89,34 @@ describe('CoachMark', () => {
 
 		});
 	});
-//
-// 	describe('resize event setup', function() {
-// 		beforeEach(function() {
-// 			let body = document.body;
-// 			let div = document.createElement('div');
-// 			div.id = 'testId';
-// 			body.appendChild(div);
-// 			config.opts.id = '1';
-// 			coachMark = new CoachMark(config);
-// 		});
-//
-// 		// just cleaning up
-// 		afterEach(function() {
-// 			coachMark.removeCoachMark();
-// 			let body = document.body;
-// 			let div = document.getElementById('testId');
-// 			div.parentElement.removeChild(div);
-// 		});
-//
-// 		it('should fire resetPositionFunction', function() {
-// 			let resetPostionCalled = false;
-// 			coachMark.resetPosition = function() {
-// 				resetPostionCalled = true;
-// 			}
-// 			window.dispatchEvent(new Event('resize'));
-// 			expect(resetPostionCalled).toBe(true);
-// 		});
-// 	});
+
+	describe('resize event setup', function() {
+		beforeEach(function() {
+			let body = document.body;
+			let div = document.createElement('div');
+			div.id = 'testId';
+			body.appendChild(div);
+			config.opts.id = '1';
+			coachMark = new CoachMark(config);
+		});
+
+		// just cleaning up
+		afterEach(function() {
+			coachMark.removeCoachMark();
+			let body = document.body;
+			let div = document.getElementById('testId');
+			div.parentElement.removeChild(div);
+		});
+
+		it('should fire resetPositionFunction', function() {
+			let resetPostionCalled = false;
+			coachMark.resetPosition = function() {
+				resetPostionCalled = true;
+			}
+			window.dispatchEvent(new Event('resize'));
+			expect(resetPostionCalled).toBe(true);
+		});
+	});
 //
 // 	describe('removeCoachMark', function() {
 // 		beforeEach(function() {
