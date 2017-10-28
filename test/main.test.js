@@ -117,44 +117,44 @@ describe('CoachMark', () => {
 			expect(resetPostionCalled).toBe(true);
 		});
 	});
-//
-// 	describe('removeCoachMark', function() {
-// 		beforeEach(function() {
-// 			let body = document.body;
-// 			let div = document.createElement('div');
-// 			div.id = 'testId';
-// 			body.appendChild(div);
-// 			config.opts.id = '2';
-// 			coachMark = new CoachMark(config);
-// 		});
-//
-// 		afterEach(function() {
-// 			let body = document.body;
-// 			let div = document.getElementById('testId');
-// 			div.parentElement.removeChild(div);
-// 		});
-//
-// 		//no need to clean up because the test is making sure it cleans up...
-//
-// 		it('should not call resetPosition and also remove class to the target', function() {
-// 			let resetPostionCalled = false;
-// 			let callbackCalled = false;
-// 			coachMark.resetPosition = function() {
-// 				resetPostionCalled = true;
-// 			};
-// 			config.callback = function() {
-// 				callbackCalled = true;
-// 			};
-// 			coachMark.removeCoachMark();
-//
-// 			let div = document.getElementById('testId');
-// 			expect(resetPostionCalled).toBe(false);
-// 			expect(callbackCalled).toBe(true);
-// 			expect(div.classList.length).toBe(0);
-// 			expect(document.getElementById('2')).toBe(null);
-// 		});
-//
-// 	});
+
+	describe('removeCoachMark', function() {
+		beforeEach(function() {
+			let body = document.body;
+			let div = document.createElement('div');
+			div.id = 'testId';
+			body.appendChild(div);
+			config.opts.id = '2';
+			coachMark = new CoachMark(config);
+		});
+
+		afterEach(function() {
+			let body = document.body;
+			let div = document.getElementById('testId');
+			div.parentElement.removeChild(div);
+		});
+
+		//no need to clean up because the test is making sure it cleans up...
+
+		it('should not call resetPosition and also remove class to the target', function() {
+			let resetPostionCalled = false;
+			let callbackCalled = false;
+			coachMark.resetPosition = function() {
+				resetPostionCalled = true;
+			};
+			config.callback = function() {
+				callbackCalled = true;
+			};
+			coachMark.removeCoachMark();
+
+			let div = document.getElementById('testId');
+			expect(resetPostionCalled).toBe(false);
+			expect(callbackCalled).toBe(true);
+			expect(div.classList.length).toBe(0);
+			expect(document.getElementById('2')).toBe(null);
+		});
+
+	});
 
 	// describe('resetPosition', function() {
 	// 	beforeEach(function() {
