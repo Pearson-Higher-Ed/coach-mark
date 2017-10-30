@@ -8,7 +8,7 @@
     "dev": "npm run dev-setup && webpack-dev-server --port 8081 --devtool source-map --hot --progress --colors",
     "pretest": "npm run lint",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
-    "build": "webpack -p",
+    "build": "webpack -p; node ./npm_scripts/copyStuff.js",
     "lint": "eslint src/js/** demo/demo.js",
     "gen-changelog": "node ./npm_scripts/gen-changelog.js",
     "version": "npm run gen-changelog && git add CHANGELOG.md",
@@ -23,8 +23,7 @@
     "url": "https://github.com/Pearson-Higher-Ed/coach-mark"
   },
   "dependencies": {
-    "inline-loader": "^0.1.1",
-    "react-intl": "~2.0.1"
+    "inline-loader": "^0.1.1"
   },
   "devDependencies": {
     "babel-core": "~6.3.17",
@@ -36,6 +35,7 @@
     "babel-preset-react": "~6.3.13",
     "babel-preset-stage-0": "~6.5.0",
     "babel-register": "~6.7.2",
+    "babel-template": "^6.26.0",
     "colors": "~1.1.2",
     "conventional-changelog": "~1.1.0",
     "css-loader": "~0.23.0",
@@ -45,6 +45,7 @@
     "expect": "~1.18.0",
     "expect-jsx": "~2.5.1",
     "file-loader": "~0.8.5",
+    "fs-extra": "^4.0.2",
     "intl": "~1.1.0",
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",

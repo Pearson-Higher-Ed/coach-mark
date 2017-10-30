@@ -1,7 +1,3 @@
-//
-// Change all references to 'MyComponent' in this file to your real component name!
-//
-
 // bundled component styling
 import './main.scss';
 
@@ -9,19 +5,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ComponentOwner from './src/js/component-owner';
 
-// i18n, set up for French out-of-the-box
-import {addLocaleData, IntlProvider} from 'react-intl';
-import frLocaleData from 'react-intl/locale-data/fr';
-import frJson from './translations/fr.json';
-const translations = {
-	'fr' : frJson
-};
-
 export default class CoachMark {
 
 	constructor(config) {
 
-		addLocaleData(frLocaleData);
 		if (!config.opts.id) {
 			throw new Error('missing required option: you must specify a unique id for the coach mark')
 		}
@@ -150,30 +137,15 @@ export default class CoachMark {
 	}
 
 	init() {
-		if (!document.getElementById('pe-icons-sprite')) {
-			var pe_ajax=new XMLHttpRequest();
-			pe_ajax.open("GET", "/icons/p-icons-sprite-1.1.svg", true);
-			pe_ajax.responseType="document";
-			pe_ajax.onload=function(e) {
-				document.body.insertBefore(
-					pe_ajax.responseXML.documentElement,
-					document.body.childNodes[0]
-				);
-			}
-			pe_ajax.send();
-		}
 
-		const locale = this.config.locale ? this.config.locale : 'en';
 
 		ReactDOM.render(
-			<IntlProvider locale={locale} messages={translations[locale]}>
-				<ComponentOwner
-					removeCoachMark={() => this.removeCoachMark()}
-					target={this.target}
-					opts={this.config.opts}
-					callback={this.config.callback}
-					placement={!this.config.opts.disablePointer ? this.getPlacement() : ''} />
-			</IntlProvider>,
+			<ComponentOwner
+			  removeCoachMark={() => this.removeCoachMark()}
+				target={this.target}
+				opts={this.config.opts}
+				callback={this.config.callback}
+				placement={!this.config.opts.disablePointer ? this.getPlacement() : ''} />,
 			this.container
 		);
 	}

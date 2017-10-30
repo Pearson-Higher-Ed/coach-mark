@@ -1,14 +1,12 @@
 /* global describe it expect */
 
 import React from 'react';
-import {IntlProvider} from 'react-intl';
 import TestUtils from 'react-addons-test-utils';
 import ComponentOwner from '../src/js/component-owner';
 
 
 describe('Component Owner Suite', () => {
   let renderer;
-  let intlProvider;
   let config = {
     opts: {
       title: 'Coach Mark Above Feature',
@@ -24,27 +22,20 @@ describe('Component Owner Suite', () => {
 
   beforeEach(() => {
     renderer = TestUtils.createRenderer();
-    intlProvider = new IntlProvider({locale: 'en'}, {});
   });
 
   it('should render component', () => {
 
-    const locale = 'en';
-    const translations = {
-      'en' : {}
-    };
     let body = document.body;
     let element = body.appendChild(document.createElement('div'));
     let component;
     const container = TestUtils.renderIntoDocument(
-     <IntlProvider locale={locale} messages={translations[locale]}>
-       <ComponentOwner 
+       <ComponentOwner
          ref={(c) => component = c.refs.wrappedInstance}
-         removeCoachMark={() => { console.log('done'); }} 
-         target={element} 
-         opts={config.opts} 
+         removeCoachMark={() => { console.log('done'); }}
+         target={element}
+         opts={config.opts}
          callback={config.callback} />
-     </IntlProvider>
     );
 
     expect(true).toBe(true);

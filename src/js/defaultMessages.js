@@ -1,9 +1,7 @@
-import {defineMessages} from 'react-intl';
-
 //
 // Default messages are 'en-US'
 //
-export const messages = defineMessages({
+export const messages = {
   gotIt: {
     id: 'gotIt',
     description : 'got it message',
@@ -24,4 +22,4 @@ export const messages = defineMessages({
     description : 'close button',
     defaultMessage: 'close'
   }
-});
+};
