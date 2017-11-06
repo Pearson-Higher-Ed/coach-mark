@@ -1,11 +1,9 @@
 // NOTE: There is no need to rename this file.
-//
 // In React, an owner is the component that sets the props of other components, if desired.
 // See https://facebook.github.io/react/docs/multiple-components.html for composability.
-//
 
 import React from 'react';
-import {messages} from './defaultMessages';
+import { messages } from './defaultMessages';
 
 class ComponentOwner extends React.Component {
 
@@ -43,11 +41,9 @@ class ComponentOwner extends React.Component {
 
 		if(this.props.opts.gotIt) {
 			return (
-				<div className="pe-copy--small">
-					<button className="o-coach-mark__got-it" onClick={(event) => this.props.removeCoachMark(event)}>
-						{gotItText}
-					</button>
-				</div>
+				<button className="o-coach-mark__got-it pe-label" onClick={(event) => this.props.removeCoachMark(event)}>
+					{gotItText}
+				</button>
 			);
 		}
 
@@ -117,24 +113,28 @@ class ComponentOwner extends React.Component {
 			meatballTitleStyle.paddingTop = '24px'
 		}
 
+		const { removeCoachMark, opts, placement } = this.props;
+
 		return (
-			<div id={this.props.opts.id} className="o-coach-mark__container"  style={{ zIndex: this.props.opts.zIndex || 990 }}>
+			<div id={opts.id} className="o-coach-mark__container"  style={{ zIndex: opts.zIndex || 1200 }}>
 				<div className="o-coach-mark__content-container">
-					<div className={`o-coach-mark__content ${this.props.placement}`}>
-						{/*titlebar*/}
+					<div className={`o-coach-mark__content ${placement}`}>
 						<div>
 							{meatball}
-							<div className="o-coach-mark__title pe-label pe-label--bold" style={meatballTitleStyle}>
-								{this.props.opts.title}
+							<div className="o-coach-mark__title pe-label--bold" style={meatballTitleStyle}>
+								{opts.title}
 							</div>
-							<p className="pe-copy--small o-coach-mark__paragraph">
-								{this.props.opts.text}
+							<p className="o-coach-mark__paragraph pe-label">
+								{opts.text}
 							</p>
 						</div>
 						{extras}
 					</div>
-					<div className="o-coach-mark__close-div">
-						<button className="pe-icon--btn" onClick={(event) => this.props.removeCoachMark(event)}>
+						<button
+							className="o-coach-mark__close-icon"
+							onClick={(event) => removeCoachMark(event)}
+							style={meatballTitleStyle}
+						>
 							<svg role="img"
 							   aria-labelledby="r2"
 							   focusable="false"
@@ -143,7 +143,6 @@ class ComponentOwner extends React.Component {
 							<use xlinkHref="#remove-sm-18"></use>
 						  </svg>
 						</button>
-					</div>
 				</div>
 			</div>
 		);

@@ -86,10 +86,10 @@ export default class CoachMark {
 		let top = 0;
 		const placement = this.getPlacement();
 		if (placement.indexOf('bottom') > -1) {
-			top = featurePosition.bottom + 5;
+			top = featurePosition.bottom + 2;
 		}
 		if (placement.indexOf('top') > -1) {
-			top = featurePosition.top - markHeight - 15 - container.offsetHeight;
+			top = featurePosition.top - markHeight - 31 - container.offsetHeight;
 		}
 
 		// allow consumer to specify an offset (side effect: this adds 'px' regardless)
@@ -105,7 +105,6 @@ export default class CoachMark {
 
 	getPlacement() {
 		let placement = 'o-coach-mark--';
-
 		// get window geometry - this is how jQuery does it
 		const body = document.body,
 			html = document.documentElement,
@@ -126,9 +125,6 @@ export default class CoachMark {
 			placement += bottomHalf ? 'top' : 'bottom';
 		}
 
-
-
-
 		if(leftCenterLine) {
 			placement += '-left';
 		}
@@ -138,19 +134,18 @@ export default class CoachMark {
 
 	init() {
 
-
 		ReactDOM.render(
 			<ComponentOwner
 			  removeCoachMark={() => this.removeCoachMark()}
 				target={this.target}
 				opts={this.config.opts}
 				callback={this.config.callback}
-				placement={!this.config.opts.disablePointer ? this.getPlacement() : ''} />,
+				placement={!this.config.opts.disablePointer ? this.getPlacement() : ''}
+			/>,
 			this.container
 		);
 	}
 }
-
 //
 // For events, use the Origami naming convention of pre-pending with 'o.'
 //

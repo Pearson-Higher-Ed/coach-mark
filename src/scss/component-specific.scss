@@ -1,11 +1,5 @@
-////
-/// Custom SCSS for component-specific styling goes here
-////
-
 .o-coach-mark {
 	&__container {
-		font-size: 18px;
-		font-weight: normal;
 		content: " ";
 		display: block;
 		height: 0;
@@ -16,7 +10,7 @@
 		:-moz-focusring {
 			outline:none;
 			border:2px solid rgba(81, 203, 238, 1);
-			-webkit-box-shadow: 0px 0px 5px  rgba(0,0,0,0.25);
+			-webkit-box-shadow: 0px 0 5px rgba(0,0,0,0.25);
 			box-shadow: 0 0 5px rgba(0,0,0,0.25);
 		}
 	}
@@ -24,22 +18,22 @@
 		box-shadow: 0 0 0 9999999px rgba(0,0,0,0.25);
 	}
 	&__close-icon {
-		margin-top: 5px;
-		padding: 2px;
+		margin: -4px -10px 0 0;
+		float: right;
+		padding: 0;
 		background-color: transparent;
 		cursor: pointer;
 		border: none;
 	}
 	&__content-container {
-		padding: 0 0 20px 20px;
+		padding: 20px 24px;
 		z-index: 1200;
 		margin: 10px;
 		background-color: $pe-color-digital-ice-blue;
 		border-radius: 4px;
-		box-shadow: 0 1px 10px rgba(0,0,0,0.25);
-		min-width: 300px;
+		box-shadow: 0 3px 7px rgba(0,0,0,0.25);
+		min-width: 280px;
 		float: left;
-		color: #231f20;
 	}
 	&__meatball {
 		border-radius: 50%;
@@ -56,10 +50,12 @@
 		margin-bottom: 15px;
 	}
 	&__title {
-		padding: 20px 10px 0 0;
+		padding-bottom: 4px;
+		line-height: 18px;
 	}
 	&__paragraph {
 		clear: both;
+		margin: 0;
 	}
 	&__button-space {
 		margin-right: 15px;
@@ -80,20 +76,17 @@
 		width: 255px;
 		margin: 0px;
 		position: relative;
-		p {
-			margin: 13px 0;
-		}
 	}
 
 	&--bottom::before {
 		left: 221px;
-		top: -10px;
+		top: -28px;
 		box-shadow: -1px -1px 1px 0px rgba(0,0,0,.1);
 	}
 
 	&--bottom-left::before {
 		left: 19px;
-		top: -10px;
+		top: -28px;
 		box-shadow: -1px -1px 1px 0px rgba(0,0,0,.1);
 	}
 
@@ -103,13 +96,13 @@
 
 
 	&--top::before {
-		bottom: -30px;
+		bottom: -28px;
 		left: 220px;
 		box-shadow: 1px 1px 1px 0px rgba(0,0,0,.1);
 	}
 
 	&--top-left::before {
-		bottom: -30px;
+		bottom: -28px;
 		left: 19px;
 		box-shadow: 1px 1px 1px 0px rgba(0,0,0,.1);
 	}
@@ -120,8 +113,8 @@
 	&--top-left::before {
 		content: '\00a0';
 		position: absolute;
-		width: 20px;
-		height: 20px;
+		width: 16px;
+		height: 16px;
 		background-color: $pe-color-digital-ice-blue;
 		transform: rotate( 45deg );
 			-moz-transform: rotate( 45deg );
@@ -174,14 +167,18 @@
 	}
 
 	&__got-it {
+		margin-top: 24px;
 		float: right;
-	    background: none;
-	    border: none;
-	    padding: 0!important;
-	    font: inherit;
-	    cursor: pointer;
-	    text-decoration: underline;
-	    color: $pe-color-digital-pearson-blue;
+    background: none;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    text-decoration: underline;
+    color: $pe-color-charcoal;
+
+		&:hover {
+			text-decoration: none;
+		}
 	}
 
 }

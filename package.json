@@ -62,7 +62,7 @@
     "karma-webpack": "^1.7.0",
     "node-sass": "~3.4.2",
     "null-loader": "^0.1.1",
-    "pearson-elements": "^1.5.0",
+    "pearson-elements": "^1.14.0",
     "react": "^15.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-dom": "^15.0.0",
