@@ -1,3 +1,13 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.3.0...v0.4.0) (2017-11-10)
+
+
+### Features
+
+* Update styles to 1.0.2 ([aeeb9cb](https://github.com/Pearson-Higher-Ed/coach-mark/commit/aeeb9cb))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.17...v0.3.0) (2017-10-30)
 
