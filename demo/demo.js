@@ -8,10 +8,9 @@ function init() {
   new CoachMark({
     elementId: 'top',
     opts: {
-      title: 'Coach Mark Below Feature with Got It',
+      title: 'Coach Mark below feature /w Got It',
       text: 'Some text explaining to the user why you changed their interface',
       gotIt: true,
-      zIndex: 994,
       disableShadowing: true,
       id: '9834893449'
     },
@@ -19,9 +18,8 @@ function init() {
       new CoachMark({
         elementId: 'cm-left',
         opts: {
-          title: 'Coach Mark Above Feature',
+          title: 'Coach Mark above feature',
           text: 'Some text explaining to the user why you changed their interface',
-          gotIt: true,
           gotItText: 'Yup! I got it!',
           forceAbove: true,
           disableShadowing: true,
@@ -31,7 +29,7 @@ function init() {
           new CoachMark({
             elementId: 'cm-right-1',
             opts: {
-              title: 'Coach Mark Above Feature',
+              title: 'Coach Mark above feature',
               text: 'Some text explaining to the user why you changed their interface',
               nextText: 'Next',
               id: '9837494320',
@@ -44,7 +42,7 @@ function init() {
               new CoachMark({
                 elementId: 'cm-left-1',
                 opts: {
-                  title: 'Coach Mark top left Feature',
+                  title: 'Coach Mark top left feature',
                   text: 'Some text explaining to the user why you changed their interface',
                   nextText: 'Next',
                   id: '9837494321',
@@ -56,7 +54,7 @@ function init() {
                     elementId: 'cm-bottom',
                     opts: {
                       like: true,
-                      title: 'No pointer. This is a long title that wraps three lines wraps three lines and looks fine',
+                      title: 'No pointer. This is a long title that wraps three lines and looks fine wooo!',
                       text: 'Some text explaining to the user why you changed their interface',
                       id: '9892387492098',
                       previousText: 'previous',
@@ -69,7 +67,7 @@ function init() {
                         elementId: 'cm-bottom',
                         opts: {
                           like: true,
-                          title: 'No pointer. This is a long title that wraps three lines wraps three lines and looks fine',
+                          title: 'No pointer. This is a long title that wraps three lines and looks fine wooo!',
                           text: 'Some text explaining to the user why you changed their interface',
                           id: '9892387492098',
                           currentCM: '2',
@@ -99,7 +97,7 @@ function init() {
                                 detail: {
                                   elementId: 'top',
                                   opts: {
-                                    title: 'Eventing API. Also, no shadow box.',
+                                    title: 'Eventing API.',
                                     text: 'This demos the Event API - see demo.js file',
                                     id: 'lskdjflkjsd',
                                     disableShadowing: true,
