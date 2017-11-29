@@ -7,7 +7,7 @@ script:
 - npm run ci
 - chmod 777 ./node_modules/@pearson-components/npm-scripts/shell_scripts/run_selenium_ci_tests.sh
 - export TEST_GROUP=desktop-regression
-- ./node_modules/@pearson-components/npm-scripts/shell_scripts/run_selenium_ci_tests.sh
+- "./node_modules/@pearson-components/npm-scripts/shell_scripts/run_selenium_ci_tests.sh"
 deploy:
   provider: npm
   email: pearson-design-accelerator@pearson.com
@@ -17,3 +17,6 @@ deploy:
   on:
     branch: master
     tags: true
+env:
+  global:
+    secure: iaonK0LD5C8YfooAUmXf7wL72L4jxR5Z3FztZEEzDfQ2ewUAamOaM6ft3dhmj9B8yXROR4PhgfRArrVtqIv1ECsuq0PvL9o5zb56YUu6iAJiu7sYggnfYPhc5qcO+v9/5tRkjICLfeajdN8KdOIuEW4Z55ZC063JLhQCdXcFQ9aSc5CauQp/mWI7Oo9BuDLUSWh4ZkO/WvHxAadzKQTrVyIrOsQraAHZWAXhWjwdlAsV/d++qaQ9j+yWaheGagt/VQV2aqZodffyfCrQEtfr3k74WxFgQVtu3ZKG5VgeBeestV7eyBWTrXlKvnS5VhgASLR9fh0sNbUNrow/Hf8PxznRFCx/TDIXB12Y+Lb17ZbutM4eqQsTfHYhrp7lAx+t8hTcFWvMQs1HvWjuO5W35E371p9+8hSIADSAtA+SP88gVusJRVBe+Sv0VqwIPEKYii4WFbyfQd/VBtk5CooPi2wtZvOj9lSR0k7KeMBf2IGipINDKm296g+uE7KJc4WTF2nx0fdNmSLEie3MVU6YVh4HubEFOlK3CMSEgxut+D2j83Lfj9QBy51bkfZfd/jz/Z5gCFLI/9PgNkaHJFRNKMaAn7QDNFdH8DmFWSdv70ywNXO7MINNFyHPWgpdIf9Adqo9NRlL3qUa/KsRR0JwNDS4i6UVwblwGBYjEoBld48=
