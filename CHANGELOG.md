@@ -1,15 +1,5 @@
-<a name="0.4.0"></a>
-# [0.4.0](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.3.0...v0.4.0) (2017-11-10)
-
-
-### Features
-
-* Update styles to 1.0.2 ([aeeb9cb](https://github.com/Pearson-Higher-Ed/coach-mark/commit/aeeb9cb))
-
-
-
-<a name="0.3.0"></a>
-# [0.3.0](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.17...v0.3.0) (2017-10-30)
+<a name="0.4.1"></a>
+## [0.4.1](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.16...v0.4.1) (2017-11-29)
 
 
 ### Bug Fixes
@@ -24,19 +14,14 @@
 * update z-index to correspond to design specifications for coach-mark ([a72439b](https://github.com/Pearson-Higher-Ed/coach-mark/commit/a72439b))
 
 
+### Features
 
-<a name="0.2.17"></a>
-## [0.2.17](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.16...v0.2.17) (2017-09-11)
+* Update styles to 1.0.2 ([aeeb9cb](https://github.com/Pearson-Higher-Ed/coach-mark/commit/aeeb9cb))
 
 
 
 <a name="0.2.16"></a>
-## [0.2.16](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.15...v0.2.16) (2017-05-23)
-
-
-
-<a name="0.2.15"></a>
-## [0.2.15](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.14...v0.2.15) (2017-03-31)
+## [0.2.16](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.14...v0.2.16) (2017-05-23)
 
 
 
