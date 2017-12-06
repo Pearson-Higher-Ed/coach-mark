@@ -10,11 +10,11 @@
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "build": "webpack -p; node ./npm_scripts/copyStuff.js",
     "lint": "eslint src/js/** demo/demo.js",
-    "gen-changelog": "node ./npm_scripts/gen-changelog.js",
-    "version": "npm run gen-changelog && git add CHANGELOG.md",
-    "ci": "npm test && npm run build",
-    "release": "npm run ci && node ./npm_scripts/release.js",
-    "verify": "node ./npm_scripts/verify.js"
+    "gen-changelog": "node ./node_modules/@pearson-components/npm-scripts/npm_scripts/gen-changelog.js",
+    "version": "node ./node_modules/@pearson-components/npm-scripts/npm_scripts/version.js",
+    "ci": "node ./node_modules/@pearson-components/npm-scripts/npm_scripts/ci.js",
+    "release": "node ./node_modules/@pearson-components/npm-scripts/npm_scripts/release.js",
+    "verify": "node ./node_modules/@pearson-components/npm-scripts/npm_scripts/verify.js"
   },
   "author": "AegisTeam aegisteam@pearson.com",
   "license": "PEARSON PROPRIETARY AND CONFIDENTIAL INFORMATION SUBJECT TO NDA",
