@@ -1,7 +1,7 @@
 /* global describe it expect */
 
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import { createRenderer } from 'react-test-renderer/shallow';
 import ComponentOwner from '../src/js/component-owner';
 
 
@@ -21,7 +21,7 @@ describe('Component Owner Suite', () => {
   };
 
   beforeEach(() => {
-    renderer = TestUtils.createRenderer();
+    renderer = createRenderer();
   });
 
   it('should render component', () => {
@@ -29,7 +29,7 @@ describe('Component Owner Suite', () => {
     let body = document.body;
     let element = body.appendChild(document.createElement('div'));
     let component;
-    const container = TestUtils.renderIntoDocument(
+    const container = renderer.render(
        <ComponentOwner
          ref={(c) => component = c.refs.wrappedInstance}
          removeCoachMark={() => { console.log('done'); }}
