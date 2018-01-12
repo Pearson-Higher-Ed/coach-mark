@@ -1,3 +1,14 @@
+<a name="0.4.2"></a>
+## [0.4.2](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.4.1...v0.4.2) (2018-01-12)
+
+
+### Bug Fixes
+
+* HTML structure for button alignment ([7731f0a](https://github.com/Pearson-Higher-Ed/coach-mark/commit/7731f0a))
+* remove unit test warnings ([6a4b92c](https://github.com/Pearson-Higher-Ed/coach-mark/commit/6a4b92c))
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.2.16...v0.4.1) (2017-11-29)
 
