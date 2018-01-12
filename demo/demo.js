@@ -20,7 +20,8 @@ function init() {
         opts: {
           title: 'Coach Mark above feature',
           text: 'Some text explaining to the user why you changed their interface',
-          gotItText: 'Yup! I got it!',
+          gotItText: 'Custom gotItText',
+          gotIt: true,
           forceAbove: true,
           disableShadowing: true,
           id: '9834893498'
