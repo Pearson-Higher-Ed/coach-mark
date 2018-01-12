@@ -118,6 +118,19 @@ class ComponentOwner extends React.Component {
 		return (
 			<div id={opts.id} className="o-coach-mark__container"  style={{ zIndex: opts.zIndex || 1200 }}>
 				<div className="o-coach-mark__content-container">
+					<button
+						className="o-coach-mark__close-icon"
+						onClick={(event) => removeCoachMark(event)}
+						style={meatballTitleStyle}
+					>
+						<svg role="img"
+							 aria-labelledby="r2"
+							 focusable="false"
+							 className="pe-icon--remove-sm-18">
+						<title id="r2">Close dialog</title>
+						<use xlinkHref="#remove-sm-18"></use>
+						</svg>
+					</button>
 					<div className={`o-coach-mark__content ${placement}`}>
 						<div>
 							{meatball}
@@ -130,19 +143,7 @@ class ComponentOwner extends React.Component {
 						</div>
 						{extras}
 					</div>
-						<button
-							className="o-coach-mark__close-icon"
-							onClick={(event) => removeCoachMark(event)}
-							style={meatballTitleStyle}
-						>
-							<svg role="img"
-							   aria-labelledby="r2"
-							   focusable="false"
-							   className="pe-icon--remove-sm-18">
-							<title id="r2">Close dialog</title>
-							<use xlinkHref="#remove-sm-18"></use>
-						  </svg>
-						</button>
+
 				</div>
 			</div>
 		);
