@@ -1,29 +1,53 @@
-// For output.filename configuration:
-//
-// Change "component-name" in this file to your real component name!
-// DO NOT CHANGE "[name]", which denotes the entry property names that webpack automatically inserts for you!
+const fs                = require('fs');
+const path              = require('path');
+const webpack           = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const index             = `${__dirname}/index.html`;
+const demo              = `${__dirname}/demo/demo.js`;
+const eventing          = `${__dirname}/demo/eventing.js`;
+const component         = `${__dirname}/index.js`;
+const icons             = `${__dirname}/node_modules/@pearson-components/elements-sdk/build/icons/p-icons-sprite-1.1.svg`;
+const elements          = `${__dirname}/node_modules/@pearson-components/elements-sdk/build/css/elements.css`;
+const fontsDir          = `${__dirname}/node_modules/@pearson-components/elements-sdk/build/fonts/`;
+const fonts             = fs.readdirSync(fontsDir, 'utf-8').map(font => fontsDir + font);
+
 
 module.exports = {
   entry: {
-   dev: ['webpack/hot/dev-server', './main.js', './demo/demo.js'],
-   dist: ['./main.js']
+    demo             : [ demo ],
+    dev              : [ elements, icons ],
+    eventInterface   : [ eventing ],
+    dist             : [ component ],
+    fonts            : fonts
   },
   output: {
-    path: './',
-    filename: 'build/[name].coach-mark.js',
-    libraryTarget: 'umd'
+    path          : path.resolve(__dirname, 'build'),
+    filename      : '[name].component-name.js',
+    publicPath    : '/coach-mark/',
+    libraryTarget : 'umd'
   },
-  devtool: 'cheap-module-source-map',
+  devtool: "source-map",
+  devServer: {
+    host               : "0.0.0.0",
+    port               : 8081,
+    publicPath         : "/coach-mark/",
+    hot                : true,
+    https              : false,
+    overlay            : true,
+    watchContentBase   : true,
+    disableHostCheck   : true,
+    historyApiFallback : true,
+    watchOptions       : { poll: true },
+    contentBase        : path.join(__dirname, "build")
+  },
   externals: [
     {
-      'react': {
+      react: {
         root: 'React',
         commonjs2: 'react',
         commonjs: 'react',
         amd: 'react'
-      }
-    },
-    {
+      },
       'react-dom': {
         root: 'ReactDOM',
         commonjs2: 'react-dom',
@@ -32,37 +56,46 @@ module.exports = {
       }
     }
   ],
-  contentBase: './demo', // for webpack dev server
   module: {
-    preLoaders: [
-      // {
-      //   test: /\.js$/,
-      //   loader: 'eslint',
-      //   exclude: /node_modules/
-      // }
-    ],
-    loaders: [
+    rules: [
       {
-        test: /\.scss$/,
-        loader: 'style!css!sass' // sass -> css -> javascript -> inline style
+        test: /\.(css|scss)$/,
+        use: [{
+          loader: "style-loader"
+        }, {
+          loader: "css-loader"
+        }, {
+          loader: "sass-loader"
+        }]
       },
       {
-        test: /\.js$/,
-        loader: 'babel',
-        query: {
-          cacheDirectory: true,
-          presets: ['es2015', 'react', 'stage-0']
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '/images/[name].[ext]?[hash]'
         }
       },
       {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
-        test: /\.(svg|woff2|eot|woff|ttf)$/,
-        exclude: /node_modules/,
-        loaders: ['file-loader?name=images/[path]/[name].[ext]&context=src/images']
+        test: /\.(ttf|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          name: '/fonts/[name].[ext]?[hash]'
+        }
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './demo/index.html'
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV' : JSON.stringify(process.env.NODE_ENV)
+    }),
+    new webpack.NamedModulesPlugin()
+  ]
 };
