@@ -1,3 +1,5 @@
+@import '../../node_modules/@pearson-components/elements-sdk/src/styles/elements/color/_color.scss';
+
 .o-coach-mark {
 	&__container {
 		content: " ";
@@ -157,7 +159,6 @@
 
 	&__sr-hidden {
 		position: absolute !important;
-		clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
 		clip: rect(1px, 1px, 1px, 1px);
 		padding: 0 !important;
 		border: 0 !important;

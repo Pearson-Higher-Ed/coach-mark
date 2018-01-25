@@ -60,6 +60,6 @@
   },
   "keywords": ["pearson-components"],
   "dependencies": {
-    "@pearson-components/elements-sdk": "^1.8.0"
+    "@pearson-components/elements-sdk": "^1.9.0"
   }
 }
