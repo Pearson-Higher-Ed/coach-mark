@@ -1,1 +1,1 @@
-export ComponentOwner from './src/js/component-owner';
+export CoachMark from './src/js/component-owner';

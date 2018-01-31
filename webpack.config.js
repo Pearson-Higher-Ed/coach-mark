@@ -2,7 +2,6 @@ const fs                = require('fs');
 const path              = require('path');
 const webpack           = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const index             = `${__dirname}/index.html`;
 const demo              = `${__dirname}/demo/demo.js`;
 const eventing          = `${__dirname}/demo/eventing.js`;
 const component         = `${__dirname}/index.js`;
@@ -22,7 +21,7 @@ module.exports = {
   },
   output: {
     path          : path.resolve(__dirname, 'build'),
-    filename      : '[name].component-name.js',
+    filename      : '[name].coachmark.js',
     publicPath    : '/coach-mark/',
     libraryTarget : 'umd'
   },
@@ -30,7 +29,7 @@ module.exports = {
   devServer: {
     host               : "0.0.0.0",
     port               : 8081,
-    publicPath         : "/coach-mark/",
+    publicPath         : "/coach-mark",
     hot                : true,
     https              : false,
     overlay            : true,
