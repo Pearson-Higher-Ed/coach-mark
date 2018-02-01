@@ -3,70 +3,66 @@
 // See https://facebook.github.io/react/docs/multiple-components.html for composability.
 
 import React, { Component } from 'react';
+import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import { messages } from './defaultMessages';
 import '../scss/component-specific.scss';
 
 class CoachMark extends Component {
   static propTypes = {
-    elementId: PropTypes.string.isRequired,
+    targetId: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    onClose: PropTypes.func,
     title: PropTypes.string,
     text: PropTypes.string,
     gotIt: PropTypes.bool,
+		gotItText: PropTypes.string,
     disableShadowing: PropTypes.bool,
     disablePointer: PropTypes.bool,
-    id: PropTypes.string.isRequired,
-    callback: PropTypes.func
+		offsetX: PropTypes.number,
+		offsetY: PropTypes.number,
+		zIndex: PropTypes.number,
+		forceAbove: PropTypes.bool,
+		forceBelow: PropTypes.bool,
+		stopScroll: PropTypes.bool,
+    srCloseText: PropTypes.string
   };
   
-	constructor(props) {
-		super(props);
+  static defaultProps = {
+    gotItText: 'Got it',
+    srCloseText: 'Close dialog',
+		zIndex: 1200
+  };
+  
+  constructor(props) {
+    super(props);
+    this.target = document.getElementById(props.targetId);
+  
+    if(!this.props.disableShadowing) {
+      this.target.classList.add('o-coach-mark__hole');
+    }
     
-    // if (!props.id) {
-    //   throw new Error('missing required option: you must specify a unique id for the coach mark')
-    // }
-    
-    // if (props.currentCM !== undefined && config.totalCM === undefined) {
-    //   throw new Error('you must include totalCM if currentCM is specified')
-    // }
-    
-    // if (props.gotIt && props.totalCM) {
-    //   throw new Error('cannot display "Got it" along with numbered coach marks (totalCM)')
-    // }
-   // this.props = config;
-    this.target = document.getElementById(props.elementId);
-    this.container = document.createElement('div');
-    this.target.parentNode.insertBefore(this.container, this.target.nextSibling);
-  //  this.init();
-//    this.createEvents();
-//    this.resetPosition();
+    if(!this.props.stopScroll) {
+      this.target.scrollIntoView(false);
+    }
+  }
+
+  componentWillMount() {
+    window.addEventListener('resize', this.resetPosition);
   }
   
-  // createEvents = () => {
-  //   if(!this.props.disableShadowing) {
-  //     this.target.classList.add('o-coach-mark__hole');
-  //   }
-  //
-  //   if(!this.props.stopScroll) {
-  //     this.target.scrollIntoView(false);
-  //   }
-  //
-  //   window.addEventListener('resize', this.resetPosition);
-  // };
+  componentDidMount() {
+    this.resetPosition();
+  }
   
-  removeCoachMark = (event) => {
-		debugger;
-    this.target.classList.remove('o-coach-mark__hole');
+  componentWillUnmount() {
     window.removeEventListener('resize', this.resetPosition);
-    if (this.props.callback) {
-      this.props.callback(this.props.id, event);
-    }
-    this.container.parentElement.removeChild(this.container);
-  };
-  
+    this.target.classList.remove('o-coach-mark__hole');
+  }
+
   resetPosition = () => {
     const element = this.target;
-    const container = document.getElementById(this.props.id) || this.container;
+    const container = document.getElementById(this.props.id);
     const content = container.childNodes[0].childNodes[0];
     const contentContainer = container.childNodes[0];
     // this is called on draw and redraw
@@ -121,14 +117,12 @@ class CoachMark extends Component {
     // get window geometry - this is how jQuery does it
     const body = document.body,
       html = document.documentElement,
-      height = Math.max(
-        body.scrollHeight,
-        body.offsetHeight,
-        html.clientHeight),
+      height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight),
       rect = this.target.getBoundingClientRect(),
       // 50 is close enough. This is very browser-specific
       bottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
-      leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2;
+      leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2
+    ;
     
     if(this.props.forceAbove) {
       placement += 'top';
@@ -144,138 +138,37 @@ class CoachMark extends Component {
     
     return placement;
   };
-  
-	triggerEvent = (elementClickedIS, eventIs, payload) => {
-		let event;
-		if (document.createEvent) {
-			event = document.createEvent('HTMLEvents');
-			event.initEvent(eventIs, true, true);
-		} else {
-			event = document.createEventObject();
-			event.eventType = eventIs;
-		}
-
-		event.eventName = eventIs;
-		event.data = {
-			type: elementClickedIS,
-			id: this.props.id,
-			payload: payload
-		};
-
-		if (document.createEvent) {
-			this.props.target.dispatchEvent(event);
-		} else {
-			// IE9
-			this.props.target.fireEvent("on" + event.eventType, event);
-		}
-	};
-
-	extraOptions = () => {
-		const gotItText = this.props.gotItText ? this.props.gotItText : messages.gotIt.defaultMessage;
-
-		if (this.props.gotIt) {
-			return (
-				<button className="o-coach-mark__got-it pe-label" onClick={(event) => this.removeCoachMark(event)}>
-					{gotItText}
-				</button>
-			);
-		}
-
-		if (this.props.currentCM && this.props.totalCM) {
-			const opts = this.props.opts;
-			let backButton = '';
-			let nextText = closeText ? closeText : messages.close.defaultMessage;
-			const prevText = previousText ? previousText : messages.back.defaultMessage;
-			const noBack = {
-				paddingLeft: '107px'
-			};
-			const backEvent = (event) => {
-				this.props.removeCoachMark(event);
-				this.triggerEvent('previous', 'o-cm-previous-clicked');
-				event.preventDefault();
-			};
-			const nextEvent = (event) => {
-				this.props.removeCoachMark(event);
-				this.triggerEvent('next', 'o-cm-next-clicked');
-				event.preventDefault();
-			};
-			if(currentCM > 1 && totalCM > 1) {
-				backButton = (
-					<button className="o-coach-mark__button-space pe-btn pe-btn--link" onClick={backEvent}>
-						<span>{prevText}</span>
-					</button>
-				);
-				noBack.paddingLeft = '';
-			}
-			if(currentCM < totalCM) {
-				nextText = nextText ? nextText : messages.close.defaultMessage;
-			}
-
-			return (
-				<div className="o-coach-mark__back-next pe-copy--small">
-					{backButton}
-					<span className="o-coach-mark__total-coachmarks pe-label pe-label--small" style={noBack}>
-						{currentCM}/{totalCM}
-					</span>
-					<button className="o-coach-mark__next-button pe-btn pe-btn--link" onClick={nextEvent}>
-						<span>{nextText}</span>
-					</button>
-				</div>
-			);
-		}
-
-		return '';
-	};
-
-	addMeatball = () => {
-		if(this.props.currentCM && this.props.totalCM) {
-			return (
-				<div className="o-coach-mark__meatball">
-					{this.props.currentCM}
-				</div>
-			);
-		}
-		return '';
-	};
-
+	
 	render() {
-		const extras = this.extraOptions();
-		const meatball = this.addMeatball();
-		const meatballTitleStyle = {};
-		// if there is a meatball then we need to change the title text padding to line up properly
-		if(meatball !== '') {
-			meatballTitleStyle.paddingTop = '24px'
-		}
-
-		const { removeCoachMark, placement = '' } = this.props;
-
+	  const placement = this.getPlacement();
 		return (
-			<div id={this.props.id} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex || 1200 }}>
+			<div id={this.props.id} ref={`coachmark-${this.props.id}`} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
 				<div className="o-coach-mark__content-container">
 					<button
+						type="button"
 						className="o-coach-mark__close-icon"
-						onClick={(event) => removeCoachMark(event)}
-						style={meatballTitleStyle}
+						onClick={this.props.onClose}
 					>
 						<svg role="img"
 							 aria-labelledby="r2"
 							 focusable="false"
 							 className="pe-icon--remove-sm-18">
-						<title id="r2">Close dialog</title>
+						<title id="r2">{this.props.srCloseText}</title>
 						<use xlinkHref="#remove-sm-18"></use>
 						</svg>
 					</button>
 					<div className={`o-coach-mark__content ${placement}`}>
-						<div>
-							{meatball}
-							<div className="o-coach-mark__title pe-label--bold" style={meatballTitleStyle}>
-								{this.props.title}
-							</div>
-							<p className="o-coach-mark__paragraph pe-label">
-								{this.props.text}
-							</p>
-						</div>
-						{extras}
+            <div className="o-coach-mark__title pe-label--bold">
+              {this.props.title}
+            </div>
+            <p className="o-coach-mark__paragraph pe-label">
+              {this.props.text}
+            </p>
+						{this.props.gotIt &&
+							<button className="o-coach-mark__got-it pe-label" onClick={this.props.onClose}>
+								{this.props.gotItText}
+							</button>
+						}
 					</div>
 
 				</div>

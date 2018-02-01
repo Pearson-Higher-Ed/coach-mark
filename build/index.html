@@ -1,34 +1,22 @@
 <!doctype html>
 <html>
 <head>
-    <title>Demo Component</title>
+    <title>Coachmark Component</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      div.demo-target {
+        border: 1px solid;
+        margin: 10px;
+        padding: 2px;
+      }
+    </style>
 </head>
 <body>
-    <h1>CoachMark Demo</h1>
-    <p>Styled using the Elements SDK.</p>
-    <p class="lorum-ipsum" id="top">
-        Top text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mi in dignissim tincidunt. Ut vel blandit nibh. Quisque consectetur nibh at lorem vulputate porta. Mauris nec magna libero. Vestibulum tempor vitae odio sit amet ultricies. Morbi commodo velit eget libero pulvinar ultricies. Pellentesque rhoncus malesuada ex nec iaculis. Donec sollicitudin lacus in pellentesque gravida. Duis hendrerit consectetur turpis, ut ullamcorper est bibendum nec. Etiam elit ex, dictum nec tellus in, suscipit lobortis orci. Sed aliquam velit vitae nulla vehicula, vitae dapibus arcu viverra. Aenean vestibulum magna in posuere semper. Cras elementum turpis risus, vel consectetur ipsum facilisis in. Nam ligula est, hendrerit et fermentum imperdiet, venenatis iaculis nisl. Proin posuere non risus in vulputate.
-    </p>
-    <div class="left">
-        <p class="lorum-ipsum" id="cm-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mi in dignissim tincidunt. Ut vel blandit nibh. Quisque consectetur nibh at lorem vulputate porta. Mauris nec magna libero. Vestibulum tempor vitae odio sit amet ultricies. Morbi commodo velit eget libero pulvinar ultricies. Pellentesque rhoncus malesuada ex nec iaculis. Donec sollicitudin lacus in pellentesque gravida. Duis hendrerit consectetur turpis, ut ullamcorper est bibendum nec. Etiam elit ex, dictum nec tellus in, suscipit lobortis orci. Sed aliquam velit vitae nulla vehicula, vitae dapibus arcu viverra. Aenean vestibulum magna in posuere semper. Cras elementum turpis risus, vel consectetur ipsum facilisis in. Nam ligula est, hendrerit et fermentum imperdiet, venenatis iaculis nisl. Proin posuere non risus in vulputate.</p>
-    </div>
-    <div class="right">
-        <p class="lorum-ipsum" id="cm-right">Quisque viverra augue ac tincidunt blandit. Sed id pellentesque ex, condimentum molestie arcu. Aenean viverra gravida quam finibus imperdiet. Nunc massa magna, tempor vitae odio ullamcorper, scelerisque semper massa. Pellentesque aliquet eget urna at elementum. Nulla facilisi. Phasellus vel odio vel massa volutpat varius. Integer eget magna congue, laoreet urna eu, eleifend elit. Quisque non lectus volutpat, volutpat velit a, laoreet lorem.</p>
-    </div>
-    <div class="left" style="clear:both">
-        <p class="lorum-ipsum" id="cm-left-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mi in dignissim tincidunt. Ut vel blandit nibh. Quisque consectetur nibh at lorem vulputate porta. Mauris nec magna libero. Vestibulum tempor vitae odio sit amet ultricies. Morbi commodo velit eget libero pulvinar ultricies. Pellentesque rhoncus malesuada ex nec iaculis. Donec sollicitudin lacus in pellentesque gravida. Duis hendrerit consectetur turpis, ut ullamcorper est bibendum nec. Etiam elit ex, dictum nec tellus in, suscipit lobortis orci. Sed aliquam velit vitae nulla vehicula, vitae dapibus arcu viverra. Aenean vestibulum magna in posuere semper. Cras elementum turpis risus, vel consectetur ipsum facilisis in. Nam ligula est, hendrerit et fermentum imperdiet, venenatis iaculis nisl. Proin posuere non risus in vulputate.</p>
-    </div>
-    <div class="right">
-        <p class="lorum-ipsum" id="cm-right-1">Quisque viverra augue ac tincidunt blandit. Sed id pellentesque ex, condimentum molestie arcu. Aenean viverra gravida quam finibus imperdiet. Nunc massa magna, tempor vitae odio ullamcorper, scelerisque semper massa. Pellentesque aliquet eget urna at elementum. Nulla facilisi. Phasellus vel odio vel massa volutpat varius. Integer eget magna congue, laoreet urna eu, eleifend elit. Quisque non lectus volutpat, volutpat velit a, laoreet lorem.</p>
-    </div>
-    <p class="lorum-ipsum" id="cm-bottom" style="clear:both">Vestibulum diam felis, varius nec ullamcorper ut, fermentum et est. Sed mattis turpis nisl, sed elementum lorem tristique in. Vestibulum dignissim cursus quam vulputate vestibulum. Sed nulla quam, sollicitudin eu mi in, luctus gravida augue. Nunc volutpat sagittis luctus. Proin et ante libero. Pellentesque rutrum lobortis viverra. Sed sed dolor nec sapien molestie sodales. Aenean risus justo, mollis sed tellus vel, mollis laoreet massa. Nunc sapien ligula, congue semper ullamcorper at, auctor ac orci.</p>
-
     <!-- Icons -->
     <script>
       if (document.body.children[0].nodeName !== 'svg') {
-        var pe_ajax = new XMLHttpRequest();
+        let pe_ajax = new XMLHttpRequest();
         pe_ajax.open("GET", "https://unpkg.com/@pearson-components/elements-sdk/build/icons/p-icons-sprite-1.1.svg", true);
         pe_ajax.responseType = "document";
         pe_ajax.onload = function(e) {
@@ -36,18 +24,34 @@
             pe_ajax.responseXML.documentElement,
             document.body.childNodes[0]
           );
-        }
+        };
         pe_ajax.send();
       }
     </script>
-    <!-- Provide React and ReactDOM as a depedency external to the component -->
+
+    <h1>CoachMark Demo</h1>
+    <p>Styled using the Elements SDK.</p>
+
+    <h2>First Example</h2>
+    <div id="demo-target1" class="demo-target">
+      Default Coachmark should appear &nbsp;&nbsp; <button onclick="showFirst()">Show</button>
+    </div>
+
+    <h2>Second Example</h2>
+    <div id="demo-target2">
+      Default Coachmark should appear above this text<br/>
+      <button type="button" onclick="showFirst()">Show</button>
+    </div>
+
+    <div id="coachmark-container"></div>
+    <!-- Provide React and ReactDOM as a dependency external to the component -->
     <script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
     <script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
-    <!-- CustomEvent, Array.from, Object.assign and Promise polyfills are for IE, Intl.js polyfill is for Safari -->
-    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=CustomEvent,Array.from,Object.assign,Promise,Intl.~locale.en,Intl.~locale.fr"></script>
+    <!-- CustomEvent, Array.from, Object.assign and Promise polyfills are for IE -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=CustomEvent,Array.from,Object.assign,Promise"></script>
     <!-- Demo build of component Injected on build -->
     <!-- Build Component to View Demo: npm run build && npm start -->
     <!-- View at: http://localhost:8081/coach-mark/ -->
-<script type="text/javascript" src="/coach-mark/fonts.component-name.js"></script><script type="text/javascript" src="/coach-mark/demo.component-name.js"></script><script type="text/javascript" src="/coach-mark/eventInterface.component-name.js"></script><script type="text/javascript" src="/coach-mark/dev.component-name.js"></script><script type="text/javascript" src="/coach-mark/dist.component-name.js"></script></body>
+<script type="text/javascript" src="/coach-mark/eventInterface.coachmark.js"></script><script type="text/javascript" src="/coach-mark/demo.coachmark.js"></script><script type="text/javascript" src="/coach-mark/dist.coachmark.js"></script><script type="text/javascript" src="/coach-mark/fonts.coachmark.js"></script><script type="text/javascript" src="/coach-mark/dev.coachmark.js"></script></body>
 </html>

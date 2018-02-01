@@ -37,20 +37,6 @@
 		min-width: 280px;
 		float: left;
 	}
-	&__meatball {
-		border-radius: 50%;
-		width: 30px;
-		height: 30px;
-		background: #107aca;
-		border-color: #9dc0db;
-		color: white;
-		padding: 3px;
-		float: left;
-		text-align: center;
-		margin-top: 20px;
-		margin-right: 14px;
-		margin-bottom: 15px;
-	}
 	&__title {
 		padding-bottom: 4px;
 		line-height: 18px;
@@ -62,16 +48,6 @@
 	&__button-space {
 		margin-right: 15px;
 		margin-top: -4px;
-	}
-	&__next-button {
-		float: right;
-		margin-top: -4px;
-	}
-	&__back-next {
-		cursor: pointer;
-	}
-	&__total-coachmarks {
-		padding-left: 45px;
 	}
 	&__content {
 		float: left;

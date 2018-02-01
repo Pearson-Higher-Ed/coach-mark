@@ -27,14 +27,11 @@ import { CoachMark } from '../index';
 export const showFirst = () => {
   ReactDOM.render(
     <CoachMark
-      elementId="demo-target1"
-      title="This is my title"
-      text="This is the text"
-      gotIt={true}
-      disableShadowing={true}
-      disablePointer={true}
-      id="first-coachmark-id"
-      callback={() => alert('Toodles!')}
+      targetId="demo-target1"
+      title="Coach Mark auto-positioned"
+      text="Some text explaining to the user why you changed their interface"
+      id="demo-coachmark-1"
+      onClose={() => ReactDOM.unmountComponentAtNode(document.getElementById('coachmark-container'))}
     />,
     document.getElementById('coachmark-container')
   );

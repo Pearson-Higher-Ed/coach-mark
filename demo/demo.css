@@ -1,5 +1,7 @@
-html {
-  background-color: white;
+.demo-target {
+  border: 2px solid;
+  margin: 10px;
+  display: inline-block;
 }
 
 p.lorum-ipsum {

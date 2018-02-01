@@ -1,10 +1,16 @@
 <!doctype html>
 <html>
 <head>
-    <title>Demo Component</title>
+    <title>Coachmark Component</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="script" href="demo.js">
+    <style>
+      div.demo-target {
+        border: 1px solid;
+        margin: 10px;
+        padding: 2px;
+      }
+    </style>
 </head>
 <body>
     <!-- Icons -->
@@ -27,9 +33,14 @@
     <p>Styled using the Elements SDK.</p>
 
     <h2>First Example</h2>
-    <div id="demo-target1">
-      Default Coachmark should appear to the right of this text<br/>
-      <button type="button" onclick="showFirst()">Show Coachmark</button>
+    <div id="demo-target1" class="demo-target">
+      Default Coachmark should appear &nbsp;&nbsp; <button onclick="showFirst()">Show</button>
+    </div>
+
+    <h2>Second Example</h2>
+    <div id="demo-target2">
+      Default Coachmark should appear above this text<br/>
+      <button type="button" onclick="showFirst()">Show</button>
     </div>
 
     <div id="coachmark-container"></div>
