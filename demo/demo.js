@@ -1,6 +1,6 @@
 import React     from 'react';
 import ReactDOM  from 'react-dom';
-import { CoachMark } from '../index';
+import CoachMarkContainer from './CoachMarkContainer';
 
 // import { addLocaleData, IntlProvider } from 'react-intl';
 //
@@ -26,12 +26,10 @@ import { CoachMark } from '../index';
 
 export const showFirst = () => {
   ReactDOM.render(
-    <CoachMark
+    <CoachMarkContainer
       targetId="demo-target1"
-      title="Coach Mark auto-positioned"
+      title="Default Coach Mark"
       text="Some text explaining to the user why you changed their interface"
-      id="demo-coachmark-1"
-      onClose={() => ReactDOM.unmountComponentAtNode(document.getElementById('coachmark-container'))}
     />,
     document.getElementById('coachmark-container')
   );

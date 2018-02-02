@@ -4,8 +4,6 @@
 .travis.yml
 solano.yml
 webpack.config.js
-main.js
-
 
 /coverage
 /src

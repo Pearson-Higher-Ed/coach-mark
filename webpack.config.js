@@ -21,7 +21,7 @@ module.exports = {
   },
   output: {
     path          : path.resolve(__dirname, 'build'),
-    filename      : '[name].coachmark.js',
+    filename      : '[name].coach-mark.js',
     publicPath    : '/coach-mark/',
     libraryTarget : 'umd'
   },

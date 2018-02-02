@@ -2,12 +2,9 @@
 
 .o-coach-mark {
 	&__container {
-		content: " ";
-		display: block;
 		height: 0;
 		clear: both;
 		float: left;
-		text-align: left;
 		position: absolute;
 		:-moz-focusring {
 			outline:none;
@@ -19,17 +16,8 @@
 	&__hole {
 		box-shadow: 0 0 0 9999999px rgba(0,0,0,0.25);
 	}
-	&__close-icon {
-		margin: -4px -10px 0 0;
-		float: right;
-		padding: 0;
-		background-color: transparent;
-		cursor: pointer;
-		border: none;
-	}
 	&__content-container {
 		padding: 20px 24px;
-		z-index: 1200;
 		margin: 10px;
 		background-color: $pe-color-digital-ice-blue;
 		border-radius: 4px;
@@ -44,10 +32,6 @@
 	&__paragraph {
 		clear: both;
 		margin: 0;
-	}
-	&__button-space {
-		margin-right: 15px;
-		margin-top: -4px;
 	}
 	&__content {
 		float: left;
@@ -67,11 +51,6 @@
 		top: -28px;
 		box-shadow: -1px -1px 1px 0px rgba(0,0,0,.1);
 	}
-
-	&--bottom-disappear {
-		visibility: hidden;
-	}
-
 
 	&--top::before {
 		bottom: -28px;
@@ -95,67 +74,27 @@
 		height: 16px;
 		background-color: $pe-color-digital-ice-blue;
 		transform: rotate( 45deg );
-			-moz-transform: rotate( 45deg );
-			-ms-transform: rotate( 45deg );
-			-o-transform: rotate( 45deg );
-			-webkit-transform: rotate( 45deg );
-		@media (max-width: 480px) {
-			visibility: hidden;
-		}
 	}
 
-	&--link-text {
-		color: #0d65a6;
-		padding: 5px;
-		font-size: smaller;
-	}
-
-	&--hr {
-		border-color: #eee9c1;
-		border-style: ridge;
-	}
-
-	&--icons {
-		padding: 4px;
-	}
-
-	&__feedback {
-		display: none;
-
-		textarea {
-			width: 95%;
-			height: 50px;
-		}
-
-		div a {
-			font-size: 12px;
-			padding: 0 10px;
-		}
-	}
-
-	&__sr-hidden {
-		position: absolute !important;
-		clip: rect(1px, 1px, 1px, 1px);
-		padding: 0 !important;
-		border: 0 !important;
-		height: 1px !important;
-		width: 1px !important;
-		overflow: hidden;
+	&__got-it,
+	&__close-icon {
+		float: right;
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
 	}
 
 	&__got-it {
 		margin-top: 24px;
-		float: right;
-    background: none;
-    border: none;
-    padding: 0 !important;
-    cursor: pointer;
     text-decoration: underline;
     color: $pe-color-charcoal;
-
 		&:hover {
 			text-decoration: none;
 		}
+	}
+	&__close-icon {
+		margin: -4px -10px 0 0;
 	}
 
 }

@@ -1,8 +1,6 @@
-/* global describe it expect */
-
 import React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
-import ComponentOwner from '../src/js/component-owner';
+import CoachMark from '../src/js/CoachMark';
 
 
 describe('Component Owner Suite', () => {
@@ -30,7 +28,7 @@ describe('Component Owner Suite', () => {
     let element = body.appendChild(document.createElement('div'));
     let component;
     const container = renderer.render(
-       <ComponentOwner
+       <CoachMark
          ref={(c) => component = c.refs.wrappedInstance}
          removeCoachMark={() => { console.log('done'); }}
          target={element}

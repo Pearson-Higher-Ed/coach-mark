@@ -1,5 +1,5 @@
 import React from 'react';
-import CoachMark from '../main';
+import CoachMark from '../index';
 import ReactTestUtils from 'react-dom/test-utils';
 import ReactDOM from 'react-dom';
 

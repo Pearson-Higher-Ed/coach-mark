@@ -1,18 +1,12 @@
-// NOTE: There is no need to rename this file.
-// In React, an owner is the component that sets the props of other components, if desired.
-// See https://facebook.github.io/react/docs/multiple-components.html for composability.
-
 import React, { Component } from 'react';
-import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
-import { messages } from './defaultMessages';
-import '../scss/component-specific.scss';
+import '../scss/coachmark.scss';
 
 class CoachMark extends Component {
   static propTypes = {
     targetId: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
     onClose: PropTypes.func,
+    srCloseText: PropTypes.string,
     title: PropTypes.string,
     text: PropTypes.string,
     gotIt: PropTypes.bool,
@@ -22,14 +16,14 @@ class CoachMark extends Component {
 		offsetX: PropTypes.number,
 		offsetY: PropTypes.number,
 		zIndex: PropTypes.number,
-		forceAbove: PropTypes.bool,
-		forceBelow: PropTypes.bool,
-		stopScroll: PropTypes.bool,
-    srCloseText: PropTypes.string
+		placement: PropTypes.oneOf(['top', 'bottom']),
+		stopScroll: PropTypes.bool
   };
   
   static defaultProps = {
     gotItText: 'Got it',
+    offsetX: 0,
+    offsetY: 0,
     srCloseText: 'Close dialog',
 		zIndex: 1200
   };
@@ -38,11 +32,11 @@ class CoachMark extends Component {
     super(props);
     this.target = document.getElementById(props.targetId);
   
-    if(!this.props.disableShadowing) {
+    if (!this.props.disableShadowing) {
       this.target.classList.add('o-coach-mark__hole');
     }
     
-    if(!this.props.stopScroll) {
+    if (!this.props.stopScroll) {
       this.target.scrollIntoView(false);
     }
   }
@@ -62,7 +56,7 @@ class CoachMark extends Component {
 
   resetPosition = () => {
     const element = this.target;
-    const container = document.getElementById(this.props.id);
+    const container = this.myRef;
     const content = container.childNodes[0].childNodes[0];
     const contentContainer = container.childNodes[0];
     // this is called on draw and redraw
@@ -76,12 +70,7 @@ class CoachMark extends Component {
       horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left);
     
     const centerOnDiv = () => {
-      let left = horizontal_center - 280;
-      if (content.className.indexOf('-left') > -1) {
-        // push to the right because pointer is on the left side
-        left += 220;
-      }
-      return left;
+      return horizontal_center - (content.className.includes('-left') ? 60 : 280);
     };
     
     const centerOnScreen = () => {
@@ -92,18 +81,15 @@ class CoachMark extends Component {
     // center pointer on div if wider than 480, otherwise center on screen
     const left = (document.body.offsetWidth > 480) ? centerOnDiv() : centerOnScreen();
   
-    let top = 0;
     const placement = this.getPlacement();
-    if (placement.indexOf('bottom') > -1) {
-      top = featurePosition.bottom + 2;
-    }
-    if (placement.indexOf('top') > -1) {
-      top = featurePosition.top - markHeight - 31 - container.offsetHeight;
-    }
   
+    const top = placement.includes('bottom')
+      ? featurePosition.bottom + 2
+      : featurePosition.top - markHeight - 31 - container.offsetHeight;
+    
     // allow consumer to specify an offset (side effect: this adds 'px' regardless)
-    container.style.left = (typeof this.props.offsetX !== 'undefined') ? left + this.props.offsetX + 'px' : left + 'px';
-    container.style.top = (typeof this.props.offsetY !== 'undefined') ? top + this.props.offsetY + 'px' : top + 'px';
+    container.style.left = left + this.props.offsetX + 'px';
+    container.style.top = top + this.props.offsetY + 'px';
   
     // push right if we are off-screen to the left
     const rect = contentContainer.getBoundingClientRect();
@@ -113,36 +99,34 @@ class CoachMark extends Component {
   };
   
   getPlacement = () => {
-    let placement = 'o-coach-mark--';
     // get window geometry - this is how jQuery does it
     const body = document.body,
       html = document.documentElement,
       height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight),
       rect = this.target.getBoundingClientRect(),
       // 50 is close enough. This is very browser-specific
-      bottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
+      isBottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
       leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2
     ;
     
-    if(this.props.forceAbove) {
-      placement += 'top';
-    } else if(this.props.forceBelow) {
-      placement += 'bottom';
+    let placement;
+    if (this.props.placement === 'top') {
+      placement = 'o-coach-mark--top';
+    } else if (this.props.placement === 'bottom') {
+      placement = 'o-coach-mark--bottom';
     } else {
-      placement += bottomHalf ? 'top' : 'bottom';
+      placement = isBottomHalf ? 'o-coach-mark--top' : 'o-coach-mark--bottom'
     }
-    
-    if(leftCenterLine) {
-      placement += '-left';
+    if (leftCenterLine) {
+      return `${placement}-left`;
     }
-    
     return placement;
   };
 	
 	render() {
 	  const placement = this.getPlacement();
 		return (
-			<div id={this.props.id} ref={`coachmark-${this.props.id}`} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
+			<div ref={(node) => {this.myRef = node}} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
 				<div className="o-coach-mark__content-container">
 					<button
 						type="button"
