@@ -56,9 +56,6 @@ class CoachMark extends Component {
 
   resetPosition = () => {
     const element = this.target;
-    const container = this.myRef;
-    const content = container.childNodes[0].childNodes[0];
-    const contentContainer = container.childNodes[0];
     // this is called on draw and redraw
     const featurePosition = {
         top: element.offsetTop,
@@ -66,46 +63,42 @@ class CoachMark extends Component {
         bottom: element.offsetTop + element.offsetHeight,
         right: element.offsetLeft + element.offsetWidth
       },
-      markHeight = content.offsetHeight + 30,
+      markHeight = this.contentContainer.offsetHeight + 30,
       horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left);
     
     const centerOnDiv = () => {
-      return horizontal_center - (content.className.includes('-left') ? 60 : 280);
+      return horizontal_center - (this.content.className.includes('-left') ? 60 : 280);
     };
     
     const centerOnScreen = () => {
       // take horizontal scroll into account
-      const relativeOffset = container.getBoundingClientRect().left - container.offsetLeft;
-      return document.body.offsetWidth / 2 - relativeOffset - 150;
+      const relativeOffset = this.container.getBoundingClientRect().left - this.container.offsetLeft;
+      return window.innerWidth / 2 - relativeOffset - 150;
     };
     // center pointer on div if wider than 480, otherwise center on screen
-    const left = (document.body.offsetWidth > 480) ? centerOnDiv() : centerOnScreen();
+    const left = (window.innerWidth > 480) ? centerOnDiv() : centerOnScreen();
   
     const placement = this.getPlacement();
   
     const top = placement.includes('bottom')
       ? featurePosition.bottom + 2
-      : featurePosition.top - markHeight - 31 - container.offsetHeight;
+      : featurePosition.top - markHeight - 31 - this.container.offsetHeight;
     
     // allow consumer to specify an offset (side effect: this adds 'px' regardless)
-    container.style.left = left + this.props.offsetX + 'px';
-    container.style.top = top + this.props.offsetY + 'px';
+    this.container.style.left = left + this.props.offsetX + 'px';
+    this.container.style.top = top + this.props.offsetY + 'px';
   
     // push right if we are off-screen to the left
-    const rect = contentContainer.getBoundingClientRect();
+    const rect = this.contentContainer.getBoundingClientRect();
     if (rect.left < 0) {
-      container.style.left = element.offsetLeft - rect.left + 'px';
+      this.container.style.left = element.offsetLeft - rect.left + 'px';
     }
   };
   
   getPlacement = () => {
     // get window geometry - this is how jQuery does it
-    const body = document.body,
-      html = document.documentElement,
-      height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight),
-      rect = this.target.getBoundingClientRect(),
-      // 50 is close enough. This is very browser-specific
-      isBottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > height/2,
+    const rect = this.target.getBoundingClientRect(),
+      isBottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > window.innerHeight/2,
       leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2
     ;
     
@@ -126,8 +119,8 @@ class CoachMark extends Component {
 	render() {
 	  const placement = this.getPlacement();
 		return (
-			<div ref={(node) => {this.myRef = node}} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
-				<div className="o-coach-mark__content-container">
+			<div ref={(node) => {this.container = node}} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
+				<div ref={(node) => {this.contentContainer = node}} className="o-coach-mark__content-container">
 					<button
 						type="button"
 						className="o-coach-mark__close-icon"
@@ -141,7 +134,7 @@ class CoachMark extends Component {
 						<use xlinkHref="#remove-sm-18"></use>
 						</svg>
 					</button>
-					<div className={`o-coach-mark__content ${placement}`}>
+					<div ref={(node) => {this.content = node}} className={`o-coach-mark__content ${placement}`}>
             <div className="o-coach-mark__title pe-label--bold">
               {this.props.title}
             </div>
