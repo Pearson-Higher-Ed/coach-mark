@@ -27,10 +27,7 @@ export const showFirst = () => {
     elementId: 'demo-target1',
     opts: {
       title: 'Default Coach Mark',
-      text: 'Some text explaining to the user why you changed their interface',
-      disablePointer: true,
-      forceAbove: true,
-      disableShadowing: true
+      text: 'Assuming the consumer only passes in .title and .text',
     }
   });
 };
@@ -39,11 +36,23 @@ export const showSecond = () => {
   new CoachMark({
     elementId: 'demo-target2',
     opts: {
-      title: 'Default Coach Mark',
-      text: 'Some text explaining to the user why you changed their interface',
+      title: 'Coach Mark Above',
+      text: 'Consumer passes in .forceAbove, .disableShadowing, and .gotIt',
+      gotIt: true,
       forceAbove: true,
       disableShadowing: true
     }
   });
 };
 
+export const showThird = () => {
+  new CoachMark({
+    elementId: 'demo-target3',
+    opts: {
+      title: 'Coach Mark w/No Pointer',
+      text: 'Consumer passes in .disablePointer and a callback',
+      disablePointer: true,
+    },
+    callback: () => showFirst()
+  });
+};

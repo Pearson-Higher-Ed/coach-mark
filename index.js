@@ -21,15 +21,11 @@ export default class CoachMark {
   }
   
   removeCoachMark = (event) => {
+    ReactDOM.unmountComponentAtNode(this.container);
+    this.container.remove();
     if (this.config.callback) {
       this.config.callback(this.config.opts.id, event);
     }
-    ReactDOM.unmountComponentAtNode(this.container);
-    this.container.remove();
   }
 
 }
-//
-// For events, use the Origami naming convention of pre-pending with 'o.'
-//
-//document.body.addEventListener('o.InitCoachMark', e => new CoachMark(e.detail));
