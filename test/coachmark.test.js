@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
-import CoachMark from '../src/js/CoachMark';
+import CoachMark from '../src/js/component-owner';
 
 
 describe('Component Owner Suite', () => {

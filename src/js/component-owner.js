@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import '../scss/coachmark.scss';
+import '../scss/component-owner.scss';
 
 class CoachMark extends Component {
   static propTypes = {
     targetId: PropTypes.string.isRequired,
-    onClose: PropTypes.func,
-    srCloseText: PropTypes.string,
     title: PropTypes.string,
     text: PropTypes.string,
+    id: PropTypes.string,
+    onClose: PropTypes.func,
+    srCloseText: PropTypes.string,
     gotIt: PropTypes.bool,
 		gotItText: PropTypes.string,
     disableShadowing: PropTypes.bool,
@@ -16,7 +17,8 @@ class CoachMark extends Component {
 		offsetX: PropTypes.number,
 		offsetY: PropTypes.number,
 		zIndex: PropTypes.number,
-		placement: PropTypes.oneOf(['top', 'bottom']),
+		forceAbove: PropTypes.bool,
+    forceBelow: PropTypes.bool,
 		stopScroll: PropTypes.bool
   };
   
@@ -57,14 +59,13 @@ class CoachMark extends Component {
   resetPosition = () => {
     const element = this.target;
     // this is called on draw and redraw
-    const featurePosition = {
+    const elementPosition = {
         top: element.offsetTop,
         left: element.offsetLeft,
         bottom: element.offsetTop + element.offsetHeight,
         right: element.offsetLeft + element.offsetWidth
       },
-      markHeight = this.contentContainer.offsetHeight + 30,
-      horizontal_center = ((featurePosition.right - featurePosition.left) / 2 + featurePosition.left);
+      horizontal_center = ((elementPosition.right - elementPosition.left) / 2 + elementPosition.left);
     
     const centerOnDiv = () => {
       return horizontal_center - (this.content.className.includes('-left') ? 60 : 280);
@@ -81,8 +82,8 @@ class CoachMark extends Component {
     const placement = this.getPlacement();
   
     const top = placement.includes('bottom')
-      ? featurePosition.bottom + 2
-      : featurePosition.top - markHeight - 31 - this.container.offsetHeight;
+      ? elementPosition.bottom + 2
+      : elementPosition.top - this.container.scrollHeight;
     
     // allow consumer to specify an offset (side effect: this adds 'px' regardless)
     this.container.style.left = left + this.props.offsetX + 'px';
@@ -96,6 +97,10 @@ class CoachMark extends Component {
   };
   
   getPlacement = () => {
+    if (this.props.disablePointer) {
+      return '';
+    }
+    
     // get window geometry - this is how jQuery does it
     const rect = this.target.getBoundingClientRect(),
       isBottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > window.innerHeight/2,
@@ -103,9 +108,9 @@ class CoachMark extends Component {
     ;
     
     let placement;
-    if (this.props.placement === 'top') {
+    if (this.props.forceAbove) {
       placement = 'o-coach-mark--top';
-    } else if (this.props.placement === 'bottom') {
+    } else if (this.props.forceBelow) {
       placement = 'o-coach-mark--bottom';
     } else {
       placement = isBottomHalf ? 'o-coach-mark--top' : 'o-coach-mark--bottom'
@@ -119,7 +124,7 @@ class CoachMark extends Component {
 	render() {
 	  const placement = this.getPlacement();
 		return (
-			<div ref={(node) => {this.container = node}} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
+			<div ref={(node) => {this.container = node}} id={this.props.id} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
 				<div ref={(node) => {this.contentContainer = node}} className="o-coach-mark__content-container">
 					<button
 						type="button"

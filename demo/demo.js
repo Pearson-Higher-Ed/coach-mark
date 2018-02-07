@@ -1,6 +1,4 @@
-import React     from 'react';
-import ReactDOM  from 'react-dom';
-import CoachMarkContainer from './CoachMarkContainer';
+import CoachMark from '../index';
 
 // import { addLocaleData, IntlProvider } from 'react-intl';
 //
@@ -25,13 +23,27 @@ import CoachMarkContainer from './CoachMarkContainer';
 // const locale = (navigator.language) ? navigator.language : navigator.browserLanguage;
 
 export const showFirst = () => {
-  ReactDOM.render(
-    <CoachMarkContainer
-      targetId="demo-target1"
-      title="Default Coach Mark"
-      text="Some text explaining to the user why you changed their interface"
-    />,
-    document.getElementById('coachmark-container')
-  );
+  new CoachMark({
+    elementId: 'demo-target1',
+    opts: {
+      title: 'Default Coach Mark',
+      text: 'Some text explaining to the user why you changed their interface',
+      disablePointer: true,
+      forceAbove: true,
+      disableShadowing: true
+    }
+  });
+};
+
+export const showSecond = () => {
+  new CoachMark({
+    elementId: 'demo-target2',
+    opts: {
+      title: 'Default Coach Mark',
+      text: 'Some text explaining to the user why you changed their interface',
+      forceAbove: true,
+      disableShadowing: true
+    }
+  });
 };
 
