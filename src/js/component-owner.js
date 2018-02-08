@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../scss/component-owner.scss';
 
-class CoachMark extends Component {
+class ComponentOwner extends Component {
   static propTypes = {
-    targetId: PropTypes.string.isRequired,
+    target: PropTypes.object.isRequired,
     title: PropTypes.string,
     text: PropTypes.string,
     id: PropTypes.string,
@@ -30,20 +30,14 @@ class CoachMark extends Component {
 		zIndex: 1200
   };
   
-  constructor(props) {
-    super(props);
-    this.target = document.getElementById(props.targetId);
-  
-    if (!this.props.disableShadowing) {
-      this.target.classList.add('o-coach-mark__hole');
-    }
-    
-    if (!this.props.stopScroll) {
-      this.target.scrollIntoView(false);
-    }
-  }
-
   componentWillMount() {
+    if (!this.props.disableShadowing) {
+      this.props.target.classList.add('o-coach-mark__hole');
+    }
+  
+    if (!this.props.stopScroll) {
+      this.props.target.scrollIntoView(false);
+    }
     window.addEventListener('resize', this.resetPosition);
   }
   
@@ -53,17 +47,17 @@ class CoachMark extends Component {
   
   componentWillUnmount() {
     window.removeEventListener('resize', this.resetPosition);
-    this.target.classList.remove('o-coach-mark__hole');
+    this.props.target.classList.remove('o-coach-mark__hole');
   }
 
   resetPosition = () => {
-    const element = this.target;
+    const { target } = this.props;
     // this is called on draw and redraw
     const elementPosition = {
-        top: element.offsetTop,
-        left: element.offsetLeft,
-        bottom: element.offsetTop + element.offsetHeight,
-        right: element.offsetLeft + element.offsetWidth
+        top: target.offsetTop,
+        left: target.offsetLeft,
+        bottom: target.offsetTop + target.offsetHeight,
+        right: target.offsetLeft + target.offsetWidth
       },
       horizontal_center = ((elementPosition.right - elementPosition.left) / 2 + elementPosition.left);
     
@@ -102,7 +96,7 @@ class CoachMark extends Component {
     }
     
     // get window geometry - this is how jQuery does it
-    const rect = this.target.getBoundingClientRect(),
+    const rect = this.props.target.getBoundingClientRect(),
       isBottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > window.innerHeight/2,
       leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2
     ;
@@ -159,4 +153,4 @@ class CoachMark extends Component {
 	}
 }
 
-export default CoachMark;
+export default ComponentOwner;

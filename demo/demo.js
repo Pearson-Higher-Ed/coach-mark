@@ -50,7 +50,7 @@ export const showThird = () => {
     elementId: 'demo-target3',
     opts: {
       title: 'Coach Mark w/No Pointer',
-      text: 'Consumer passes in .disablePointer and a callback',
+      text: 'Consumer passes in .disablePointer and a callback that shows the first coach-mark',
       disablePointer: true,
     },
     callback: () => showFirst()

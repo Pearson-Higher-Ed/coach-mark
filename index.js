@@ -12,7 +12,7 @@ export default class CoachMark {
     
     ReactDOM.render(
       <ComponentOwner
-        targetId={config.elementId}
+        target={target}
         onClose={this.removeCoachMark}
         {...config.opts}
       />,
