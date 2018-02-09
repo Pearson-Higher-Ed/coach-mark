@@ -86,7 +86,7 @@ class ComponentOwner extends Component {
     // push right if we are off-screen to the left
     const rect = this.contentContainer.getBoundingClientRect();
     if (rect.left < 0) {
-      this.container.style.left = element.offsetLeft - rect.left + 'px';
+      this.container.style.left = target.offsetLeft - rect.left + 'px';
     }
   };
   
