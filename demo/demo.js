@@ -28,9 +28,18 @@ export const showThird = () => {
     elementId: 'demo-target3',
     opts: {
       title: 'Coach Mark w/No Pointer',
-      text: 'Consumer passes in .disablePointer and a callback that shows the first coach-mark',
+      text: 'Consumer passes in .disablePointer and a callback that shows another coach-mark',
+      gotIt: true,
       disablePointer: true,
     },
-    callback: () => showFirst()
+    callback: () => {
+      new CoachMark({
+        elementId: 'demo-target3',
+        opts: {
+          text: 'You closed it the coach-mark.  Great job!',
+          forceBelow: true
+        }
+      })
+    }
   });
 };
