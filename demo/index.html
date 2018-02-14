@@ -1,54 +1,62 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-    <title>Demo</title>
+    <title>Coachmark Component</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="demo.css">
-    <script>
-    if (!document.getElementById('pe-icons-sprite')) {
-      const pe_ajax=new XMLHttpRequest();
-      pe_ajax.open("GET", "/icons/p-icons-sprite-1.1.svg", true);
-      pe_ajax.responseType="document";
-      pe_ajax.onload=function() {
-        console.log('****  INSERTING ICON SPRITE  ****');
-        console.log(pe_ajax);
-        document.body.insertBefore(
-          pe_ajax.responseXML.documentElement,
-          document.body.childNodes[0]
-        );
-      };
-      pe_ajax.send();
-    }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      div.demo-target {
+        border: 1px solid;
+        margin: 10px;
+        padding: 2px;
+        width: 50%;
+      }
+    </style>
 </head>
 <body>
+    <!-- Icons -->
+    <script>
+      if (document.body.children[0].nodeName !== 'svg') {
+        let pe_ajax = new XMLHttpRequest();
+        pe_ajax.open("GET", "https://unpkg.com/@pearson-components/elements-sdk/build/icons/p-icons-sprite-1.1.svg", true);
+        pe_ajax.responseType = "document";
+        pe_ajax.onload = function(e) {
+          document.body.insertBefore(
+            pe_ajax.responseXML.documentElement,
+            document.body.childNodes[0]
+          );
+        };
+        pe_ajax.send();
+      }
+    </script>
+
     <h1>CoachMark Demo</h1>
     <p>Styled using the Elements SDK.</p>
-    <p class="lorum-ipsum" id="top">
-        Top text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mi in dignissim tincidunt. Ut vel blandit nibh. Quisque consectetur nibh at lorem vulputate porta. Mauris nec magna libero. Vestibulum tempor vitae odio sit amet ultricies. Morbi commodo velit eget libero pulvinar ultricies. Pellentesque rhoncus malesuada ex nec iaculis. Donec sollicitudin lacus in pellentesque gravida. Duis hendrerit consectetur turpis, ut ullamcorper est bibendum nec. Etiam elit ex, dictum nec tellus in, suscipit lobortis orci. Sed aliquam velit vitae nulla vehicula, vitae dapibus arcu viverra. Aenean vestibulum magna in posuere semper. Cras elementum turpis risus, vel consectetur ipsum facilisis in. Nam ligula est, hendrerit et fermentum imperdiet, venenatis iaculis nisl. Proin posuere non risus in vulputate.
-    </p>
-    <div class="left">
-        <p class="lorum-ipsum" id="cm-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mi in dignissim tincidunt. Ut vel blandit nibh. Quisque consectetur nibh at lorem vulputate porta. Mauris nec magna libero. Vestibulum tempor vitae odio sit amet ultricies. Morbi commodo velit eget libero pulvinar ultricies. Pellentesque rhoncus malesuada ex nec iaculis. Donec sollicitudin lacus in pellentesque gravida. Duis hendrerit consectetur turpis, ut ullamcorper est bibendum nec. Etiam elit ex, dictum nec tellus in, suscipit lobortis orci. Sed aliquam velit vitae nulla vehicula, vitae dapibus arcu viverra. Aenean vestibulum magna in posuere semper. Cras elementum turpis risus, vel consectetur ipsum facilisis in. Nam ligula est, hendrerit et fermentum imperdiet, venenatis iaculis nisl. Proin posuere non risus in vulputate.</p>
-    </div>
-    <div class="right">
-        <p class="lorum-ipsum" id="cm-right">Quisque viverra augue ac tincidunt blandit. Sed id pellentesque ex, condimentum molestie arcu. Aenean viverra gravida quam finibus imperdiet. Nunc massa magna, tempor vitae odio ullamcorper, scelerisque semper massa. Pellentesque aliquet eget urna at elementum. Nulla facilisi. Phasellus vel odio vel massa volutpat varius. Integer eget magna congue, laoreet urna eu, eleifend elit. Quisque non lectus volutpat, volutpat velit a, laoreet lorem.</p>
-    </div>
-    <div class="left" style="clear:both">
-        <p class="lorum-ipsum" id="cm-left-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mi in dignissim tincidunt. Ut vel blandit nibh. Quisque consectetur nibh at lorem vulputate porta. Mauris nec magna libero. Vestibulum tempor vitae odio sit amet ultricies. Morbi commodo velit eget libero pulvinar ultricies. Pellentesque rhoncus malesuada ex nec iaculis. Donec sollicitudin lacus in pellentesque gravida. Duis hendrerit consectetur turpis, ut ullamcorper est bibendum nec. Etiam elit ex, dictum nec tellus in, suscipit lobortis orci. Sed aliquam velit vitae nulla vehicula, vitae dapibus arcu viverra. Aenean vestibulum magna in posuere semper. Cras elementum turpis risus, vel consectetur ipsum facilisis in. Nam ligula est, hendrerit et fermentum imperdiet, venenatis iaculis nisl. Proin posuere non risus in vulputate.</p>
-    </div>
-    <div class="right">
-        <p class="lorum-ipsum" id="cm-right-1">Quisque viverra augue ac tincidunt blandit. Sed id pellentesque ex, condimentum molestie arcu. Aenean viverra gravida quam finibus imperdiet. Nunc massa magna, tempor vitae odio ullamcorper, scelerisque semper massa. Pellentesque aliquet eget urna at elementum. Nulla facilisi. Phasellus vel odio vel massa volutpat varius. Integer eget magna congue, laoreet urna eu, eleifend elit. Quisque non lectus volutpat, volutpat velit a, laoreet lorem.</p>
-    </div>
-    <p class="lorum-ipsum" id="cm-bottom" style="clear:both">Vestibulum diam felis, varius nec ullamcorper ut, fermentum et est. Sed mattis turpis nisl, sed elementum lorem tristique in. Vestibulum dignissim cursus quam vulputate vestibulum. Sed nulla quam, sollicitudin eu mi in, luctus gravida augue. Nunc volutpat sagittis luctus. Proin et ante libero. Pellentesque rutrum lobortis viverra. Sed sed dolor nec sapien molestie sodales. Aenean risus justo, mollis sed tellus vel, mollis laoreet massa. Nunc sapien ligula, congue semper ullamcorper at, auctor ac orci.</p>
 
-    <!-- External dependencies for React -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
-    <!-- CustomEvent polyfill is for IE, Intl.js polyfill is for Safari -->
-    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=CustomEvent,Intl.~locale.en,Intl.~locale.fr"></script>
-    <!-- Locally hosted demo server -->
-    <script src="http://localhost:8081/webpack-dev-server.js"></script>
-    <!-- Demo build of component -->
-    <script src="../build/dev.coach-mark.js"></script>
+    <h2>First Example</h2>
+    <div id="demo-target1" class="demo-target">
+      Default Coachmark should appear &nbsp; <button onclick="showFirst()">Show</button>
+    </div>
+
+    <h2>Second Example</h2>
+    <div id="demo-target2" class="demo-target">
+      Default Coachmark should appear above this text &nbsp; <button type="button" onclick="showSecond()">Show</button>
+    </div>
+
+    <h2>Third Example</h2>
+    <div id="demo-target3" class="demo-target">
+      This Coachmark has no pointer and a callback that shows another Coachmark &nbsp;
+      <button type="button" onclick="showThird()">Show</button>
+    </div>
+
+    <!-- Provide React and ReactDOM as a dependency external to the component -->
+    <script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+    <!-- CustomEvent, Array.from, Object.assign and Promise polyfills are for IE -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=CustomEvent"></script>
+    <!-- Demo build of component Injected on build -->
+    <!-- Build Component to View Demo: npm run build && npm start -->
+    <!-- View at: http://localhost:8081/coach-mark/ -->
 </body>
 </html>

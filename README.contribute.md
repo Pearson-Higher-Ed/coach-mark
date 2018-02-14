@@ -41,7 +41,7 @@ scope in Pearson's npm organization.
 
 ## Initial Machine Setup
 1. Install [Git](https://git-scm.com/downloads). 
-2. Install [Node 4.0.0 or greater](https://nodejs.org) - Need to run multiple versions of Node? Use [nvm](https://github.com/creationix/nvm).
+2. Install [Node 6.0.0 or greater](https://nodejs.org) - Need to run multiple versions of Node? Use [nvm](https://github.com/creationix/nvm).
 3. On a Mac? You're all set. If you're on Windows, complete the steps for your OS below.  
 
 **On Windows:**
@@ -56,13 +56,13 @@ See the project working before changing anything!
 In your local repo:
 
     npm install
-    npm run dev
+    npm start
 
-Navigate to: **localhost:8081/demo** 
+Navigate to: **localhost:8081/coach-mark**
 
 #### Where are the files being served from?
 
-Webpack serves your component in memory when you `npm run dev`. No physical files are written. When the component is 
+Webpack serves your component in memory when you `npm start`. No physical files are written. When the component is
 built using `npm run build`, physical files are written to /build.
 
 Additionally, Hot Module Replacement is activated in the webpack dev server; saved changes to /src are automatically 

@@ -1,7 +1,11 @@
-webpack.config.js
-.travis.yml
-karma.conf.js
-test
-npm_scripts
+.babelrc
+.eslintrc
 .idea
-build/dev*.js
+.travis.yml
+solano.yml
+webpack.config.js
+
+/coverage
+/src
+/test
+/demo

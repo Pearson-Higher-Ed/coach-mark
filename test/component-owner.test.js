@@ -1,44 +1,106 @@
-/* global describe it expect */
-
 import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import enzyme from 'enzyme';
 import ComponentOwner from '../src/js/component-owner';
 
+const { mount } = enzyme;
 
 describe('Component Owner Suite', () => {
-  let renderer;
-  let config = {
-    opts: {
-      title: 'Coach Mark Above Feature',
-      text: 'Some text explaining to the user why you changed their interface',
-      id: '9837494320',
-      currentCM: '1',
-      totalCM: '2'
-    },
-    callback: function() {
-      console.log('callback');
-    }
-  };
+  
+  const target = global.document.createElement("div");
+  global.document.body.appendChild(target);
 
-  beforeEach(() => {
-    renderer = createRenderer();
+  let wrapper;
+  
+  afterEach(() => {
+    wrapper.unmount();
   });
-
-  it('should render component', () => {
-
-    let body = document.body;
-    let element = body.appendChild(document.createElement('div'));
-    let component;
-    const container = renderer.render(
-       <ComponentOwner
-         ref={(c) => component = c.refs.wrappedInstance}
-         removeCoachMark={() => { console.log('done'); }}
-         target={element}
-         opts={config.opts}
-         callback={config.callback} />
+  
+  it('should shallowly render the component', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        title="This is a title"
+        stopScroll={true}
+      />
     );
-
-    expect(true).toBe(true);
+    expect(wrapper.find('.o-coach-mark__title').text()).toEqual('This is a title');
   });
-
+  
+  it('should fire resetPosition Function again', function() {
+    const resetPositionMock = jest.fn();
+    class ComponentOwnerClone extends ComponentOwner {
+      resetPosition = resetPositionMock;
+    }
+    wrapper = mount(
+      <ComponentOwnerClone
+        target={target}
+        stopScroll={true}
+      />
+    );
+    window.dispatchEvent(new Event('resize'));
+    expect(resetPositionMock.mock.calls.length).toBe(2);
+  });
+  
+  it('should not add class for pointer', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        disablePointer={true}
+      />
+    );
+    expect(wrapper.find('.o-coach-mark--top').length).toBe(0);
+    expect(wrapper.find('.o-coach-mark--bottom').length).toBe(0);
+  });
+  
+  it('should place above target', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        forceAbove={true}
+      />
+    );
+    expect(wrapper.find('.o-coach-mark--top-left').length).toBe(1);
+  });
+  
+  it('should place below target', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        forceBelow={true}
+      />
+    );
+    expect(wrapper.find('.o-coach-mark--bottom-left').length).toBe(1);
+  });
+  
+  it('should fire onClose when X is clicked', () => {
+    const onCloseMock = jest.fn();
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        onClose={onCloseMock}
+      />
+    );
+    wrapper.find('.o-coach-mark__close-icon').simulate('click');
+    expect(onCloseMock.mock.calls.length).toBe(1);
+  });
+  
+  it('should fire onClose when gotIt button clicked', () => {
+    const onCloseMock = jest.fn();
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        onClose={onCloseMock}
+        gotIt={true}
+      />
+    );
+    wrapper.find('.o-coach-mark__got-it').simulate('click');
+    expect(onCloseMock.mock.calls.length).toBe(1);
+  });
+  
+  
 });

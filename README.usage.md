@@ -1,6 +1,6 @@
 # Usage
 
-This project supports [Node v4+](https://nodejs.org) and npm 2+ installed in your development toolchain.
+This project supports [Node v6+](https://nodejs.org) and npm 2+ installed in your development toolchain.
 
 Install and save in your package.json:
 
@@ -9,7 +9,7 @@ Install and save in your package.json:
 Additionally if the application is not using NPM, this component can be consumed via unpkg.com in a single script tag:
 
 ```html
-<script type="text/javascript" src="https://unpkg.com/@pearson-components/coach-mark@0.4.1/build/dist.coach-mark.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@pearson-components/coach-mark@0.5.0/build/dist.coach-mark.js"></script>
 ```
 
 If using this option, please see the demo code for how to properly instantiate and operate this component.  This will involve using the
@@ -28,11 +28,10 @@ The following [Polyfill.io](https://cdn.polyfill.io/v2/docs/examples) service is
 component cross-browser:
 
 ```html
-<script src="https://cdn.polyfill.io/v2/polyfill.js?features=CustomEvent,Intl.~locale.en,Intl.~locale.fr"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.js?features=CustomEvent"></script>
 ```
 
-The CustomEvent polyfill is for Internet Explorer, and the Intl.js polyfill is for Safari. As you support more languages,
-add them to the list of features requested.
+The CustomEvent polyfill is for Internet Explorer.
 
 If your browser already supports a feature, this service automatically optimizes and does not bring down unnecessary code.
 
