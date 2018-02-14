@@ -1,3 +1,16 @@
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.4.3...v0.5.0) (2018-02-14)
+
+
+### Bug Fixes
+
+* reverting CI keys ([be4d280](https://github.com/Pearson-Higher-Ed/coach-mark/commit/be4d280))
+* reverting version number to previous value, 0.4.3 ([cf1dd4a](https://github.com/Pearson-Higher-Ed/coach-mark/commit/cf1dd4a))
+* updating eventListener code ([e31fffb](https://github.com/Pearson-Higher-Ed/coach-mark/commit/e31fffb))
+* updating travis.yml to get selenium tests to run ([4f6efda](https://github.com/Pearson-Higher-Ed/coach-mark/commit/4f6efda))
+
+
+
 <a name="0.4.3"></a>
 ## [0.4.3](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.4.2...v0.4.3) (2018-01-18)
 
@@ -184,3 +197,6 @@
 
 * Install karma-chrome-launcher to allow npm test to work. ([1731762](https://github.com/Pearson-Higher-Ed/coach-mark/commit/1731762))
 * position calculations ([08f0d05](https://github.com/Pearson-Higher-Ed/coach-mark/commit/08f0d05))
+
+
+
