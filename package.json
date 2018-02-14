@@ -42,6 +42,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.15.0",
+    "eslint-plugin-react": "^7.6.1",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
