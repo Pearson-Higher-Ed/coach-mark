@@ -58,7 +58,9 @@
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.0"
   },
-  "keywords": ["pearson-components"],
+  "keywords": [
+    "pearson-components"
+  ],
   "dependencies": {
     "@pearson-components/elements-sdk": "^1.9.0"
   }
