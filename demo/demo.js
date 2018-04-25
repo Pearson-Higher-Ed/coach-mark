@@ -5,7 +5,7 @@ export const showFirst = () => {
     elementId: 'demo-target1',
     opts: {
       title: 'Default Coach Mark',
-      text: 'Assuming the consumer only passes in .title and .text',
+      text: 'Assuming the consumer only passes in .title and .text'
     }
   });
 };
@@ -40,6 +40,16 @@ export const showThird = () => {
           forceBelow: true
         }
       })
+    }
+  });
+};
+
+export const showFourth = () => {
+  new CoachMark({
+    elementId: 'demo-target4',
+    opts: {
+      title: '<h4>Coach Wrapped in h4 HTML tags</h4>',
+      text: '<a href="#">Text that is a clickable link</a>'
     }
   });
 };
