@@ -56,16 +56,15 @@ class ComponentOwner extends Component {
   }
 
   componentDidMount() {
-    this.buttons = document.querySelectorAll('button');
-    this.coachmark = document.querySelector('.o-coach-mark__container');
-    this.coachmarkButtons = this.coachmark.querySelectorAll('button');
+    const buttons = document.querySelectorAll('button');
+    const coachmarkButtons = document.querySelectorAll('.o-coach-mark__container button');
 
-    _.forEach(this.buttons, button=> {
+    _.forEach(buttons, button=> {
       button.setAttribute('disabled', true)
     });
 
 
-    _.forEach(this.coachmarkButtons, button=> {
+    _.forEach(coachmarkButtons, button=> {
       button.removeAttribute('disabled');
     });
 
@@ -73,10 +72,11 @@ class ComponentOwner extends Component {
   }
 
   componentWillUnmount() {
+    const buttons = document.querySelectorAll('button');
     window.removeEventListener('resize', this.resetPosition);
     this.props.target.classList.remove('o-coach-mark__hole');
 
-    _.forEach(this.buttons, button => {
+    _.forEach(buttons, button => {
       button.removeAttribute('disabled');
     });
 
