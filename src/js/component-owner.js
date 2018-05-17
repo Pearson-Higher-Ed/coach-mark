@@ -58,7 +58,6 @@ class ComponentOwner extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     const buttons = document.querySelectorAll('button');
     const coachmarkButtons = document.querySelectorAll('.o-coach-mark__container button');
 
