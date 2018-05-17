@@ -12,6 +12,7 @@ class ComponentOwner extends Component {
   static propTypes = {
     target: PropTypes.object.isRequired,
     title: PropTypes.string,
+    type: PropTypes.string,
     text: PropTypes.string,
     id: PropTypes.string,
     onClose: PropTypes.func,
@@ -33,7 +34,8 @@ class ComponentOwner extends Component {
     offsetX: 0,
     offsetY: 0,
     srCloseText: 'Close dialog',
-    zIndex: 1200
+    zIndex: 1200,
+    type: 'default'
   };
 
   constructor(props) {
@@ -56,6 +58,7 @@ class ComponentOwner extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     const buttons = document.querySelectorAll('button');
     const coachmarkButtons = document.querySelectorAll('.o-coach-mark__container button');
 
@@ -153,7 +156,7 @@ class ComponentOwner extends Component {
     const placement = this.getPlacement();
     return (
       <div ref={(node) => {this.container = node}} id={this.props.id} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
-        <div ref={(node) => {this.contentContainer = node}} className="o-coach-mark__content-container">
+        <div ref={(node) => {this.contentContainer = node}} className={this.props.type === 'info' ? 'o-coach-mark__content-container info' : 'o-coach-mark__content-container default'}>
           <button
             type="button"
             className="o-coach-mark__close-icon"

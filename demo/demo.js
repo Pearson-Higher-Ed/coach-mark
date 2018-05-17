@@ -5,7 +5,8 @@ export const showFirst = () => {
     elementId: 'demo-target1',
     opts: {
       title: 'Default Coach Mark',
-      text: 'Assuming the consumer only passes in .title and .text'
+      text: 'Assuming the consumer only passes in .title and .text',
+      type: 'default'
     }
   });
 };
@@ -18,7 +19,8 @@ export const showSecond = () => {
       text: 'Consumer passes in .forceAbove, .disableShadowing, and .gotIt',
       gotIt: true,
       forceAbove: true,
-      disableShadowing: true
+      disableShadowing: true,
+      type: 'default'
     }
   });
 };
@@ -31,13 +33,15 @@ export const showThird = () => {
       text: 'Consumer passes in .disablePointer and a callback that shows another coach-mark',
       gotIt: true,
       disablePointer: true,
+      type: 'default'
     },
     callback: () => {
       new CoachMark({
         elementId: 'demo-target3',
         opts: {
           text: 'You closed it the coach-mark.  Great job!',
-          forceBelow: true
+          forceBelow: true,
+          type: 'default'
         }
       })
     }
@@ -49,7 +53,19 @@ export const showFourth = () => {
     elementId: 'demo-target4',
     opts: {
       title: '<h4>Coach Wrapped in h4 HTML tags</h4>',
-      text: '<a href="#">Text that is a clickable link</a>'
+      text: '<a href="#">Text that is a clickable link</a>',
+      type: 'default'
+    }
+  });
+};
+
+export const showFifth = () => {
+  new CoachMark({
+    elementId: 'demo-target5',
+    opts: {
+      title: 'Information Coach Mark',
+      text: 'Assuming the consumer only passes in .title and .text',
+      type: 'info'
     }
   });
 };

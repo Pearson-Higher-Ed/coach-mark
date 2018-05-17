@@ -21,6 +21,7 @@ export default class CoachMark {
   }
 
   removeCoachMark = (event) => {
+    // IE 11 polyfill for .remove();
     if (!('remove' in Element.prototype)) {
       Element.prototype.remove = function() {
         if (this.parentNode) {

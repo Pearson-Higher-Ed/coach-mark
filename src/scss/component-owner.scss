@@ -19,11 +19,27 @@
 	&__content-container {
 		padding: 20px 24px;
 		margin: 10px;
-		background-color: $pe-color-digital-ice-blue;
 		border-radius: 4px;
 		box-shadow: 0 3px 7px rgba(0,0,0,0.25);
 		min-width: 280px;
 		float: left;
+		&.default {
+			background-color: $pe-color-digital-ice-blue;
+			.o-coach-mark__content {
+				&::before {
+					background-color: $pe-color-digital-ice-blue;
+				}
+			}
+
+		}
+		&.info {
+			background-color: $pe-color-sunshine-yellow;
+			.o-coach-mark__content {
+				&::before {
+					background-color: $pe-color-sunshine-yellow;
+				}
+			}
+		}
 	}
 	&__title {
 		padding-bottom: 4px;
@@ -72,7 +88,6 @@
 		position: absolute;
 		width: 16px;
 		height: 16px;
-		background-color: $pe-color-digital-ice-blue;
 		transform: rotate( 45deg );
 	}
 
