@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ComponentOwner from './src/js/component-owner';
 
+
 export default class CoachMark {
 
   constructor(config) {

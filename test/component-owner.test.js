@@ -5,16 +5,16 @@ import ComponentOwner from '../src/js/component-owner';
 const { mount } = enzyme;
 
 describe('Component Owner Suite', () => {
-  
+
   const target = global.document.createElement("div");
   global.document.body.appendChild(target);
 
   let wrapper;
-  
+
   afterEach(() => {
     wrapper.unmount();
   });
-  
+
   it('should shallowly render the component', () => {
     wrapper = mount(
       <ComponentOwner
@@ -25,7 +25,7 @@ describe('Component Owner Suite', () => {
     );
     expect(wrapper.find('.o-coach-mark__title').text()).toEqual('This is a title');
   });
-  
+
   it('should fire resetPosition Function again', function() {
     const resetPositionMock = jest.fn();
     class ComponentOwnerClone extends ComponentOwner {
@@ -40,7 +40,7 @@ describe('Component Owner Suite', () => {
     window.dispatchEvent(new Event('resize'));
     expect(resetPositionMock.mock.calls.length).toBe(2);
   });
-  
+
   it('should not add class for pointer', () => {
     wrapper = mount(
       <ComponentOwner
@@ -52,7 +52,53 @@ describe('Component Owner Suite', () => {
     expect(wrapper.find('.o-coach-mark--top').length).toBe(0);
     expect(wrapper.find('.o-coach-mark--bottom').length).toBe(0);
   });
-  
+
+
+  it('should not add class for animate', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        animate={false}
+      />
+    );
+    expect(wrapper.find('.animated .fadeIn').length).toBe(0);
+  });
+
+  it('should add class for animate', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        animate={true}
+      />
+    );
+    expect(wrapper.find('.animated .fadeIn').length).toBe(1);
+  });
+
+  it('should change coachmark color to yellow', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        type={'info'}
+      />
+    );
+    expect(wrapper.find('.info').length).toBe(1);
+  });
+
+  it('should change coachmark color to white', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        type={'generic'}
+      />
+    );
+    expect(wrapper.find('.generic').length).toBe(1);
+  });
+
+
   it('should place above target', () => {
     wrapper = mount(
       <ComponentOwner
@@ -63,7 +109,7 @@ describe('Component Owner Suite', () => {
     );
     expect(wrapper.find('.o-coach-mark--top-left').length).toBe(1);
   });
-  
+
   it('should place below target', () => {
     wrapper = mount(
       <ComponentOwner
@@ -74,7 +120,7 @@ describe('Component Owner Suite', () => {
     );
     expect(wrapper.find('.o-coach-mark--bottom-left').length).toBe(1);
   });
-  
+
   it('should fire onClose when X is clicked', () => {
     const onCloseMock = jest.fn();
     wrapper = mount(
@@ -87,7 +133,7 @@ describe('Component Owner Suite', () => {
     wrapper.find('.o-coach-mark__close-icon').simulate('click');
     expect(onCloseMock.mock.calls.length).toBe(1);
   });
-  
+
   it('should fire onClose when gotIt button clicked', () => {
     const onCloseMock = jest.fn();
     wrapper = mount(
@@ -101,6 +147,6 @@ describe('Component Owner Suite', () => {
     wrapper.find('.o-coach-mark__got-it').simulate('click');
     expect(onCloseMock.mock.calls.length).toBe(1);
   });
-  
-  
+
+
 });

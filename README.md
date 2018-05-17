@@ -33,6 +33,7 @@ id             | text    | yes      | unique identifier - can be anything as lon
 type           | text    | no       | The type of coach mark you want to display (default is "default", options are "info", "generic")
 offsetX        | int     | no       | moves the mark left/right
 offsetY        | int     | no       | moves the mark up/down
+animate        | boolean | no       | adds a fade in and fade out animation to the coachmark. Default is false
 disableShadow  | boolean | no       | Prevents the darkening of the rest of the page when an element is highlighted. Default is false
 disablePointer | boolean | no       | Disables the pointer which indicates which element the coach mark is attached to. Default is false
 gotIt          | boolean | no       | display "Got it" on bottom-right

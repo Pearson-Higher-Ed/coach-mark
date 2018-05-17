@@ -1,12 +1,12 @@
 import CoachMark from '../index';
 
+
 export const showFirst = () => {
   new CoachMark({
     elementId: 'demo-target1',
     opts: {
       title: 'Default Coach Mark',
-      text: 'Assuming the consumer only passes in .title and .text',
-      type: 'default'
+      text: 'Assuming the consumer only passes in .title and .text'
     }
   });
 };
@@ -19,8 +19,7 @@ export const showSecond = () => {
       text: 'Consumer passes in .forceAbove, .disableShadowing, and .gotIt',
       gotIt: true,
       forceAbove: true,
-      disableShadowing: true,
-      type: 'default'
+      disableShadowing: true
     }
   });
 };
@@ -33,7 +32,6 @@ export const showThird = () => {
       text: 'Consumer passes in .disablePointer and a callback that shows another coach-mark',
       gotIt: true,
       disablePointer: true,
-      type: 'default'
     },
     callback: () => {
       new CoachMark({
@@ -41,7 +39,6 @@ export const showThird = () => {
         opts: {
           text: 'You closed it the coach-mark.  Great job!',
           forceBelow: true,
-          type: 'default'
         }
       })
     }
@@ -53,8 +50,7 @@ export const showFourth = () => {
     elementId: 'demo-target4',
     opts: {
       title: '<h4>Coach Wrapped in h4 HTML tags</h4>',
-      text: '<a href="#">Text that is a clickable link</a>',
-      type: 'default'
+      text: '<a href="#">Text that is a clickable link</a>'
     }
   });
 };
@@ -77,6 +73,27 @@ export const showSixth = () => {
       title: 'Generic Coach Mark',
       text: 'Assuming the consumer only passes in .title and .text',
       type: 'generic'
+    }
+  });
+};
+
+export const showSeventh = () => {
+  new CoachMark({
+    elementId: 'demo-target7',
+    opts: {
+      title: 'Coach Mark Animation',
+      text: 'This Coach Mark will fade and fade out on exit',
+      gotIt: true,
+      animate: true
+    },
+    callback: () => {
+      new CoachMark({
+        elementId: 'demo-target7',
+        opts: {
+          text: 'Yay.  Great job!',
+          animate: true
+        }
+      })
     }
   });
 };

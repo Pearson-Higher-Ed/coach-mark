@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 import PropTypes from 'prop-types';
-import '../scss/component-owner.scss';
+
+import '../../src/scss/component-owner.scss';
+import '../../src/scss/animation.scss';
 
 // using lodash for unsupported es6 in IE11
 import _ from 'lodash';
@@ -17,6 +19,7 @@ class ComponentOwner extends Component {
     id: PropTypes.string,
     onClose: PropTypes.func,
     srCloseText: PropTypes.string,
+    animate: PropTypes.bool,
     gotIt: PropTypes.bool,
     gotItText: PropTypes.string,
     disableShadowing: PropTypes.bool,
@@ -35,14 +38,16 @@ class ComponentOwner extends Component {
     offsetY: 0,
     srCloseText: 'Close dialog',
     zIndex: 1200,
-    type: 'default'
+    type: 'default',
+    animate: false
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      animate: null
     };
+    this.closeCoach = this.closeCoach.bind(this);
   }
   componentWillMount() {
     if (!this.props.disableShadowing) {
@@ -53,13 +58,16 @@ class ComponentOwner extends Component {
       this.props.target.scrollIntoView(false);
     }
 
-    this.setState({isOpen: true});
     window.addEventListener('resize', this.resetPosition);
   }
 
   componentDidMount() {
     const buttons = document.querySelectorAll('button');
     const coachmarkButtons = document.querySelectorAll('.o-coach-mark__container button');
+
+    if (this.props.animate === true) {
+      this.setState({animate: true});
+    }
 
     _.forEach(buttons, button=> {
       button.setAttribute('disabled', true)
@@ -72,6 +80,7 @@ class ComponentOwner extends Component {
 
     this.resetPosition();
   }
+
 
   componentWillUnmount() {
     const buttons = document.querySelectorAll('button');
@@ -109,7 +118,6 @@ class ComponentOwner extends Component {
     const left = (window.innerWidth > 480) ? centerOnDiv() : centerOnScreen();
 
     const placement = this.getPlacement();
-
 
     const top = _.includes(placement, 'bottom')
       ? elementPosition.bottom + 2
@@ -151,10 +159,23 @@ class ComponentOwner extends Component {
     return placement;
   };
 
+  closeCoach() {
+    if (this.props.animate === true) {
+      this.setState({animate: false});
+      setTimeout(() => {
+        this.props.onClose();
+      }, 500)
+    } else {
+      this.props.onClose();
+    }
+  }
+
   render() {
     const placement = this.getPlacement();
     return (
-      <div ref={(node) => {this.container = node}} id={this.props.id} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
+      <div ref={(node) => {this.container = node}} id={this.props.id}
+        className={this.state.animate === true ? "o-coach-mark__container animated fadeIn" :
+          this.state.animate === false ? "o-coach-mark__container animated fadeOut" : "o-coach-mark__container"}  style={{ zIndex: this.props.zIndex }}>
         <div ref={(node) => {this.contentContainer = node}}
           className={this.props.type === 'info' ? 'o-coach-mark__content-container info' :
             this.props.type === 'generic' ? 'o-coach-mark__content-container generic' : 'o-coach-mark__content-container default'}
@@ -162,12 +183,9 @@ class ComponentOwner extends Component {
           <button
             type="button"
             className="o-coach-mark__close-icon"
-            onClick={this.props.onClose}
+            onClick={this.closeCoach}
           >
-            <svg role="img"
-                 aria-labelledby="r2"
-                 focusable="false"
-                 className="pe-icon--remove-sm-18">
+            <svg role="img" aria-labelledby="r2" focusable="false" className="pe-icon--remove-sm-18">
               <title id="r2">{this.props.srCloseText}</title>
               <use xlinkHref="#remove-sm-18"></use>
             </svg>
@@ -180,7 +198,7 @@ class ComponentOwner extends Component {
               { ReactHtmlParser(this.props.text) }
             </p>
             {this.props.gotIt &&
-            <button className="o-coach-mark__got-it pe-label" onClick={this.props.onClose}>
+            <button className="o-coach-mark__got-it pe-label" onClick={this.closeCoach}>
               { ReactHtmlParser(this.props.gotItText) }
             </button>
             }
@@ -191,5 +209,4 @@ class ComponentOwner extends Component {
     );
   }
 }
-
 export default ComponentOwner;
