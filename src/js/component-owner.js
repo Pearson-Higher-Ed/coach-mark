@@ -155,7 +155,10 @@ class ComponentOwner extends Component {
     const placement = this.getPlacement();
     return (
       <div ref={(node) => {this.container = node}} id={this.props.id} className="o-coach-mark__container"  style={{ zIndex: this.props.zIndex }}>
-        <div ref={(node) => {this.contentContainer = node}} className={this.props.type === 'info' ? 'o-coach-mark__content-container info' : 'o-coach-mark__content-container default'}>
+        <div ref={(node) => {this.contentContainer = node}}
+          className={this.props.type === 'info' ? 'o-coach-mark__content-container info' :
+            this.props.type === 'generic' ? 'o-coach-mark__content-container generic' : 'o-coach-mark__content-container default'}
+        >
           <button
             type="button"
             className="o-coach-mark__close-icon"

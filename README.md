@@ -30,7 +30,7 @@ title          | text    | no       | The title
 text           | text    | yes      | The body of the coach mark
 srCloseText    | text    | no       | The screen reader text that calls out the close button (default is "Close Dialog")
 id             | text    | yes      | unique identifier - can be anything as long as no other HTML element has this value as an id
-type           | text    | no       | The type of coach mark you want to display (default is "default", informative is "info")
+type           | text    | no       | The type of coach mark you want to display (default is "default", options are "info", "generic")
 offsetX        | int     | no       | moves the mark left/right
 offsetY        | int     | no       | moves the mark up/down
 disableShadow  | boolean | no       | Prevents the darkening of the rest of the page when an element is highlighted. Default is false

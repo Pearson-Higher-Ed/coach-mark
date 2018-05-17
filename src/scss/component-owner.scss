@@ -25,20 +25,12 @@
 		float: left;
 		&.default {
 			background-color: $pe-color-digital-ice-blue;
-			.o-coach-mark__content {
-				&::before {
-					background-color: $pe-color-digital-ice-blue;
-				}
-			}
-
 		}
 		&.info {
 			background-color: $pe-color-sunshine-yellow;
-			.o-coach-mark__content {
-				&::before {
-					background-color: $pe-color-sunshine-yellow;
-				}
-			}
+		}
+		&.generic {
+			background-color: white;
 		}
 	}
 	&__title {
@@ -54,6 +46,7 @@
 		width: 255px;
 		margin: 0px;
 		position: relative;
+		background-color:inherit;
 	}
 
 	&--bottom::before {
@@ -89,6 +82,7 @@
 		width: 16px;
 		height: 16px;
 		transform: rotate( 45deg );
+		background-color: inherit;
 	}
 
 	&__got-it,

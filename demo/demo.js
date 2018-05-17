@@ -69,3 +69,14 @@ export const showFifth = () => {
     }
   });
 };
+
+export const showSixth = () => {
+  new CoachMark({
+    elementId: 'demo-target6',
+    opts: {
+      title: 'Generic Coach Mark',
+      text: 'Assuming the consumer only passes in .title and .text',
+      type: 'generic'
+    }
+  });
+};
