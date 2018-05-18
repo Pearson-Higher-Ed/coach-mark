@@ -31,14 +31,14 @@ export const showThird = () => {
       title: 'Coach Mark w/No Pointer',
       text: 'Consumer passes in .disablePointer and a callback that shows another coach-mark',
       gotIt: true,
-      disablePointer: true,
+      disablePointer: true
     },
     callback: () => {
       new CoachMark({
         elementId: 'demo-target3',
         opts: {
           text: 'You closed it the coach-mark.  Great job!',
-          forceBelow: true,
+          forceBelow: true
         }
       })
     }
@@ -84,7 +84,8 @@ export const showSeventh = () => {
       title: 'Coach Mark Animation',
       text: 'This Coach Mark will fade and fade out on exit',
       gotIt: true,
-      animate: true
+      animate: true,
+      showClose: false
     },
     callback: () => {
       new CoachMark({
@@ -94,6 +95,18 @@ export const showSeventh = () => {
           animate: true
         }
       })
+    }
+  });
+};
+
+export const showEighth= () => {
+  new CoachMark({
+    elementId: 'demo-target8',
+    opts: {
+      title: 'Coach Mark Without an X',
+      text: 'Assuming the consumer only passes in .title and .text',
+      gotIt: true,
+      showClose: false
     }
   });
 };
