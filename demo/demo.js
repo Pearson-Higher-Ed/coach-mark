@@ -61,7 +61,7 @@ export const showFifth = () => {
     elementId: 'demo-target5',
     opts: {
       title: 'Information Coach Mark',
-      text: 'Assuming the consumer only passes in .title and .text',
+      text: 'Consumer passes in the type: info',
       type: 'info'
     }
   });
@@ -72,7 +72,7 @@ export const showSixth = () => {
     elementId: 'demo-target6',
     opts: {
       title: 'Generic Coach Mark',
-      text: 'Assuming the consumer only passes in .title and .text',
+      text: 'Consumer passes in the type: generic',
       type: 'generic'
     }
   });
@@ -83,10 +83,10 @@ export const showSeventh = () => {
     elementId: 'demo-target7',
     opts: {
       title: 'Coach Mark Animation',
-      text: 'This Coach Mark will fade and fade out on exit',
+      text: 'Consumer passes in animate: true',
       gotIt: true,
-      animate: true,
-      showClose: false
+      disablePointer: true,
+      animate: true
     },
     callback: () => {
       new CoachMark({
@@ -105,7 +105,7 @@ export const showEighth= () => {
     elementId: 'demo-target8',
     opts: {
       title: 'Coach Mark Without an X',
-      text: 'Assuming the consumer only passes in .title and .text',
+      text: 'Consumer passes in showClose: false',
       gotIt: true,
       showClose: false
     }
@@ -117,9 +117,7 @@ export const showNinth= () => {
     elementId: 'demo-target9',
     opts: {
       title: 'Coach Mark can close when clicked outside the target area',
-      text: 'Assuming the consumer only passes in .title and .text',
-      gotIt: true,
-      showClose: false,
+      text: 'Consumer passes in closeOnBodyClick: true',
       closeOnBodyClick: true
     }
   });

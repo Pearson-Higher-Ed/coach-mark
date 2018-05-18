@@ -8,11 +8,9 @@ export default class CoachMark {
 
   constructor(config) {
     this.config = config;
-    console.log('hello');
     const target = document.getElementById(config.elementId);
     this.container = document.createElement('div');
     target.parentNode.insertBefore(this.container, target.nextSibling);
-
     ReactDOM.render(
 
       <ComponentOwner
@@ -20,20 +18,11 @@ export default class CoachMark {
         onClose={this.removeCoachMark}
         {...config.opts}
       />,
-
       this.container
     );
   }
 
   removeCoachMark = (event) => {
-    // IE 11 polyfill for .remove();
-    if (!('remove' in Element.prototype)) {
-      Element.prototype.remove = function() {
-        if (this.parentNode) {
-          this.parentNode.removeChild(this);
-        }
-      };
-    }
     ReactDOM.unmountComponentAtNode(this.container);
     this.container.remove();
     if (this.config.callback) {

@@ -46,6 +46,7 @@ class ComponentOwner extends Component {
       animate: null
     };
     this.closeCoach = this.closeCoach.bind(this);
+    this.closeOnBodyClick = this.closeOnBodyClick.bind(this);
   }
   componentWillMount() {
     if (!this.props.disableShadowing) {
@@ -69,6 +70,13 @@ class ComponentOwner extends Component {
       this.setState({ animate: true });
     }
 
+    if (this.props.closeOnBodyClick === true) {
+      // set a split second timeout to avoid capture of click outside the coachmark
+      setTimeout(() => {
+        document.addEventListener('click', this.closeOnBodyClick);
+      }, 1);
+    }
+
     _.forEach(buttons, button => {
       button.setAttribute('disabled', true);
     });
@@ -85,9 +93,19 @@ class ComponentOwner extends Component {
     window.removeEventListener('resize', this.resetPosition);
     this.props.target.classList.remove('o-coach-mark__hole');
 
+    if (this.props.closeOnBodyClick === true) {
+      document.removeEventListener('click', this.closeOnBodyClick);
+    }
+
     _.forEach(buttons, button => {
       button.removeAttribute('disabled');
     });
+  }
+
+  closeOnBodyClick(event) {
+    if (event.target.closest('.o-coach-mark__content-container') === null) {
+      this.closeCoach();
+    }
   }
 
   resetPosition = () => {
@@ -106,7 +124,7 @@ class ComponentOwner extends Component {
     const centerOnDiv = () => {
       return (
         horizontal_center -
-        (_.includes(this.content.className, '-left') ? 60 : 280)
+        (this.content.className.includes('-left') ? 60 : 280)
       );
     };
 
@@ -121,7 +139,7 @@ class ComponentOwner extends Component {
 
     const placement = this.getPlacement();
 
-    const top = _.includes(placement, 'bottom')
+    const top = placement.includes('bottom')
       ? elementPosition.bottom + 2
       : elementPosition.top - this.container.scrollHeight;
 
