@@ -1,5 +1,6 @@
 import CoachMark from '../index';
-
+import '../src/scss/component-owner.scss';
+import '../src/scss/animation.scss';
 
 export const showFirst = () => {
   new CoachMark({
@@ -107,6 +108,19 @@ export const showEighth= () => {
       text: 'Assuming the consumer only passes in .title and .text',
       gotIt: true,
       showClose: false
+    }
+  });
+};
+
+export const showNinth= () => {
+  new CoachMark({
+    elementId: 'demo-target9',
+    opts: {
+      title: 'Coach Mark can close when clicked outside the target area',
+      text: 'Assuming the consumer only passes in .title and .text',
+      gotIt: true,
+      showClose: false,
+      closeOnBodyClick: true
     }
   });
 };

@@ -3,20 +3,24 @@ import ReactDOM from 'react-dom';
 import ComponentOwner from './src/js/component-owner';
 
 
+
 export default class CoachMark {
 
   constructor(config) {
     this.config = config;
+    console.log('hello');
     const target = document.getElementById(config.elementId);
     this.container = document.createElement('div');
     target.parentNode.insertBefore(this.container, target.nextSibling);
 
     ReactDOM.render(
+
       <ComponentOwner
         target={target}
         onClose={this.removeCoachMark}
         {...config.opts}
       />,
+
       this.container
     );
   }

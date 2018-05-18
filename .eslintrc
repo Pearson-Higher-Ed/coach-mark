@@ -8,14 +8,14 @@ env:
 
 rules:
   # Style
-  comma-spacing: 2
-  eol-last: 2
-  indent: [2, 2]
-  new-cap: 2
-  one-var: [2, never]
-  quotes: [1, single]
-  space-after-keywords: 2
-  space-before-blocks: 2
+#  comma-spacing: 2
+#  eol-last: 2
+#  indent: [2, 2]
+#  new-cap: 2
+#  one-var: [2, never]
+#  quotes: [1, single]
+#  space-after-keywords: 2
+#  space-before-blocks: 2
 
   ## React
   jsx-quotes: [2, prefer-double]

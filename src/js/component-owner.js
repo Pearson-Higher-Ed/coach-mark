@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 import PropTypes from 'prop-types';
-
-import '../../src/scss/component-owner.scss';
-import '../../src/scss/animation.scss';
 
 // using lodash for unsupported es6 in IE11
 import _ from 'lodash';
 
 class ComponentOwner extends Component {
-
   static propTypes = {
     target: PropTypes.object.isRequired,
     title: PropTypes.string,
@@ -65,24 +61,24 @@ class ComponentOwner extends Component {
 
   componentDidMount() {
     const buttons = document.querySelectorAll('button');
-    const coachmarkButtons = document.querySelectorAll('.o-coach-mark__container button');
+    const coachmarkButtons = document.querySelectorAll(
+      '.o-coach-mark__container button'
+    );
 
     if (this.props.animate === true) {
-      this.setState({animate: true});
+      this.setState({ animate: true });
     }
 
-    _.forEach(buttons, button=> {
-      button.setAttribute('disabled', true)
+    _.forEach(buttons, button => {
+      button.setAttribute('disabled', true);
     });
 
-
-    _.forEach(coachmarkButtons, button=> {
+    _.forEach(coachmarkButtons, button => {
       button.removeAttribute('disabled');
     });
 
     this.resetPosition();
   }
-
 
   componentWillUnmount() {
     const buttons = document.querySelectorAll('button');
@@ -92,7 +88,6 @@ class ComponentOwner extends Component {
     _.forEach(buttons, button => {
       button.removeAttribute('disabled');
     });
-
   }
 
   resetPosition = () => {
@@ -104,20 +99,25 @@ class ComponentOwner extends Component {
         bottom: target.offsetTop + target.offsetHeight,
         right: target.offsetLeft + target.offsetWidth
       },
-      horizontal_center = ((elementPosition.right - elementPosition.left) / 2 + elementPosition.left);
+      horizontal_center =
+        (elementPosition.right - elementPosition.left) / 2 +
+        elementPosition.left;
 
     const centerOnDiv = () => {
-      return horizontal_center - (_.includes(this.content.className, '-left') ? 60 : 280);
-
+      return (
+        horizontal_center -
+        (_.includes(this.content.className, '-left') ? 60 : 280)
+      );
     };
 
     const centerOnScreen = () => {
       // take horizontal scroll into account
-      const relativeOffset = this.container.getBoundingClientRect().left - this.container.offsetLeft;
+      const relativeOffset =
+        this.container.getBoundingClientRect().left - this.container.offsetLeft;
       return window.innerWidth / 2 - relativeOffset - 150;
     };
     // center pointer on div if wider than 480, otherwise center on screen
-    const left = (window.innerWidth > 480) ? centerOnDiv() : centerOnScreen();
+    const left = window.innerWidth > 480 ? centerOnDiv() : centerOnScreen();
 
     const placement = this.getPlacement();
 
@@ -143,9 +143,10 @@ class ComponentOwner extends Component {
 
     // get window geometry - this is how jQuery does it
     const rect = this.props.target.getBoundingClientRect(),
-      isBottomHalf = rect.bottom - rect.height + 50 + window.pageYOffset > window.innerHeight/2,
-      leftCenterLine = rect.left + rect.width/2 < window.innerWidth/2
-    ;
+      isBottomHalf =
+        rect.bottom - rect.height + 50 + window.pageYOffset >
+        window.innerHeight / 2,
+      leftCenterLine = rect.left + rect.width / 2 < window.innerWidth / 2;
 
     let placement;
     if (this.props.forceAbove) {
@@ -153,7 +154,7 @@ class ComponentOwner extends Component {
     } else if (this.props.forceBelow) {
       placement = 'o-coach-mark--bottom';
     } else {
-      placement = isBottomHalf ? 'o-coach-mark--top' : 'o-coach-mark--bottom'
+      placement = isBottomHalf ? 'o-coach-mark--top' : 'o-coach-mark--bottom';
     }
     if (leftCenterLine) {
       return `${placement}-left`;
@@ -163,10 +164,10 @@ class ComponentOwner extends Component {
 
   closeCoach() {
     if (this.props.animate === true) {
-      this.setState({animate: false});
+      this.setState({ animate: false });
       setTimeout(() => {
         this.props.onClose();
-      }, 500)
+      }, 500);
     } else {
       this.props.onClose();
     }
@@ -175,43 +176,76 @@ class ComponentOwner extends Component {
   render() {
     const placement = this.getPlacement();
     return (
-      <div ref={(node) => {this.container = node}} id={this.props.id}
-        className={this.state.animate === true ? "o-coach-mark__container animated fadeIn" :
-          this.state.animate === false ? "o-coach-mark__container animated fadeOut" : "o-coach-mark__container"}  style={{ zIndex: this.props.zIndex }}>
-        <div ref={(node) => {this.contentContainer = node}}
-          className={this.props.type === 'info' ? 'o-coach-mark__content-container info' :
-            this.props.type === 'generic' ? 'o-coach-mark__content-container generic' : 'o-coach-mark__content-container default'}
+      <Fragment>
+        <div
+          ref={node => {
+            this.container = node;
+          }}
+          id={this.props.id}
+          className={
+            this.state.animate === true
+              ? 'o-coach-mark__container animated fadeIn'
+              : this.state.animate === false
+                ? 'o-coach-mark__container animated fadeOut'
+                : 'o-coach-mark__container'
+          }
+          style={{ zIndex: this.props.zIndex }}
         >
-          {
-            this.props.showClose === true ?
+          <div
+            ref={node => {
+              this.contentContainer = node;
+            }}
+            className={
+              this.props.type === 'info'
+                ? 'o-coach-mark__content-container info'
+                : this.props.type === 'generic'
+                  ? 'o-coach-mark__content-container generic'
+                  : 'o-coach-mark__content-container default'
+            }
+          >
+            {this.props.showClose ? (
               <button
                 type="button"
                 className="o-coach-mark__close-icon"
                 onClick={this.closeCoach}
               >
-                <svg role="img" aria-labelledby="r2" focusable="false" className="pe-icon--remove-sm-18">
+                <svg
+                  role="img"
+                  aria-labelledby="r2"
+                  focusable="false"
+                  className="pe-icon--remove-sm-18"
+                >
                   <title id="r2">{this.props.srCloseText}</title>
-                  <use xlinkHref="#remove-sm-18"></use>
+                  <use xlinkHref="#remove-sm-18" />
                 </svg>
-              </button> :
-              <div></div>
-          }
-          <div ref={(node) => {this.content = node}} className={`o-coach-mark__content ${placement}`}>
-            <div className="o-coach-mark__title pe-label--bold">
-              { ReactHtmlParser(this.props.title) }
+              </button>
+            ) : (
+              <div />
+            )}
+            <div
+              ref={node => {
+                this.content = node;
+              }}
+              className={`o-coach-mark__content ${placement}`}
+            >
+              <div className="o-coach-mark__title pe-label--bold">
+                {ReactHtmlParser(this.props.title)}
+              </div>
+              <p className="o-coach-mark__paragraph pe-label">
+                {ReactHtmlParser(this.props.text)}
+              </p>
+              {this.props.gotIt && (
+                <button
+                  className="o-coach-mark__got-it pe-label"
+                  onClick={this.closeCoach}
+                >
+                  {ReactHtmlParser(this.props.gotItText)}
+                </button>
+              )}
             </div>
-            <p className="o-coach-mark__paragraph pe-label">
-              { ReactHtmlParser(this.props.text) }
-            </p>
-            {this.props.gotIt &&
-            <button className="o-coach-mark__got-it pe-label" onClick={this.closeCoach}>
-              { ReactHtmlParser(this.props.gotItText) }
-            </button>
-            }
           </div>
-
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
