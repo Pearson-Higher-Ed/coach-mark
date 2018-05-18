@@ -37,6 +37,7 @@ animate        | boolean | no       | adds a fade in and fade out animation to t
 disableShadow  | boolean | no       | Prevents the darkening of the rest of the page when an element is highlighted. Default is false
 disablePointer | boolean | no       | Disables the pointer which indicates which element the coach mark is attached to. Default is false
 gotIt          | boolean | no       | display "Got it" on bottom-right
+showClose      | boolean | no       | display "X" in the upper-right
 gotItText      | text    | no       | Overrides the "Got it" text
 zIndex         | int     | no       | keeps coachmark on top or below other HTML elements,based on the requirement.Default is 1010
 forceAbove     | boolean | no       | forces the coach mark to be above element

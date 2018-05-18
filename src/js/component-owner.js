@@ -24,6 +24,7 @@ class ComponentOwner extends Component {
     gotItText: PropTypes.string,
     disableShadowing: PropTypes.bool,
     disablePointer: PropTypes.bool,
+    showClose: PropTypes.bool,
     offsetX: PropTypes.number,
     offsetY: PropTypes.number,
     zIndex: PropTypes.number,
@@ -39,7 +40,8 @@ class ComponentOwner extends Component {
     srCloseText: 'Close dialog',
     zIndex: 1200,
     type: 'default',
-    animate: false
+    animate: false,
+    showClose: true
   };
 
   constructor(props) {
@@ -180,16 +182,20 @@ class ComponentOwner extends Component {
           className={this.props.type === 'info' ? 'o-coach-mark__content-container info' :
             this.props.type === 'generic' ? 'o-coach-mark__content-container generic' : 'o-coach-mark__content-container default'}
         >
-          <button
-            type="button"
-            className="o-coach-mark__close-icon"
-            onClick={this.closeCoach}
-          >
-            <svg role="img" aria-labelledby="r2" focusable="false" className="pe-icon--remove-sm-18">
-              <title id="r2">{this.props.srCloseText}</title>
-              <use xlinkHref="#remove-sm-18"></use>
-            </svg>
-          </button>
+          {
+            this.props.showClose === true ?
+              <button
+                type="button"
+                className="o-coach-mark__close-icon"
+                onClick={this.closeCoach}
+              >
+                <svg role="img" aria-labelledby="r2" focusable="false" className="pe-icon--remove-sm-18">
+                  <title id="r2">{this.props.srCloseText}</title>
+                  <use xlinkHref="#remove-sm-18"></use>
+                </svg>
+              </button> :
+              <div></div>
+          }
           <div ref={(node) => {this.content = node}} className={`o-coach-mark__content ${placement}`}>
             <div className="o-coach-mark__title pe-label--bold">
               { ReactHtmlParser(this.props.title) }
