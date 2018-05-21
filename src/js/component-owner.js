@@ -62,35 +62,16 @@ class ComponentOwner extends Component {
   }
 
   componentDidMount() {
-    const buttons = document.querySelectorAll('button');
-    const coachmarkButtons = document.querySelectorAll('.o-coach-mark__container button');
-
     if (this.props.animate === true) {
       this.setState({animate: true});
     }
-
-    _.forEach(buttons, button=> {
-      button.setAttribute('disabled', true)
-    });
-
-
-    _.forEach(coachmarkButtons, button=> {
-      button.removeAttribute('disabled');
-    });
-
     this.resetPosition();
   }
 
 
   componentWillUnmount() {
-    const buttons = document.querySelectorAll('button');
     window.removeEventListener('resize', this.resetPosition);
     this.props.target.classList.remove('o-coach-mark__hole');
-
-    _.forEach(buttons, button => {
-      button.removeAttribute('disabled');
-    });
-
   }
 
   resetPosition = () => {
