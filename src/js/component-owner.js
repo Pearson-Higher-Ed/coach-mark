@@ -26,6 +26,8 @@ class ComponentOwner extends Component {
     zIndex: PropTypes.number,
     forceAbove: PropTypes.bool,
     forceBelow: PropTypes.bool,
+    forceRight: PropTypes.bool,
+    forceLeft: PropTypes.bool,
     stopScroll: PropTypes.bool
   };
 
@@ -153,6 +155,10 @@ class ComponentOwner extends Component {
       placement = 'o-coach-mark--top';
     } else if (this.props.forceBelow) {
       placement = 'o-coach-mark--bottom';
+    } else if (this.props.forceRight) {
+      placement = 'o-coach-mark--right';
+    } else if (this.props.forceLeft) {
+      placement = 'o-coach-mark--left';
     } else {
       placement = isBottomHalf ? 'o-coach-mark--top' : 'o-coach-mark--bottom';
     }
