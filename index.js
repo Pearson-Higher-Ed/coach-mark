@@ -21,6 +21,8 @@ export default class CoachMark {
         />,
         this.container
       )
+    } else {
+      return null
     }
   }
 

@@ -1,5 +1,6 @@
 import CoachMark from '../index';
-
+import '../src/scss/component-owner.scss';
+import '../src/scss/animation.scss';
 
 export const showFirst = () => {
   new CoachMark({
@@ -31,14 +32,14 @@ export const showThird = () => {
       title: 'Coach Mark w/No Pointer',
       text: 'Consumer passes in .disablePointer and a callback that shows another coach-mark',
       gotIt: true,
-      disablePointer: true,
+      disablePointer: true
     },
     callback: () => {
       new CoachMark({
         elementId: 'demo-target3',
         opts: {
           text: 'You closed it the coach-mark.  Great job!',
-          forceBelow: true,
+          forceBelow: true
         }
       })
     }
@@ -60,7 +61,7 @@ export const showFifth = () => {
     elementId: 'demo-target5',
     opts: {
       title: 'Information Coach Mark',
-      text: 'Assuming the consumer only passes in .title and .text',
+      text: 'Consumer passes in the type: info',
       type: 'info'
     }
   });
@@ -71,7 +72,7 @@ export const showSixth = () => {
     elementId: 'demo-target6',
     opts: {
       title: 'Generic Coach Mark',
-      text: 'Assuming the consumer only passes in .title and .text',
+      text: 'Consumer passes in the type: generic',
       type: 'generic'
     }
   });
@@ -82,8 +83,9 @@ export const showSeventh = () => {
     elementId: 'demo-target7',
     opts: {
       title: 'Coach Mark Animation',
-      text: 'This Coach Mark will fade and fade out on exit',
+      text: 'Consumer passes in animate: true',
       gotIt: true,
+      disablePointer: true,
       animate: true
     },
     callback: () => {
@@ -94,6 +96,29 @@ export const showSeventh = () => {
           animate: true
         }
       })
+    }
+  });
+};
+
+export const showEighth= () => {
+  new CoachMark({
+    elementId: 'demo-target8',
+    opts: {
+      title: 'Coach Mark Without an X',
+      text: 'Consumer passes in showClose: false',
+      gotIt: true,
+      showClose: false
+    }
+  });
+};
+
+export const showNinth= () => {
+  new CoachMark({
+    elementId: 'demo-target9',
+    opts: {
+      title: 'Coach Mark can close when clicked outside the target area',
+      text: 'Consumer passes in closeOnBodyClick: true',
+      closeOnBodyClick: true
     }
   });
 };

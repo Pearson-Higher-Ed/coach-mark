@@ -98,6 +98,26 @@ describe('Component Owner Suite', () => {
     expect(wrapper.find('.generic').length).toBe(1);
   });
 
+  it('should have a close X button', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+      />
+    );
+    expect(wrapper.find('.o-coach-mark__close-icon').length).toBe(1);
+  });
+
+  it('should not have a close X button', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        showClose={false}
+      />
+    );
+    expect(wrapper.find('.o-coach-mark__close-icon').length).toBe(0);
+  });
 
   it('should place above target', () => {
     wrapper = mount(
@@ -148,5 +168,18 @@ describe('Component Owner Suite', () => {
     expect(onCloseMock.mock.calls.length).toBe(1);
   });
 
+  it('should not fire onClose when component is clicked', () => {
+    const onCloseMock = jest.fn();
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        onClose={onCloseMock}
+        closeOnBodyClick={true}
+      />
+    );
+    wrapper.find('.o-coach-mark__container').simulate('click');
+    expect(onCloseMock.mock.calls.length).toBe(0);
+  });
 
 });
