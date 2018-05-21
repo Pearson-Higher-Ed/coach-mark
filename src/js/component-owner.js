@@ -4,6 +4,9 @@ import ReactHtmlParser from 'react-html-parser';
 import PropTypes from 'prop-types';
 import '../scss/component-owner.scss';
 
+// using lodash for unsupported es6 in IE11
+import _ from 'lodash';
+
 class ComponentOwner extends Component {
 
   static propTypes = {
@@ -33,6 +36,12 @@ class ComponentOwner extends Component {
     zIndex: 1200
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false
+    };
+  }
   componentWillMount() {
     if (!this.props.disableShadowing) {
       this.props.target.classList.add('o-coach-mark__hole');
@@ -41,6 +50,7 @@ class ComponentOwner extends Component {
     if (!this.props.stopScroll) {
       this.props.target.scrollIntoView(false);
     }
+
     window.addEventListener('resize', this.resetPosition);
   }
 
@@ -65,7 +75,8 @@ class ComponentOwner extends Component {
       horizontal_center = ((elementPosition.right - elementPosition.left) / 2 + elementPosition.left);
 
     const centerOnDiv = () => {
-      return horizontal_center - (this.content.className.includes('-left') ? 60 : 280);
+      return horizontal_center - (_.includes(this.content.className, '-left') ? 60 : 280);
+
     };
 
     const centerOnScreen = () => {
@@ -78,7 +89,8 @@ class ComponentOwner extends Component {
 
     const placement = this.getPlacement();
 
-    const top = placement.includes('bottom')
+
+    const top = _.includes(placement, 'bottom')
       ? elementPosition.bottom + 2
       : elementPosition.top - this.container.scrollHeight;
 
@@ -129,9 +141,9 @@ class ComponentOwner extends Component {
             onClick={this.props.onClose}
           >
             <svg role="img"
-              aria-labelledby="r2"
-              focusable="false"
-              className="pe-icon--remove-sm-18">
+                 aria-labelledby="r2"
+                 focusable="false"
+                 className="pe-icon--remove-sm-18">
               <title id="r2">{this.props.srCloseText}</title>
               <use xlinkHref="#remove-sm-18"></use>
             </svg>
