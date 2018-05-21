@@ -51,35 +51,16 @@ class ComponentOwner extends Component {
       this.props.target.scrollIntoView(false);
     }
 
-    this.setState({isOpen: true});
     window.addEventListener('resize', this.resetPosition);
   }
 
   componentDidMount() {
-    const buttons = document.querySelectorAll('button');
-    const coachmarkButtons = document.querySelectorAll('.o-coach-mark__container button');
-
-    _.forEach(buttons, button=> {
-      button.setAttribute('disabled', true)
-    });
-
-
-    _.forEach(coachmarkButtons, button=> {
-      button.removeAttribute('disabled');
-    });
-
     this.resetPosition();
   }
 
   componentWillUnmount() {
-    const buttons = document.querySelectorAll('button');
     window.removeEventListener('resize', this.resetPosition);
     this.props.target.classList.remove('o-coach-mark__hole');
-
-    _.forEach(buttons, button => {
-      button.removeAttribute('disabled');
-    });
-
   }
 
   resetPosition = () => {
