@@ -37,7 +37,8 @@ class ComponentOwner extends Component {
     zIndex: 1200,
     type: 'default',
     animate: false,
-    showClose: true
+    showClose: true,
+    closeOnBodyClick: false
   };
 
   constructor(props) {
