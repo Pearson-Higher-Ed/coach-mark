@@ -24,25 +24,26 @@ will allow to adjust css in cases of long texts that needs to be wrapped on two 
 
 Options are the following
 
-Option         | Type    | Required | Notes
+Option           | Type    | Required | Notes
 -------------------------------------------
-title          | text    | no       | The title
-text           | text    | yes      | The body of the coach mark
-srCloseText    | text    | no       | The screen reader text that calls out the close button (default is "Close Dialog")
-id             | text    | yes      | unique identifier - can be anything as long as no other HTML element has this value as an id
-type           | text    | no       | The type of coach mark you want to display (default is "default", options are "info", "generic")
-offsetX        | int     | no       | moves the mark left/right
-offsetY        | int     | no       | moves the mark up/down
-animate        | boolean | no       | adds a fade in and fade out animation to the coachmark. Default is false
-disableShadow  | boolean | no       | Prevents the darkening of the rest of the page when an element is highlighted. Default is false
-disablePointer | boolean | no       | Disables the pointer which indicates which element the coach mark is attached to. Default is false
-gotIt          | boolean | no       | display "Got it" on bottom-right
-showClose      | boolean | no       | display "X" in the upper-right
-gotItText      | text    | no       | Overrides the "Got it" text
-zIndex         | int     | no       | keeps coachmark on top or below other HTML elements,based on the requirement.Default is 1010
-forceAbove     | boolean | no       | forces the coach mark to be above element
-forceBelow     | boolean | no       | forces the coach mark to be below element
-stopScroll     | boolean | no       | Stops coach mark from moving the view
+title            | text    | no       | The title
+text             | text    | yes      | The body of the coach mark
+srCloseText      | text    | no       | The screen reader text that calls out the close button (default is "Close Dialog")
+id               | text    | yes      | unique identifier - can be anything as long as no other HTML element has this value as an id
+type             | text    | no       | The type of coach mark you want to display (default is "default", options are "info", "generic")
+offsetX          | int     | no       | moves the mark left/right
+offsetY          | int     | no       | moves the mark up/down
+animate          | boolean | no       | adds a fade in and fade out animation to the coachmark. Default is false
+closeOnBodyClick | boolean | no       | closes when the target click is outside the coachmark
+disableShadow    | boolean | no       | Prevents the darkening of the rest of the page when an element is highlighted. Default is false
+disablePointer   | boolean | no       | Disables the pointer which indicates which element the coach mark is attached to. Default is false
+gotIt            | boolean | no       | display "Got it" on bottom-right
+showClose        | boolean | no       | display "X" in the upper-right
+gotItText        | text    | no       | Overrides the "Got it" text
+zIndex           | int     | no       | keeps coachmark on top or below other HTML elements,based on the requirement.Default is 1010
+forceAbove       | boolean | no       | forces the coach mark to be above element
+forceBelow       | boolean | no       | forces the coach mark to be below element
+stopScroll       | boolean | no       | Stops coach mark from moving the view
 
 
 

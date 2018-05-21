@@ -168,5 +168,18 @@ describe('Component Owner Suite', () => {
     expect(onCloseMock.mock.calls.length).toBe(1);
   });
 
+  it('should not fire onClose when component is clicked', () => {
+    const onCloseMock = jest.fn();
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        onClose={onCloseMock}
+        closeOnBodyClick={true}
+      />
+    );
+    wrapper.find('.o-coach-mark__container').simulate('click');
+    expect(onCloseMock.mock.calls.length).toBe(0);
+  });
 
 });
