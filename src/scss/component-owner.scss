@@ -84,26 +84,6 @@
     transform: rotate(45deg);
     background-color: inherit;
   }
-
-  &--p-right-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    &::before {
-      content: '\00a0';
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      transform: rotate(45deg);
-      background-color: inherit;
-      left: -33px;
-      box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
-      @media (max-width: 480px) {
-        display: none;
-      }
-    }
-  }
-
   &__got-it,
   &__close-icon {
     float: right;
@@ -123,5 +103,41 @@
   }
   &__close-icon {
     margin: -4px -10px 0 0;
+  }
+}
+.o-coach-mark--p-right.vertical-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &::before {
+    content: '\00a0';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    transform: rotate(45deg);
+    background-color: inherit;
+    left: -33px;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+    @media (max-width: 480px) {
+      display: none;
+    }
+  }
+}
+.o-coach-mark--p-left.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &::before {
+    content: '\00a0';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    transform: rotate(45deg);
+    background-color: inherit;
+    left: 294px;
+    box-shadow: 2px 0px 0px 0px rgba(0, 0, 0, 0.1);
+    @media (max-width: 480px) {
+      display: none;
+    }
   }
 }

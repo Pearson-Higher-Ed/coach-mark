@@ -133,3 +133,14 @@ export const showTenth= () => {
     }
   });
 };
+
+export const showEleventh= () => {
+  new CoachMark({
+    elementId: 'demo-target11',
+    opts: {
+      title: 'Coach Mark appears to the left of the container',
+      text: 'Consumer passes in forceLeft: true',
+      forceLeft: true
+    }
+  });
+};

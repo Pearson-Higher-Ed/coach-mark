@@ -107,6 +107,8 @@ class ComponentOwner extends Component {
     const centerOnDiv = () => {
       if (this.content.className.includes('p-right')) {
         return elementPosition.right + 5;
+      } else if (this.content.className.includes('p-left')) {
+        return elementPosition.left - this.container.offsetWidth;
       } else {
         return (
           horizontal_center -
@@ -134,7 +136,7 @@ class ComponentOwner extends Component {
     const returnTop = () => {
       if (placement.includes('bottom')) {
         return elementPosition.bottom + 2;
-      } else if (placement.includes('p-right')) {
+      } else if (placement.includes('vertical')) {
         if (window.innerWidth > 480) {
           return (
             elementPosition.top -
@@ -179,9 +181,9 @@ class ComponentOwner extends Component {
     } else if (this.props.forceBelow) {
       placement = 'o-coach-mark--bottom';
     } else if (this.props.forceRight) {
-      placement = 'o-coach-mark--p-right';
+      placement = 'o-coach-mark--p-right vertical';
     } else if (this.props.forceLeft) {
-      placement = 'o-coach-mark--p-left';
+      placement = 'o-coach-mark--p-left vertical';
     } else {
       placement = isBottomHalf ? 'o-coach-mark--top' : 'o-coach-mark--bottom';
     }

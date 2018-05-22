@@ -44,6 +44,7 @@ zIndex           | int     | no       | keeps coachmark on top or below other HT
 forceAbove       | boolean | no       | forces the coach mark to be above element
 forceBelow       | boolean | no       | forces the coach mark to be below element
 forceRight       | boolean | no       | forces the coach mark to be to the right of the element
+forceLeft        | boolean | no       | forces the coach mark to be to the left of the element
 stopScroll       | boolean | no       | Stops coach mark from moving the view
 
 
