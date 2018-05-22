@@ -20,7 +20,7 @@ export const showSecond = () => {
       text: 'Consumer passes in .forceAbove, .disableShadowing, and .gotIt',
       gotIt: true,
       forceAbove: true,
-      disableShadowing: true
+      disableShadowing: false
     }
   });
 };
