@@ -37,7 +37,8 @@ class ComponentOwner extends Component {
     type: 'default',
     animate: false,
     showClose: true,
-    closeOnBodyClick: false
+    closeOnBodyClick: false,
+    disableShadowing: true
   };
 
   constructor(props) {

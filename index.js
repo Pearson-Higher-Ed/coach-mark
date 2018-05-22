@@ -7,8 +7,11 @@ export default class CoachMark {
   constructor(config) {
     this.config = config;
     const target = document.getElementById(config.elementId);
+
+    // check to see how many coachmarks with the data id exist in the document
     const coachEl = document.querySelectorAll('[data-id]');
 
+    // if no coachmarks exist render
     if (coachEl.length === 0) {
       this.container = document.createElement('div');
       this.container.setAttribute('data-id', config.elementId);
@@ -22,6 +25,7 @@ export default class CoachMark {
         this.container
       )
     } else {
+      // if coachmark is rendered return
       return null
     }
   }
