@@ -123,6 +123,22 @@
     }
   }
 }
+.switch-right {
+  .o-coach-mark--p-right.vertical-left {
+    &::before {
+      left: 294px;
+      box-shadow: 2px 0px 0px 0px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+.switch-left {
+  .o-coach-mark--p-left.vertical {
+    &::before {
+      left: -33px;
+      box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
 .o-coach-mark--p-left.vertical {
   display: flex;
   flex-direction: column;

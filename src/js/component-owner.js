@@ -159,11 +159,25 @@ class ComponentOwner extends Component {
 
     // push right if we are off-screen to the left
     const rect = this.contentContainer.getBoundingClientRect();
+
     if (rect.left < 0) {
-      this.container.style.left = target.offsetLeft - rect.left + 'px';
+      this.container.style.left = elementPosition.left + 5 + 'px';
+      this.container.classList.add('switch-left');
+    } else {
+      this.container.classList.remove('switch-left');
+    }
+
+    // make sure the right positioned coach doesnt get covered by the window
+    if (rect.right > window.innerWidth) {
+      this.container.style.left =
+        elementPosition.right - this.container.offsetWidth + 'px';
+      this.container.classList.add('switch-right');
+    } else {
+      this.container.classList.remove('switch-right');
     }
   };
 
+  // controls arrow placement
   getPlacement = () => {
     if (this.props.disablePointer) {
       return '';
