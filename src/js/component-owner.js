@@ -105,9 +105,9 @@ class ComponentOwner extends Component {
         elementPosition.left;
 
     const centerOnDiv = () => {
-      if (this.content.className.includes('p-right')) {
+      if (this.content.className.includes('o-coach-mark--p-right')) {
         return elementPosition.right + 5;
-      } else if (this.content.className.includes('p-left')) {
+      } else if (this.content.className.includes('o-coach-mark--p-left')) {
         return elementPosition.left - this.container.offsetWidth;
       } else {
         return (
@@ -159,24 +159,30 @@ class ComponentOwner extends Component {
 
     // push right if we are off-screen to the left
     const rect = this.contentContainer.getBoundingClientRect();
-
     if (rect.left < 0) {
-      console.log('rect < 0');
-      this.container.style.left = elementPosition.left + 5 + 'px';
-      this.container.style.right = 'auto';
-      this.container.classList.add('switch-left');
-      if (
-        window.innerWidth <=
-        this.container.offsetLeft + this.container.offsetWidth
-      ) {
-        this.container.style.left = 'auto';
-        this.container.style.right = 0 + 'px';
-      } else {
+      this.container.style.left = target.offsetLeft - rect.left + 'px';
+    }
+
+    if (this.content.className.includes('o-coach-mark--p-left')) {
+      console.log(this.content.className);
+      if (rect.left < 0) {
         this.container.style.left = elementPosition.left + 5 + 'px';
         this.container.style.right = 'auto';
+        this.container.classList.add('switch-left');
+        if (
+          window.innerWidth <=
+          this.container.offsetLeft + this.container.offsetWidth
+        ) {
+          this.container.style.left = 'auto';
+          this.container.style.right = 0 + 'px';
+        } else {
+          this.container.style.left = elementPosition.left + 5 + 'px';
+          this.container.style.right = 'auto';
+        }
+      } else {
+        console.log('remove');
+        this.container.classList.remove('switch-left');
       }
-    } else {
-      this.container.classList.remove('switch-left');
     }
 
     // make sure the right positioned coach doesnt get covered by the window
