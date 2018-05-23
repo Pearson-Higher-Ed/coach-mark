@@ -122,3 +122,25 @@ export const showNinth= () => {
     }
   });
 };
+
+export const showTenth= () => {
+  new CoachMark({
+    elementId: 'demo-target10',
+    opts: {
+      title: 'Coach Mark appears to the right of the container',
+      text: 'Consumer passes in forceRight: true',
+      forceRight: true
+    }
+  });
+};
+
+export const showEleventh= () => {
+  new CoachMark({
+    elementId: 'demo-target11',
+    opts: {
+      title: 'Coach Mark appears to the left of the container',
+      text: 'Consumer passes in forceLeft: true',
+      forceLeft: true
+    }
+  });
+};

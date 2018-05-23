@@ -23,6 +23,8 @@ class ComponentOwner extends Component {
     zIndex: PropTypes.number,
     forceAbove: PropTypes.bool,
     forceBelow: PropTypes.bool,
+    forceRight: PropTypes.bool,
+    forceLeft: PropTypes.bool,
     stopScroll: PropTypes.bool
   };
 
@@ -90,6 +92,7 @@ class ComponentOwner extends Component {
 
   resetPosition = () => {
     const { target } = this.props;
+
     // this is called on draw and redraw
     const elementPosition = {
         top: target.offsetTop,
@@ -102,26 +105,53 @@ class ComponentOwner extends Component {
         elementPosition.left;
 
     const centerOnDiv = () => {
-      return (
-        horizontal_center -
-        (this.content.className.includes('-left') ? 60 : 280)
-      );
+      if (this.content.className.includes('p-right')) {
+        return elementPosition.right + 5;
+      } else if (this.content.className.includes('p-left')) {
+        return elementPosition.left - this.container.offsetWidth;
+      } else {
+        return (
+          horizontal_center -
+          (this.content.className.includes('-left') ? 60 : 280)
+        );
+      }
     };
 
     const centerOnScreen = () => {
       // take horizontal scroll into account
-      const relativeOffset =
-        this.container.getBoundingClientRect().left - this.container.offsetLeft;
-      return window.innerWidth / 2 - relativeOffset - 150;
+      if (this.content.className.includes('p-right')) {
+      } else {
+        const relativeOffset =
+          this.container.getBoundingClientRect().left -
+          this.container.offsetLeft;
+        return window.innerWidth / 2 - relativeOffset - 150;
+      }
     };
+
     // center pointer on div if wider than 480, otherwise center on screen
     const left = window.innerWidth > 480 ? centerOnDiv() : centerOnScreen();
 
     const placement = this.getPlacement();
 
-    const top = placement.includes('bottom')
-      ? elementPosition.bottom + 2
-      : elementPosition.top - this.container.scrollHeight;
+    const returnTop = () => {
+      if (placement.includes('bottom')) {
+        return elementPosition.bottom + 2;
+      } else if (placement.includes('vertical')) {
+        if (window.innerWidth > 480) {
+          return (
+            elementPosition.top -
+            this.container.scrollHeight +
+            (target.offsetHeight + this.container.offsetHeight) / 2
+          );
+        } else {
+          return elementPosition.top - this.container.scrollHeight;
+        }
+      } else {
+        return elementPosition.top - this.container.scrollHeight;
+      }
+    };
+
+    const top = returnTop();
 
     // allow consumer to specify an offset (side effect: this adds 'px' regardless)
     this.container.style.left = left + this.props.offsetX + 'px';
@@ -129,16 +159,29 @@ class ComponentOwner extends Component {
 
     // push right if we are off-screen to the left
     const rect = this.contentContainer.getBoundingClientRect();
+
     if (rect.left < 0) {
-      this.container.style.left = target.offsetLeft - rect.left + 'px';
+      this.container.style.left = elementPosition.left + 5 + 'px';
+      this.container.classList.add('switch-left');
+    } else {
+      this.container.classList.remove('switch-left');
+    }
+
+    // make sure the right positioned coach doesnt get covered by the window
+    if (rect.right > window.innerWidth) {
+      this.container.style.left =
+        elementPosition.right - this.container.offsetWidth + 'px';
+      this.container.classList.add('switch-right');
+    } else {
+      this.container.classList.remove('switch-right');
     }
   };
 
+  // controls arrow placement
   getPlacement = () => {
     if (this.props.disablePointer) {
       return '';
     }
-
     // get window geometry - this is how jQuery does it
     const rect = this.props.target.getBoundingClientRect(),
       isBottomHalf =
@@ -151,6 +194,10 @@ class ComponentOwner extends Component {
       placement = 'o-coach-mark--top';
     } else if (this.props.forceBelow) {
       placement = 'o-coach-mark--bottom';
+    } else if (this.props.forceRight) {
+      placement = 'o-coach-mark--p-right vertical';
+    } else if (this.props.forceLeft) {
+      placement = 'o-coach-mark--p-left vertical';
     } else {
       placement = isBottomHalf ? 'o-coach-mark--top' : 'o-coach-mark--bottom';
     }
