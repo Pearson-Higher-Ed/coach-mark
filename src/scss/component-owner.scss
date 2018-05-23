@@ -14,12 +14,14 @@
     }
   }
   &__hole {
+    -webkit-box-shadow: 0 0 0 9999999px rgba(0, 0, 0, 0.25);
     box-shadow: 0 0 0 9999999px rgba(0, 0, 0, 0.25);
   }
   &__content-container {
     padding: 20px 24px;
     margin: 10px;
     border-radius: 4px;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.25);
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.25);
     min-width: 280px;
     float: left;
@@ -52,24 +54,28 @@
   &--bottom::before {
     left: 221px;
     top: -28px;
+    -webkit-box-shadow: -1px -1px 1px 0px rgba(0, 0, 0, 0.1);
     box-shadow: -1px -1px 1px 0px rgba(0, 0, 0, 0.1);
   }
 
   &--bottom-left::before {
     left: 19px;
     top: -28px;
+    -webkit-box-shadow: -1px -1px 1px 0px rgba(0, 0, 0, 0.1);
     box-shadow: -1px -1px 1px 0px rgba(0, 0, 0, 0.1);
   }
 
   &--top::before {
     bottom: -28px;
     left: 220px;
+    -webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.1);
   }
 
   &--top-left::before {
     bottom: -28px;
     left: 19px;
+    -webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.1);
   }
 
@@ -81,6 +87,8 @@
     position: absolute;
     width: 16px;
     height: 16px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     background-color: inherit;
   }
@@ -106,17 +114,29 @@
   }
 }
 .o-coach-mark--p-right.vertical-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   &::before {
     content: '\00a0';
     position: absolute;
+    display: block;
+    flex: 1 0 auto;
     width: 16px;
     height: 16px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     background-color: inherit;
     left: -33px;
+    -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
     @media (max-width: 480px) {
       display: none;
@@ -127,6 +147,9 @@
   .o-coach-mark--p-right.vertical-left {
     &::before {
       left: 294px;
+      display: block;
+      flex: 1 0 auto;
+      -webkit-box-shadow: 2px 0px 0px 0px rgba(0, 0, 0, 0.1);
       box-shadow: 2px 0px 0px 0px rgba(0, 0, 0, 0.1);
     }
   }
@@ -135,25 +158,66 @@
   .o-coach-mark--p-left.vertical {
     &::before {
       left: -33px;
+      display: block;
+      flex: 1 0 auto;
+      -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
       box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
     }
   }
 }
 .o-coach-mark--p-left.vertical {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   &::before {
     content: '\00a0';
     position: absolute;
     width: 16px;
     height: 16px;
+    flex: 1 0 auto;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     background-color: inherit;
     left: 294px;
+    -webkit-box-shadow: 2px 0px 0px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 2px 0px 0px 0px rgba(0, 0, 0, 0.1);
     @media (max-width: 480px) {
       display: none;
+    }
+  }
+}
+.ie {
+  .o-coach-mark--p-left.vertical {
+    &::before {
+      left: 277px;
+    }
+  }
+}
+
+.ie {
+  .switch-left {
+    .o-coach-mark--p-left.vertical {
+      &::before {
+        left: -33px;
+      }
+    }
+  }
+}
+
+.ie {
+  .switch-right {
+    .o-coach-mark--p-right.vertical-left {
+      &::before {
+        left: 277px;
+      }
     }
   }
 }

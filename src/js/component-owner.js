@@ -62,6 +62,11 @@ class ComponentOwner extends Component {
   }
 
   componentDidMount() {
+    // this makes me sick, but unfortunately we need it to control arrow positions in IE11
+    if (navigator.userAgent.match(/Trident.*rv:11\./)) {
+      this.setState({ ie: true });
+    }
+
     if (this.props.animate) {
       this.setState({ animate: true });
     }
@@ -245,7 +250,7 @@ class ComponentOwner extends Component {
   render() {
     const placement = this.getPlacement();
     return (
-      <Fragment>
+      <div className={this.state.ie ? 'ie' : ''}>
         <div
           ref={node => {
             this.container = node;
@@ -314,7 +319,7 @@ class ComponentOwner extends Component {
             </div>
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }
