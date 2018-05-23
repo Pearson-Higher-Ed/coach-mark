@@ -49,6 +49,7 @@ class ComponentOwner extends Component {
     this.closeCoach = this.closeCoach.bind(this);
     this.closeOnBodyClick = this.closeOnBodyClick.bind(this);
   }
+
   componentWillMount() {
     if (!this.props.disableShadowing) {
       this.props.target.classList.add('o-coach-mark__hole');
@@ -57,16 +58,15 @@ class ComponentOwner extends Component {
     if (!this.props.stopScroll) {
       this.props.target.scrollIntoView(false);
     }
-
     window.addEventListener('resize', this.resetPosition);
   }
 
   componentDidMount() {
-    if (this.props.animate === true) {
+    if (this.props.animate) {
       this.setState({ animate: true });
     }
 
-    if (this.props.closeOnBodyClick === true) {
+    if (this.props.closeOnBodyClick) {
       // set a split second timeout to avoid capture of click outside the coachmark
       setTimeout(() => {
         document.addEventListener('click', this.closeOnBodyClick);
@@ -79,7 +79,7 @@ class ComponentOwner extends Component {
     window.removeEventListener('resize', this.resetPosition);
     this.props.target.classList.remove('o-coach-mark__hole');
 
-    if (this.props.closeOnBodyClick === true) {
+    if (this.props.closeOnBodyClick) {
       document.removeEventListener('click', this.closeOnBodyClick);
     }
   }
@@ -105,10 +105,15 @@ class ComponentOwner extends Component {
         elementPosition.left;
 
     const centerOnDiv = () => {
+      // if forced right push right
       if (this.content.className.includes('o-coach-mark--p-right')) {
         return elementPosition.right + 5;
+
+        // if forced left, push left
       } else if (this.content.className.includes('o-coach-mark--p-left')) {
         return elementPosition.left - this.container.offsetWidth;
+
+        // else center on div
       } else {
         return (
           horizontal_center -
@@ -119,18 +124,13 @@ class ComponentOwner extends Component {
 
     const centerOnScreen = () => {
       // take horizontal scroll into account
-      if (this.content.className.includes('p-right')) {
-      } else {
-        const relativeOffset =
-          this.container.getBoundingClientRect().left -
-          this.container.offsetLeft;
-        return window.innerWidth / 2 - relativeOffset - 150;
-      }
+      const relativeOffset =
+        this.container.getBoundingClientRect().left - this.container.offsetLeft;
+      return window.innerWidth / 2 - relativeOffset - 150;
     };
 
     // center pointer on div if wider than 480, otherwise center on screen
     const left = window.innerWidth > 480 ? centerOnDiv() : centerOnScreen();
-
     const placement = this.getPlacement();
 
     const returnTop = () => {
@@ -163,8 +163,8 @@ class ComponentOwner extends Component {
       this.container.style.left = target.offsetLeft - rect.left + 'px';
     }
 
+    // if forced left and about to push of screen switch to right
     if (this.content.className.includes('o-coach-mark--p-left')) {
-      console.log(this.content.className);
       if (rect.left < 0) {
         this.container.style.left = elementPosition.left + 5 + 'px';
         this.container.style.right = 'auto';
@@ -185,7 +185,7 @@ class ComponentOwner extends Component {
       }
     }
 
-    // make sure the right positioned coach doesnt get covered by the window
+    // if forced right and about to push of screen switch to left
     if (rect.right > window.innerWidth) {
       this.container.style.left =
         elementPosition.right - this.container.offsetWidth + 'px';
