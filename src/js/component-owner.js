@@ -159,11 +159,43 @@ class ComponentOwner extends Component {
 
     // push right if we are off-screen to the left
     const rect = this.contentContainer.getBoundingClientRect();
+
     if (rect.left < 0) {
-      this.container.style.left = target.offsetLeft - rect.left + 'px';
+      console.log('rect < 0');
+      this.container.style.left = elementPosition.left + 5 + 'px';
+      this.container.style.right = 'auto';
+      this.container.classList.add('switch-left');
+      if (
+        window.innerWidth <=
+        this.container.offsetLeft + this.container.offsetWidth
+      ) {
+        this.container.style.left = 'auto';
+        this.container.style.right = 0 + 'px';
+      } else {
+        this.container.style.left = elementPosition.left + 5 + 'px';
+        this.container.style.right = 'auto';
+      }
+    } else {
+      this.container.classList.remove('switch-left');
+    }
+
+    // make sure the right positioned coach doesnt get covered by the window
+    if (rect.right > window.innerWidth) {
+      this.container.style.left =
+        elementPosition.right - this.container.offsetWidth + 'px';
+      this.container.classList.add('switch-right');
+      if (this.container.offsetLeft <= 0) {
+        this.container.style.left = 0 + 'px';
+      } else {
+        this.container.style.left =
+          elementPosition.right - this.container.offsetWidth + 'px';
+      }
+    } else {
+      this.container.classList.remove('switch-right');
     }
   };
 
+  // controls arrow placement
   getPlacement = () => {
     if (this.props.disablePointer) {
       return '';
