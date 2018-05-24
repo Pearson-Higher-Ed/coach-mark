@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import ComponentOwner from './src/js/component-owner';
 
+import _ from 'lodash'
 export default class CoachMark {
 
   constructor(config) {
@@ -21,7 +22,7 @@ export default class CoachMark {
       target.parentNode.insertBefore(this.container, target.nextSibling);
 
       // check to see if any coaches are open, if they are, remove.
-      coachAll.forEach(coach => {
+      _.forEach(coachAll, coach => {
         ReactDOM.unmountComponentAtNode(coach);
         coach.remove();
       });

@@ -144,3 +144,14 @@ export const showEleventh= () => {
     }
   });
 };
+
+export const showTwelveth= () => {
+  new CoachMark({
+    elementId: 'demo-target12',
+    opts: {
+      title: 'Coach Mark appears outside a scrolling container',
+      text: 'See the CSS on the parent containers',
+      forceBelow:true
+    }
+  });
+};
