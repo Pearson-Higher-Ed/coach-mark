@@ -76,7 +76,7 @@ describe('Component Owner Suite', () => {
     expect(wrapper.find('.animated .fadeIn').length).toBe(1);
   });
 
-  it('should change coachmark color to yellow', () => {
+  it('should change coachmark to informative', () => {
     wrapper = mount(
       <ComponentOwner
         target={target}
@@ -87,7 +87,7 @@ describe('Component Owner Suite', () => {
     expect(wrapper.find('.info').length).toBe(1);
   });
 
-  it('should change coachmark color to white', () => {
+  it('should change coachmark to generic', () => {
     wrapper = mount(
       <ComponentOwner
         target={target}
@@ -139,6 +139,28 @@ describe('Component Owner Suite', () => {
       />
     );
     expect(wrapper.find('.o-coach-mark--bottom-left').length).toBe(1);
+  });
+
+  it('should place to right of target', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        forceRight={true}
+      />
+    );
+    expect(wrapper.find('.o-coach-mark--p-right').length).toBe(1);
+  });
+
+  it('should place to left of target', () => {
+    wrapper = mount(
+      <ComponentOwner
+        target={target}
+        stopScroll={true}
+        forceLeft={true}
+      />
+    );
+    expect(wrapper.find('.o-coach-mark--p-left').length).toBe(1);
   });
 
   it('should fire onClose when X is clicked', () => {
