@@ -9,13 +9,23 @@ export default class CoachMark {
     const target = document.getElementById(config.elementId);
 
     // check to see how many coachmarks with the data id exist in the document
-    const coachEl = document.querySelectorAll('[data-id]');
+    const coachId = '[data-id="' + config.elementId + '"]';
+    const coachEl = document.querySelectorAll(coachId);
+    const coachAll = document.querySelectorAll('[data-id]');
+
 
     // if no coachmarks exist render
     if (coachEl.length === 0) {
       this.container = document.createElement('div');
       this.container.setAttribute('data-id', config.elementId);
       target.parentNode.insertBefore(this.container, target.nextSibling);
+
+      // check to see if any coaches are open, if they are, remove.
+      coachAll.forEach(coach => {
+        ReactDOM.unmountComponentAtNode(coach);
+        coach.remove();
+      });
+
       ReactDOM.render(
         <ComponentOwner
           target={target}
