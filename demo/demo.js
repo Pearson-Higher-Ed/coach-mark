@@ -73,7 +73,8 @@ export const showSixth = () => {
     opts: {
       title: 'Generic Coach Mark',
       text: 'Consumer passes in the type: generic',
-      type: 'generic'
+      type: 'generic',
+      gotIt: true
     }
   });
 };

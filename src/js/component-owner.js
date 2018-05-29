@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
+import _ from 'lodash';
 
 class ComponentOwner extends Component {
   static propTypes = {
@@ -47,6 +49,7 @@ class ComponentOwner extends Component {
       animate: null
     };
     this.closeCoach = this.closeCoach.bind(this);
+    this.closeOnEscape = this.closeOnEscape.bind(this);
     this.closeOnBodyClick = this.closeOnBodyClick.bind(this);
   }
 
@@ -67,6 +70,8 @@ class ComponentOwner extends Component {
       this.setState({ ie: true });
     }
 
+    document.addEventListener('keyup', this.closeOnEscape);
+
     if (this.props.animate) {
       this.setState({ animate: true });
     }
@@ -77,11 +82,13 @@ class ComponentOwner extends Component {
         document.addEventListener('click', this.closeOnBodyClick);
       }, 1);
     }
+
     this.resetPosition();
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resetPosition);
+    document.removeEventListener('keyup', this.closeOnEscape);
     this.props.target.classList.remove('o-coach-mark__hole');
 
     if (this.props.closeOnBodyClick) {
@@ -92,6 +99,15 @@ class ComponentOwner extends Component {
   closeOnBodyClick(event) {
     if (event.target.closest('.o-coach-mark__content-container') === null) {
       this.closeCoach();
+    }
+  }
+
+  closeOnEscape() {
+    if (event.code === 'Escape') {
+      // check to see if any coaches are open, if they are, remove.
+      this.closeCoach();
+    } else {
+      return null;
     }
   }
 
@@ -143,12 +159,14 @@ class ComponentOwner extends Component {
         return elementPosition.bottom + 2;
       } else if (placement.includes('vertical')) {
         if (window.innerWidth > 480) {
+          this.container.classList.remove('respond');
           return (
             elementPosition.top -
             this.container.scrollHeight +
             (target.offsetHeight + this.container.offsetHeight) / 2
           );
         } else {
+          this.container.classList.add('respond');
           return elementPosition.top - this.container.scrollHeight;
         }
       } else {
@@ -282,6 +300,7 @@ class ComponentOwner extends Component {
                 type="button"
                 className="o-coach-mark__close-icon"
                 onClick={this.closeCoach}
+                aria-label="close coachmark"
               >
                 <svg
                   role="img"
@@ -312,6 +331,7 @@ class ComponentOwner extends Component {
                 <button
                   className="o-coach-mark__got-it pe-label"
                   onClick={this.closeCoach}
+                  aria-label="got it - close coachmark"
                 >
                   {ReactHtmlParser(this.props.gotItText)}
                 </button>

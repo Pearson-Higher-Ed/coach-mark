@@ -27,6 +27,7 @@ export default class CoachMark {
         coach.remove();
       });
 
+
       ReactDOM.render(
         <ComponentOwner
           target={target}
@@ -41,6 +42,8 @@ export default class CoachMark {
     }
   }
 
+
+
   removeCoachMark = (event) => {
     if (!('remove' in Element.prototype)) {
       Element.prototype.remove = function() {
@@ -54,5 +57,5 @@ export default class CoachMark {
     if (this.config.callback) {
       this.config.callback(this.config.opts.id, event);
     }
-  }
+  };
 }

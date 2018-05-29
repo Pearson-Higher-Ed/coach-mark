@@ -33,6 +33,10 @@
     }
     &.generic {
       background-color: white;
+      .o-coach-mark__got-it {
+        text-decoration: none;
+        color: #047a9c;
+      }
     }
   }
   &__title {
