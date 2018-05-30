@@ -15,7 +15,7 @@ module.exports = {
   ],
   "coverageThreshold": {
     "global": {
-      "lines": 80
+      "lines": 70
     }
   },
   "testPathIgnorePatterns": [

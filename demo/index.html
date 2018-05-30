@@ -4,6 +4,7 @@
     <title>Coachmark Component</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/@pearson-components/elements-sdk@1.12.0/build/css/elements.css">
     <style>
       div.demo-target {
         border: 1px solid;
@@ -55,14 +56,67 @@
         <button type="button" onclick="showFourth()">Show</button>
     </div>
 
+    <h2>Fifth Example</h2>
+    <div id="demo-target5" class="demo-target">
+        This Coachmark is informational
+        <button type="button" onclick="showFifth()">Show</button>
+    </div>
+
+    <h2>Sixth Example</h2>
+    <div id="demo-target6" class="demo-target">
+        This Coachmark is generic
+        <button type="button" onclick="showSixth()">Show</button>
+    </div>
+
+    <h2>Seventh Example</h2>
+    <div id="demo-target7" class="demo-target">
+        This Coachmark is animated
+        <button type="button" onclick="showSeventh()">Show</button>
+    </div>
+
+    <h2>Eighth Example</h2>
+    <div id="demo-target8" class="demo-target">
+        This Coachmark doesnt have an X
+        <button type="button" onclick="showEighth()">Show</button>
+    </div>
+
+    <h2>Ninth Example</h2>
+    <div id="demo-target9" class="demo-target">
+        This Coachmark can close when a target is clicked outside the coachmark
+        <button type="button" onclick="showNinth()">Show</button>
+    </div>
+
+    <h2>Tenth Example</h2>
+    <div id="demo-target10" class="demo-target">
+        This Coachmark appears to the right
+        <button type="button" onclick="showTenth()">Show</button>
+    </div>
+
+    <div style="display:flex; flex-direction: column; align-items: flex-end">
+        <h2>Eleventh Example</h2>
+        <div id="demo-target11" class="demo-target">
+            This Coachmark appears to the left
+            <button type="button" onclick="showEleventh()">Show</button>
+        </div>
+    </div>
+
+    <div style="width:250px; overflow: scroll">
+        <h2>Twelveth Example</h2>
+        <div id="demo-target12" class="demo-target" style="width:350px;">
+            This Coachmark pops out of a hidden content scrolling container
+            <button type="button" onclick="showTwelveth()">Show</button>
+        </div>
+    </div>
+
     <!-- Provide React and ReactDOM as a dependency external to the component -->
     <script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
     <script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
     <!-- CustomEvent, Array.from, Object.assign and Promise polyfills are for IE -->
-    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=CustomEvent"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=CustomEvent,Element.prototype.remove,Element.prototype.closest,Array.prototype.includes,String.prototype.includes"></script>
     <!-- Demo build of component Injected on build -->
     <!-- Build Component to View Demo: npm run build && npm start -->
     <!-- View at: http://localhost:8081/coach-mark/ -->
+
 </body>
 </html>
