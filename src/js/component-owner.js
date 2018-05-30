@@ -1,9 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import _ from 'lodash';
 
 class ComponentOwner extends Component {
   static propTypes = {
@@ -40,7 +38,8 @@ class ComponentOwner extends Component {
     animate: false,
     showClose: true,
     closeOnBodyClick: false,
-    disableShadowing: true
+    disableShadowing: true,
+    stopScroll: true
   };
 
   constructor(props) {
@@ -61,6 +60,7 @@ class ComponentOwner extends Component {
     if (!this.props.stopScroll) {
       this.props.target.scrollIntoView(false);
     }
+
     window.addEventListener('resize', this.resetPosition);
   }
 

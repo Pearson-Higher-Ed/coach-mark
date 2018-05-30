@@ -8,6 +8,7 @@ export const showFirst = () => {
     opts: {
       title: 'Default Coach Mark',
       text: 'Assuming the consumer only passes in .title and .text'
+
     }
   });
 };
