@@ -115,15 +115,16 @@ class ComponentOwner extends Component {
     const { target } = this.props;
 
     // this is called on draw and redraw
-    const elementPosition = {
-        top: target.offsetTop,
-        left: target.offsetLeft,
-        bottom: target.offsetTop + target.offsetHeight,
-        right: target.offsetLeft + target.offsetWidth
-      },
-      horizontal_center =
-        (elementPosition.right - elementPosition.left) / 2 +
-        elementPosition.left;
+    const targetRect = target.getBoundingClientRect(),
+          elementPosition = {
+            top: targetRect.top + window.scrollY,
+            left: targetRect.left + window.scrollX,
+            bottom: targetRect.bottom + window.scrollY,
+            right: targetRect.right + window.scrollX
+          },
+          horizontal_center =
+            (elementPosition.right - elementPosition.left) / 2 +
+            elementPosition.left;
 
     const centerOnDiv = () => {
       // if forced right push right
