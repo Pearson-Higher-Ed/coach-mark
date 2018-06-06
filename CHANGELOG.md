@@ -1,3 +1,13 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.0.0...v1.1.0) (2018-06-06)
+
+
+### Bug Fixes
+
+* change positioning method by moving coach mark to body tag ([1b28123](https://github.com/Pearson-Higher-Ed/coach-mark/commit/1b28123))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v0.5.1...v1.0.0) (2018-05-30)
 
