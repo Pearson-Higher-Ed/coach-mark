@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 import PropTypes from 'prop-types';
+import '../scss/component-owner.scss';
+import '../scss/animation.scss';
 
 class ComponentOwner extends Component {
   static propTypes = {
