@@ -1,6 +1,4 @@
 import CoachMark from '../index';
-import '../src/scss/component-owner.scss';
-import '../src/scss/animation.scss';
 
 export const showFirst = () => {
   new CoachMark({

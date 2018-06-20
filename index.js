@@ -19,10 +19,11 @@ export default class CoachMark {
     if (coachEl.length === 0) {
       this.container = document.createElement('div');
       this.container.setAttribute('data-id', config.elementId);
+
       // Fix for positioning in a container that position:relative and overflow:scroll or overflow:hidden
       // move the node to the body tag instead of inside the parent container.
-      //target.parentNode.insertBefore(this.container, target.nextSibling);
-      document.body.appendChild(this.container)
+      // target.parentNode.insertBefore(this.container, target.nextSibling);
+      document.body.appendChild(this.container);
 
       // check to see if any coaches are open, if they are, remove.
       _.forEach(coachAll, coach => {

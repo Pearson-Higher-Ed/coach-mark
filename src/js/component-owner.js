@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 import PropTypes from 'prop-types';
+import '../scss/component-owner.scss';
+import '../scss/animation.scss';
 
 class ComponentOwner extends Component {
   static propTypes = {
@@ -116,15 +118,15 @@ class ComponentOwner extends Component {
 
     // this is called on draw and redraw
     const targetRect = target.getBoundingClientRect(),
-          elementPosition = {
-            top: targetRect.top + window.scrollY,
-            left: targetRect.left + window.scrollX,
-            bottom: targetRect.bottom + window.scrollY,
-            right: targetRect.right + window.scrollX
-          },
-          horizontal_center =
-            (elementPosition.right - elementPosition.left) / 2 +
-            elementPosition.left;
+      elementPosition = {
+        top: targetRect.top + window.pageYOffset,
+        left: targetRect.left + window.pageXOffset,
+        bottom: targetRect.bottom + window.pageYOffset,
+        right: targetRect.right + window.pageXOffset
+      },
+      horizontal_center =
+        (elementPosition.right - elementPosition.left) / 2 +
+        elementPosition.left;
 
     const centerOnDiv = () => {
       // if forced right push right
