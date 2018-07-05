@@ -336,12 +336,12 @@ class ComponentOwner extends Component {
               }}
               className={`o-coach-mark__content ${placement}`}
             >
-              <h4
+              <h6
                 id="o-coach-mark__title"
                 className="o-coach-mark__title pe-label--bold"
               >
                 {ReactHtmlParser(this.props.title)}
-              </h4>
+              </h6>
               <p
                 id="o-coach-mark__paragraph"
                 className="o-coach-mark__paragraph pe-label"
