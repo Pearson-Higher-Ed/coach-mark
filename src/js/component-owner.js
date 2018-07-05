@@ -67,6 +67,9 @@ class ComponentOwner extends Component {
   }
 
   componentDidMount() {
+    this.trigger = this.props.target.querySelector('button');
+    this.focusTarget = this.confirmBtn || this.closeBtn;
+
     // this makes me sick, but unfortunately we need it to control arrow positions in IE11
     if (navigator.userAgent.match(/Trident.*rv:11\./)) {
       this.setState({ ie: true });
@@ -86,6 +89,8 @@ class ComponentOwner extends Component {
     }
 
     this.resetPosition();
+
+    this.focusTarget.focus();
   }
 
   componentWillUnmount() {
@@ -266,12 +271,18 @@ class ComponentOwner extends Component {
     } else {
       this.props.onClose();
     }
+    this.trigger.focus();
   }
 
   render() {
     const placement = this.getPlacement();
     return (
-      <div className={this.state.ie ? 'ie' : ''}>
+      <div
+        className={this.state.ie ? 'ie' : ''}
+        role="dialog"
+        aria-labelledby="o-coach-mark__title"
+        aria-describedby="o-coach-mark__paragraph"
+      >
         <div
           ref={node => {
             this.container = node;
@@ -304,6 +315,7 @@ class ComponentOwner extends Component {
                 className="o-coach-mark__close-icon"
                 onClick={this.closeCoach}
                 aria-label="close coachmark"
+                ref={node => (this.closeBtn = node)}
               >
                 <svg
                   role="img"
@@ -324,10 +336,16 @@ class ComponentOwner extends Component {
               }}
               className={`o-coach-mark__content ${placement}`}
             >
-              <div className="o-coach-mark__title pe-label--bold">
+              <h4
+                id="o-coach-mark__title"
+                className="o-coach-mark__title pe-label--bold"
+              >
                 {ReactHtmlParser(this.props.title)}
-              </div>
-              <p className="o-coach-mark__paragraph pe-label">
+              </h4>
+              <p
+                id="o-coach-mark__paragraph"
+                className="o-coach-mark__paragraph pe-label"
+              >
                 {ReactHtmlParser(this.props.text)}
               </p>
               {this.props.gotIt && (
@@ -335,6 +353,7 @@ class ComponentOwner extends Component {
                   className="o-coach-mark__got-it pe-label"
                   onClick={this.closeCoach}
                   aria-label="got it - close coachmark"
+                  ref={node => (this.confirmBtn = node)}
                 >
                   {ReactHtmlParser(this.props.gotItText)}
                 </button>
