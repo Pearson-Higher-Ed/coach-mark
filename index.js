@@ -43,13 +43,6 @@ export default class CoachMark {
   }
 
   removeCoachMark = event => {
-    if (!('remove' in Element.prototype)) {
-      Element.prototype.remove = function() {
-        if (this.parentNode) {
-          this.parentNode.removeChild(this);
-        }
-      };
-    }
     ReactDOM.unmountComponentAtNode(this.container);
     this.container.remove();
     if (this.config.callback) {
