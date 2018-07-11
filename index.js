@@ -1,10 +1,8 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import ComponentOwner from './src/js/component-owner';
 
-import _ from 'lodash'
 export default class CoachMark {
-
   constructor(config) {
     this.config = config;
     const target = document.getElementById(config.elementId);
@@ -13,7 +11,6 @@ export default class CoachMark {
     const coachId = '[data-id="' + config.elementId + '"]';
     const coachEl = document.querySelectorAll(coachId);
     const coachAll = document.querySelectorAll('[data-id]');
-
 
     // if no coachmarks exist render
     if (coachEl.length === 0) {
@@ -26,11 +23,10 @@ export default class CoachMark {
       document.body.appendChild(this.container);
 
       // check to see if any coaches are open, if they are, remove.
-      _.forEach(coachAll, coach => {
+      Array.prototype.forEach.call(coachAll, coach => {
         ReactDOM.unmountComponentAtNode(coach);
         coach.remove();
       });
-
 
       ReactDOM.render(
         <ComponentOwner
@@ -39,23 +35,14 @@ export default class CoachMark {
           {...config.opts}
         />,
         this.container
-      )
+      );
     } else {
       // if coachmark is rendered return
-      return null
+      return null;
     }
   }
 
-
-
-  removeCoachMark = (event) => {
-    if (!('remove' in Element.prototype)) {
-      Element.prototype.remove = function() {
-        if (this.parentNode) {
-          this.parentNode.removeChild(this);
-        }
-      };
-    }
+  removeCoachMark = event => {
     ReactDOM.unmountComponentAtNode(this.container);
     this.container.remove();
     if (this.config.callback) {
