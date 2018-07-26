@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-
 import PropTypes from 'prop-types';
+
 import '../scss/component-owner.scss';
 import '../scss/animation.scss';
+
+/**
+ * Focus on DOM node after a delay.
+ * @param {HTMLElement} el Element that will receive focus.
+ * @param {Number} [timeout = 0] Delay before focus occurs, in ms. Defaults to 0.
+ */
+function focusWithTimeout(el, timeout = 0) {
+  setTimeout(() => {
+    el.focus();
+  }, timeout);
+}
 
 class ComponentOwner extends Component {
   static propTypes = {
@@ -90,7 +101,7 @@ class ComponentOwner extends Component {
 
     this.resetPosition();
 
-    this.focusTarget.focus();
+    focusWithTimeout(this.focusTarget);
   }
 
   componentWillUnmount() {
@@ -101,6 +112,7 @@ class ComponentOwner extends Component {
     if (this.props.closeOnBodyClick) {
       document.removeEventListener('click', this.closeOnBodyClick);
     }
+    focusWithTimeout(this.trigger);
   }
 
   closeOnBodyClick(event) {
@@ -271,7 +283,6 @@ class ComponentOwner extends Component {
     } else {
       this.props.onClose();
     }
-    this.trigger.focus();
   }
 
   render() {
