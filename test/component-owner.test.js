@@ -7,6 +7,9 @@ const { mount } = enzyme;
 describe('Component Owner Suite', () => {
 
   const target = global.document.createElement("div");
+  const trigger = global.document.createElement("button");
+
+  target.appendChild(trigger);
   global.document.body.appendChild(target);
 
   let wrapper;
