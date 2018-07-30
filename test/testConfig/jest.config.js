@@ -1,4 +1,5 @@
 module.exports = {
+  "testURL": 'http://localhost',
   "rootDir": "../../",
   "setupTestFrameworkScriptFile": "<rootDir>/test/testConfig/enzymeConfig.js",
   "moduleFileExtensions": [
