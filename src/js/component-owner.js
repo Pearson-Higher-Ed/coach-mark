@@ -10,9 +10,17 @@ import '../scss/animation.scss';
  * @param {HTMLElement} el Element that will receive focus.
  * @param {Number} [timeout = 0] Delay before focus occurs, in ms. Defaults to 0.
  */
-function focusWithTimeout(el, timeout = 0) {
+
+function focusWithTimeout(props, el, timeout = 0) {
   setTimeout(() => {
-    el.focus();
+    if (!props.stopScroll) {
+      el.focus();
+    } else {
+      const x = window.scrollX,
+        y = window.scrollY;
+      el.focus();
+      window.scrollTo(x, y);
+    }
   }, timeout);
 }
 
@@ -70,10 +78,6 @@ class ComponentOwner extends Component {
       this.props.target.classList.add('o-coach-mark__hole');
     }
 
-    if (!this.props.stopScroll) {
-      this.props.target.scrollIntoView(false);
-    }
-
     window.addEventListener('resize', this.resetPosition);
   }
 
@@ -92,6 +96,10 @@ class ComponentOwner extends Component {
       this.setState({ animate: true });
     }
 
+    if (!this.props.stopScroll) {
+      this.props.target.scrollIntoView(false);
+    }
+
     if (this.props.closeOnBodyClick) {
       // set a split second timeout to avoid capture of click outside the coachmark
       setTimeout(() => {
@@ -100,8 +108,7 @@ class ComponentOwner extends Component {
     }
 
     this.resetPosition();
-
-    focusWithTimeout(this.focusTarget);
+    focusWithTimeout(this.props, this.focusTarget);
   }
 
   componentWillUnmount() {
@@ -112,7 +119,7 @@ class ComponentOwner extends Component {
     if (this.props.closeOnBodyClick) {
       document.removeEventListener('click', this.closeOnBodyClick);
     }
-    focusWithTimeout(this.trigger);
+    focusWithTimeout(this.props, this.trigger);
   }
 
   closeOnBodyClick(event) {

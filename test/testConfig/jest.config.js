@@ -1,26 +1,3 @@
 module.exports = {
-  "testURL": 'http://localhost',
-  "rootDir": "../../",
-  "setupTestFrameworkScriptFile": "<rootDir>/test/testConfig/enzymeConfig.js",
-  "moduleFileExtensions": [
-    "jsx",
-    "js",
-    "json"
-  ],
-  "moduleNameMapper": {
-    "^.+\\.(css|scss)$": "<rootDir>/test/__mocks__/styleMock.js",
-    "^.+\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__mocks__/fileMock.js"
-  },
-  "collectCoverageFrom": [
-    "**/src/js/*.{js,jsx}"
-  ],
-  "coverageThreshold": {
-    "global": {
-      "lines": 70
-    }
-  },
-  "testPathIgnorePatterns": [
-    "<rootDir>/(build|node_modules|demo|coverage)/"
-  ],
-  "verbose": true
+  "testURL": 'http://localhost'
 }
