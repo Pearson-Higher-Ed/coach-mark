@@ -2,7 +2,7 @@ import React from 'react';
 import enzyme from 'enzyme';
 import ComponentOwner from '../src/js/component-owner';
 
-const { mount } = enzyme;
+const { mount, shallow } = enzyme;
 
 describe('Component Owner Suite', () => {
 
