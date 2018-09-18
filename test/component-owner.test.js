@@ -2,7 +2,7 @@ import React from 'react';
 import enzyme from 'enzyme';
 import ComponentOwner from '../src/js/component-owner';
 
-const { mount, shallow } = enzyme;
+const { mount } = enzyme;
 
 describe('Component Owner Suite', () => {
 
@@ -61,6 +61,7 @@ describe('Component Owner Suite', () => {
     wrapper = mount(
       <ComponentOwner
         target={target}
+        stopScroll={true}
         animate={false}
       />
     );
@@ -68,10 +69,11 @@ describe('Component Owner Suite', () => {
   });
 
   it('should add class for animate', () => {
-    wrapper = shallow(
+    wrapper = mount(
       <ComponentOwner
         target={target}
-        animate
+        stopScroll={true}
+        animate={true}
       />
     );
     expect(wrapper.find('.animated .fadeIn').length).toBe(1);
