@@ -61,7 +61,6 @@ describe('Component Owner Suite', () => {
     wrapper = mount(
       <ComponentOwner
         target={target}
-        stopScroll={true}
         animate={false}
       />
     );
@@ -69,11 +68,10 @@ describe('Component Owner Suite', () => {
   });
 
   it('should add class for animate', () => {
-    wrapper = mount(
+    wrapper = shallow(
       <ComponentOwner
         target={target}
-        stopScroll={true}
-        animate={true}
+        animate
       />
     );
     expect(wrapper.find('.animated .fadeIn').length).toBe(1);
