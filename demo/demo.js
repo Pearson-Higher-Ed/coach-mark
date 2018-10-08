@@ -116,9 +116,10 @@ export const showNinth= () => {
   new CoachMark({
     elementId: 'demo-target9',
     opts: {
-      title: 'Coach Mark can close when clicked outside the target area',
+      title: 'Coach Mark can close when clicked outside the target area, and scrolls the area.',
       text: 'Consumer passes in closeOnBodyClick: true',
-      closeOnBodyClick: true
+      closeOnBodyClick: true,
+      stopScroll : false
     }
   });
 };
