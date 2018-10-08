@@ -1,3 +1,8 @@
+<a name="1.1.6"></a>
+## [1.1.6](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.1.5...v1.1.6) (2018-10-08)
+
+
+
 <a name="1.1.5"></a>
 ## [1.1.5](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.1.4...v1.1.5) (2018-10-08)
 
@@ -5,6 +10,11 @@
 
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.1.3...v1.1.4) (2018-10-08)
+
+
+### Bug Fixes
+
+* fix scrollStop bug and make screen position work in IE 11 ([7aaecd6](https://github.com/Pearson-Higher-Ed/coach-mark/commit/7aaecd6))
 
 
 
