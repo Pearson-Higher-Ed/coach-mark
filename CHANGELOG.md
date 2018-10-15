@@ -1,15 +1,5 @@
-<a name="1.1.6"></a>
-## [1.1.6](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.1.5...v1.1.6) (2018-10-08)
-
-
-
-<a name="1.1.5"></a>
-## [1.1.5](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.1.4...v1.1.5) (2018-10-08)
-
-
-
-<a name="1.1.4"></a>
-## [1.1.4](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.1.3...v1.1.4) (2018-10-08)
+<a name="1.1.7"></a>
+## [1.1.7](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.1.4...v1.1.7) (2018-10-15)
 
 
 ### Bug Fixes
@@ -18,8 +8,8 @@
 
 
 
-<a name="1.1.3"></a>
-## [1.1.3](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.1.2...v1.1.3) (2018-07-30)
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/Pearson-Higher-Ed/coach-mark/compare/v1.1.2...v1.1.4) (2018-09-18)
 
 
 
