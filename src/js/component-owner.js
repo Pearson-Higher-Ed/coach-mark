@@ -14,7 +14,7 @@ import '../scss/animation.scss';
 function focusWithTimeout(props, el, timeout = 0) {
   setTimeout(() => {
     if (props.stopScroll) {
-      el.focus();
+      el.focus({ preventScroll: true });
     } else {
       const x = window.pageXOffset,
         y = window.pageYOffset;
