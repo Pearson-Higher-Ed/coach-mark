@@ -135,6 +135,7 @@
     flex: 1 0 auto;
     width: 16px;
     height: 16px;
+    top: calc(50% - 8px);
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
@@ -186,6 +187,7 @@
     width: 16px;
     height: 16px;
     flex: 1 0 auto;
+    top: calc(50% - 8px);
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
