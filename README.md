@@ -67,7 +67,7 @@ new CoachMark({
       text: 'Required text explaining to the user why you changed their interface',
       id: 'my-coachmark-id'
   },
-  function (id) {
+  callback(id) {
 	  console.log('Callback executed on exit of id:' + id);
   }
 });
@@ -86,7 +86,7 @@ In your local repo:
     npm install
     npm start
 
-Navigate to **localhost:8081/coach-mark ** - the bundle is served in memory, which is why you may not see the file in /build.
+Navigate to **localhost:8081/coach-mark** - the bundle is served in memory, which is why you may not see the file in /build.
 
 **Hot module replacement** is activated in the webpack dev server; saved changes to src are automatically reloaded in the
 browser.
